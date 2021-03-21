@@ -1,0 +1,970 @@
+:root {
+
+	--light: lightgoldenrodyellow;
+
+	--cool: steelBlue;
+
+	--bright: green;
+
+	--warm: goldenrod;
+
+	--hot: brown;
+
+	--dark: black;
+
+}
+
+
+
+@font-face {
+
+	font-family: info;
+
+	src: url(assets/fantasquesansmono-regular.otf);
+
+}
+
+
+
+@font-face {
+
+	font-family: title;
+
+	src: url(assets/HP\ PSG.ttf);
+
+}
+
+
+
+/*-----------------------
+
+  Loader code
+
+*/
+
+#ellipsis {
+
+	position: relative;
+
+	text-align: center;
+
+	margin: 0.5em auto 0;
+
+	width: 6em;
+
+	height: 1em;
+
+	font-size: 1.5em;
+
+}
+
+
+
+#ellipsis div {
+
+	position: absolute;
+
+	width: 1em;
+
+	height: 1em;
+
+	margin: 0 -0.5em;
+
+	color: var(--light);
+
+}
+
+
+
+#ellipsis div:nth-child(1) {
+
+	left: 0;
+
+	animation: ellipsis1 1s infinite;
+
+}
+
+
+
+#ellipsis div:nth-child(2) {
+
+	left: 0;
+
+	animation: ellipsis2 1s infinite;
+
+}
+
+
+
+#ellipsis div:nth-child(3) {
+
+	left: 3em;
+
+	animation: ellipsis2 1s infinite;
+
+}
+
+
+
+#ellipsis div:nth-child(4) {
+
+	left: 6em;
+
+	animation: ellipsis3 1s infinite;
+
+}
+
+
+
+@keyframes ellipsis1 {
+
+	0% {
+
+		transform: scale(0);
+
+	}
+
+
+
+	100% {
+
+		transform: scale(1);
+
+	}
+
+}
+
+
+
+@keyframes ellipsis3 {
+
+	0% {
+
+		transform: scale(1);
+
+	}
+
+
+
+	100% {
+
+		transform: scale(0);
+
+	}
+
+}
+
+
+
+@keyframes ellipsis2 {
+
+	0% {
+
+		transform: translate(0, 0);
+
+	}
+
+
+
+	100% {
+
+		transform: translate(3em, 0);
+
+	}
+
+}
+
+
+
+/* -----------------------
+
+
+
+*/
+
+
+
+* {
+
+	box-sizing: border-box;
+
+}
+
+
+
+body {
+
+	font: normal normal normal 15px "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+
+	background-color: var(--cool);
+
+	line-height: 1.34em;
+
+}
+
+
+
+h1 {
+
+	font-family: title;
+
+	font-size: 1.34em;
+
+	text-align: center;
+
+	font-weight: bold;
+
+	margin: 0.34em 0 0.17em;
+
+}
+
+
+
+h2 {
+
+	margin: 0.68em 0 0;
+
+	font-weight: 450;
+
+}
+
+
+
+b,
+
+big {
+
+	color: var(--bright);
+
+	font-weight: bold;
+
+	text-shadow: 1px 1px 1px black;
+
+}
+
+
+
+i,
+
+big {
+
+	font-family: title;
+
+	font-size: 1.17em;
+
+	line-height: .86em;
+
+}
+
+
+
+h1 i {
+
+	font-size: 1em;
+
+}
+
+
+
+i.show {
+
+	color: var(--light);
+
+	text-shadow: 1px 1px 1px black, 1px 1px 2px black;
+
+}
+
+
+
+big {
+
+	font-size: 1.43em;
+
+}
+
+
+
+small {
+
+	display: block;
+
+	font-size: 0.75em;
+
+	font-weight: 600;
+
+}
+
+
+
+sub,
+
+sup {
+
+	font-size: 0.75em;
+
+	margin: 0 -0.1em;
+
+	line-height: 1em;
+
+	vertical-align: sub;
+
+}
+
+
+
+sup {
+
+	vertical-align: super;
+
+}
+
+
+
+a {
+
+	color: var(--bright);
+
+	font-weight: 450;
+
+	cursor: pointer;
+
+	text-decoration: none;
+
+}
+
+
+
+a:hover, button:hover {
+
+	opacity: 0.68;
+
+}
+
+
+
+body>* {
+
+	z-index: 1;
+
+}
+
+
+
+button {
+
+	display: block;
+
+	margin: 1em auto 0;
+
+	padding: .5em 1em;
+
+	border-radius: .5em;
+
+	min-width: 10em;
+
+	background-color: var(--bright);
+
+	color: white;
+
+	cursor: pointer;
+
+	font-family: info;
+
+	font-size: 1em;
+
+}
+
+
+
+button.dual {
+
+	display: inline;
+
+	width: 30%;
+
+	min-width: 30%;
+
+	border-radius: 3em;
+
+	min-height: 3em;
+
+	margin: 1em 5% 0 15%;
+
+	padding: 0;
+
+}
+
+
+
+button.dual:last-child{
+
+	margin: 1em 15% 0 5%;
+
+}
+
+
+
+select {
+
+	width: 100%;
+
+}
+
+
+
+footer {
+
+	font-size: 0.75em;
+
+	position: fixed;
+
+	bottom: 0;
+
+	right: 0;
+
+	margin: .6em 2.8em;
+
+}
+
+
+
+footer a {
+
+	color: var(--light);
+
+}
+
+
+
+#loader {
+
+	text-align: center;
+
+	position: fixed;
+
+	top: 50%;
+
+	margin-top: -4em;
+
+	width: 100%;
+
+	color: var(--light);
+
+	text-shadow: 1px 1px 1px black;
+
+}
+
+
+
+#loader big {
+
+	color: var(--light);
+
+}
+
+
+
+.bullet {
+
+	display: inline-block;
+
+	text-align: center;
+
+	width: 1.5em;
+
+	font-size: 0.86em;
+
+	margin: 0 0.5em 0 -0.5em;
+
+	line-height: 2.14em;
+
+}
+
+
+
+.card{
+
+	transform: rotate(9deg);
+
+	border-radius: 0.17em;
+
+	box-shadow: 1px 1px 2px black;
+
+	letter-spacing: -2px;
+
+}
+
+
+
+.over {
+
+	transform: rotate(110deg);
+
+}
+
+
+
+.idle, .idle *{
+
+	color: transparent !important;
+
+	text-shadow: 0 0 2.2px grey;
+
+	background: none !important;
+
+}
+
+
+
+.center {
+
+	text-align: center;
+
+}
+
+
+
+.hot {
+
+	background-color: var(--hot);
+
+}
+
+
+
+.warm {
+
+	background-color: var(--warm);
+
+}
+
+
+
+.suit {
+
+	vertical-align: sub;
+
+	display: inline-block;
+
+	height: 1em;
+
+}
+
+
+
+canvas {
+
+	position: fixed;
+
+	top: 0;
+
+	left: 0;
+
+	width: 100%;
+
+	height: 100%;
+
+	z-index: 0;
+
+}
+
+
+
+#p5_loading {
+
+	display: none;
+
+}
+
+
+
+.display {
+
+	z-index: 2;
+
+	position: relative;
+
+	display: block;
+
+	width: fit-content;
+
+	padding: 0.5em 1.25em;
+
+	text-align: center;
+
+	border-radius: 0.5em;
+
+	box-shadow: 1px 1px 2px black;
+
+	background-color: var(--light);
+
+}
+
+
+
+#GoalDisplay {
+
+	position: fixed;
+
+	bottom: -6.2em;
+
+	left: 2em;
+
+	max-width: 40em;
+
+	background-color: lightsteelblue;
+
+}
+
+
+
+#GoalDisplay.open {
+
+	bottom: 2em;
+
+}
+
+
+
+#popDisplay {
+
+	font-family: info;
+
+	pointer-events: none;
+
+	opacity: 0;
+
+	position: fixed;
+
+	margin-top: -2.34em;
+
+	margin-left: .34em;
+
+	border-radius: 1.43em;
+
+	border-bottom-left-radius: 0;
+
+	line-height: .68em;
+
+	padding: .5em .86em;
+
+}
+
+
+
+#popDisplay.open {
+
+	opacity: 1;
+
+}
+
+
+
+#quideDisplay {
+
+	top: 0;
+
+	font-family: info;
+
+	margin: -6.2em auto 0;
+
+	max-width: 45em;
+
+	line-height: 1.25em;
+
+}
+
+
+
+#quideDisplay.open {
+
+	margin-top: 2em;
+
+}
+
+
+
+#InfoDisplay {
+
+	z-index: 1;
+
+	position: fixed;
+
+	top: 50%;
+
+	margin-top: -15%;
+
+	left: 0;
+
+	margin-left: -20em;
+
+	width: fit-content;
+
+	min-width: 7em;
+
+	max-width: 20em;
+
+	text-align: left;
+
+	padding: 1em;
+
+}
+
+
+
+#InfoDisplay a {
+
+	display: block;
+
+	line-height: 2.17em;
+
+}
+
+
+
+#InfoDisplay.open {
+
+	margin-left: 5%;
+
+}
+
+
+
+#InfoDisplay label {
+
+	font-size: 1.14em;
+
+	font-family: title;
+
+	text-shadow: 1px 1px 1px black;
+
+}
+
+
+
+#InfoDisplay .path {
+
+	margin: 0.5em 0 0.5em 1.5em;
+
+	position: relative;
+
+}
+
+
+
+#InfoDisplay .path::before {
+
+	content: '⤑';
+
+	position: absolute;
+
+	left: -1.5em;
+
+}
+
+
+
+
+
+/* --------------------------- JACK RABBITS FONTS --------------------------- */
+
+
+
+@charset "UTF-8";
+
+
+
+@font-face {
+
+  font-family: "jack-rabbits";
+
+  src:url("assets/jack-rabbits.eot");
+
+  src:url("assets/jack-rabbits.eot?#iefix") format("embedded-opentype"),
+
+    url("assets/jack-rabbits.woff") format("woff"),
+
+    url("assets/jack-rabbits.ttf") format("truetype"),
+
+    url("assets/jack-rabbits.svg#jack-rabbits") format("svg");
+
+  font-weight: normal;
+
+  font-style: normal;
+
+
+
+}
+
+
+
+[data-icon]:before {
+
+  font-family: "jack-rabbits" !important;
+
+  content: attr(data-icon);
+
+  font-style: normal !important;
+
+  font-weight: normal !important;
+
+  font-variant: normal !important;
+
+  text-transform: none !important;
+
+  speak: none;
+
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+
+
+[class^="icon-"]:before,
+
+[class*=" icon-"]:before {
+
+  font-family: "jack-rabbits" !important;
+
+  font-style: normal !important;
+
+  font-weight: normal !important;
+
+  font-variant: normal !important;
+
+  text-transform: none !important;
+
+  speak: none;
+
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+	font-size: 1em;
+
+	line-height: .86em;
+
+}
+
+
+
+.icon-bishop:before {
+
+  content: "\34";
+
+}
+
+.icon-bones:before {
+
+  content: "\62";
+
+}
+
+.icon-clubs:before {
+
+  content: "\63";
+
+}
+
+.icon-crystals:before {
+
+  content: "\67";
+
+}
+
+.icon-diamonds:before {
+
+  content: "\64";
+
+}
+
+.icon-hearts:before {
+
+  content: "\68";
+
+}
+
+.icon-horseshoes:before {
+
+  content: "\75";
+
+}
+
+.icon-king:before {
+
+  content: "\36";
+
+}
+
+.icon-knight:before {
+
+  content: "\32";
+
+}
+
+.icon-mushrooms:before {
+
+  content: "\6d";
+
+}
+
+.icon-pawn:before {
+
+  content: "\31";
+
+}
+
+.icon-queen:before {
+
+  content: "\35";
+
+}
+
+.icon-rabbit:before {
+
+  content: "\30";
+
+}
+
+.icon-rook:before {
+
+  content: "\33";
+
+}
+
+.icon-sheilds:before {
+
+  content: "\6f";
+
+}
+
+.icon-shells:before {
+
+  content: "\77";
+
+}
+
+.icon-skulls:before {
+
+  content: "\6b";
+
+}
+
+.icon-spades:before {
+
+  content: "\73";
+
+}
+
+.icon-torches:before {
+
+  content: "\74";
+
+}
+

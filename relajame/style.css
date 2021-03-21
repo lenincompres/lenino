@@ -1,0 +1,30 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: calc(1vw + 1vh);
+  background-color: gray;
+  color: white;
+}
+
+* {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.34em;
+  font-weight: 100;
+}
+
+#signature {
+  position: fixed;
+  bottom: 0;
+  right: -2px;
+  margin: 1em 2em;
+}

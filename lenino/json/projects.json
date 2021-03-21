@@ -1,0 +1,52 @@
+[{
+  "title": "Mis 500 Locos",
+  "link": "https://www.imdb.com/title/tt7552938/",
+  "img": "lenino/images/mis500locos.jpg",
+  "desc": "Film written by Lenin Compres and Waddys Jaquez, directed by Leticia Tonos, based on a book by Antonio Zaglul"
+},  {
+  "title": "Illusions of Duality",
+  "link": "album/",
+  "img": "lenino/images/cover.jpg",
+  "desc": "Lenino's musical debut: a storyteller's journey through conflict and empathy"
+},{
+  "title": "Jack Rabbits",
+  "link": "http://lenino.net/jackrabbits",
+  "img": "lenino/images/jackrabbits.jpg",
+  "desc": "Board game created by Lenino, inspired on his music, designs and favorite books. Now with a Virtual Version."
+}, {
+  "title": "PRE Model",
+  "link": "http://lenino.net/pre",
+  "img": "http://lenino.net/pre/assets/pre.png",
+  "desc": "Physical-Rational-Emotional. A comprehensive and elegant psychometric tool. Ideal for Jung functions and MBTI lovers."
+}, {
+  "title": "Photonic Chimes",
+  "link": "/relajame",
+  "img": "lenino/images/chimes.jpg",
+  "desc": "Particles combine velocities, resulting in cumulative particles that may not travel as fast as their individual speed."
+}, {
+  "title": "Las 12 Piezas Cortas",
+  "link": "lenino/las12piezascortas.html",
+  "img": "lenino/images/las12piezascortas.jpg",
+  "desc": "Mis primeras obras de teatro, entre ellas <b>Desayuno en Rojo Chino</b>, dirigidas a la formación de nuevos talentos teatrales",
+  "old": [{
+    "title": "Código Piñata",
+    "link": "https://www.youtube.com/channel/UCEaAvUAt69SvV7vFggBlwlA",
+    "img": "lenino/images/codigopinata.jpg",
+    "desc": "Canal de YouTube en español para curiosidades creativas y de ciencias."
+  }, {
+    "title": "Chinese Pop",
+    "link": "http://chinesepop.lenino.net",
+    "img": "lenino/images/chinesePop.jpeg",
+    "desc": "Memory game app that helps you learn Mandarin characters, created and developed by Lenino"
+  }, {
+    "title": "Poisoned Apple Productions",
+    "link": "http://lenino.net/poisonedapple/",
+    "img": "http://lenino.net/poisonedapple/images/logo-apple.png",
+    "desc": "Production company co-founded with Waddys Jaquez"
+  }, {
+    "title": "Emotions Interface",
+    "link": "http://lenino.net/emotions",
+    "img": "http://lenino.net/emotions/image.png",
+    "desc": "UI based on my observations human's basic emotions."
+  }]
+}]

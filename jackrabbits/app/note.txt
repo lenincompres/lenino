@@ -1,0 +1,9 @@
+# ----------------------------------- BUGS ----------------------------------- #
+
+- 
+
+
+
+# ------------------------------- IMPROVEMENTS ------------------------------- #
+
+- Turn suits, catle, forks, caves, joker, boat & horse into fonticons (http://app.fontastic.me) (https://www.flaticon.com)

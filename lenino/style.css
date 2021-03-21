@@ -1,0 +1,621 @@
+:root {
+  --link-color: rgb(0, 102, 102);
+  --hl-color: rgb(0, 180, 180);
+  --bg-color: rgb(68, 85, 51);
+  --darklink-color: #003333;
+  --page-color: #F5DC9A;
+}
+
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+  font-family: markerfelt;
+  src: url(markerfeltnormal.ttf);
+}
+
+body {
+  background-color: #023;
+  margin: 0;
+  scrollbar-face-color: #000000;
+  scrollbar-shadow-color: #2D2C4D;
+  scrollbar-link-color: #7D7E94;
+  scrollbar-3dlight-color: #7D7E94;
+  scrollbar-darkshadow-color: #2D2C4D;
+  scrollbar-track-color: #7D7E94;
+  scrollbar-arrow-color: #C1C1D1;
+  font: normal normal normal 13px "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--highlight-color);
+}
+
+h1, h2, h3 {
+  font-family: markerfelt, Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 0;
+  text-shadow: 2px 1px #eee;
+  padding-left: .5em;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+small {
+  font: normal normal normal 12px "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: .66em;
+  text-shadow: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1150px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page {
+    position: relative;
+    height: 1417px;
+    max-width: 800px;
+    background-color: var(--bg-color);
+    background-image: url(images/leninoYourCard.jpg);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 100%;
+    background-min-size: 500px;
+    margin: 0;
+    width: 100vw;
+    display: inline-block;
+}
+
+header {
+  position: absolute;
+  left: 12px;
+  width: auto;
+  height: 30px;
+  background-color: var(--page-color);
+  padding: 6px;
+  top: 24px;
+  z-index: 10;
+  box-shadow: 1px 1px 2px #000;
+  border-radius: .5em;
+  overflow: hidden;
+}
+
+#homelink {
+  float: left;
+  font-family: markerfelt, Georgia, "Times New Roman", Times, serif;
+  font-size: 2.3em;
+}
+
+#tagline {
+  float: left;
+  line-height: 1em;
+  padding: .2em .6em;
+}
+
+#toplinks {
+  float: right;
+  margin: 4px;
+}
+
+#feature {
+  width: 25em;
+  border-radius: 1em;
+  box-shadow: 1px 1px 2px black;
+  margin: 2em;
+  float: right;
+  overflow: hidden;
+  padding: 1em;
+  background-color: white;
+  text-align: center;
+}
+#feature img{
+  width: 100%;
+}
+
+section {
+  min-height: 900px;
+}
+
+.lyrics {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  display: none;
+}
+
+.lyrics.show {
+  display: block;
+}
+
+.logo {
+  vertical-align: text-top;
+}
+
+article {
+  padding: 5.25em 0 0 10em;
+  display: none;
+}
+
+.info {
+  font-size: 1.1em;
+  width: 585px;
+  color: #100E09;
+  padding: 12px 24px;
+  background-color: var(--page-color);
+  box-shadow: 1px 1px 2px #000;
+  border-radius: 6px;
+  margin: 4px;
+  line-height: 1.25em;
+  font-weight: 500;
+  position: relative;
+  overflow: auto;
+  display: inline-block;
+  min-height: 100px;
+  max-height: 630px;
+}
+
+.info img {
+  max-width: 98%;
+  margin: 1%;
+  float: left;
+}
+
+.info.grid {
+  font-size: 1em;
+  width: 260px;
+  min-height: 100px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.info.grid:hover {
+  background-color: #feb;
+}
+
+.info.grid.hot {
+  cursor: pointer;
+}
+
+.info.grid.hot:hover {
+  background-color: var(--hl-color);
+  box-shadow: 3px 3px 3px #000;
+}
+
+.info .close {
+  content: 'x';
+  position: absolute;
+  top: .4em;
+  right: .4em;
+  width: 1.4em;
+  height: 1.4em;
+  color: var(--page-color);
+  border-radius: 1em;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1.4em;
+  background-color: var(--link-color);
+  box-shadow: 1px 1px 2px #000;
+}
+
+.info .close:hover {
+  background-color: var(--highlight-color);
+  text-decoration: none;
+}
+
+.info.grid .close {
+  display: none;
+}
+
+.bottomsticker {
+  display: inline-block;
+  padding: .5em;
+  border-radius: .5em;
+  position: absolute;
+  bottom: .8em;
+  left: .5em;
+  box-shadow: 1px 1px 2px #000;
+  background-color: var(--link-color);
+  color: white;
+}
+
+nav {
+  float: left;
+  background-color: #4b270f;
+  width: 8em;
+  padding: 5.5em 0 1em;
+  box-shadow: inset 1px 1px 2px #000;
+  z-index: 5;
+  border-radius: 5px;
+  color: rgb(245, 220, 154);
+  text-align: center;
+  font-weight: bold;
+  margin-left: 2em;
+}
+
+nav>li {
+  display: inline-block;
+}
+
+.link {
+  background-color: var(--page-color);
+  width: 4em;
+  padding: .25em;
+  margin: .3em 0;
+  font-size: 1.25em;
+  color: var(--link-color);
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  box-shadow: 1px 1px 2px #000;
+  font-weight: normal;
+}
+
+.link:hover {
+  background-color: var(--link-color);
+  ;
+  color: var(--highlight-color);
+  text-decoration: none;
+  box-shadow: 3px 3px 3px #000;
+}
+
+.link:active {
+  text-decoration: none;
+  box-shadow: 2px 1px 1px #000;
+}
+
+.link.active {
+  background-color: var(--darklink-color);
+  color: var(--page-color);
+  text-decoration: none;
+  box-shadow: inset 2px 1px 1px #000;
+}
+
+a.event {
+  width: 100%;
+  margin: 1% 0;
+  background-size: 100%;
+  padding: 150px 1% 1%;
+  display: block;
+  color: white;
+  text-shadow: black 1px 1px 1px;
+  font-size: 15px;
+  position: relative;
+  background-position: center;
+  text-align: right;
+  /*
+    width: 46%;
+    margin: .5%;
+    background-size: 100%;
+    padding: 66px 1% 1%;
+    display: inline-block;
+    color: white;
+    text-shadow: black 2px 2px 2px;
+    font-size: 12px;
+    position: relative;
+    text-align: left;
+    background-position: center;
+	*/
+}
+
+a.event:hover {
+  opacity: .66;
+}
+
+a b {
+  position: absolute;
+  display: block;
+  top: 0;
+  padding: .5em 0;
+  font-size: 1.3em;
+}
+
+.ads {
+  color: black;
+  width: 100%;
+  height: 80px;
+  padding-top: 3px;
+  background: #4b270f;
+  overflow: hidden;
+}
+
+.arrow {
+  display: inline-block;
+  margin: 18px 3px 0 0;
+  width: 0;
+  height: 0;
+  border-color: transparent transparent transparent var(--link-color);
+  /*top, right, bottom, and left border*/
+  border-style: solid;
+  border-width: 1.5em;
+  /*width of each border*/
+  float: left;
+  cursor: pointer;
+}
+
+.ad {
+  color: black;
+  display: inline-block;
+  margin: 6px 6px 12px 0;
+  padding: 6px;
+  width: 215px;
+  background-color: var(--page-color);
+  border-radius: .5em;
+  top: 0;
+  position: relative;
+  float: left;
+  cursor: pointer;
+  box-shadow: 2px 1px 1px #000;
+}
+
+.ad:hover {
+  background-color: var(--hl-color);
+  box-shadow: 3px 3px 3px #000;
+  position: relative;
+}
+
+.ad:active {
+  box-shadow: 2px 1px 1px #000;
+}
+
+.ad img {
+  margin-right: 4px;
+  border-radius: 5px;
+}
+
+.grid img {
+  padding-right: 4px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.instagram {
+  width: 100%;
+  min-width: 780px;
+  height: 650px;
+  margin: 0;
+  background-color: #4b270f;
+}
+
+.instagram img {
+  vertical-align: top;
+  height: 25px;
+  margin: 10px;
+  position: absolute;
+}
+
+.instagram img:hover {
+  background-color: 333;
+}
+
+.instagram iframe {
+  display: inline-block !important;
+}
+
+.fb {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.sidebar {
+    width: 350px;
+    background-color: white;
+    display: inline-block;
+}
+
+.sidebar div {
+  float: left;
+  width: 100%;
+}
+
+#musicplayer {
+  width: 100%;
+  height: 937px;
+}
+
+#twitter {
+  height: 763px;
+  overflow: auto;
+}
+
+#player {
+  width: 100%;
+  padding: 5px;
+  height: 258px;
+  position: relative;
+}
+
+#videos .arrow {
+  position: absolute;
+  left: 8px;
+  pointer-events: none;
+  border-left-width: 35px;
+  top: -2px;
+  border-left-color: red;
+}
+
+.carItemContain {
+  height: 100px;
+}
+
+.antispam {
+  display: none;
+}
+
+.slide {
+  position: relative;
+  top: -20px;
+  opacity: 0;
+  -webkit-animation: slide 0.34s forwards;
+  animation: slide 0.34s forwards;
+}
+
+.link.extra {
+  display: none;
+}
+
+#contact {
+  font-size: 2em;
+  text-align: center;
+}
+
+/* Style all font awesome icons */
+
+.fa {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  font-size: 1em;
+  line-height: 2em;
+  box-shadow: 1px 1px 1px black;
+  padding: 0;
+  vertical-align: text-bottom;
+}
+
+/* Add a hover effect if you want */
+
+.social {
+  float: right;
+  margin-top: 1em;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #8a3ab9;
+  color: white;
+}
+
+.fa-soundcloud {
+  background: #f50;
+  color: white;
+}
+
+.fa-youtube {
+  background: #f00;
+  color: white;
+}
+
+@-webkit-keyframes slide {
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@media (max-width:1160px) {
+  .sidebar {
+    max-width: 800px;
+    width: 100%;
+  }
+  .container {
+    width: min-content;
+  }
+  #musicplayer {
+    height: 467px;
+  }
+}
+
+@media (max-width:850px) {
+  body {
+    background-position: center top;
+  }
+  .page {
+    overflow: hidden;
+    background-position: center top;
+    background-size: initial;
+  }
+  header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+  .tagline, .close, h1 {
+    display: none;
+  }
+  section {
+    min-height: 500px;
+  }
+  nav {
+    padding: 2.5em 0 0;
+    width: 100%;
+    margin: 0;
+  }
+  article {
+    padding: 6em 0 0 0;
+    text-align: center;
+  }
+  .info {
+    width: auto;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .link {
+    width: auto;
+    padding: .5em;
+  }
+  .link.extra {
+    display: block;
+  }
+  .ads {
+    padding-left: 3em;
+  }
+  .ad:nth-child(2), .ad:nth-child(3) {
+    display: none !important;
+  }
+  .info.grid {
+    min-height: 0;
+  }
+  .sidebar div {
+    width: 100%;
+  }
+  .slide {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+}

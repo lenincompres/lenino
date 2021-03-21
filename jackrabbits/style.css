@@ -1,0 +1,281 @@
+/* CSS Document */
+
+@font-face {
+
+    font-family: titleFont;
+
+    src: url("HP PSG.ttf");
+
+}
+
+
+
+html, body{
+
+	width:100%;
+
+	height:100%
+
+}
+
+body {
+
+	text-align: center;
+
+	padding: 0px;
+
+	margin: 0px;
+
+	background-color:#EBEBD5;
+
+	background-image:url(images/bg.png);
+
+	font-family:Calibri, "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+
+}
+
+main{
+
+    max-width: 500px;
+
+    min-width: 490px;
+
+	margin:0 auto;
+
+    padding: 0 0 10px;
+
+}
+
+main>section{
+
+	margin: 1em 0;
+
+}
+
+h1, h2, h3, h4{
+
+	font-family: titleFont;
+
+	 margin: 1em 0 0 0;
+
+	 line-height: 1.5em;
+
+}
+
+h4{
+
+	 margin: 0;
+
+}
+
+p{
+
+	 margin:  0 0 1em 0;
+
+}
+
+a {
+
+	text-decoration: none;
+
+}
+
+i{
+
+	font-family: titleFont;
+
+	font-style:normal;
+
+}
+
+ul{
+
+	text-align:left;
+
+    width: 300px;
+
+    margin: 0 100px 50px;
+
+}
+
+.verse {
+
+	white-space:nowrap;
+
+}
+
+big{
+
+	font-size: 1.8em;
+
+}
+
+.wisdom{
+
+	color:teal;
+
+}
+
+.courage, a {
+
+	color:indigo;
+
+}
+
+.fortune{
+
+	color:darkgoldenrod;
+
+}
+
+.charm, a:hover {
+
+	color:crimson;
+
+}
+
+.wisdom, .courage, .charm, .fortune{
+
+text-shadow:  black 1px 1px;
+
+}
+
+body>table{
+
+	width:100%;
+
+	height:100%
+
+}
+
+body>table td{
+
+	text-align:center;
+
+	vertical-align:middle;
+
+}
+
+#content {
+
+	background: white;
+
+	width: 1024px;
+
+	height: 768px;
+
+	margin: auto;
+
+	padding: 0px;
+
+	box-shadow: 1px 1px 5px #000;;
+
+ 	border: solid 5px silver;
+
+}
+
+
+
+.inline{
+
+	white-space:nowrap;
+
+}
+
+
+
+.card{
+
+    width: 243px;
+
+    height: 340px;
+
+	display:inline-block;
+
+	cursor:pointer;
+
+	position:relative;
+
+}
+
+.card .img, .card-img{
+
+    width: 243px;
+
+    height: 340px;
+
+    box-shadow: 2px 2px 6px;
+
+    border-radius: 1em;
+
+    background-color: lightgoldenrodyellow;
+
+	display:inline-block;
+
+}
+
+.card.big{
+
+    width: 490px;
+
+    height: 340px;
+
+}
+
+.card.big .img{
+
+    width: 490px;
+
+    height: 340px;
+
+    background-color: white;
+
+}
+
+.card.sideways{
+
+    height: 243px;
+
+    width: 340px;
+
+}
+
+.card.sideways .img{
+
+    height: 243px;
+
+    width: 340px;
+
+}
+
+.info{
+
+    display: inline-block;
+
+    width: 350px;
+
+    vertical-align: middle;
+
+}
+
+.splash{
+
+    background: url(images/splash.png) center center no-repeat;
+
+    background-color: lightgoldenrodyellow;
+
+}
+
+.antispam {
+
+    display: none;
+
+}
+
+
+
+.instagram-media{
+
+	margin: 0 auto !important;
+
+}
