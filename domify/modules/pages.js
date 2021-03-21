@@ -1,17 +1,16 @@
-let pages = [{
-    link: 'Home',
+const PAGES = [{
+    data: 'Home',
     h1: 'Let\'s Domify Things',
     div: [{
       p: 'Javascript is so powerful that it\'s about time we retire HTML, CSS and pretty much all JS frameworks.'
     }, {
-      p: 'Here is all the HTML you may ever need on your <i>index.html</i> index file.'
+      p: 'Here is all the HTML you need on your <i>index.html</i> file.'
     }, {
       pre: {
-        text: `<script src="lib/domify.js"></script>
-<script type="module" src="main.js"></script>`
+        text: `<script src="lib/domify.js"></script>`
       }
     }, {
-      p: 'Virtually all browsers know how to complete the rest. But, if you want to be fancy, then do...'
+      p: 'Is this unsettling? Do you want to be fancy? OK, then do this:'
     }, {
       pre: {
         text: `<!DOCUMENT>
@@ -20,12 +19,11 @@ let pages = [{
     <script src="lib/domify.js"></script>
   </head>
   <body>
-    <script type="module" src="main.js"></script>
   </body>
 </html>`
       }
     }, {
-      p: 'The library dependecies can be added in the <i>head</i> tag, and the code for the webpage/webapp in the <i>body</i> tag. Now, let\'s make a webpage. Here is some code you can put in that <i>main.js</i> file.'
+      p: 'Now, let\'s make a webpage. Here is some code you can put in a file called <i>main.js</i>, which is the default <b>entry point</b> for our javascript code.'
     }, {
       pre: {
         text: `domify({
@@ -50,40 +48,40 @@ let pages = [{
 });`
       }
     }, {
-      p: 'The domify function creates a DOM structure in the document.body based on a JS structural object. It recognizes object names as tags of child elements and creates then in he same structural hierarchy. If provided with a string, this becomes the HTML content of the elemt. And when given an array, it will create several elements of that tag.'
+      p: 'The domify function creates a DOM structure in the document.body based on a JS structural object. It recognizes object names as tags of child elements, and creates the same hierarchy. String values will become the HTML content of the element. And when given an array, domify creates several elements of that tag—as in <i>nav a</i>.'
     }, {
-      p: 'But not only that, domify also recognizes attributes, styles and () triggers. Check this out.'
+      p: 'Of course, that\s not it. Domify also recognizes <b>attributes</b>, <b>styles</b> and <b>event handlers</b>. Check this out.'
     }, {
-      pre: `import <b>STYLE</b> from './modules/styles.js'
-import <b>pages</b> from './modules/<b>pages</b>.js'
+      pre: `/* assume we have these constant objects (STYLE, CSS, COLOR, PAGES) 
+from a module, json file, or declared before in the code.*/
 
 domify({
   style: 'font: 14px tahoma; padding: 1em',
   main: {
-    style: <b>STYLE</b>.PAGE,
+    style: STYLE.PAGE,
     header: {
       style: {
         padding: '0.2em 2em 1em',
-        color: <b>STYLE.COLOR</b>.PALE,
-        backgroundColor: <b>STYLE.COLOR</b>.DARK
+        color: COLOR.PALE,
+        backgroundColor: COLOR.DARK
       },
       button: {
         float: 'right',
         marginTop: '1em',
-        innerText: 'Repo',
-        onclick: function(){
+        text: 'Repo',
+        onclick: function () {
           window.open('https://github.com/lenincompres/domify', '_blank');
         }
       },
       h1: 'Domify | &lt;small>A Simple Sample&lt;/small>'
     },
     nav: {
-      background: <b>STYLE.COLOR</b>.PALE,
+      background: COLOR.PALE,
       padding: '0.7em 0 0 1em',
-      a: <b>pages</b>.map((page, index) => {
+      a: PAGES.map((page, index) => {
         let a = {
-          text: page.link,
-          onclick: e => currentPage.value = index,
+          text: page.data,
+          onclick: () => currentPage.value = index,
           background: {
             bind: 'currentPage',
             onvalue: value => value === index ? 'white' : 'none'
@@ -97,18 +95,18 @@ domify({
       html: {
         bind: 'currentPage',
         value: 0,
-        onvalue: value => <b>pages</b>[value]
+        onvalue: value => PAGES[value]
       }
     },
     menu: {
       margin: '1em',
       height: '2em',
       paddingTop: '1em',
-      borderTop: '1px solid ' + <b>STYLE.COLOR</b>.MILD,
+      borderTop: '1px solid ' + COLOR.MILD,
       button: [{
         float: 'left',
         text: 'Back',
-        onclick: e => currentPage.value -= 1,
+        onclick: () => currentPage.value -= 1,
         display: {
           bind: 'currentPage',
           onvalue: value => value > 0 ? 'block' : 'none'
@@ -116,64 +114,70 @@ domify({
       }, {
         float: 'right',
         text: 'Next',
-        onclick: e => currentPage.value += 1,
+        onclick: () => currentPage.value += 1,
         display: {
           bind: 'currentPage',
-          onvalue: value => value < <b>pages</b>.length - 1 ? 'block' : 'none'
+          onvalue: value => value < PAGES.length - 1 ? 'block' : 'none'
         }
       }]
     },
     footer: {
-      style: <b>STYLE</b>.DARK,
+      style: STYLE.DARK,
       span: 'by ',
       a: {
-        color: <b>STYLE.COLOR</b>.MILD,
+        color: COLOR.MILD,
         target: '_bank',
         href: 'http://lenino.net',
         text: 'Lenin Comprés'
       }
     }
   },
+  backgroundImage: 'url(assets/background.jpeg)',
+  css: CSS
 });`
     }, {
-      p: 'This is the core code for this very tutorial website. The following pages will unpack this code. But, if you are an experienced web developer, here are the highlights you may want to look back and notice.',
+      p: ['This is the actual code for this very tutorial website. The <a onclick="currentPage.value += 1">following pages</a> will unpack this code.','But, if you are an experienced web developer, here are some highlights you may want to look back and notice.'],
       ul: {
         li: [
-          'The <i>style</i> attribute can be assigned as a string directly. See first <i>style</i>.',
-          'Or it can be an object containing all the individual style propertiesin camelCase. See the <i>main</i>.',
-          'Conversely, you may skip the <i>style</i> object and assign althogether the style properties directly. See the <i>header</i>.',
-          'If an object is an array, domify knows to create several elements. Or, in the case of an array of style objects, consolidate all the styles in them. See the <i>nav</i>.',
-          'You may defined variables to hold things like colors, values or whole objects to assign to you new elements. See wherever <i><b>STYLE.COLOR</b></i> or <i><b>STYLE</b></i> constants are invoked.',
-          'You can bind properties, styles and attributes of an element (or several ones) to a global variable. See wherever you find <i>bind</i>.'
+          'The <i>style</i> attribute can be assigned as a CSS string. See first <i>style</i>.',
+          'Or, it can be a previously declared in a variable. See the <i>main</i>.',
+          'The style properties could be an object with <b>camelCase</b> properties. See the <i>header</i>.',
+          'Conversely, you may assign style properties directly using <b>camelCase</b>. See the first <i>button</i>.',
+          'Event handlers can be declared right on the structural object—see instances of <i>onclick:</i>. They can also be assigned a method.',
+          'You can bind the <b>content</b>, <b>styles</b> and <b>attributes</b> of an element (or several ones) to a global variable. See instances of <i>bind:</i>.'
         ]
       }
     }]
   },
   {
-    link: 'Elements',
+    data: 'Elements',
     h1: 'Create elements by giving them and ID',
     p: 'Coming soon.'
   },
   {
-    link: 'Head',
+    data: 'Head & Styles',
     h1: 'Domify can be called to set up the document\s head',
     p: 'Coming soon.'
   },
   {
-    link: 'Binding',
+    data: 'Binding',
     h1: 'This is pretty nifty',
     p: 'Coming soon.'
   },
   {
-    link: 'Glossary',
+    data: 'Glossary',
     h1: 'What if a word is an Atrtribute, Style and Tag?',
     p: 'Coming soon.'
   },
   {
-    link: 'P5 js',
-    h1: 'Yes, there\'s p5.domify',
-    p: 'Coming soon.'
+    data: 'P5.js',
+    h1: 'Yes, you can domify P5.js elements',
+    div: [{
+      p: ['Don\'t know what P5.js is? Then <a href="https://p5js.org/" target="_blank">get to know</a>.',
+        'But basically that\'s it. If you call <i>p5.domify</i>, or if you call the <i>domify</i> method from a p5.Element, then all elements created in the dom structure will be p5 Elements. And you may set up their event triggers and methods right on the domify calls. Like so...'
+      ]
+    }]
   }
 ];
 
-export default pages;
+export default PAGES;

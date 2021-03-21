@@ -1,6 +1,9 @@
-import STYLE from './modules/styles.js'
-import pages from './modules/pages.js'
-import './modules/head.js'
+import {
+  STYLE,
+  CSS,
+  COLOR
+} from './modules/styles.js'
+import PAGES from './modules/pages.js'
 
 domify({
   style: 'font: 14px tahoma; padding: 1em',
@@ -8,27 +11,25 @@ domify({
   main: {
     style: STYLE.PAGE,
     header: {
-      style: {
-        padding: '0.2em 2em 1em',
-        color: STYLE.COLOR.PALE,
-        backgroundColor: STYLE.COLOR.DARK
-      },
+      padding: '0.2em 2em 1em',
+      color: COLOR.PALE,
+      backgroundColor: COLOR.DARK,
       button: {
         float: 'right',
         marginTop: '1em',
         innerText: 'Repo',
-        onclick: function(){
+        onclick: function () {
           window.open('https://github.com/lenincompres/domify', '_blank');
         }
       },
       h1: 'Domify | <small>A Simple Sample</small>'
     },
     nav: {
-      background: STYLE.COLOR.PALE,
+      background: COLOR.PALE,
       padding: '0.7em 0 0 1em',
-      a: pages.map((page, index) => {
+      a: PAGES.map((page, index) => {
         let a = {
-          text: page.link,
+          innerText: page.data,
           onclick: e => currentPage.value = index,
           background: {
             bind: 'currentPage',
@@ -43,14 +44,14 @@ domify({
       html: {
         bind: 'currentPage',
         value: 0,
-        onvalue: value => pages[value]
+        onvalue: value => PAGES[value]
       }
     },
     menu: {
       margin: '1em',
       height: '2em',
       paddingTop: '1em',
-      borderTop: '1px solid ' + STYLE.COLOR.MILD,
+      borderTop: '1px solid ' + COLOR.MILD,
       button: [{
         float: 'left',
         text: 'Back',
@@ -65,7 +66,7 @@ domify({
         onclick: e => currentPage.value += 1,
         display: {
           bind: 'currentPage',
-          onvalue: value => value < pages.length - 1 ? 'block' : 'none'
+          onvalue: value => value < PAGES.length - 1 ? 'block' : 'none'
         }
       }]
     },
@@ -73,11 +74,12 @@ domify({
       style: STYLE.DARK,
       span: 'by ',
       a: {
-        color: STYLE.COLOR.MILD,
+        color: COLOR.MILD,
         target: '_bank',
         href: 'http://lenino.net',
         text: 'Lenin Comprés'
       }
     }
   },
+  css: CSS,
 });
