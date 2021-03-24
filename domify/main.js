@@ -6,18 +6,21 @@ import {
 import PAGES from './modules/pages.js'
 
 domify({
-  style: 'font: 14px tahoma; padding: 1em',
-  backgroundImage: 'url(assets/background.jpeg)',
+  style: {
+    lang: 'css',
+    content: CSS
+  },
   main: {
     style: STYLE.PAGE,
     header: {
-      padding: '0.2em 2em 1em',
-      color: COLOR.PALE,
-      backgroundColor: COLOR.DARK,
+      style: {
+        padding: '0.2em 2em 1em',
+        color: COLOR.PALE,
+        backgroundColor: COLOR.DARK
+      },
       button: {
-        float: 'right',
-        marginTop: '1em',
-        innerText: 'Repo',
+        style: 'float: right; margin-top: 1em',
+        text: 'Repo',
         onclick: function () {
           window.open('https://github.com/lenincompres/domify', '_blank');
         }
@@ -25,27 +28,20 @@ domify({
       h1: 'Domify | <small>A Simple Sample</small>'
     },
     nav: {
-      background: COLOR.PALE,
       padding: '0.7em 0 0 1em',
+      backgroundColor: COLOR.PALE,
       a: PAGES.map((page, index) => {
         let a = {
-          innerText: page.data,
+          text: page.data,
           onclick: e => currentPage.value = index,
-          background: {
-            bind: 'currentPage',
-            onvalue: value => value === index ? 'white' : 'none'
-          }
+          background: dombind('currentPage', val => val === index ? 'white' : 'none')
         };
         return a;
       })
     },
     article: {
       margin: '2em',
-      html: {
-        bind: 'currentPage',
-        value: 0,
-        onvalue: value => PAGES[value]
-      }
+      content: dombind('currentPage', val => PAGES[val], 0)
     },
     menu: {
       margin: '1em',
@@ -56,18 +52,12 @@ domify({
         float: 'left',
         text: 'Back',
         onclick: e => currentPage.value -= 1,
-        display: {
-          bind: 'currentPage',
-          onvalue: value => value > 0 ? 'block' : 'none'
-        }
+        display: dombind('currentPage', val => val > 0 ? 'block' : 'none')
       }, {
         float: 'right',
         text: 'Next',
         onclick: e => currentPage.value += 1,
-        display: {
-          bind: 'currentPage',
-          onvalue: value => value < PAGES.length - 1 ? 'block' : 'none'
-        }
+        display: dombind('currentPage', val => val < PAGES.length - 1 ? 'block' : 'none')
       }]
     },
     footer: {
@@ -81,5 +71,4 @@ domify({
       }
     }
   },
-  css: CSS,
 });

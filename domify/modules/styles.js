@@ -1,4 +1,4 @@
-export const COLOR ={
+export const COLOR = {
   PRIMARY: 'royalBlue',
   INTENSE: 'blue',
   MILD: 'cornflowerBlue',
@@ -8,12 +8,8 @@ export const COLOR ={
   NEUTRAL: 'lightSlateGray'
 };
 
-export const STYLE = { 
+export const STYLE = {
   COLOR: COLOR,
-  PARAGRAPH: {
-    marginTop: '1.5em',
-    textIndent: '2rem',
-  },
   LINK: {
     cursor: 'pointer',
     color: COLOR.INTENSE,
@@ -77,7 +73,15 @@ export const STYLE = {
 };
 
 export const CSS = {
-  'h1, p, article ul': STYLE.PARAGRAPH,
+  'h1, p, article ul': {
+    marginTop: '1em',
+    textIndent: '1rem'
+  },
+  body: {
+    font: '14px tahoma',
+    padding: '1em',
+    backgroundImage: 'url(assets/background.jpeg)',
+  },
   h1: {
     fontSize: '1.5em',
     marginTop: '1em'
@@ -91,7 +95,7 @@ export const CSS = {
   i: {
     fontFamily: 'courier',
     background: COLOR.LIGHT,
-    padding: '0.5em'
+    padding: '0.34em'
   },
   a: [STYLE.LINK, {
     hover: {
@@ -99,7 +103,7 @@ export const CSS = {
       textDecoration: 'underline'
     }
   }],
-  nav:{
+  nav: {
     a: [STYLE.MENU_LINK, {
       hover: {
         color: COLOR.PRIMARY,
@@ -118,6 +122,9 @@ export const CSS = {
           content: '"•"',
           marginLeft: '-1em',
           marginRight: '0.5em'
+        },
+        ul: {
+          marginTop: 0
         }
       }
     }
