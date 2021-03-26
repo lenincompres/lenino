@@ -1,0 +1,1 @@
+It's not domifying the resertCSS. I suspect it has something to do with style and the HTML_TAGS array binding. Not sure.
