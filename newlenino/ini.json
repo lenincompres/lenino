@@ -1,0 +1,7 @@
+{
+  "title": "Lenino.net",
+  "icon": "assets/icon.png",
+  "link": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+  "font": "./assets/markerfeltnormal.ttf",
+  "backgroundColor": "#023"
+}

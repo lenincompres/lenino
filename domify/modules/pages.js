@@ -162,7 +162,7 @@ domify({
   }, someElement, true);`,
       p_: 'A <b>true</b> boolean will indicate the new structure should <b>replace</b> any existing one in the element, instead of the default <b>append</b> mode. Specifying <b>false</b> here will <b>prepend</b> the struture instead.'
     }, {
-      p: 'You may also provide a string to indicate the tag of a new element where the DOM structure will be created. The following example creates a <i>main</i> element with the domified structure. It returns this <i>main</i> element, and <b>prepends</b> it in <i>someElement</i>.',
+      p: 'You may also provide a string to indicate the tag of a new element where the DOM structure will be created. The following example creates a <i>main</i> element with the domified structure. It returns this <i>main</i> element, and appends it in <i>someElement</i>.',
       pre: `domify({
   h1: 'Hello world',
   p: 'This is &lt;b>a&lt;/b> paragraph.'

@@ -144,6 +144,7 @@ const domifyCSS = (sel, obj) => {
   let extra = [],
     id, cls;
   [sel, id, ...cls] = sel.split('_');
+  if (sel.toLowerCase() === 'fontface') sel = '@font-face';
   if (id) sel += '#' + id;
   if (cls.length) sel += '.' + cls.join('.');
   if (isPrimitive(obj)) return `${sel.camelCase('-')}: ${obj};`;
@@ -188,7 +189,7 @@ const domload = (url, onload, value) => {
 }
 
 class Bind {
-  constructor(val) {
+  constructor(val = '') {
     this._elems = [];
     this._value = val;
   }
@@ -198,7 +199,7 @@ class Bind {
       property: property,
       onvalue: onvalue
     });
-    if (this._value !== undefined) elem.domify(onvalue(this._value), property);
+    elem.domify(onvalue(this._value), property);
   }
   set value(val) {
     if ([null, undefined].includes(val)) return;
@@ -236,7 +237,6 @@ const domloadRequest = (url, data, onsuccess = _ => null, onerror = _ => null) =
 domloadRequest('ini.json', data => dominify(data, true), error => error === 404 ? dominify(false, true) : null);
 
 let dominify = (INI, autoCall = false) => {
-  const ENTRY_POINT = 'main.js';
   const makeArray = a => Array.isArray(a) ? a : [a];
   let ini = Object.assign({
     title: 'A Domified Site',
@@ -246,23 +246,29 @@ let dominify = (INI, autoCall = false) => {
     meta: [],
     resetCSS: true,
     style: [],
+    font: 'Arial, Helvetica, sans-serif',
     link: [],
     library: [],
     script: [],
-    entryPoint: ENTRY_POINT,
+    entryPoint: false,
     module: true,
     postscript: []
   }, isPrimitive(INI) ? {} : INI);
+  const N = 6;
+  const EM_MAX = 2;
+  let hn = {};
+  (new Array(N)).fill('h').forEach((h,i) => {
+    hn[h + (i+1)] = {
+      fontSize: (EM_MAX-i/N) + 'em'
+    }
+  });
   if (INI) {
     let reset = {
       '*': {
         boxSizing: 'border',
         font: 'inherit',
-        fontFamily: 'Arial, Helvetica, sans-serif',
-        fontSize: '100%',
-        fontStyle: 'none',
         verticalAlign: 'baseline',
-        lineHeight: '1.5em',
+        lineHeight: 'inherit',
         margin: 0,
         padding: 0,
         border: 0,
@@ -272,8 +278,22 @@ let dominify = (INI, autoCall = false) => {
         quotes: 'none',
         content: '',
         content: 'none',
+      },
+      body: {
+        fontSize: '100%',
+        fontStyle: 'none',
+        lineHeight: '1em',
+        verticalAlign: 'baseline',
+        fontFamily: ini.font,
+      },
+      'b, strong': {
+        fontWeight: 'bold',
+      },
+      'i, em': {
+        fontStyle: 'itallic',
       }
     };
+    Object.assign(reset, hn)
     if (INI) document.head.domify({
       title: ini.title,
       meta: [{
@@ -291,7 +311,7 @@ let dominify = (INI, autoCall = false) => {
     }, true);
   }
   // sets the entry point Should only be done once
-  if (autoCall) domloadRequest(INI ? ini.entryPoint : ENTRY_POINT, data => {
+  if (ini.entryPoint) domloadRequest(INI ? ini.entryPoint : ENTRY_POINT, data => {
     domify({
       script: [{
         type: ini.module ? 'module' : null,
