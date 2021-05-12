@@ -1,6 +1,6 @@
 export const projects = [{
-  title: "Domify JS",
-  link: "https://github.com/lenincompres/domify",
+  title: "DOM.create",
+  link: "https://github.com/lenincompres/DOM.create",
   img: "assets/domify.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model"
 }, {

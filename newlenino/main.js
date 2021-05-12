@@ -1,8 +1,4 @@
-import {
-  COLOR,
-  STYLE,
-  SHADOW
-} from './modules/style.js'
+import * as STYLE from './modules/style.js'
 import PAGES from './modules/pages.js'
 import INSTAGRAM from './modules/widgets/instagram.js'
 import TWITTER from './modules/widgets/twitter.js'
@@ -13,7 +9,10 @@ import slideDown from './modules/animations/slideDown.js'
 var pageNames = Object.keys(PAGES);
 var BREAK_POINT = window.innerWidth < 850;
 
-domify({
+const currentPage = new Binder();
+const navHover = new Binder();
+
+DOM.create({
 
   div_container: {
     style: STYLE.FLEX,
@@ -24,7 +23,7 @@ domify({
       position: 'relative',
       maxWidth: '800px',
       width: '100%',
-      backgroundColor: COLOR.BACKGROUND,
+      backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: 'url(assets/leninoYourCard.jpg)',
       backgroundSize: BREAK_POINT ? 'initial' : '100%',
       backgroundPosition: 'center top',
@@ -84,7 +83,7 @@ domify({
         position: BREAK_POINT ? 'relative' : 'absolute',
 
         a: {
-          color: COLOR.PAGE,
+          color: STYLE.COLOR.PAGE,
           width: '4em',
           padding: '.25em',
           margin: '0.25em',
@@ -94,12 +93,12 @@ domify({
           fontWeight: 'normal',
 
           content: pageNames.map(name => new Object({
-            backgroundColor: dombind('currentPage', current => current === name ? COLOR.LINK_DARK : COLOR.LINK),
+            backgroundColor: DOM.bind(currentPage, current => current === name ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.LINK),
             display: name !== pageNames[0] && (BREAK_POINT || (name !== pageNames.slice(-1)[0])) ? 'block' : 'none',
-            boxShadow: dombind(['navHover', 'currentPage'], (over, current) =>
-              current === name ? SHADOW.INSET :
-              over === name ? SHADOW.HIGHLIGHT :
-              SHADOW.NORMAL),
+            boxShadow: DOM.bind([navHover, currentPage], (over, current) =>
+              current === name ? STYLE.SHADOW.INSET :
+              over === name ? STYLE.SHADOW.HIGHLIGHT :
+              STYLE.SHADOW.NORMAL),
 
             href: '#' + name,
             text: name.toLowerCase(),
@@ -119,7 +118,7 @@ domify({
         minHeight: BREAK_POINT ? '600px' : '815px',
         width: BREAK_POINT ? '100%' : '47em',
         margin: BREAK_POINT ? 0 : '6em 0 0 9em',
-        content: dombind('currentPage', p => PAGES[p], PAGES[0])
+        content: DOM.bind(currentPage, p => PAGES[p], PAGES[0])
       },
 
       div: INSTAGRAM,

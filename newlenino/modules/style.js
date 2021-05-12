@@ -12,27 +12,26 @@ export const SHADOW = {
   HIGHLIGHT: '0 0 9px white, 0 0 9px white inset'
 }
 
-export const STYLE = {
-  PAGE: {
-    backgroundColor: COLOR.PAGE,
-    boxShadow: SHADOW.NORMAL,
-    fontSize: '1.1em',
-    width: 'calc(100% - 1em)',
-    padding: '0.86em',
-    borderRadius: '0.25em',
-    margin: '0.25em',
-    position: 'relative',
-  },
-  FLEX: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    alignContent: 'flex-start',
-  }
-}
+export const PAGE = {
+  backgroundColor: COLOR.PAGE,
+  boxShadow: SHADOW.NORMAL,
+  fontSize: '1.1em',
+  width: 'calc(100% - 1em)',
+  padding: '0.86em',
+  borderRadius: '0.25em',
+  margin: '0.25em',
+  position: 'relative',
+};
 
-domstyle({
+export const FLEX = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  alignItems: 'flex-start',
+  alignContent: 'flex-start',
+};
+
+DOM.style({
   a: {
     color: COLOR.LINK,
     hover: {

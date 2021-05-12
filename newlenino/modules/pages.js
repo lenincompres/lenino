@@ -1,9 +1,9 @@
 import slideDown from './animations/slideDown.js'
 import projects from './projects.js'
-import {
-  STYLE, SHADOW
-} from './style.js';
+import * as STYLE from './style.js';
 import SOCIAL_LINKS from './widgets/social.js'
+
+const activeProject = new Binder();
 
 export const PAGES = {
   HOME: {},
@@ -21,19 +21,22 @@ export const PAGES = {
   },
 
   PROJECTS: {
-    section: projects.filter(p => !p.hidden).map((project,i) => new Object({
+    section: projects.filter(p => !p.hidden).map((project, i) => new Object({
       style: STYLE.PAGE,
       fontSize: '1em',
       width: window.innerWidth > 850 ? 'calc(50% - 1em)' : undefined,
       cursor: 'pointer',
-      boxShadow: dombind('activeProject', val => val === i ? SHADOW.HIGHLIGHT: SHADOW.NORMAL),
+      boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
       img: {
         float: 'left',
         height: '6em',
-        paddingRight: '0.86em',
+        marginRight: '0.86em',
         src: project.img
       },
-      h6: project.title,
+      h6: {
+        marginBottom: '0.25em',
+        text: project.title
+      },
       p: project.desc,
       onmouseover: e => activeProject.value = i,
       onmouseout: e => activeProject.value = false,
