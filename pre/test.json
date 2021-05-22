@@ -1,0 +1,286 @@
+{
+  "questions": [{
+      "question": "How much do you like these colors?",
+      "options": [{
+          "choice": "Reds",
+          "hint": "scarlet, maroon, brick"
+        },
+        {
+          "choice": "Greens",
+          "hint": "lime, army, mint"
+        },
+        {
+          "choice": "Blues",
+          "hint": "royal, sky, navy"
+        },
+        [{
+          "choice": "Dark"
+        }, {
+          "choice": "Light"
+        }],
+        [{
+          "choice": "Neutral"
+        }, {
+          "choice": "Intense"
+        }]
+      ]
+    },
+    {
+      "question": "When appreciating art, how much do you value…",
+      "options": [{
+          "choice": "Execution",
+          "hint": "magnitude, elaboration, dexterity"
+        },
+        {
+          "choice": "Concept",
+          "hint": "meaning, idea, message"
+        },
+        {
+          "choice": "Feeling",
+          "hint": "sentiment, emotion, nostalgia"
+        }
+      ]
+    },
+    {
+      "question": "In sports, how much are you into…",
+      "options": [{
+          "choice": "Competition",
+          "hint": "challege, practice, play"
+        },
+        {
+          "choice": "Stats",
+          "hint": "records, scores, strategies"
+        },
+        {
+          "choice": "Atmosphere",
+          "hint": "camaraderie, cheer, environment"
+        }
+      ]
+    },
+    {
+      "question": "In your studies, how interested are you in…",
+      "options": [{
+          "choice": "Industry",
+          "hint": "application, commerce, production"
+        },
+        {
+          "choice": "Science",
+          "hint": "logic, structure, functionality"
+        },
+        {
+          "choice": "Culture",
+          "hint": "art, literature, history"
+        }
+      ]
+    },
+    {
+      "question": "How much does your meals resemble a…",
+      "options": [{
+          "choice": "Feast",
+          "hint": "gorge, try things, fill up"
+        },
+        {
+          "choice": "Diet",
+          "hint": "nutrition, portions, timing"
+        },
+        {
+          "choice": "Treat",
+          "hint": "favorites, presentation, ceremony"
+        }
+      ]
+    },
+    {
+      "question": "At work, how much do you focus on…",
+      "options": [{
+          "choice": "Productivity",
+          "hint": "execute, deliver, profit"
+        },
+        {
+          "choice": "Methodology",
+          "hint": "plan, anylize, assess"
+        },
+        {
+          "choice": "Service",
+          "hint": "help, support, contribution"
+        }
+      ]
+    },
+    {
+      "question": "In movies or books, how drawn are you to…",
+      "options": [{
+          "choice": "Action",
+          "hint": "thrills, pace, visuals/sounds"
+        },
+        {
+          "choice": "Plot",
+          "hint": "development, intrigue, rationale"
+        },
+        {
+          "choice": "Drama",
+          "hint": "romance, misfortune, joy"
+        }
+      ]
+    },
+    {
+      "question": "How likely are you to give up rest for…",
+      "options": [{
+          "choice": "Spontaneous activities",
+          "hint": "play, chrore, exercise"
+        },
+        {
+          "choice": "Disecting a subject",
+          "hint": "ponder, clarify, research"
+        },
+        {
+          "choice": "Tending to feelings",
+          "hint": "affection, appreciation, care"
+        }
+      ]
+    },
+    {
+      "reverse": true,
+      "question": "How likely are you to spend free time on…",
+      "options": [{
+          "choice": "Mental recreation",
+          "hint": "read, write, converse"
+        },
+        {
+          "choice": "Carefree fun",
+          "hint": "play, party, indulge"
+        },
+        {
+          "choice": "Handy tasks",
+          "hint": "project, work out, organize"
+        }
+      ]
+    },
+    {
+      "question": "How much do these sound like you?",
+      "options": [{
+          "choice": "I am prompt with my duties.",
+          "hint": "Gotta be done."
+        },
+        {
+          "choice": "I am clear with my plans.",
+          "hint": "And stick to them."
+        },
+        {
+          "choice": "I am true to my values.",
+          "hint": "Won't give them up."
+        }
+      ]
+    },
+    {
+      "reverse": true,
+      "question": "What's your tendency?",
+      "options": [
+        [{
+          "choice": "Do things"
+        }, {
+          "choice": "Ponder things"
+        }],
+        [{
+          "choice": "Follow plans"
+        }, {
+          "choice": "Follow whims"
+        }],
+        [{
+          "choice": "Mind preferences"
+        }, {
+          "choice": "Mind facts"
+        }]
+      ]
+    },
+    {
+      "question": "How much do these resemble you?",
+      "options": [{
+          "choice": "Habitual",
+          "hint": "Do as I always do"
+        },
+        {
+          "choice": "Resolute",
+          "hint": "Stick to my decisions"
+        },
+        {
+          "choice": "Particular",
+          "hint": "Like it the way I like it"
+        }
+      ]
+    },
+    {
+      "reverse": true,
+      "options": [{
+          "choice": "Alert",
+          "hint": "Aware of my surroundings"
+        },
+        {
+          "choice": "Inquisitive",
+          "hint": "Looking to learn and debate"
+        },
+        {
+          "choice": "Softhearted",
+          "hint": "Even with strangers and critters"
+        }
+      ]
+    },
+    {
+      "question": "How strong is your tendency to…",
+      "options": [{
+          "choice": "Work alone"
+        },
+        {
+          "choice": "Demand freedom and control"
+        },
+        {
+          "choice": "Avoid others' drama"
+        }
+      ]
+    },
+    {
+      "reverse": true,
+      "options": [{
+          "choice": "Seek group activities"
+        },
+        {
+          "choice": "Enjoy discussions"
+        },
+        {
+          "choice": "Meet diverse people",
+          "hint": "ages, genders, lifestyles, backgrounds"
+        }
+      ]
+    },
+    {
+      "question": "What is your average demand of…",
+      "options": [{
+          "choice": "Activity",
+          "hint": "exercise, physical work, maneuver"
+        },
+        {
+          "choice": "Analysis",
+          "hint": "organize, research, supervise"
+        },
+        {
+          "choice": "Affectivity",
+          "hint": "care for self/others/pets/garden/cause"
+        },
+        [{
+          "choice": "Relaxation",
+          "hint": "rest, leisure"
+        }, {
+          "choice": "Tension",
+          "hint": "effort, stress"
+        }],
+        [{
+            "choice": "Focus on others",
+            "hint": "externalize, interact"
+          },
+          {
+            "choice": "Focus on self",
+            "hint": "internalize, reclude"
+          }
+        ]
+      ]
+    }
+  ]
+}

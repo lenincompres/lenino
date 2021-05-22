@@ -6,11 +6,16 @@ import MUSICPLAYER from './modules/widgets/musicplayer.js'
 import SOCIAL_LINKS from './modules/widgets/social.js'
 import slideDown from './modules/animations/slideDown.js'
 
-var pageNames = Object.keys(PAGES);
-var BREAK_POINT = window.innerWidth < 850;
+
+const isMobile = new Binder(window.innerWidth < 850);
+window.addEventListener('resize', e => isMobile.value = window.innerWidth < 850);
 
 const currentPage = new Binder();
+if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase();
+
 const navHover = new Binder();
+
+var pageNames = Object.keys(PAGES);
 
 DOM.create({
 
@@ -25,21 +30,21 @@ DOM.create({
       width: '100%',
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: 'url(assets/leninoYourCard.jpg)',
-      backgroundSize: BREAK_POINT ? 'initial' : '100%',
+      backgroundSize: isMobile.bind(val => val ? 'initial' : '100%'),
       backgroundPosition: 'center top',
 
       header: {
         style: [STYLE.PAGE, STYLE.FLEX],
-        flexDirection: BREAK_POINT ? 'column' : undefined,
-        alignContent: BREAK_POINT ? 'center' : undefined,
-        height: BREAK_POINT ? '4em' : undefined,
+        flexDirection: isMobile.bind(val => val ? 'column' : undefined),
+        alignContent: isMobile.bind(val => val ? 'center' : undefined),
+        height: isMobile.bind(val => val ? '4em' : undefined),
         alignItems: 'flex-end',
-        position: BREAK_POINT ? 'relative' : 'absolute',
-        width: BREAK_POINT ? '100%' : 'fit-content',
+        position: isMobile.bind(val => val ? 'relative' : 'absolute'),
+        width: isMobile.bind(val => val ? '100%' : 'fit-content'),
         padding: '0.5em',
-        margin: BREAK_POINT ? 0 : '1em',
+        margin: isMobile.bind(val => val ? 0 : '1em'),
         zIndex: 10,
-        borderRadius: BREAK_POINT ? 0 : '.5em',
+        borderRadius: isMobile.bind(val => val ? 0 : '.5em'),
 
         a: {
           fontSize: '2.3em',
@@ -61,7 +66,7 @@ DOM.create({
         },
 
         menu: {
-          display: BREAK_POINT ? 'none' : 'bock',
+          display: isMobile.bind(val => val ? 'none' : 'bock'),
           a: SOCIAL_LINKS
         },
 
@@ -71,16 +76,16 @@ DOM.create({
       nav: {
         style: STYLE.FLEX,
         flexDirection: 'column',
-        alignContent: BREAK_POINT ? 'center' : 'left',
-        height: BREAK_POINT ? '4em' : 'fit-content',
-        width: BREAK_POINT ? '100%' : 'fit-content',
-        backgroundColor: `rgba(${BREAK_POINT ? '0,0,0' : '255,255,255'},0.5)`,
-        padding: BREAK_POINT ? '0.5em 0' : '5.75em 0.5em 0.5em',
+        alignContent: isMobile.bind(val => val ? 'center' : 'left'),
+        height: isMobile.bind(val => val ? '4em' : 'fit-content'),
+        width: isMobile.bind(val => val ? '100%' : 'fit-content'),
+        backgroundColor: isMobile.bind(val => `rgba(${val ? '0,0,0' : '255,255,255'},0.5)`),
+        padding: isMobile.bind(val => val ? '0.5em 0' : '5.75em 0.5em 0.5em'),
         zIndex: 5,
-        borderRadius: BREAK_POINT ? 0 : '0.5em',
+        borderRadius: isMobile.bind(val => val ? 0 : '0.5em'),
         color: 'rgb(245, 220, 154)',
-        margin: BREAK_POINT ? 0 : '0.25em 0 0 2em',
-        position: BREAK_POINT ? 'relative' : 'absolute',
+        margin: isMobile.bind(val => val ? 0 : '0.25em 0 0 2em'),
+        position: isMobile.bind(val => val ? 'relative' : 'absolute'),
 
         a: {
           color: STYLE.COLOR.PAGE,
@@ -94,12 +99,11 @@ DOM.create({
 
           content: pageNames.map(name => new Object({
             backgroundColor: DOM.bind(currentPage, current => current === name ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.LINK),
-            display: name !== pageNames[0] && (BREAK_POINT || (name !== pageNames.slice(-1)[0])) ? 'block' : 'none',
+            display: isMobile.bind(val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0] ? 'block' : 'none'),
             boxShadow: DOM.bind([navHover, currentPage], (over, current) =>
               current === name ? STYLE.SHADOW.INSET :
               over === name ? STYLE.SHADOW.HIGHLIGHT :
               STYLE.SHADOW.NORMAL),
-
             href: '#' + name,
             text: name.toLowerCase(),
             onclick: e => currentPage.value = name,
@@ -113,11 +117,11 @@ DOM.create({
 
       article: {
         style: STYLE.FLEX,
-        flexDirection: BREAK_POINT ? 'column' : 'row',
-        alignContent: BREAK_POINT ? 'center' : undefined,
-        minHeight: BREAK_POINT ? '600px' : '815px',
-        width: BREAK_POINT ? '100%' : '47em',
-        margin: BREAK_POINT ? 0 : '6em 0 0 9em',
+        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
+        alignContent: isMobile.bind(val => val ? 'center' : undefined),
+        minHeight: isMobile.bind(val => val ? '600px' : '815px'),
+        width: isMobile.bind(val => val ? '100%' : '47em'),
+        margin: isMobile.bind(val => val ? 0 : '6em 0 0 9em'),
         content: DOM.bind(currentPage, p => PAGES[p], PAGES[0])
       },
 
@@ -125,11 +129,9 @@ DOM.create({
     },
 
     sidebar: {
-      width: BREAK_POINT ? '100%' : '350px',
+      width: isMobile.bind(val => val ? '100%' : '350px'),
       backgroundColor: 'white',
       section: [MUSICPLAYER, TWITTER]
     }
   }
 });
-
-if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase();
