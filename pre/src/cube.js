@@ -9,7 +9,7 @@ function getCube(onready = v => v, options = {}) {
   return new p5(function (me) {
 
     me.setup = function () {
-      onready(me.createCanvas(me.windowWidth, 400).elt);
+      onready(me.createCanvas(720, 400).elt);
       me.centerCode = options.center !== undefined ? options.center : '000';
       me.lang = options.lang !== undefined ? options.lang : ENG;
       me.vicinity = options.vicinity;
@@ -17,11 +17,12 @@ function getCube(onready = v => v, options = {}) {
       me.isHover = false;
       me.center = [me.width * 0.5, me.height * 0.5];
       me.states = new Array(27).fill().map((_, i) => new State(me, {
-        index: i
+        index: i,
+        //noText: true
       })).filter(s => !me.vicinity || s.isNear()).sort(s => s.tier);
       me.states.forEach(s => s.draw(me));
       if (me.ref) me.states.forEach(s => s.setRef(me.ref));
-      me.nextPost = 1 + Math.floor(Math.random() * POSTS);
+      me.nextPost = Math.floor(Math.random() * POSTS);
       me.currentPost = 0;
       me.changePost = false;
       me.animate();
@@ -38,7 +39,7 @@ function getCube(onready = v => v, options = {}) {
         me.changePost = false;
       }
       // draws the labels
-      if(!me.currentPost) return;
+      if(!me.currentPost || options.noLabels) return;
       let y = RADIUS * 4.5;
       let x = RADIUS * 4.75;
       const esp = me.lang === ESP;
@@ -95,7 +96,7 @@ function getCube(onready = v => v, options = {}) {
       me.isHover = !!parseInt(me.get(me.mouseX, me.mouseY).join('')); // any pixel color under the mouse
       me.cursor(me.isHover ? me.HAND : me.ARROW);
       if (me.isHover) {
-        var newOver = me.states.filter(s => !s.hidden && me.dist(me.mouseX - me.center[0], me.mouseY - me.center[1], ...s.coords) < s.radius)[0];
+        var newOver = me.states.filter(s => !s.hidden && me.dist(me.mouseX - me.center[0], me.mouseY - me.center[1], ...s.coords) < s.radius).pop();
         if (newOver === me.overState) return;
         if (me.overState) me.overState.selected = false;
         me.overState = newOver;

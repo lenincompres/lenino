@@ -54,7 +54,7 @@ export class Bar {
           pointerEvents: 'none',
           zIndex: 10,
           minWidth: 'fit-content',
-          text: this.percent.bind(v => v + '%'),
+          text: this.percent.bind(v => Math.round(v) + '%'),
         },
         onmouseover: e => this.showPercent.value = true,
         onmouseout: e => this.showPercent.value = false

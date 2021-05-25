@@ -4,13 +4,11 @@ import states from "./states.js";
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
 
-var defaultRGB = DOM.querystring().rgb ? '#' + DOM.querystring().rgb : '#808080';
-
-export const feature = new Binder(defaultRGB);
 export const mbti = new Binder('----');
+export const feature = new Binder('#808080');
 
 const bars = {
-  i: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
+  e: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
   s: new Bar('S|N', '6em', 'red', 'cyan'),
   f: new Bar('F|T', '6em', 'blue', 'lime'),
   j: new Bar('J|P', '6em', 'white', 'black'),
@@ -21,6 +19,33 @@ const bars = {
   g: new Bar('Rati.', '6em', 'lime'),
   b: new Bar('Emot.', '6em', 'blue')
 }
+
+feature.addListener(hex => {
+  if(!hex) return;
+
+  if (stateP5.update) stateP5.update(hex.hexToCode());
+
+  let [r, g, b] = AUX.rgb(hex).map(v => v * 100 / 255);
+  let e = 100 - 100 * AUX.dist(50, 50, 50, r, g, b) / AUX.dist(0, 0, 0, 50, 50, 50);
+  let s = 100 * r / (0.5 * (g + b) + r);
+  let f = 100 * b / (g + b);
+  let j = (r + g + b) / 3;
+
+  const binar = (v, A, B, N = '-', T = 100, D = 2) => v > T / 2 + D ? A : v < T / 2 - D ? B : N;
+  mbti.value = binar(e, 'E', 'I') + binar(s, 'S', 'N') + binar(f, 'F', 'T') + binar(j, 'J', 'P');
+
+  bars.r.value = r;
+  bars.g.value = g;
+  bars.b.value = b;
+  bars.e.value = e;
+  bars.s.value = s;
+  bars.f.value = f;
+  bars.j.value = j;
+  bars.id.value = 0.5 * (r + b);
+  bars.ego.value = 0.5 * (g + r);
+  bars.sup.value = 0.5 * (g + b);
+});
+
 const psychModel = {
   style: style.floatingSign,
   fontSize: 'small',
@@ -63,7 +88,7 @@ const psychModel = {
         href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
         target: '_blank'
       },
-      div: [bars.i.model, bars.s.model, bars.f.model],
+      div: [bars.f.model, bars.s.model, bars.e.model],
     }, {
       a: {
         text: 'MBTI',
@@ -72,17 +97,18 @@ const psychModel = {
       },
       div: bars.j.model,
       p: {
-        fontType: 'monotype',
         fontSize: '1.25em',
-        color: feature,
-        textShadow: '1px 1px 1px black',
+        letterSpacing: '0.25em',
+        fontFamily: 'monospace',
+        border: 'solid 1px',
+        margin: '1em 0 0 3em',
         text: mbti
       }
     }]
   },
   footer: {
     fontSize: '0.68em',
-    text: '* Extroversion (E) refers to being sociable: a conjuction between outgoing, empathetic, open, agreeable.'
+    text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
   }
 };
 
@@ -98,13 +124,8 @@ var stateP5 = new p5(function (me) {
       });
       state.draw();
     }
-    me.update(defaultRGB.hexToCode());
+    me.update(feature.value.hexToCode());
   }
-});
-
-feature.addListener(v => {
-  stateP5.update(v.hexToCode());
-  breakdown(v);
 });
 
 export const model = {
@@ -117,49 +138,15 @@ export const model = {
     width: 'fit-content',
     fontSize: 'small',
     padding: '1em',
-    p: 'Closest state/archetype',
+    p: 'State & archetype',
     div: {
       canvas: stateElement
     },
     h5: {
-      text: feature.bind(v => 'The ' + states[v.hexToCode()].archetype)
+      text: feature.bind(v => v ? 'The ' + states[v.hexToCode()].archetype : '')
     }
   },
   section: psychModel
-}
-
-function breakdown(hex) {
-  var f = 100 / 255;
-  var mb = {};
-  var c = AUX.color(hex);
-  var d = 2; // threshold to decide on a letter
-  var rgb = AUX.rgb(c);
-  mb.r = f * rgb[0];
-  mb.g = f * rgb[1];
-  mb.b = f * rgb[2];
-  mb.l = AUX.lightness(c);
-  mb.s = 100 * mb.r / (0.5 * (mb.g + mb.b) + mb.r);
-  mb.f = 100 * mb.b / (mb.g + mb.b);
-  mb.j = (mb.r + mb.g + mb.b) / 3;
-  var half = 50;
-  mb.i = 100 * AUX.dist(half, half, half, mb.r, mb.g, mb.b) / AUX.dist(0, 0, 0, half, half, half);
-
-  mb.type = ['I', 'E', '-'][mb.i > 50 + d ? 0 : mb.i < 50 - d ? 1 : 2];
-  mb.type += ['S', 'N', '-'][mb.s > 50 + d ? 0 : mb.s < 50 - d ? 1 : 2];
-  mb.type += ['F', 'T', '-'][mb.f > 50 + d ? 0 : mb.f < 50 - d ? 1 : 2];
-  mb.type += ['J', 'P', '-'][mb.j > 50 + d ? 0 : mb.j < 50 - d ? 1 : 2];
-  mbti.value = mb.type;
-
-  bars.r.value = mb.r;
-  bars.g.value = mb.g;
-  bars.b.value = mb.b;
-  bars.i.value = mb.i;
-  bars.s.value = mb.s;
-  bars.f.value = mb.f;
-  bars.j.value = mb.j;
-  bars.id.value = 0.5 * (mb.r + mb.b);
-  bars.ego.value = 0.5 * (mb.g + mb.r);
-  bars.sup.value = 0.5 * (mb.g + mb.b);
 }
 
 export default model;

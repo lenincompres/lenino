@@ -10,7 +10,7 @@
           "hint": "meaning, idea, message"
         },
         {
-          "choice": "Feeling",
+          "choice": "Feelings",
           "hint": "sentiment, emotion, nostalgia"
         }
       ]
@@ -99,7 +99,7 @@
       "question": "How likely are you to give up rest for…",
       "options": [{
           "choice": "Spontaneous activities",
-          "hint": "play, chrore, exercise"
+          "hint": "play, chores, exercise"
         },
         {
           "choice": "Analyzing a subject",
@@ -135,11 +135,11 @@
           "hint": "Gotta be done."
         },
         {
-          "choice": "Clear with plans",
+          "choice": "Clear about plans",
           "hint": "And stick to them."
         },
         {
-          "choice": "True to values",
+          "choice": "Committed to values",
           "hint": "Won't give them up."
         }
       ]
@@ -189,7 +189,7 @@
         },
         {
           "choice": "Inquisitive",
-          "hint": "Looking to learn and debate"
+          "hint": "Look to learn and debate"
         },
         {
           "choice": "Softhearted",

@@ -284,6 +284,7 @@ class DOM {
           quotes: 'none',
           content: 'none',
           fontWeight: 'normal',
+          backgroundColor: 'transparent',
         },
         body: {
           fontFamily: 'Arial, sans-serif',

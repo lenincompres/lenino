@@ -4,9 +4,8 @@ import * as results from "./results.js";
 import * as style from "./style.js";
 
 const rgb = DOM.querystring().rgb;
-questionnaire.results.addListener(v => {
-  results.feature.value = v;
-});
+
+questionnaire.results.bind(results.feature);
 
 document.head.create({
   title: 'PRE Spectrum',
@@ -52,36 +51,45 @@ DOM.style({
 });
 
 const cubeElement = new Binder();
-let cube = getCube(cube => cubeElement.value = cube);
-cube.onclick = s => {
-  console.log(s);
-  s ? window.location.href = './?rgb=' + s.code.codeToHex() : null;
-};
+let cube = getCube(cube => cubeElement.value = cube, {
+  noLabels: true
+});
+cube.onclick = s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null;
 const cubeModel = {
   div: {
+    margin: '0 auto',
+    width: 'fit-content',
+    position: 'relative',
+    select: !rgb ? undefined : {
+      position: 'absolute',
+      top: '3em',
+      right: 0,
+      textAlignLast: 'right',
+      onchange: e => cube.view(e.target.value),
+      option: [{
+        value: 'text',
+        text: ''
+      }, {
+        value: 0,
+        text: 'Top view'
+      }, {
+        value: -1,
+        text: 'Center view'
+      }, {
+        value: -2,
+        text: 'Base view'
+      }, {
+        value: 1,
+        text: 'Physical break'
+      }, {
+        value: 2,
+        text: 'Rational break'
+      }, {
+        value: 3,
+        text: 'Emotional break'
+      }]
+    },
     canvas: cubeElement
-  },
-  select: {
-    option: ['- Views -', {
-      value: 0,
-      text: 'Top view'
-    }, {
-      value: -1,
-      text: 'Center view'
-    }, {
-      value: -2,
-      text: 'Base view'
-    }, {
-      value: 1,
-      text: 'Physical break'
-    }, {
-      value: 2,
-      text: 'Rational break'
-    }, {
-      value: 3,
-      text: 'Emotional break'
-    }],
-    onchange: e => cube.view(e.target.value)
   },
 };
 
@@ -94,12 +102,12 @@ const takeTheTest = {
 DOM.create({
   textAlign: 'center',
   overflowX: 'hidden',
-  backgroundColor: questionnaire.favorite,
+  backgroundColor: rgb ? '#' + rgb : questionnaire.favorite,
   header: {
     backgroundColor: style.lightSreen,
     padding: '1em 0.5em',
     h1: 'PRE Spectrum',
-    h4: 'Physical, Rational & Emotional psichometric tool',
+    h4: 'Physical, Rational & Emotional',
     div: {
       marginTop: '-3em',
       content: cubeModel
@@ -107,23 +115,27 @@ DOM.create({
   },
   main: rgb ? undefined : questionnaire.model,
   footer: {
-    boxShadow: '0 0 3em black',
-    backgroundColor: results.feature,
+    boxShadow: rgb ? '0 -1em 1em #' + rgb : results.feature.bind(v => '0 -1em 1em ' + v),
+    backgroundColor: rgb ? '#' + rgb : results.feature,
     section: {
       style: style.section,
+      display: 'flex',
+      flexDirection: 'column',
       h1: 'Results',
       div: results.model,
-      a: rgb ? takeTheTest : {
+      a: [rgb ? takeTheTest : {
         target: '_blank',
         href: results.feature.bind(v => './?rgb=' + v.substr(1)),
-        text: results.feature.bind(v => 'A link for these results: ' + v)
-      },
-      p: {
-        display: 'block',
+        text: 'Here is a link for these results, if you care to share or save it.'
+      }, {
         fontSize: 'small',
-        margin: '3em 0 0',
-        html: 'Created by <a href="http://www.lenino.net" target="_blank">Lenin Compres</a>'
-      }
+        margin: '2em 0 0',
+        href: 'http://lenino.net',
+        target: '_blank',
+        text: 'Created by Lenin Compres'
+      }]
     }
   }
 });
+
+if (rgb) results.feature.value = rgb;

@@ -4,15 +4,15 @@ import * as AUX from "./functions.js";
 const sampleQuestion = {
   "question": "How much do you like these colors?",
   "options": [{
-      "choice": "Red",
+      "choice": "Reds",
       "hint": "scarlet, maroon, brick"
     },
     {
-      "choice": "Green",
+      "choice": "Greens",
       "hint": "lime, army, mint"
     },
     {
-      "choice": "Blue",
+      "choice": "Blues",
       "hint": "royal, sky, navy"
     },
     [{
@@ -35,11 +35,8 @@ const modelQuestion = q => {
   q.answers = [];
 
   q.model = {
-    width: 'calc(100% - 1em)',
-    maxWidth: '35em',
-    margin: '0.5em auto 2em',
     h2: !q.question ? undefined : {
-      marginTop: '1em',
+      marginTop: '2em',
       fontSize: '1.5em',
       padding: '0.68em 0 0',
       backgroundColor: style.darkSreen,

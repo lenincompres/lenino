@@ -148,6 +148,7 @@ export class State {
     this.draw = _ => {
       if (!this.symbolSprite) return;
       this.onupdate(this);
+      if(isNaN(this.post)) this.post = 0;
       let end = this.posts[this.post];
       let ended = sketch.dist(...end, ...this.coords) < 0.25;
       if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
@@ -164,11 +165,13 @@ export class State {
       // top
       drawBox(this.radius, this.color, 0.34 * Math.pow(this.value, 3), false, sketch);
       // text
-      sketch.fill(0, this.value * 255);
-      sketch.textFont('Verdana');
-      sketch.textAlign(sketch.CENTER, sketch.CENTER);
-      sketch.textSize(this.radius * 0.25);
-      sketch.text(this.article, 0, this.radius * 0.5);
+      if(!options.noText){
+        sketch.fill(0, this.value * 255);
+        sketch.textFont('Verdana');
+        sketch.textAlign(sketch.CENTER, sketch.CENTER);
+        sketch.textSize(this.radius * 0.25);
+        sketch.text(this.article, 0, this.radius * 0.5);
+      }
       //
       if (this.selected) {
         sketch.fill(0, 0);
