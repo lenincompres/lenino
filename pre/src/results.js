@@ -51,7 +51,7 @@ const psychModel = {
   fontSize: 'small',
   margin: '1em 0',
   header: {
-    span: 'Exact results: ',
+    span: 'Exact code: ',
     b: {
       text: feature
     }
@@ -137,8 +137,8 @@ export const model = {
     position: 'relative',
     width: 'fit-content',
     fontSize: 'small',
-    padding: '1em',
-    p: 'State & archetype',
+    padding: '1.5em 1em 1em',
+    p: 'State & Archetype',
     div: {
       canvas: stateElement
     },

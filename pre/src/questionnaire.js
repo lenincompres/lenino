@@ -1,6 +1,11 @@
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
 
+/* Methods to calculate the results */
+
+export const favorite = new Binder('#808080');
+export const results = new Binder('#808080');
+
 const sampleQuestion = {
   "question": "How much do you like these colors?",
   "options": [{
@@ -119,23 +124,28 @@ DOM.requestJSON('assets/questionnaire.json', data => {
 
 export const model = {
   style: style.section,
-  marginTop: '2em',
   header: {
     style: style.floatingSign,
     h4: 'Questionnaire Instructions:',
-    ul: {
-      li: [
-        'Rate options individually, but mind how they compare to others.',
-        'When contrasting options, indicate how much you lean to either.'
-      ]
-    }
+    p: [
+      'Rate options individually, but mind how they compare to others.',
+      'When contrasting options, indicate how much you lean to either.'
+    ]
   },
   article: {
     color: '#fff',
-    margin: '4em 0',
+    margin: '4em 0 0',
     content: [{
       h1: 'Sample',
       div: modelQuestion(sampleQuestion)
+    }, {
+      marginTop: '1em',
+      a: {
+        fontSize: '1.14em',
+        target: '_blank',
+        text: favorite.bind(v => 'Resulting color code: ' + v),
+        href: favorite.bind(v => './?rgb=' + v.substr(1)),
+      }
     }, {
       h1: 'Start',
       div: questions.bind(qs => qs.map(q => q.model))
@@ -143,12 +153,6 @@ export const model = {
   }
 };
 
-
-
-/* Methods to calculate the results */
-
-export const favorite = new Binder('#808080');
-export const results = new Binder('#808080');
 
 const getAverage = (first, last) => {
   var output = Array(questions.value[first].answers.length).fill(0);

@@ -15,10 +15,10 @@ export const projects = [{
   img: "assets/mis500locos.jpg",
   desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
-  title: "Jack Rabbits",
-  link: "http://lenino.net/jackrabbits",
-  img: "assets/jackrabbits.jpg",
-  desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version"
+  title: "PRE Spectrum",
+  link: "http://lenino.net/pre",
+  img: "http://lenino.net/pre/assets/pre.png",
+  desc: "Psychometric tool focusing on Physical, Rational & Emotional functions, ideal for Jung, Freud and MBTI fans"
 }, {
   title: "Illusions of Duality",
   link: "http://lenino.net/album/",
@@ -30,10 +30,10 @@ export const projects = [{
   img: "assets/chimes.jpg",
   desc: "Animation that illustrates how bonded particles may not travel as fast as their individual speed"
 }, {
-  title: "PRE Model",
-  link: "http://lenino.net/pre",
-  img: "http://lenino.net/pre/assets/pre.png",
-  desc: "Psychometric tool focusing on Physical, Rational & Emotional functions, ideal for Jung, Freud and MBTI fans"
+  title: "Jack Rabbits",
+  link: "http://lenino.net/jackrabbits",
+  img: "assets/jackrabbits.jpg",
+  desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version"
 }, {
   title: "Las 12 Piezas Cortas",
   link: "http://lenino.net/las12piezascortas/",

@@ -10,7 +10,8 @@ function getCube(options = {}) {
 
     me.setup = function () {
       let onready = options.onready !== undefined ? options.onready : _ => null;
-      onready(me.createCanvas(me.windowWidth, 400).elt);
+      let canvas = me.createCanvas(me.windowWidth, 400);
+      onready(canvas.elt);
       me.centerCode = options.center !== undefined ? options.center : '000';
       me.lang = options.lang !== undefined ? options.lang : ENG;
       me.onclick = options.onclick !== undefined ? options.onclick : _ => null;
@@ -40,7 +41,7 @@ function getCube(options = {}) {
         me.changePost = false;
       }
       // draws the labels
-      if(!me.currentPost || options.noLabels) return;
+      if (!me.currentPost || options.noLabels) return;
       let y = RADIUS * 4.5;
       let x = RADIUS * 4.75;
       const esp = me.lang === ESP;
@@ -49,17 +50,17 @@ function getCube(options = {}) {
         [esp ? 'Atento' : 'Attentive', 0, y],
         [esp ? 'Introspectivo' : 'Introspective', x, y]
       ];
-      if(me.currentPost === 2) texts = [
+      if (me.currentPost === 2) texts = [
         [esp ? 'Instintivo' : 'Instinctive', -x * 1.12, y],
         [esp ? 'Informativo' : 'Informative', 0, y],
         [esp ? 'Regulativo' : 'Regulative', x * 1.12, y]
       ];
-      else if(me.currentPost === 3) texts = [
+      else if (me.currentPost === 3) texts = [
         [esp ? 'Objetivo' : 'Objective', -x, y],
         [esp ? 'Sensible' : 'Responsive', 0, y],
         [esp ? 'Affectivo' : 'Affective', x, y]
       ];
-      else if(me.currentPost === 4) texts = [
+      else if (me.currentPost === 4) texts = [
         ['Base', -x * 1.28, y],
         [esp ? 'Periféricos & Neutro' : 'Peripheral & Neutral', 0, y],
         [esp ? 'Tope' : 'Top', x * 1.28, y]
@@ -67,7 +68,7 @@ function getCube(options = {}) {
       me.fill(0);
       me.textAlign(me.CENTER, me.CENTER);
       me.textSize(RADIUS * 0.34);
-      texts.forEach(t =>  me.text(...t));
+      texts.forEach(t => me.text(...t));
     }
 
     me.animate = function (wait = 1000) {

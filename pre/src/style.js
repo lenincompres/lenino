@@ -13,6 +13,6 @@ export const floatingSign = {
 
 export const section = {
   margin: '0 auto',
-  padding: '2em 1em',
+  padding: '4em 1em',
   maxWidth: '42em',
 }

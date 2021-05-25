@@ -3,8 +3,11 @@ import * as questionnaire from "./questionnaire.js";
 import * as results from "./results.js";
 import * as style from "./style.js";
 
-let rgb = DOM.querystring().rgb;
-if(rgb) rgb = '#'+ rgb;
+const QS = DOM.querystring();
+let rgb = QS.rgb;
+let fav = QS.color;
+if (rgb) rgb = '#' + rgb;
+if (fav) fav = '#' + fav;
 
 questionnaire.results.bind(results.feature);
 
@@ -57,43 +60,6 @@ let cube = getCube({
   onclick: s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null,
   onready: cube => cubeElement.value = cube
 });
-const cubeModel = {
-  div: {
-    margin: '-2em auto 0',
-    width: 'fit-content',
-    position: 'relative',
-    canvas: cubeElement,
-    select: !rgb ? undefined : {
-      position: 'absolute',
-      top: '3em',
-      right: 0,
-      textAlignLast: 'right',
-      onchange: e => cube.view(e.target.value),
-      option: [{
-        value: 'text',
-        text: ''
-      }, {
-        value: 0,
-        text: 'Top view'
-      }, {
-        value: -1,
-        text: 'Center view'
-      }, {
-        value: -2,
-        text: 'Base view'
-      }, {
-        value: 1,
-        text: 'Physical break'
-      }, {
-        value: 2,
-        text: 'Rational break'
-      }, {
-        value: 3,
-        text: 'Emotional break'
-      }]
-    }
-  },
-};
 
 DOM.create({
   textAlign: 'center',
@@ -104,7 +70,37 @@ DOM.create({
     paddingTop: '2em',
     h1: 'PRE Spectrum',
     h4: 'Physical, Rational & Emotional',
-    div: cubeModel
+    div: {
+      margin: '-2em auto 0',
+      position: 'relative',
+      canvas: cubeElement,
+      select: !rgb ? undefined : {
+        position: 'absolute',
+        top: '3em',
+        right: 0,
+        textAlignLast: 'right',
+        option: ['', {
+          value: 0,
+          text: 'Top view'
+        }, {
+          value: -1,
+          text: 'Center view'
+        }, {
+          value: -2,
+          text: 'Base view'
+        }, {
+          value: 1,
+          text: 'Physical break'
+        }, {
+          value: 2,
+          text: 'Rational break'
+        }, {
+          value: 3,
+          text: 'Emotional break'
+        }]
+      },
+      onchange: e => cube.view(e.target.value)
+    }
   },
   main: rgb ? undefined : questionnaire.model,
   footer: {
@@ -114,14 +110,28 @@ DOM.create({
       style: style.section,
       display: 'flex',
       flexDirection: 'column',
-      h1: 'Results',
+      h1: rgb && !fav ? 'Featured' : 'Results',
+      p: !fav ? undefined : {
+        marginBottom: '-1.5em',
+        zIndex: 1,
+        text: 'Closests'
+      },
       div: results.model,
       a: {
         target: '_blank',
         content: [{
           display: rgb ? 'none' : 'block',
-          href: results.feature.bind(v => './?rgb=' + v.substr(1)),
+          href: results.feature.bind(v => './?rgb=' + v.substr(1) + '&color=' + questionnaire.favorite.value.substr(1)),
           text: 'Here is a link with these results for you to save or share.'
+        }, !fav ? undefined : {
+          margin: '0 auto',
+          padding: '0.5em 1em',
+          width: 'fit-content',
+          borderRadius: '0.5em',
+          boxShadow: '1px 1px 2px black',
+          backgroundColor: fav,
+          href: './?rgb=' + fav.substr(1),
+          text: 'Your also have this favorite color: ' + fav
         }, {
           fontSize: '1.25em',
           marginTop: '2em',
