@@ -1,3 +1,5 @@
+import states from "./states.js";
+
 const STATE_ICON_GRID = 36;
 const CENTERCODE = '111';
 const [ENG, ESP] = ['eng', 'esp'];
@@ -12,7 +14,7 @@ Array.prototype.plus = function (arr = 0) { // adds arrays to array, or number
   return this.map((n, i) => n + (typeof arr === 'number' ? arr : arr[i % arr.length]));
 }
 Number.prototype.ordinalToCode = function (base) {
-  let code = '' + floor(this / 9) % 3 + floor(this / 3) % 3 + this % 3;
+  let code = '' + Math.floor(this / 9) % 3 + Math.floor(this / 3) % 3 + this % 3;
   if (base) code = code.codeToCoords().plus(base.codeToCoords()).map(o => o % 3).join('');
   return code;
 }
@@ -32,7 +34,9 @@ String.prototype.codeToHex = function () {
   return this.codeToCoords().codeToHex();
 }
 String.prototype.hexToCode = function () {
-  return codeColor(color('#' + this));
+  let s = this.startsWith('#') ? this.substr(1) : this;
+  let arr = s.length > 3 ? [s[0] + s[1], s[2] + s[3], s[4] + s[5]] : [s[0] + s[0], s[1] + s[1], s[2] + s[2]];
+  return arr.map(s => Math.round(2 * parseInt('0x' + s) / 255)).join('');
 }
 String.prototype.codeToColor = function () {
   return this.codeToCoords().codeToColor();
@@ -41,87 +45,59 @@ Array.prototype.codeToCoords = function () {
   return this.map(n => parseInt(n) % 3);
 }
 Array.prototype.codeToOrdinal = function () {
-  return this.reverse().reduce((o, v, i) => o + (v % 28) * pow(3, i), 0);
+  return this.reverse().reduce((o, v, i) => o + (v % 28) * Math.pow(3, i), 0);
 }
 Array.prototype.codeToHex = function (shades) {
   return this.map(v => hexCode(v)).join('');
 }
 Array.prototype.codeToColor = function () {
-  return this.map(v => round('0x' + hexCode(v)));
+  return this.map(v => Math.round('0x' + hexCode(v)));
 }
 Array.prototype.colorToCode = function () {
-  return this.map(n => round(map(n, 0, 255, 0, 2))).join('');
+  return this.map(n => Math.round(n * 2 / 255)).join('');
 }
 
-// other functions
+const hexNum = n => parseInt(n, 10).toString(16);
 
-export function getI(r, g, b, top = 100) {
-  var half = 0.5 * top;
-  return 100 * dist(half, half, half, r, g, b) / dist(0, 0, 0, half, half, half);
-}
+const hexCode = code => [hexNum(0xff / 6), hexNum(0xff / 2), hexNum(5 * 0xff / 6)][code];
 
-export function hexColor(colour) {
-  var r = 1;
-  return '' + hex(r * round(red(colour) / r), 2) + hex(r * round(green(colour) / r), 2) + hex(r * round(blue(colour) / r), 2);
-}
-
-export function codeColor(colour) {
-  return [red(colour), green(colour), blue(colour)].colorToCode();
-}
-
-export const hexNum = (n, d = 2, r = 16) => hex(r * round(n / r), 2);
-
-export const hexCode = v => [hexNum(0xff / 6), hexNum(0xff / 2), hexNum(5 * 0xff / 6)][v];
-
-export function drawBox(radius = 40, colour = [128, 128, 128], alpha = 1, inside = true, canvas) {
-  if (!canvas) canvas = this;
+function drawBox(radius = 40, colour = [128, 128, 128], alpha = 1, inside = true, sketch) {
+  if (!sketch) return;
   let [x, y] = [radius * COS30, radius * SIN30];
   alpha *= 255;
-  if (inside) canvas.rotate(PI);
-  canvas.fill(...colour.plus(32), alpha);
-  canvas.quad(0, 0, x, -y, 0, -radius, -x, -y);
-  canvas.fill(...colour, alpha);
-  canvas.quad(0, 0, 0, radius, -x, y, -x, -y);
-  canvas.fill(...colour.plus(-32), alpha);
-  canvas.quad(0, 0, x, -y, x, y, 0, radius);
-  if (inside) canvas.rotate(PI);
+  if (inside) sketch.rotate(Math.PI);
+  sketch.fill(...colour.plus(32), alpha);
+  sketch.quad(0, 0, x, -y, 0, -radius, -x, -y);
+  sketch.fill(...colour, alpha);
+  sketch.quad(0, 0, 0, radius, -x, y, -x, -y);
+  sketch.fill(...colour.plus(-32), alpha);
+  sketch.quad(0, 0, x, -y, x, y, 0, radius);
+  if (inside) sketch.rotate(Math.PI);
 }
 
-export function polygon(x, y, radius, npoints, canvas) {
-  if (!canvas) canvas = this;
-  let angle = TWO_PI / npoints;
-  canvas.beginShape();
-  for (let a = 0; a < TWO_PI; a += angle) {
+function polygon(x, y, radius, npoints, sketch) {
+  if (!sketch) sketch = this;
+  let angle = Math.TWO_PI / npoints;
+  sketch.beginShape();
+  for (let a = 0; a < Math.TWO_PI; a += angle) {
     let sx = x + cos(a) * radius;
     let sy = y + sin(a) * radius;
-    canvas.vertex(sx, sy);
+    sketch.vertex(sx, sy);
   }
-  canvas.endShape(CLOSE);
-}
-
-// p5 sketch to showcase a state
-
-export function p5State(z = 100) {
-  return new p5(function (p) {
-    p.setup = () => {
-      p.canvas = p.createCanvas(z, z);
-    }
-    p.drawState = hex => {
-      p.clear();
-      p.push();
-      p.translate(p.width / 2, p.height / 2);
-      p.state = new State(hex.substr(1).hexToCode());
-      p.state.draw(p);
-      p.pop();
-    }
-  });
+  sketch.endShape(sketch.CLOSE);
 }
 
 export class State {
-  constructor(centerCode = CENTERCODE, index = false, animate = false, radius = 40, lang = null) {
+  constructor(sketch, options) {
+    let base = options.center !== undefined ? options.center : CENTERCODE;
+    let index = options.index !== undefined ? options.index : false;
+    let animate = options.animate !== undefined ? options.animate : false;
+    let radius = options.radius !== undefined ? options.radius : 40;
+    let lang = options.lang !== undefined ? options.lang : ENG;
+    this.onupdate = options.onupdate !== undefined ? options.onupdate : s => s;
     if (index === false) index = CENTERCODE.codeToOrdinal();
     let inCoords = index.codeToCoords();
-    let baseCode = centerCode.codeToCoords().plus(2).codeToCoords();
+    let baseCode = base.codeToCoords().plus(2).codeToCoords();
     let code = index.ordinalToCode(baseCode);
     this.ordinal = code.codeToOrdinal();
     this.color = code.codeToColor();
@@ -160,55 +136,52 @@ export class State {
     this.coords = animate ? [0, 0] : this.posts[0];
     this.hex = code.codeToHex();
     this.value = 1;
+    this.article = lang === ESP ? states[code].articulo : states[code].article;
+    this.arch = lang === ESP ? states[code].arquetipo : states[code].archetype;
+    this.info = states[code];
 
-    this.symbolInfo;
-    DOM.requestJSON('states.json', d => {
-      this.symbolInfo = d;
-      this.article = lang === ESP ? this.symbolInfo[code].articulo : this.symbolInfo[code].article;
-      this.arch = lang === ESP ? this.symbolInfo[code].arquetipo : this.symbolInfo[code].archetype;
-      this.info = this.symbolInfo[code];
+    sketch.loadImage('assets/symbolsprite18.png', img => {
+      this.symbolSprite = img;
+      this.draw();
     });
 
-    this.symbolSprite;
-    DOM.request('assets/symbolsprite18.png', d => this.symbolSprite = d);
-  }
-
-  draw(canvas) {
-    if(!this.symbolSprite || this.symbolInfo) return;
-    if (!canvas) canvas = window;
-    let end = isNaN(this.post) ? this.posts[0] : this.posts[this.post];
-    let ended = dist(...end, ...this.coords) < 0.25;
-    if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
-    if (this.hidden) return;
-    canvas.push();
-    canvas.noStroke();
-    canvas.translate(...this.coords);
-    // base
-    drawBox(this.radius, this.color, 0.86 * pow(this.value, 3), true, canvas);
-    // icon
-    canvas.tint(...this.color, pow(this.value, 2) * 255);
-    var iconSize = this.radius * 0.86;
-    canvas.image(this.symbolSprite, -iconSize * 0.5, -iconSize * 0.5, iconSize, iconSize, (this.ordinal % 3) * STATE_ICON_GRID, floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
-    // top
-    drawBox(this.radius, this.color, 0.34 * pow(this.value, 3), false, canvas);
-    // desc
-    canvas.fill(0, this.value * 255);
-    canvas.textFont('Verdana');
-    canvas.textAlign(CENTER, CENTER);
-    canvas.textSize(this.radius * 0.25);
-    canvas.text(this.article, 0, this.radius * 0.5);
-    //
-    if (this.selected) {
-      canvas.fill(0, 0);
-      canvas.rotate(PI / 6);
-      canvas.strokeWeight(6);
-      canvas.stroke(0, 140);
-      polygon(1, 1, this.radius, 6, canvas);
-      canvas.strokeWeight(4);
-      canvas.stroke(255);
-      polygon(0, 0, this.radius, 6, canvas);
+    this.draw = _ => {
+      if (!this.symbolSprite) return;
+      this.onupdate(this);
+      let end = this.posts[this.post];
+      let ended = sketch.dist(...end, ...this.coords) < 0.25;
+      if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
+      if (this.hidden) return;
+      sketch.push();
+      sketch.noStroke();
+      sketch.translate(...this.coords);
+      // base
+      drawBox(this.radius, this.color, 0.86 * Math.pow(this.value, 3), true, sketch);
+      // icon
+      sketch.tint(...this.color, Math.pow(this.value, 2) * 255);
+      var iSize = this.radius * 0.86;
+      sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
+      // top
+      drawBox(this.radius, this.color, 0.34 * Math.pow(this.value, 3), false, sketch);
+      // text
+      sketch.fill(0, this.value * 255);
+      sketch.textFont('Verdana');
+      sketch.textAlign(sketch.CENTER, sketch.CENTER);
+      sketch.textSize(this.radius * 0.25);
+      sketch.text(this.article, 0, this.radius * 0.5);
+      //
+      if (this.selected) {
+        sketch.fill(0, 0);
+        sketch.rotate(Math.PI / 6);
+        sketch.strokeWeight(6);
+        sketch.stroke(0, 140);
+        polygon(1, 1, this.radius, 6, sketch);
+        sketch.strokeWeight(4);
+        sketch.stroke(255);
+        polygon(0, 0, this.radius, 6, sketch);
+      }
+      sketch.pop();
     }
-    canvas.pop();
   }
 
   isNear() {

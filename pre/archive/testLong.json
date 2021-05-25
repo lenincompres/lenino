@@ -48,8 +48,8 @@
           "hint": "challege, practice, play"
         },
         {
-          "choice": "Stats",
-          "hint": "records, scores, strategies"
+          "choice": "Scores",
+          "hint": "records, stats, strategies"
         },
         {
           "choice": "Atmosphere",
@@ -109,7 +109,7 @@
       "question": "In movies or books, how drawn are you to…",
       "options": [{
           "choice": "Action",
-          "hint": "thrills, pace, visuals/sounds"
+          "hint": "thrills, pace, audiovisuals"
         },
         {
           "choice": "Plot",
@@ -157,15 +157,15 @@
     {
       "question": "How much do these sound like you?",
       "options": [{
-          "choice": "I am prompt with my duties.",
+          "choice": "Prompt with my duties.",
           "hint": "Gotta be done."
         },
         {
-          "choice": "I am clear with my plans.",
+          "choice": "Clear with my plans.",
           "hint": "And stick to them."
         },
         {
-          "choice": "I am true to my values.",
+          "choice": "True to my values.",
           "hint": "Won't give them up."
         }
       ]
@@ -254,7 +254,7 @@
       "question": "What is your average demand of…",
       "options": [{
           "choice": "Activity",
-          "hint": "exercise, physical work, maneuver"
+          "hint": "exercise, carry, maneuver"
         },
         {
           "choice": "Analysis",

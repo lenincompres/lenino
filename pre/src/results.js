@@ -1,12 +1,16 @@
-import p5Cube from "./cube.js";
 import Bar from './Bar.js';
-import { p5State } from "./State.js";
+import State from "./State.js";
+import states from "./states.js";
+import * as style from "./style.js";
+import * as AUX from "./functions.js";
 
-var mousePos = {};
-var state;
+var defaultRGB = DOM.querystring().rgb ? '#' + DOM.querystring().rgb : '#808080';
 
-let barMap = {
-  i: new Bar('I|E', '6em', 'assets/extremes.gif', 'gray'),
+export const feature = new Binder(defaultRGB);
+export const mbti = new Binder('----');
+
+const bars = {
+  i: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
   s: new Bar('S|N', '6em', 'red', 'cyan'),
   f: new Bar('F|T', '6em', 'blue', 'lime'),
   j: new Bar('J|P', '6em', 'white', 'black'),
@@ -17,155 +21,145 @@ let barMap = {
   g: new Bar('Rati.', '6em', 'lime'),
   b: new Bar('Emot.', '6em', 'blue')
 }
-
-let cube = p5Cube();
-console.log(cube)
-//cube.onmouseover = s => s ? showMe('#' + s.code.codeToHex()) : null;
-//cube.onmouseout = s => showMe();
-
-const stateBinder = new Binder();
-const results = new Binder([]);
-
-export const resultsSection = {
-  h1: 'Results',
-  p: 'Closest average state and its archetype',
-  a_exploreLink: {
-    text: 'Unique link for these results here',
-    target: '_blank'
+const psychModel = {
+  style: style.floatingSign,
+  fontSize: 'small',
+  margin: '1em 0',
+  header: {
+    span: 'Exact results: ',
+    b: {
+      text: feature
+    }
   },
   ul: {
-    li_results: results.bind(rs => rs.map((r, i) => new Object({
-      span: ['PRE results', 'Present Life', 'Favorite Color'][i],
-      b: '',
-      i: ''
-    })))
-  },
-  state: {
-    approx: '≈ Closest',
-    canvas: stateBinder.bind(),
-    archetype: ''
-  },
-  psych: {
-    p: 'For the psych nerds',
-    span_stat: [{
-      p: 'PRE',
-      div: [barMap.r.dom, barMap.g.dom, barMap.b.dom]
-    }, {
-      p: {
-        a: {
-          text: 'Freud',
-          href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
-          target: '_blank'
-        }
+    css: {
+      margin: '1em 0',
+      display: 'flex',
+      li: {
+        display: 'inline - block ',
+        margin: '.25em',
+        verticalAlign: 'top',
+        p: {
+          margin: '.75em 0 0.25em'
+        },
+      }
+    },
+    li: [{
+      a: {
+        text: 'PRE',
+        href: './'
       },
-      div: [barMap.id.dom, barMap.ego.dom, barMap.sup.dom]
+      div: [bars.r.model, bars.g.model, bars.b.model]
     }, {
-      p: {
-        a: {
-          text: 'Jung',
-          href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
-          target: '_blank'
-        }
+      a: {
+        text: 'Freud',
+        href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
+        target: '_blank'
       },
-      div: [barMap.i.dom, barMap.s.dom, barMap.f.dom],
+      div: [bars.id.model, bars.ego.model, bars.sup.model]
     }, {
-      p: {
-        a: {
-          text: 'MBTI',
-          href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
-          target: '_blank'
-        }
+      a: {
+        text: 'Jung',
+        href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
+        target: '_blank'
       },
-      div: barMap.j.dom,
+      div: [bars.i.model, bars.s.model, bars.f.model],
+    }, {
+      a: {
+        text: 'MBTI',
+        href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
+        target: '_blank'
+      },
+      div: bars.j.model,
       p: {
-        id: 'mbti'
+        fontType: 'monotype',
+        fontSize: '1.25em',
+        color: feature,
+        textShadow: '1px 1px 1px black',
+        text: mbti
       }
     }]
   },
-  cube: {
-    canvas: cube.canvas,
-    select: {
-      option: ['- Choose view -', {
-        value: 0,
-        text: 'Top view'
-      }, {
-        value: -1,
-        text: 'Center view'
-      }, {
-        value: -2,
-        text: 'Base view'
-      }, {
-        value: 1,
-        text: 'Physical break'
-      }, {
-        value: 2,
-        text: 'Rational break'
-      }, {
-        value: 3,
-        text: 'Emotional break'
-      }],
-      onchange: e => cube.view(e.target.value)
-    },
+  footer: {
+    fontSize: '0.68em',
+    text: '* Extroversion (E) refers to being sociable: a conjuction between outgoing, empathetic, open, agreeable.'
   }
-}
-
-export const updateResults = questions => {
-
-  const getAnswer = (j, i) => questions[j].answers[i].value;
-  
-  const getAverage = (first, last) => {
-    var output = Array(questions[first].answers.length).fill(0);
-    questions.filter((q, i) => i >= first && i <= last).forEach(q => output = output.plus(q.answers.map(a => a.value)));
-    return output.times(1 / (last - first + 1));
-  }
-  
-  const getColor = (h, s, b) => {
-    p5.colorMode(HSL);
-    var colour = p5.color(h, s, b);
-    return ('#' + hexColor(colour));
-  }
-
-  var f = 255 / 100;
-  //Sorter
-  var h = p5.hue(p5.color(...getAverage(1, 6).times(f)));
-  var light = getAverage(7, 10).reduce((o, v) => v + o, 0) / 3;
-  var sat = getAverage(11, 14).reduce((o, v) => v + o, 0) / 3;
-  results = [getColor(h, sat, light)];
-  dom.actual.elt.style.backgroundColor = dom.actualRGB.elt.innerText = dom.actualRGB.elt.style.color = dom.exploreLink.elt.style.color = results[0];
-  dom.exploreLink.attribute('href', 'explore.html?' + results[0].substr(1));
-  dom.results[0].mouseOver(e => showMe(0));
-  dom.results[0].mouseOut(e => showMe());
-
-  //daily
-  i = 15;
-  var dailyH = p5.hue(p5.color(getAnswer(i, 0) * f, getAnswer(i, 1) * f, getAnswer(i, 2) * f));
-  var dailyL = getAnswer(i, 3);
-  var dailyS = getAnswer(i, 4);
-  results.push(getColor(dailyH, dailyS, dailyL));
-  dom.daily.elt.style.backgroundColor = dom.dailyRGB.elt.innerText = dom.dailyRGB.elt.style.color = results[1];
-  dom.results[1].mouseOver(e => showMe(1));
-  dom.results[1].mouseOut(e => showMe());
-
-  //favorite
-  colorMode(RGB);
-  var favH = p5.hue(p5.color(getAnswer(0, 0) * f, getAnswer(0, 1) * f, getAnswer(0, 2) * f));
-  var favL = getAnswer(0, 3);
-  var favS = getAnswer(0, 4);
-  results.push(getColor(favH, favS, favL));
-  dom.header.elt.style.backgroundColor = dom.favorite.elt.style.backgroundColor = dom.favoriteRGB.elt.innerText = dom.favoriteRGB.elt.style.color = results[2];
-  dom.results[2].mouseOver(e => showMe(2));
-  dom.results[2].mouseOut(e => showMe());
-
-  showMe();
-
 };
 
-/*
-let setup = function () {
-  let args = DOM.querystring();
-  if (args.sorter) document.body.classList.add('sorter');
-  //stats
-  canvas = createCanvas(100, 100);
-  //state = p5State();
+const stateElement = new Binder();
+var stateP5 = new p5(function (me) {
+  me.setup = _ => {
+    stateElement.value = me.createCanvas(100, 100).elt;
+    me.translate(me.width / 2, me.height / 2);
+    me.update = (code) => {
+      me.clear();
+      let state = new State(me, {
+        center: code,
+      });
+      state.draw();
+    }
+    me.update(defaultRGB.hexToCode());
+  }
+});
+
+feature.addListener(v => {
+  stateP5.update(v.hexToCode());
+  breakdown(v);
+});
+
+export const model = {
+  div: {
+    backgroundColor: 'white',
+    margin: '0 auto',
+    borderRadius: '0.5em',
+    boxShadow: '1px 1px 2px black',
+    position: 'relative',
+    width: 'fit-content',
+    fontSize: 'small',
+    padding: '1em',
+    p: 'Closest state/archetype',
+    div: {
+      canvas: stateElement
+    },
+    h5: {
+      text: feature.bind(v => 'The ' + states[v.hexToCode()].archetype)
+    }
+  },
+  section: psychModel
 }
-*/
+
+function breakdown(hex) {
+  var f = 100 / 255;
+  var mb = {};
+  var c = AUX.color(hex);
+  var d = 2; // threshold to decide on a letter
+  var rgb = AUX.rgb(c);
+  mb.r = f * rgb[0];
+  mb.g = f * rgb[1];
+  mb.b = f * rgb[2];
+  mb.l = AUX.lightness(c);
+  mb.s = 100 * mb.r / (0.5 * (mb.g + mb.b) + mb.r);
+  mb.f = 100 * mb.b / (mb.g + mb.b);
+  mb.j = (mb.r + mb.g + mb.b) / 3;
+  var half = 50;
+  mb.i = 100 * AUX.dist(half, half, half, mb.r, mb.g, mb.b) / AUX.dist(0, 0, 0, half, half, half);
+
+  mb.type = ['I', 'E', '-'][mb.i > 50 + d ? 0 : mb.i < 50 - d ? 1 : 2];
+  mb.type += ['S', 'N', '-'][mb.s > 50 + d ? 0 : mb.s < 50 - d ? 1 : 2];
+  mb.type += ['F', 'T', '-'][mb.f > 50 + d ? 0 : mb.f < 50 - d ? 1 : 2];
+  mb.type += ['J', 'P', '-'][mb.j > 50 + d ? 0 : mb.j < 50 - d ? 1 : 2];
+  mbti.value = mb.type;
+
+  bars.r.value = mb.r;
+  bars.g.value = mb.g;
+  bars.b.value = mb.b;
+  bars.i.value = mb.i;
+  bars.s.value = mb.s;
+  bars.f.value = mb.f;
+  bars.j.value = mb.j;
+  bars.id.value = 0.5 * (mb.r + mb.b);
+  bars.ego.value = 0.5 * (mb.g + mb.r);
+  bars.sup.value = 0.5 * (mb.g + mb.b);
+}
+
+export default model;

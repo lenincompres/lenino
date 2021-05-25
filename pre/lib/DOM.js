@@ -9,6 +9,8 @@ Element.prototype.create = function (model, ...args) {
   let station = args.filter(a => typeof a === 'string')[0]; // style|attr|tag|inner…|onEvent|name
   if (['tag', 'onready', 'id'].includes(station)) return;
   const IS_ATTRIBUTE = ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(station);
+  if(!station) station = 'content';
+  if (model._bonds) model = model.bind();
   if (model.binders) return model.binders.forEach(binder => binder.bind(this, station, model.onvalue));
   if (['text', 'innerText'].includes(station)) return this.innerText = model;
   if (['html', 'innerHTML'].includes(station)) return this.innerHTML = model;
@@ -20,19 +22,8 @@ Element.prototype.create = function (model, ...args) {
   });
   const IS_PRIMITIVE = ['boolean', 'number', 'string'].includes(typeof model);
   const TAG = this.tagName.toLowerCase();
-  const CLEAR = args.filter(a => typeof a === 'boolean')[0];
-  const PREPEND = CLEAR === false;
-  let p5Elem = args.filter(a => a && a.elt)[0];
-  if (TAG === 'style' && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
-  if (!station || (station === 'content' && !model.binders && TAG !== 'meta')) {
-    if (station === 'content') this.innerHTML = '';
-    if (IS_PRIMITIVE) return this.innerHTML = model;
-    if (model.tagName) return this[PREPEND ? 'prepend' : 'append'](model);
-    if (model.elt) return this[PREPEND ? 'prepend' : 'append'](model.elt);
-    let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
-    keys.forEach(key => this.create(model[key], key, p5Elem, PREPEND ? false : undefined));
-    return this;
-  }
+  const CLEAR = args.filter(a => typeof a === 'boolean')[0] || station === 'content';
+  const PREPEND = args.filter(a => typeof a === 'boolean')[0] === false;
   let id;
   let [tag, ...cls] = station.split('_');
   if (station.includes('.')) {
@@ -40,13 +31,31 @@ Element.prototype.create = function (model, ...args) {
     tag = cls.shift();
   }
   if (tag.includes('#'))[tag, id] = tag.split('#');
+  let lowTag = (model.tag ? model.tag : tag).toLowerCase();
+  if(lowTag != tag) id = tag;
+  tag = lowTag;
   if (model.id) id = model.id;
-  tag = (model.tag ? model.tag : tag).toLowerCase();
+  let p5Elem = args.filter(a => a && a.elt)[0];
+  let elt = model.tagName ? model : model.elt ? model.elt : false;
   const addID = (id, elt) => {
     if (Array.isArray(elt)) return elt.forEach(e => addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) window[id].push(elt);
     window[id] = [window[id], elt];
+  }
+  if (elt) {
+    if(id) addID(id, elt);
+    else if(tag != elt.tagName.toLowerCase()) addID(tag, elt);
+    if(cls) cls.forEach(c => c ? elt.classList.add(c) : null);
+    return this[PREPEND ? 'prepend' : 'append'](elt);
+  }
+  if (TAG === 'style' && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
+  if (station === 'content' && !model.binders && TAG !== 'meta') {
+    if (CLEAR) this.innerHTML = '';
+    if (IS_PRIMITIVE) return this.innerHTML = model;
+    let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
+    keys.forEach(key => this.create(model[key], key, p5Elem, PREPEND ? false : undefined));
+    return this;
   }
   if (Array.isArray(model)) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
@@ -161,7 +170,7 @@ class Binder {
     }
   }
   addListener(func) {
-    if (typeof fun !== 'function') return;
+    if (typeof func !== 'function') return;
     this._listeners[this._listeners] = func;
     return this._listenerCount++;
   }
