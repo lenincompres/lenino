@@ -4,7 +4,7 @@ import states from "./states.js";
 import * as style from "./style.js";
 import * as AUX from "./functions.js";
 
-export const mbti = new Binder('----');
+export const mbti = new Binder('- - - -');
 export const feature = new Binder('#808080');
 
 const bars = {
@@ -32,7 +32,7 @@ feature.addListener(hex => {
   let j = (r + g + b) / 3;
 
   const binar = (v, A, B, N = '-', T = 100, D = 2) => v > T / 2 + D ? A : v < T / 2 - D ? B : N;
-  mbti.value = binar(e, 'E', 'I') + binar(s, 'S', 'N') + binar(f, 'F', 'T') + binar(j, 'J', 'P');
+  mbti.value = [binar(e, 'E', 'I'), binar(s, 'S', 'N'), binar(f, 'F', 'T'), binar(j, 'J', 'P')].join(' ');
 
   bars.r.value = r;
   bars.g.value = g;
@@ -58,12 +58,13 @@ const psychModel = {
   },
   ul: {
     css: {
-      margin: '1em 0',
       display: 'flex',
+      flexWrap: 'wrap',
+      placeContent: 'space-evenly',
       li: {
-        display: 'inline - block ',
-        margin: '.25em',
-        verticalAlign: 'top',
+        display: 'inline-block ',
+        margin: '0.5em 0',
+        width: '9em',
         p: {
           margin: '.75em 0 0.25em'
         },
@@ -97,17 +98,16 @@ const psychModel = {
       },
       div: bars.j.model,
       p: {
-        fontSize: '1.25em',
-        letterSpacing: '0.25em',
+        fontSize: '1.5em',
         fontFamily: 'monospace',
-        border: 'solid 1px',
-        margin: '1em 0 0 3em',
+        margin: '0.5em 0 0 2em',
         text: mbti
       }
     }]
   },
   footer: {
     fontSize: '0.68em',
+    marginTop: '0.5em',
     text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
   }
 };

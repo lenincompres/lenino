@@ -5,20 +5,21 @@ const WAIT = 4; //second between posts
 const POSTS = 5;
 const RADIUS = 40;
 
-function getCube(onready = v => v, options = {}) {
+function getCube(options = {}) {
   return new p5(function (me) {
 
     me.setup = function () {
-      onready(me.createCanvas(720, 400).elt);
+      let onready = options.onready !== undefined ? options.onready : _ => null;
+      onready(me.createCanvas(me.windowWidth, 400).elt);
       me.centerCode = options.center !== undefined ? options.center : '000';
       me.lang = options.lang !== undefined ? options.lang : ENG;
+      me.onclick = options.onclick !== undefined ? options.onclick : _ => null;
       me.vicinity = options.vicinity;
       me.ref = options.ref;
       me.isHover = false;
       me.center = [me.width * 0.5, me.height * 0.5];
       me.states = new Array(27).fill().map((_, i) => new State(me, {
-        index: i,
-        //noText: true
+        index: i
       })).filter(s => !me.vicinity || s.isNear()).sort(s => s.tier);
       me.states.forEach(s => s.draw(me));
       if (me.ref) me.states.forEach(s => s.setRef(me.ref));
@@ -96,7 +97,7 @@ function getCube(onready = v => v, options = {}) {
       me.isHover = !!parseInt(me.get(me.mouseX, me.mouseY).join('')); // any pixel color under the mouse
       me.cursor(me.isHover ? me.HAND : me.ARROW);
       if (me.isHover) {
-        var newOver = me.states.filter(s => !s.hidden && me.dist(me.mouseX - me.center[0], me.mouseY - me.center[1], ...s.coords) < s.radius).pop();
+        let newOver = me.states.filter(s => !s.hidden && me.dist(me.mouseX - me.center[0], me.mouseY - me.center[1], ...s.coords) < s.radius).pop();
         if (newOver === me.overState) return;
         if (me.overState) me.overState.selected = false;
         me.overState = newOver;

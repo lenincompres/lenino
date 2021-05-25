@@ -23,7 +23,7 @@ export class Bar {
       div: {
         backgroundColor: this.baseColor.includes('.') ? 'black' : this.baseColor,
         backgroundImage: this.baseColor.includes('.') ? `url(${this.baseColor})` : undefined,
-        backgroundSize: '5%',
+        backgroundSize: '6.66%',
         display: 'inline-block',
         width: this.width,
         height: '.68em',

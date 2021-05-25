@@ -96,10 +96,10 @@ const modelQuestion = q => {
           margin: '0 1em',
           content: [{
             right: 0,
-            text: isVS ? '⟶' : answer.bind(v => v + '%')
+            text: isVS ? '⟶' : answer.bind(v => (q.reverse ? 100 - v : v) + '%')
           }, {
             left: 0,
-            text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor(v * frequencies.length / 100)])
+            text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor((q.reverse ? 100 - v : v) * frequencies.length / 100)])
           }]
         }
       }
@@ -119,6 +119,7 @@ DOM.requestJSON('assets/questionnaire.json', data => {
 
 export const model = {
   style: style.section,
+  marginTop: '2em',
   header: {
     style: style.floatingSign,
     h4: 'Questionnaire Instructions:',
