@@ -15,23 +15,25 @@ const bars = {
   id: new Bar('Id', '6em', 'magenta'),
   ego: new Bar('Ego', '6em', 'yellow'),
   sup: new Bar('Sup.', '6em', 'cyan'),
-  r: new Bar('Phys.', '6em', 'red'),
-  g: new Bar('Rati.', '6em', 'lime'),
-  b: new Bar('Emot.', '6em', 'blue')
+  r: new Bar('Phys…', '6em', 'red'),
+  g: new Bar('Rati…', '6em', 'lime'),
+  b: new Bar('Emot…', '6em', 'blue')
 }
 
 feature.addListener(hex => {
-  if(!hex) return;
+  if (!hex) return;
 
   if (stateP5.update) stateP5.update(hex.hexToCode());
 
   let [r, g, b] = AUX.rgb(hex).map(v => v * 100 / 255);
-  let e = 100 - 100 * AUX.dist(50, 50, 50, r, g, b) / AUX.dist(0, 0, 0, 50, 50, 50);
-  let s = 100 * r / (0.5 * (g + b) + r);
-  let f = 100 * b / (g + b);
+  let getI = n => 100 * Math.pow(Math.abs(n - 50) / 50, 0.68);
   let j = (r + g + b) / 3;
+  let f = 100 * b / (g + b);
+  let s = 100 * r / (0.5 * (g + b) + r);
+  let e = 100 - 100 * AUX.dist(r, g, b, 50, 50, 50) / AUX.dist(0, 0, 0, 50, 50, 50);
+  //let e = 100 - (getI(r) + getI(g) + getI(b)) / 3;
 
-  const binar = (v, A, B, N = '-', T = 100, D = 2) => v > T / 2 + D ? A : v < T / 2 - D ? B : N;
+  const binar = (v, A, B, N = '-', T = 100, D = 1) => v > T / 2 + D ? A : v < T / 2 - D ? B : N;
   mbti.value = [binar(e, 'E', 'I'), binar(s, 'S', 'N'), binar(f, 'F', 'T'), binar(j, 'J', 'P')].join(' ');
 
   bars.r.value = r;
@@ -45,72 +47,6 @@ feature.addListener(hex => {
   bars.ego.value = 0.5 * (g + r);
   bars.sup.value = 0.5 * (g + b);
 });
-
-const psychModel = {
-  style: style.floatingSign,
-  fontSize: 'small',
-  margin: '1em 0',
-  header: {
-    span: 'Exact code: ',
-    b: {
-      text: feature
-    }
-  },
-  ul: {
-    css: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      placeContent: 'space-evenly',
-      li: {
-        display: 'inline-block ',
-        margin: '0.5em 0',
-        width: '9em',
-        p: {
-          margin: '.75em 0 0.25em'
-        },
-      }
-    },
-    li: [{
-      a: {
-        text: 'PRE',
-        href: './'
-      },
-      div: [bars.r.model, bars.g.model, bars.b.model]
-    }, {
-      a: {
-        text: 'Freud',
-        href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
-        target: '_blank'
-      },
-      div: [bars.id.model, bars.ego.model, bars.sup.model]
-    }, {
-      a: {
-        text: 'Jung',
-        href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
-        target: '_blank'
-      },
-      div: [bars.f.model, bars.s.model, bars.e.model],
-    }, {
-      a: {
-        text: 'MBTI',
-        href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
-        target: '_blank'
-      },
-      div: bars.j.model,
-      p: {
-        fontSize: '1.5em',
-        fontFamily: 'monospace',
-        margin: '0.5em 0 0 2em',
-        text: mbti
-      }
-    }]
-  },
-  footer: {
-    fontSize: '0.68em',
-    marginTop: '0.5em',
-    text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
-  }
-};
 
 const stateElement = new Binder();
 var stateP5 = new p5(function (me) {
@@ -135,18 +71,95 @@ export const model = {
     borderRadius: '0.5em',
     boxShadow: '1px 1px 2px black',
     position: 'relative',
-    width: 'fit-content',
-    fontSize: 'small',
-    padding: '1.5em 1em 1em',
-    p: 'State & Archetype',
+    width: '14em',
+    padding: '1.5em 1em',
+    b: 'State & Archetype',
     div: {
       canvas: stateElement
     },
     h5: {
+      margin: '0.5em 0',
       text: feature.bind(v => v ? 'The ' + states[v.hexToCode()].archetype : '')
+    },
+    small: {
+      display: 'block',
+      width: 'fit-content',
+      margin: '0 auto',
+      css: {
+        textTransform: 'lowercase',
+        firstLetter: {
+          textTransform: 'uppercase'
+        }
+      },
+      text: feature.bind(v => {
+        if (!v) return;
+        let info = states[v.hexToCode()];
+        return `The ${info.adjective} state in ${info.colour} focuses on ${info.concept}, as the archetypical ${info.archetype}.`
+      })
     }
   },
-  section: psychModel
+  section: {
+    style: style.floatingSign,
+    margin: '1em 0',
+    header: {
+      text: feature.bind(v => 'Exact code: ' + v)
+    },
+    ul: {
+      fontSize: 'small',
+      css: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        placeContent: 'space-evenly',
+        li: {
+          display: 'inline-block ',
+          margin: '0.5em 0',
+          width: '9em',
+          p: {
+            margin: '.75em 0 0.25em'
+          },
+        }
+      },
+      li: [{
+        a: {
+          text: 'PRE',
+          href: './'
+        },
+        div: [bars.r.model, bars.g.model, bars.b.model]
+      }, {
+        a: {
+          text: 'Freud',
+          href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
+          target: '_blank'
+        },
+        div: [bars.id.model, bars.ego.model, bars.sup.model]
+      }, {
+        a: {
+          text: 'Jung',
+          href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
+          target: '_blank'
+        },
+        div: [bars.f.model, bars.s.model, bars.e.model],
+      }, {
+        a: {
+          text: 'MBTI',
+          href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
+          target: '_blank'
+        },
+        div: bars.j.model,
+        p: {
+          fontSize: '1.5em',
+          fontFamily: 'monospace',
+          margin: '0.5em 0 0 2em',
+          text: mbti
+        }
+      }]
+    },
+    footer: {
+      fontSize: '0.68em',
+      marginTop: '0.5em',
+      text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
+    }
+  }
 }
 
 export default model;

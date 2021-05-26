@@ -136,7 +136,7 @@ export class State {
     this.coords = animate ? [0, 0] : this.posts[0];
     this.hex = code.codeToHex();
     this.value = 1;
-    this.article = lang === ESP ? states[code].articulo : states[code].article;
+    this.adjective = lang === ESP ? states[code].articulo : states[code].adjective;
     this.arch = lang === ESP ? states[code].arquetipo : states[code].archetype;
     this.info = states[code];
 
@@ -170,7 +170,7 @@ export class State {
         sketch.textFont('Verdana');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textSize(this.radius * 0.25);
-        sketch.text(this.article, 0, this.radius * 0.5);
+        sketch.text(this.adjective, 0, this.radius * 0.5);
       }
       //
       if (this.selected) {

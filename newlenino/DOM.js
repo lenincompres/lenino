@@ -4,30 +4,42 @@
  * @repository https://github.com/lenincompres/DOM.create
  */
 
-Element.prototype.create = function (model, ...args) {
+ Element.prototype.create = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
   if (Array.isArray(model.content)) return model.content.forEach(item => {
+    if([null, undefined].includes(item)) return;
     let individual = Object.assign({}, model);
     individual.content = item;
     this.create(individual, ...args);
   });
   let station = args.filter(a => typeof a === 'string')[0]; // style|attr|tag|inner…|on…|name
-  if (['tag', 'onready', 'id'].includes(station)) return;
-  if (station === 'css') return this.css(model);
-  if (['text', 'innerText'].includes(station)) return this.innerText = model;
-  if (['html', 'innerHTML'].includes(station)) return this.innerHTML = model;
-  if (model._bonds) model = model.bind();
-  if (model.binders) return model.binders.forEach(binder => binder.bind(this, station, model.onvalue));
   const TAG = this.tagName.toLowerCase();
   const IS_HEAD = TAG === 'head';
-  const CLEAR = args.filter(a => typeof a === 'boolean')[0] === true || station === 'content';
   const PREPEND = args.filter(a => typeof a === 'boolean')[0] === false;
-  const IS_PRIMITIVE = DOM.isPrimitive(model);
-  if (station === 'content' && TAG === 'meta') station = '*content'; // disambiguate 
+  const IS_CONTENT = station && station.toLowerCase() === 'content';
+  const CLEAR = args.filter(a => typeof a === 'boolean')[0] === true || IS_CONTENT;
+  if (IS_CONTENT && TAG === 'meta') station = '*content'; // disambiguate 
   if (!station) station = 'content';
-  let [tag, ...cls] = station.split('_');
-  if (station.includes('.')) {
-    cls = station.split('.');
+  const STATION = station; // STATION is the original station
+  station = station.toLowerCase(); // station is always lowercase
+  if(['model', 'inner'].includes(station)) station = 'content';
+  let p5Elem = args.filter(a => a && a.elt)[0];
+  if (typeof model === 'function') return (p5Elem && typeof p5Elem[STATION] === 'function') ? p5Elem[STATION](model) : this[STATION] = model;
+  if (model._bonds) model = model.bind();
+  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue));
+  if (['tag', 'onready', 'id'].includes(station)) return;
+  if (station === 'css') return this.css(model);
+  if (['text', 'innertext'].includes(station)) return this.innerText = model;
+  if (['html', 'innerhtml'].includes(station)) return this.innerHTML = model;
+  if (IS_HEAD) {
+    if (station === 'style' && !model.content) return DOM.style(model);
+    if (station === 'keywords' && Array.isArray(model)) model = model.join(',');
+    if (station === 'viewport' && !DOM.isPrimitive(model)) model = Object.entries(model).map(([key, value]) => `${DOM.unCamel(key)}=${value}`).join(',');
+  }
+  const IS_PRIMITIVE = DOM.isPrimitive(model);
+  let [tag, ...cls] = STATION.split('_');
+  if (STATION.includes('.')) {
+    cls = STATION.split('.');
     tag = cls.shift();
   }
   let id;
@@ -36,7 +48,6 @@ Element.prototype.create = function (model, ...args) {
   if (lowTag != tag) id = tag; // camelCase tags are interpreted as id
   tag = lowTag;
   if (model.id) id = model.id;
-  let p5Elem = args.filter(a => a && a.elt)[0];
   let elt = model.tagName ? model : model.elt ? model.elt : false;
   if (elt) {
     if (id) DOM.addID(id, elt);
@@ -54,50 +65,45 @@ Element.prototype.create = function (model, ...args) {
   }
   if (Array.isArray(model)) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
-    if (station === 'addEventListener') return this.addEventListener(...model);
-    let map = model.map(s => this.create(s, tag + cls.join('.'), p5Elem, PREPEND ? false : undefined));
+    if (station === 'addeventlistener') return this.addEventListener(...model);
+    let map = model.map(m => this.create(m, tag + cls.join('.'), p5Elem, PREPEND ? false : undefined));
     if (id) DOM.addID(id, map);
     return map;
   }
-  if (station === 'addEventListener') return model.options ? this.addEventListener(model.type, model.listener, model.options) : this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
-  if (tag === 'style') {
-    if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(tag, model);
-    if (IS_HEAD && !model.content) return DOM.style(model);
+  if (station === 'addeventlistener') return model.options ? this.addEventListener(model.type, model.listener, model.options) : this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
+  if (station === 'style') {
+    if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(station, model);
     if (!model.content) {
-      if (CLEAR) this.setAttribute(tag, '');
+      if (CLEAR) this.setAttribute(station, '');
       return Object.entries(model).forEach(([key, value]) => value && value.binders ? value.binders.forEach(binder => binder.bind(this, key, value.onvalue)) : this.style[key] = value);
     }
-    if (!['boolean', 'number', 'string'].includes(typeof model.content)) model.content = DOM.css(model.content);
-  }
-  if (typeof model === 'function') {
-    if (p5Elem && typeof p5Elem[station] === 'function') return p5Elem[station](model);
-    return this[station] = model;
+    if (!DOM.isPrimitive(model.content)) model.content = DOM.css(model.content);
   }
   if (IS_PRIMITIVE) {
     if (IS_HEAD) {
       const type = DOM.getType(model);
-      if (tag === 'title') return this.innerHTML += `<title>${model}</title>`;
-      if (tag === 'icon') return this.innerHTML += `<link rel="icon" href="${model}">`;
-      if (tag === 'charset') return this.innerHTML += `<meta charset="${model}">`;
-      if (['viewport', 'keywords', 'description'].includes(tag)) return this.innerHTML += `<meta name="${tag}" content="${model}">`;
-      if (tag === 'font') return DOM.style({
+      if (station === 'title') return this.innerHTML += `<title>${model}</title>`;
+      if (station === 'icon') return this.innerHTML += `<link rel="icon" href="${model}">`;
+      if (station === 'charset') return this.innerHTML += `<meta charset="${model}">`;
+      if (['viewport', 'keywords', 'description'].includes(station)) return this.innerHTML += `<meta name="${tag}" content="${model}">`;
+      if (station === 'font') return DOM.style({
         fontFace: {
           fontFamily: model.split('/').pop().split('.')[0],
           src: `url(${model})`
         }
       });
-      if (tag === 'link') return this.create({
+      if (station === 'link') return this.create({
         rel: type,
         href: model
-      }, 'link');
-      if (tag === 'script') return this.create({
+      }, station);
+      if (station === 'script') return this.create({
         type: type,
         src: model
-      }, 'script');
+      }, station);
     }
-    let done = (this.style[station] !== undefined) ? (this.style[station] = model) : undefined;
+    let done = (this.style[STATION] !== undefined) ? (this.style[STATION] = model) : undefined;
     station = station.replace('*', ''); // disambiguate 
-    if (DOM.isAttribute(station)) done = !this.setAttribute(station, model);
+    if (DOM.isAttribute(STATION)) done = !this.setAttribute(STATION, model);
     if (station === 'id') DOM.addID(model, this);
     if (done !== undefined) return;
   }
@@ -248,8 +254,6 @@ class DOM {
       let reset = {
         '*': {
           boxSizing: 'border-box',
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
           verticalAlign: 'baseline',
           lineHeight: '1.25em',
           margin: 0,
@@ -302,7 +306,7 @@ class DOM {
       if (!sel) return;
       if (Array.isArray(sel)) sel = assignAll(sel);
       if (sel.tag || sel.id || sel.class) return DOM.css(sel.tag ? sel.tag : '', sel);
-      return Object.entries(sel).map(([key, value])  => DOM.css(key, value)).join(' ');
+      return Object.entries(sel).map(([key, value]) => DOM.css(key, value)).join(' ');
     }
     let extra = [];
     let cls = sel.split('_');
@@ -347,7 +351,7 @@ class DOM {
   // initializes the head and body from model with initial values or json file
   static getSetup = _ => {
     let ini = document.head.querySelector('[create]');
-    if (ini) return (ini.getAttribute('create'));
+    if (ini) return DOM.setup(ini.getAttribute('create'));
     ini = document.head.querySelector('create');
     if (ini) DOM.setup(ini.innerHTML);
   }
@@ -364,7 +368,7 @@ class DOM {
       }
     }
     const INI = {
-      title: 'DOM.created',
+      title: 'Created with DOM.create',
       charset: 'UTF-8',
       viewport: 'width=device-width',
       icon: false,
@@ -379,7 +383,7 @@ class DOM {
       module: true,
       postscript: []
     };
-    ini = Object.entries(ini).forEach(([key, value]) => {
+    Object.entries(ini).forEach(([key, value]) => {
       delete ini[key];
       ini[key.toLocaleLowerCase()] = value;
     });
@@ -434,7 +438,7 @@ class DOM {
     less: 'stylesheet/less',
     js: 'text/javascript',
     ico: 'icon'
-  })[typeof str === 'string' ? str.split('.').slice(-1)[0] : 'none'];
+  })[typeof str === 'string' ? str.split('.').pop() : 'none'];
   static rename = (obj, name, newName) => {
     if (obj[name] === undefined) return;
     if (Array.isArray(name)) return name.forEach((n, i) => rename(obj, n, newName[i]));

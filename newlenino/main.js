@@ -16,13 +16,16 @@ const navHover = new Binder();
 
 document.head.create({
   title: 'Lenino.net',
-  charset: "UTF-8",
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1',
-  keywords: "",
-  description: "",
-  icon: "assets/icon.png",
-  link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-  font:  "./assets/markerfeltnormal.ttf",
+  charset: 'UTF-8',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  keywords: '',
+  description: '',
+  icon: 'assets/icon.png',
+  link: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+  font: './assets/markerfeltnormal.ttf',
   style: {
     a: {
       color: STYLE.COLOR.LINK,
@@ -50,7 +53,8 @@ document.head.create({
 var pageNames = Object.keys(PAGES);
 
 DOM.create({
-  backgroundColor: "#023",
+  fontSize: '14px',
+  backgroundColor: '#023',
   div: {
     style: STYLE.FLEX,
     margin: '0 auto',

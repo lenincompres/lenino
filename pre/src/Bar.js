@@ -12,6 +12,7 @@ export class Bar {
 
   get model() {
     return {
+      whiteSpace: 'nowrap',
       span: {
         display: 'inline-block',
         minWidth: '3em',

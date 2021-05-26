@@ -34,16 +34,13 @@ const sampleQuestion = {
 };
 
 const modelQuestion = q => {
-
   const frequencies = ['Rarely', 'Seldom', 'Occasionally', 'Moderately', 'Frequently', 'Generally', 'Usually', 'Extremely'];
-
   q.answers = [];
-
   q.model = {
     h2: !q.question ? undefined : {
       marginTop: '2em',
       fontSize: '1.5em',
-      padding: '0.68em 0 0',
+      padding: '0.68em 1em 0',
       backgroundColor: style.darkSreen,
       text: q.question
     },
@@ -65,7 +62,7 @@ const modelQuestion = q => {
           placeContent: 'space-evenly',
           div: o.map(option => new Object({
             h3: {
-              fontSize: isVS ? '1.34em' : '1.5em',
+              fontSize: isVS ? '1.3em' : '1.5em',
               marginTop: '0.5em',
               fontWeight: 'bold',
               color: 'black',
@@ -95,24 +92,30 @@ const modelQuestion = q => {
         small: {
           fontSize: 'small',
           color: '#06c',
-          bottom: '2.5em',
+          bottom: '2em',
           position: 'absolute',
           pointerEvents: 'none',
           margin: '0 1em',
+          maxWidth: '15%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
           content: [{
             right: 0,
             text: isVS ? '⟶' : answer.bind(v => (q.reverse ? 100 - v : v) + '%')
           }, {
             left: 0,
             text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor((q.reverse ? 100 - v : v) * frequencies.length / 100)])
+          }, !isVS ? undefined : {
+            left: '50%',
+            bottom: '2.5em',
+            marginLeft: '-0.5em',
+            text: 'vs.'
           }]
         }
       }
     })
   }
-
   return q.model;
-
 };
 
 

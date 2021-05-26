@@ -10,7 +10,7 @@
           "hint": "meaning, idea, message"
         },
         {
-          "choice": "Feelings",
+          "choice": "Feeling",
           "hint": "sentiment, emotion, nostalgia"
         }
       ]
@@ -59,7 +59,7 @@
         },
         {
           "choice": "Ritual",
-          "hint": "set, presentation, ceremony"
+          "hint": "setting, presentation, ceremony"
         }
       ]
     },
@@ -193,7 +193,7 @@
         },
         {
           "choice": "Softhearted",
-          "hint": "Even with strangers and critters"
+          "hint": "Even with strangers or critters"
         }
       ]
     },
@@ -220,7 +220,7 @@
         },
         {
           "choice": "Meet diverse people",
-          "hint": "ages, genders, lifestyles, backgrounds"
+          "hint": "age, gender, lifestyle, background"
         }
       ]
     }

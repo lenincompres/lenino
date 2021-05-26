@@ -13,21 +13,33 @@ if (fav) fav = '#' + fav;
 document.head.create({
   title: 'PRE Spectrum',
   charset: 'UTF-8',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1',
+  viewport: 'width=device-width, initial-scale=1',
   keywords: '3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction',
   description: 'A psychometric tool to visualize Physical, Rational & Emotional focus.',
   icon: 'assets/favicon.gif',
   style: {
     body: {
       fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
-      fontSize: '13px',
+      fontSize: '14px',
+    },
+    b: {
+      fontWeight: '300'
     },
     a: {
       color: 'white',
       textDecoration: 'none',
       textShadow: '1px 1px 1px black',
       hover: {
-        opacity: '0.75'
+        after: {
+          paddingLeft: '1em'
+        }
+      },
+      after: {
+        transition: 'ease-in 0.1s',
+        fontSize: '0.68em',
+        verticalAlign: 'top',
+        paddingLeft: '0.25em',
+        content: '"→"'
       }
     },
     h: {
@@ -54,8 +66,12 @@ DOM.create({
   header: {
     backgroundColor: style.lightSreen,
     boxShadow: '0 1em 1em ' + style.lightSreen,
-    paddingTop: '2em',
-    h1: 'PRE Spectrum',
+    paddingTop: '3em',
+    h1: {
+      cursor: 'pointer',
+      text: 'PRE Spectrum',
+      onclick: e => window.location.href = './'
+    },
     h4: 'Physical, Rational & Emotional',
     div: {
       margin: '-2em auto 0',
@@ -98,17 +114,17 @@ DOM.create({
       display: 'flex',
       flexDirection: 'column',
       h1: rgb && !fav ? 'Featured' : 'Results',
-      p: !fav ? undefined : {
+      p: !rgb || fav ?{
         marginBottom: '-1.5em',
         zIndex: 1,
         text: 'Closests'
-      },
+      } : undefined,
       div: results.model,
       a: {
         target: '_blank',
         content: [{
           display: rgb ? 'none' : 'block',
-          href: results.feature.bind(v => './?rgb=' + v.substr(1) + '&color=' + questionnaire.favorite.value.substr(1)),
+          href: DOM.bind([results.feature, questionnaire.favorite], (r,f) => './?rgb=' + r.substr(1) + '&color=' + f.substr(1)),
           text: 'Here is a link with these results for you to save or share.'
         }, !fav ? undefined : {
           margin: '0 auto',
@@ -133,7 +149,7 @@ DOM.create({
           fontSize: 'small',
           marginTop: '0.68em',
           href: 'https://github.com/lenincompres/DOM.create',
-          text: 'Developed with DOM.create and P5.js'
+          text: 'Developed with DOM.create'
         }]
       }
     }

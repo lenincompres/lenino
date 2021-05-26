@@ -6,13 +6,12 @@ export const whiteSreen = 'rgba(255,255,255,0.86)';
 export const floatingSign = {
   color: 'black',
   padding: '1em',
-  backgroundColor: lightSreen,
-  boxShadow: '0 0 1em white',
+  backgroundColor: whiteSreen,
   borderRadius: '1em',
 }
 
 export const section = {
   margin: '0 auto',
-  padding: '4em 1em',
+  padding: '3em 1em',
   maxWidth: '42em',
 }
