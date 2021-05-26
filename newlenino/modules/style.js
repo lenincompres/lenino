@@ -30,26 +30,3 @@ export const FLEX = {
   alignItems: 'flex-start',
   alignContent: 'flex-start',
 };
-
-DOM.style({
-  a: {
-    color: COLOR.LINK,
-    hover: {
-      color: COLOR.HIGHLIGHT
-    },
-    _fa: {
-      color: 'white',
-      width: '2em',
-      height: '2em',
-      padding: '0.5em',
-      margin: '0 0.25em',
-      textAlign: 'center',
-      borderRadius: '0.25em',
-      verticalAlign: 'text-bottom',
-      boxShadow: SHADOW.NORMAL,
-      hover: {
-        boxShadow: SHADOW.HIGHLIGHT
-      }
-    }
-  }
-})

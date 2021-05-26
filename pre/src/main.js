@@ -9,27 +9,14 @@ let fav = QS.color;
 if (rgb) rgb = '#' + rgb;
 if (fav) fav = '#' + fav;
 
-questionnaire.results.bind(results.feature);
 
 document.head.create({
   title: 'PRE Spectrum',
-  meta: [{
-    charset: "UTF-8"
-  }, {
-    name: "viewport",
-    content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1'
-  }, {
-    name: "keywords",
-    content: "3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction"
-  }, {
-    name: "description",
-    content: "A psychometric tool to visualize Physical, Rational & Emotional focus."
-  }],
-  link: {
-    rel: "icon",
-    href: "assets/favicon.gif",
-    type: "image/gif"
-  },
+  charset: 'UTF-8',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1',
+  keywords: '3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction',
+  description: 'A psychometric tool to visualize Physical, Rational & Emotional focus.',
+  icon: 'assets/favicon.gif',
   style: {
     body: {
       fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
@@ -58,7 +45,7 @@ const cubeElement = new Binder();
 let cube = getCube({
   noLabels: true,
   onclick: s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null,
-  onready: cube => cubeElement.value = cube
+  onready: elt => cubeElement.value = elt
 });
 
 DOM.create({
@@ -153,4 +140,6 @@ DOM.create({
   }
 });
 
+
+questionnaire.results.bind(results.feature);
 if (rgb) results.feature.value = rgb;

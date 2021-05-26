@@ -4,11 +4,17 @@
  * @repository https://github.com/lenincompres/DOM.create
  */
 
- Element.prototype.create = function (model, ...args) {
+Element.prototype.create = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
-  let station = args.filter(a => typeof a === 'string')[0]; // style|attr|tag|inner…|onEvent|name
+  let station = args.filter(a => typeof a === 'string')[0]; // style|attr|tag|inner…|on…|name
   if (['tag', 'onready', 'id'].includes(station)) return;
-  const IS_ATTRIBUTE = ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(station);
+  const TAG = this.tagName.toLowerCase();
+  const CLEAR = args.filter(a => typeof a === 'boolean')[0] === true || station === 'content';
+  const IS_PRIMITIVE = ['boolean', 'number', 'string'].includes(typeof model);
+  const PREPEND = args.filter(a => typeof a === 'boolean')[0] === false;
+  if (station === 'content' && TAG === 'meta') station = '*content';
+  if (!station) station = 'content';
+  if (model._bonds) model = model.bind();
   if (model.binders) return model.binders.forEach(binder => binder.bind(this, station, model.onvalue));
   if (['text', 'innerText'].includes(station)) return this.innerText = model;
   if (['html', 'innerHTML'].includes(station)) return this.innerHTML = model;
@@ -18,35 +24,38 @@
     individual.content = item;
     this.create(individual, ...args);
   });
-  const IS_PRIMITIVE = ['boolean', 'number', 'string'].includes(typeof model);
-  const TAG = this.tagName.toLowerCase();
-  const CLEAR = args.filter(a => typeof a === 'boolean')[0];
-  const PREPEND = CLEAR === false;
-  let p5Elem = args.filter(a => a && a.elt)[0];
-  if (TAG === 'style' && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
-  if (!station || (station === 'content' && !model.binders && TAG !== 'meta')) {
-    if (station === 'content') this.innerHTML = '';
-    if (IS_PRIMITIVE) return this.innerHTML = model;
-    if (model.tagName) return this[PREPEND ? 'prepend' : 'append'](model);
-    if (model.elt) return this[PREPEND ? 'prepend' : 'append'](model.elt);
-    let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
-    keys.forEach(key => this.create(model[key], key, p5Elem, PREPEND ? false : undefined));
-    return this;
-  }
+  let id;
   let [tag, ...cls] = station.split('_');
-  let id = cls[0];
   if (station.includes('.')) {
     cls = station.split('.');
     tag = cls.shift();
   }
   if (tag.includes('#'))[tag, id] = tag.split('#');
+  let lowTag = (model.tag ? model.tag : tag).toLowerCase();
+  if (lowTag != tag) id = tag;
+  tag = lowTag;
   if (model.id) id = model.id;
-  tag = (model.tag ? model.tag : tag).toLowerCase();
+  let p5Elem = args.filter(a => a && a.elt)[0];
+  let elt = model.tagName ? model : model.elt ? model.elt : false;
   const addID = (id, elt) => {
     if (Array.isArray(elt)) return elt.forEach(e => addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) window[id].push(elt);
     window[id] = [window[id], elt];
+  }
+  if (elt) {
+    if (id) addID(id, elt);
+    else if (tag != elt.tagName.toLowerCase()) addID(tag, elt);
+    if (cls) cls.forEach(c => c ? elt.classList.add(c) : null);
+    return this[PREPEND ? 'prepend' : 'append'](elt);
+  }
+  if (TAG === 'style' && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
+  if (station === 'content' && !model.binders) {
+    if (CLEAR) this.innerHTML = '';
+    if (IS_PRIMITIVE) return this.innerHTML = model;
+    let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
+    keys.forEach(key => this.create(model[key], key, p5Elem, PREPEND ? false : undefined));
+    return this;
   }
   if (Array.isArray(model)) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
@@ -59,16 +68,12 @@
   const IS_HEAD = TAG === 'head';
   if (tag === 'style') {
     if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(tag, model);
-    if (IS_HEAD && !model.content) {
-      model = {
-        content: model
-      };
-    }
+    if (IS_HEAD && !model.content) return DOM.style(model);
     if (!model.content) {
       if (CLEAR) this.setAttribute(tag, '');
-      return Object.keys(model).forEach(k => {
-        let value = model[k];
-        value && value.binders ? value.binders.forEach(binder => binder.bind(this, k, value.onvalue)) : this.style[k] = value;
+      return Object.keys(model).forEach(key => {
+        let value = model[key];
+        value && value.binders ? value.binders.forEach(binder => binder.bind(this, key, value.onvalue)) : this.style[key] = value;
       });
     }
     if (!['boolean', 'number', 'string'].includes(typeof model.content)) model.content = DOM.css(model.content);
@@ -79,38 +84,41 @@
   }
   if (IS_PRIMITIVE) {
     if (IS_HEAD) {
-      let extension = typeof model === 'string' ? model.split('.').slice(-1)[0] : 'none';
+      const type = {
+        css: 'stylesheet',
+        sass: 'stylesheet/sass',
+        scss: 'stylesheet/scss',
+        less: 'stylesheet/less',
+        js: 'text/javascript',
+        ico: 'icon'
+      } [typeof model === 'string' ? model.split('.').slice(-1)[0] : 'none'];
       if (tag === 'title') return this.innerHTML += `<title>${model}</title>`;
-      if (tag === 'link') {
-        let rel = {
-          none: '',
-          css: 'stylesheet',
-          sass: 'stylesheet/sass',
-          scss: 'stylesheet/scss',
-          less: 'stylesheet/less',
-          ico: 'icon'
-        };
-        return this.create({
-          link: {
-            rel: rel[extension],
-            href: model
-          }
-        });
-      }
-      if (tag === 'script' && extension === 'js') return this.create({
-        script: {
-          src: model
+      if (tag === 'icon') return this.innerHTML += `<link rel="icon" href="${model}">`;
+      if (tag === 'charset') return this.innerHTML += `<meta charset="${model}">`;
+      if (['viewport', 'keywords', 'description'].includes(tag)) return this.innerHTML += `<meta name="${tag}" content="${model}">`;
+      if (tag === 'font') return DOM.style({
+        fontFace: {
+          fontFamily: model.split('/').pop().split('.')[0],
+          src: `url(${model})`
         }
       });
+      if (tag === 'link') return this.create({
+        rel: type,
+        href: model
+      }, 'link');
+      if (tag === 'script') return this.create({
+        type: type,
+        src: model
+      }, 'script');
     }
     let done = (this.style[station] !== undefined) ? (this.style[station] = model) : undefined;
-    done = IS_ATTRIBUTE ? !this.setAttribute(station, model) : done;
+    if (['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', '*content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(station)) done = !this.setAttribute(station.replace('*', ''), model);
     if (station === 'id') addID(model, this);
     if (done !== undefined) return;
   }
   let elem = (model.tagName || model.elt) ? model : false;
   if (!elem) {
-    if (!tag) tag = 'div';
+    if (!tag || !isNaN(tag)) tag = 'div';
     elem = p5Elem ? createElement(tag) : document.createElement(tag);
     elem.create(model, p5Elem);
   }
@@ -150,7 +158,8 @@ class Binder {
   constructor(val) {
     this._value = val;
     this._bonds = [];
-    this._listeners = [];
+    this._listeners = {};
+    this._listenerCount = 0;
     this.onvalue = v => v;
     this.update = bond => {
       if (!bond.target) return;
@@ -160,12 +169,17 @@ class Binder {
     }
   }
   addListener(func) {
-    if(typeof fun !== 'function') return;
-    this._listeners.push(func);
+    if (typeof func !== 'function') return;
+    this._listeners[this._listeners] = func;
+    return this._listenerCount++;
+  }
+  removeListener(key) {
+    delete this._listeners[key];
   }
   bind(...args) {
     let target = args.filter(a => a.tagName || a._bonds)[0];
     if (!target) return DOM.bind(this, ...args);
+    if (this._bonds && this._bonds.some(bond => bond === this)) return console.log('Two binders are bound to each other.');
     let onvalue = args.filter(a => typeof a === 'function')[0];
     let property = args.filter(a => typeof a === 'string')[0];
     let bond = {
@@ -181,7 +195,7 @@ class Binder {
     this._value = val;
     this._bonds.forEach(bond => this.update(bond));
     this.onvalue(val);
-    this._listeners.forEach(listener => listener(val));
+    Object.values(this._listeners).forEach(listener => listener(val));
   }
   get value() {
     return this._value;
@@ -269,6 +283,7 @@ class DOM {
           quotes: 'none',
           content: 'none',
           fontWeight: 'normal',
+          backgroundColor: 'transparent',
         },
         body: {
           fontFamily: 'Arial, sans-serif',
@@ -285,7 +300,6 @@ class DOM {
           cursor: 'pointer',
         }
       };
-      // adds default heading styles (h1 ... h6) 
       const H = 6;
       (new Array(H)).fill().forEach((_, i) => reset[`h${i + 1}`] = new Object({
         fontSize: `${Math.round(100 * (2 - i / H)) / 100}em`,
@@ -300,8 +314,11 @@ class DOM {
     }, 'style');
   }
 
-  // converts JSON to CSS, nestings and all. "_" in selectors is turned to "."
-  static css(sel, obj) {
+  /* converts JSON to CSS, nestings and all. 
+  The model can also have id: and class: properties to be added to the selector.
+  "_" in selectors are turned into ".". 
+  When nesting: use a trailing "_" to affect any selector under the parent, instead of default immediate child. or add an "all: true" property.*/
+  static css(sel, model) {
     const assignAll = (arr = [], dest = {}) => {
       arr.forEach(prop => Object.assign(dest, prop));
       return dest;
@@ -309,33 +326,44 @@ class DOM {
     if (typeof sel !== 'string') {
       if (!sel) return;
       if (Array.isArray(sel)) sel = assignAll(sel);
+      if (sel.tag || sel.id || sel.class) return DOM.css(sel.tag ? sel.tag : '', sel);
       return Object.keys(sel).map(key => DOM.css(key, sel[key])).join(' ');
     }
     const unCamel = (str) => str.replace(/([A-Z])/g, '-' + '$1').toLowerCase();
     let extra = [];
     let cls = sel.split('_');
     sel = cls.shift();
+    if (sel === 'h') {
+      cls = cls.length ? ('.' + cls.join('.')) : '';
+      sel = Array(6).fill().map((_, i) => 'h' + (i + 1) + cls).join(', ');
+      cls = [];
+    }
     if (sel.toLowerCase() === 'fontface') sel = '@font-face';
+    if (['boolean', 'number', 'string'].includes(typeof model)) return `${unCamel(sel)}: ${model};\n`;
+    if (Array.isArray(model)) model = assignAll(model);
+    if (model.class) cls.push(...model.class.split(' '));
+    if (model.id) sel += '#' + model.id;
+    delete model.class;
+    delete model.id;
     if (cls.length) sel += '.' + cls.join('.');
-    if (['boolean', 'number', 'string'].includes(typeof obj)) return `${unCamel(sel)}: ${obj};\n`;
-    if (Array.isArray(obj)) obj = assignAll(obj);
-    let css = Object.keys(obj).map(key => {
-      let style = obj[key];
+    let css = Object.keys(model).map(key => {
+      let style = model[key];
       if (style === undefined || style === null) return;
       if (['boolean', 'number', 'string'].includes(typeof style)) return DOM.css(key, style);
       let sub = unCamel(key.split('(')[0]);
-      let xSel = `${sel} ${key}`;
+      let xSel = `${sel}>${key}`;
       if (['active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover', 'in-range', 'invalid', 'last-of-type', 'link', 'only-of-type', 'only-child', 'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid', 'visited', 'lang', 'not', 'nth-child', 'nth-last-child', 'nth-last-of-type', 'nth-of-type'].includes(sub)) xSel = `${sel}:${sub}`;
       else if (['after', 'before', 'first-letter', 'first-line', 'selection'].includes(sub)) xSel = `${sel}::${sub}`;
       else if (['_', '.'].some(s => key.startsWith(s))) xSel = `${sel}${sub}`;
-      else if (obj.immediate) xSel = `${sel}>${sub}`;
+      else if (['_', '.'].some(s => key.endsWith(s)) || style.all) xSel = `${sel} ${sub}`;
+      delete style.all;
       extra.push(DOM.css(xSel, style));
     }).join(' ');
     return (css ? `\n${sel} {\n ${css}}` : '') + extra.join(' ');
   }
 
   //creates an element and returns the html code for it
-  static html(model, tag = 'div'){
+  static html(model, tag = 'div') {
     let output;
     let elt = DOM.create({
       content: model,
@@ -353,11 +381,10 @@ class DOM {
       if (ini.endsWith('.json')) return DOM.request(ini, data => DOM.setup(data));
       ini = JSON.parse(ini);
     }
-    // default values for initialization
     const INI = {
       title: 'A Domified Site',
       charset: 'UTF-8',
-      viewport: 'width=device-width, minimum-scale=1.0, maximum-scale=1.0',
+      viewport: 'width=device-width, minimum-scale=1, maximum-scale=1',
       icon: false,
       meta: [],
       link: [],
@@ -366,46 +393,32 @@ class DOM {
       style: [],
       css: [],
       script: [],
-      entry: 'main.js',
+      entry: false,
       module: true,
       postscript: []
     };
-    // renames ini props to avoid misnaming of misspells
     const rename = (obj, name, newName) => {
       if (obj[name] === undefined) return;
       if (Array.isArray(name)) return name.forEach((n, i) => rename(obj, n, newName[i]));
       obj[newName] = obj[name];
       delete obj[name];
-    }
-    rename(ini, ['fontFace', 'fontface', 'entryPoint', 'entryPoint'], ['font', 'font', 'entry', 'entry']);
-    // combines ini and INI into settings
-    let settings = Object.assign({}, INI);
+    } // renames ini props to avoid misnaming of misspells
+    rename(ini, ['fontFace', 'fontface', 'fonts', 'links', 'entryPoint', 'entryPoint'],
+      ['font', 'font', 'font', 'link', 'entry', 'entry']);
+    let settings = Object.assign({}, INI); // combines ini and INI into settings
     Object.assign(settings, ini);
-    // make a value into an array if it's not one already
     const asArray = foo => Array.isArray(foo) ? foo : [foo];
-    // sets up the head
     document.head.create({
       title: settings.title,
-      meta: [{
-        charset: settings.charset
-      }, {
-        name: 'viewport',
-        content: settings.viewport
-      }, ...asArray(settings.meta)],
-      link: [!settings.icon ? undefined : new Object({
-        rel: 'icon',
-        href: settings.icon
-      }), ...asArray(settings.link)],
+      charset: settings.charset,
+      viewport: settings.viewport,
+      icon: settings.icon,
+      font: settings.font,
+      meta: asArray(settings.meta),
+      link: asArray(settings.link),
       script: asArray(settings.script)
     });
-    // sets up head style css
-    DOM.style([{
-      fontFace: (Array.isArray(settings.font) ? settings.font : [settings.font]).map(font => typeof font === 'string' ? new Object({
-        fontFamily: font.split(/[\/,.]+/).slice(-2)[0],
-        src: `url(${font})`
-      }) : font)
-    }, asArray(settings.style), asArray(settings.css)]);
-    // sets up the body
+    DOM.style([asArray(settings.style), asArray(settings.css)]);
     settings.entry = !settings.entry ? undefined : new Object({
       type: settings.module ? 'module' : undefined,
       src: settings.entry
@@ -418,10 +431,10 @@ class DOM {
     DOM.create(ini);
   }
 
-  static querystring(){
+  static querystring() {
     var qs = location.search.substring(1);
-    if(!qs) return Object();
-    if(qs.includes('=')) return JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+    if (!qs) return Object();
+    if (qs.includes('=')) return JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
     return qs.split('/');
   }
 

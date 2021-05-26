@@ -4,12 +4,12 @@
  * @repository https://github.com/lenincompres/DOM.create
  */
 
-Element.prototype.create = function (model, ...args) {
+ Element.prototype.create = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
   let station = args.filter(a => typeof a === 'string')[0]; // style|attr|tag|inner…|onEvent|name
   if (['tag', 'onready', 'id'].includes(station)) return;
   const TAG = this.tagName.toLowerCase();
-  if (station === 'content' && TAG === 'meta') station = 'meta-content';
+  if (station === 'content' && TAG === 'meta') station = '*content';
   if (!station) station = 'content';
   if (model._bonds) model = model.bind();
   if (model.binders) return model.binders.forEach(binder => binder.bind(this, station, model.onvalue));
@@ -85,23 +85,24 @@ Element.prototype.create = function (model, ...args) {
   if (IS_PRIMITIVE) {
     if (IS_HEAD) {
       let extension = typeof model === 'string' ? model.split('.').slice(-1)[0] : 'none';
+      const rel = {
+        none: '',
+        css: 'stylesheet',
+        sass: 'stylesheet/sass',
+        scss: 'stylesheet/scss',
+        less: 'stylesheet/less',
+        ico: 'icon'
+      };
       if (tag === 'title') return this.innerHTML += `<title>${model}</title>`;
-      if (tag === 'link') {
-        let rel = {
-          none: '',
-          css: 'stylesheet',
-          sass: 'stylesheet/sass',
-          scss: 'stylesheet/scss',
-          less: 'stylesheet/less',
-          ico: 'icon'
-        };
-        return this.create({
-          link: {
-            rel: rel[extension],
-            href: model
-          }
-        });
-      }
+      if (tag === 'icon') return this.innerHTML += `<link rel="icon" href="${model}">`;
+      if (tag === 'charset') return this.innerHTML += `<meta charset="${model}">`;
+      if (['viewport', 'keywords', 'description'].includes(tag)) return this.innerHTML += `<meta name="${tag}" content="${model}">`;
+      if (tag === 'link') return this.create({
+        link: {
+          rel: rel[extension],
+          href: model
+        }
+      });
       if (tag === 'script' && extension === 'js') return this.create({
         script: {
           src: model
@@ -109,8 +110,7 @@ Element.prototype.create = function (model, ...args) {
       });
     }
     let done = (this.style[station] !== undefined) ? (this.style[station] = model) : undefined;
-    const IS_ATTRIBUTE = ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', 'meta-content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(station);
-    done = IS_ATTRIBUTE ? !this.setAttribute(station.replace('meta-', ''), model) : done;
+    if (['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', '*content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(station)) done = !this.setAttribute(station.replace('*', ''), model);
     if (station === 'id') addID(model, this);
     if (done !== undefined) return;
   }
