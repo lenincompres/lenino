@@ -9,22 +9,25 @@ export const PAGES = {
   HOME: {},
 
   BIO: {
-    section: [
-      'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life. His studies range from telecommunication engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.',
-      'Lenino es un cuenta-cuentos creativo (el alter-ego afectivo de Lenin Comprés), un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida "adulta". Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno).'
-    ].map((p, i) => new Object({
+    section: {
       style: STYLE.PAGE,
-      backgroundColor: i % 2 ? 'white' : undefined,
-      p: p,
+      content: [{
+          p: 'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life. His studies range from telecommunication engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.'
+        },
+        {
+          backgroundColor: 'white',
+          p: 'Lenino es un cuenta-cuentos creativo (el alter-ego afectivo de Lenin Comprés), un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida "adulta". Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno).'
+        }
+      ],
       onready: slideDown
-    }))
+    }
   },
 
   PROJECTS: {
     section: projects.filter(p => !p.hidden).map((project, i) => new Object({
       style: STYLE.PAGE,
       fontSize: '1em',
-      width: window.innerWidth > 850 ? 'calc(50% - 1em)' : undefined,
+      width: '23em',
       cursor: 'pointer',
       boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
       img: {
@@ -38,9 +41,9 @@ export const PAGES = {
         text: project.title
       },
       p: project.desc,
-      onmouseover: e => activeProject.value = i,
-      onmouseout: e => activeProject.value = false,
-      onclick: e => window.open(project.link, '_blank'),
+      mouseover: e => activeProject.value = i,
+      mouseout: e => activeProject.value = false,
+      click: e => window.open(project.link, '_blank'),
       onready: slideDown
     }))
   },

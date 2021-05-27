@@ -7,22 +7,21 @@ import SOCIAL_LINKS from './modules/widgets/social.js'
 import slideDown from './modules/animations/slideDown.js'
 
 const isMobile = new Binder(window.innerWidth < 850);
-window.addEventListener('resize', e => isMobile.value = window.innerWidth < 850);
+const currentPage = new Binder(0);;
+const hoverPage = new Binder();
+const pageNames = Object.keys(PAGES);
 
-const currentPage = new Binder(0);
-if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase();
+if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase()
 
-const navHover = new Binder();
-
-document.head.create({
+DOM.create({
   title: 'Lenino.net',
   charset: 'UTF-8',
   viewport: {
     width: 'device-width',
     initialScale: 1,
   },
-  keywords: '',
-  description: '',
+  keywords: 'lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos',
+  description: 'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life. His studies range from telecommunication engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.',
   icon: 'assets/icon.png',
   link: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
   font: './assets/markerfeltnormal.ttf',
@@ -47,12 +46,7 @@ document.head.create({
         }
       }
     }
-  }
-});
-
-var pageNames = Object.keys(PAGES);
-
-DOM.create({
+  },
   fontSize: '14px',
   backgroundColor: '#023',
   div: {
@@ -69,9 +63,9 @@ DOM.create({
       backgroundPosition: 'center top',
       header: {
         style: [STYLE.PAGE, STYLE.FLEX],
-        flexDirection: isMobile.bind(val => val ? 'column' : undefined),
-        alignContent: isMobile.bind(val => val ? 'center' : undefined),
-        height: isMobile.bind(val => val ? '4em' : undefined),
+        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
+        alignContent: 'center',
+        height: isMobile.bind(val => val ? '4em' : 'auto'),
         alignItems: 'flex-end',
         position: isMobile.bind(val => val ? 'relative' : 'absolute'),
         width: isMobile.bind(val => val ? '100%' : 'fit-content'),
@@ -90,7 +84,7 @@ DOM.create({
             fontFamily: 'markerfeltnormal, Georgia, "Times New Roman", Times, serif',
             content: 'Lenino'
           },
-          onclick: e => currentPage.value = pageNames[0]
+          click: e => currentPage.value = pageNames[0]
         },
         tagline: {
           padding: '.2em .6em',
@@ -106,7 +100,7 @@ DOM.create({
         style: STYLE.FLEX,
         flexDirection: 'column',
         alignContent: isMobile.bind(val => val ? 'center' : 'left'),
-        height: isMobile.bind(val => val ? '4em' : 'fit-content'),
+        height: isMobile.bind(val => val ? '3.5em' : 'fit-content'),
         width: isMobile.bind(val => val ? '100%' : 'fit-content'),
         backgroundColor: isMobile.bind(val => `rgba(${val ? '0,0,0' : '255,255,255'},0.5)`),
         padding: isMobile.bind(val => val ? '0.5em 0' : '5.75em 0.5em 0.5em'),
@@ -127,15 +121,15 @@ DOM.create({
           content: pageNames.map(name => new Object({
             backgroundColor: currentPage.bind(current => current === name ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.LINK),
             display: isMobile.bind(val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0] ? 'block' : 'none'),
-            boxShadow: DOM.bind([navHover, currentPage], (over, current) =>
+            boxShadow: DOM.bind([hoverPage, currentPage], (over, current) =>
               current === name ? STYLE.SHADOW.INSET :
               over === name ? STYLE.SHADOW.HIGHLIGHT :
               STYLE.SHADOW.NORMAL),
             href: '#' + name,
             text: name.toLowerCase(),
-            onclick: e => currentPage.value = name,
-            onmouseover: e => navHover.value = name,
-            onmouseout: e => navHover.value = false,
+            click: e => currentPage.value = name,
+            mouseover: e => hoverPage.value = name,
+            mouseout: e => hoverPage.value = false,
           }))
         },
         onready: slideDown
@@ -143,7 +137,7 @@ DOM.create({
       article: {
         style: STYLE.FLEX,
         flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
-        alignContent: isMobile.bind(val => val ? 'center' : undefined),
+        alignContent: isMobile.bind(val => val ? 'center' : 'start'),
         minHeight: isMobile.bind(val => val ? '600px' : '815px'),
         width: isMobile.bind(val => val ? '100%' : '47em'),
         margin: isMobile.bind(val => val ? 0 : '6em 0 0 9em'),
@@ -156,5 +150,6 @@ DOM.create({
       backgroundColor: 'white',
       section: [MUSICPLAYER, TWITTER]
     }
-  }
+  },
+  onresize: e => isMobile.value = window.innerWidth < 850
 });
