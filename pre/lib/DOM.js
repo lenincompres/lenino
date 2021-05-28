@@ -4,10 +4,10 @@
  * @repository https://github.com/lenincompres/DOM.create
  */
 
- Element.prototype.create = function (model, ...args) {
+Element.prototype.create = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
   if (Array.isArray(model.content)) return model.content.forEach(item => {
-    if([null, undefined].includes(item)) return;
+    if ([null, undefined].includes(item)) return;
     let individual = Object.assign({}, model);
     individual.content = item;
     this.create(individual, ...args);
@@ -22,12 +22,16 @@
   if (!station) station = 'content';
   const STATION = station; // STATION is the original station
   station = station.toLowerCase(); // station is always lowercase
-  if(['model', 'inner'].includes(station)) station = 'content';
+  if (['model', 'inner'].includes(station)) station = 'content';
   let p5Elem = args.filter(a => a && a.elt)[0];
-  if (typeof model === 'function') return (p5Elem && typeof p5Elem[STATION] === 'function') ? p5Elem[STATION](model) : this[STATION] = model;
+  if (typeof model === 'function') {
+    if (DOM.isEvent(STATION)) return this.addEventListener(STATION, model);
+    else if (p5Elem && typeof p5Elem[STATION] === 'function') return p5Elem[STATION](model);
+    else return this[STATION] = model;
+  }
   if (model._bonds) model = model.bind();
-  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue));
-  if (['tag', 'onready', 'id'].includes(station)) return;
+  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener));
+  if (['tag', 'id', 'onready', 'ready', 'done', 'ondone'].includes(station)) return;
   if (station === 'css') return this.css(model);
   if (['text', 'innertext'].includes(station)) return this.innerText = model;
   if (['html', 'innerhtml'].includes(station)) return this.innerHTML = model;
@@ -45,10 +49,10 @@
   let id;
   if (tag.includes('#'))[tag, id] = tag.split('#');
   let lowTag = (model.tag ? model.tag : tag).toLowerCase();
-  if (lowTag != tag) id = tag; // camelCase tags are interpreted as id
+  if (lowTag != tag && tag[0] === tag[0].toLowerCase()) id = tag; // camelCase tags are interpreted as id (TEST THIS)
   tag = lowTag;
   if (model.id) id = model.id;
-  let elt = model.tagName ? model : model.elt ? model.elt : false;
+  let elt = DOM.isElement(model) ? model : DOM.isP5Element(model) ? model.elt : false;
   if (elt) {
     if (id) DOM.addID(id, elt);
     else if (tag != elt.tagName.toLowerCase()) DOM.addID(tag, elt);
@@ -65,17 +69,23 @@
   }
   if (Array.isArray(model)) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
-    if (station === 'addeventlistener') return this.addEventListener(...model);
+    if (DOM.isListener(station)) return this.addEventListener(...model);
     let map = model.map(m => this.create(m, tag + cls.join('.'), p5Elem, PREPEND ? false : undefined));
     if (id) DOM.addID(id, map);
     return map;
   }
-  if (station === 'addeventlistener') return model.options ? this.addEventListener(model.type, model.listener, model.options) : this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
+  if (DOM.isListener(station)) {
+    if (model.event) model.type = model.event;
+    if (model.function) model.listener = model.function;
+    if (model.method) model.listener = model.method;
+    if (model.options) return this.addEventListener(model.type, model.listener, model.options);
+    this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
+  }
   if (station === 'style') {
     if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(station, model);
     if (!model.content) {
       if (CLEAR) this.setAttribute(station, '');
-      return Object.entries(model).forEach(([key, value]) => value && value.binders ? value.binders.forEach(binder => binder.bind(this, key, value.onvalue)) : this.style[key] = value);
+      return Object.entries(model).forEach(([key, value]) => value && value.binders ? value.binders.forEach(binder => binder.bind(this, key, value.onvalue, value.listener)) : this.style[key] = value);
     }
     if (!DOM.isPrimitive(model.content)) model.content = DOM.css(model.content);
   }
@@ -101,7 +111,7 @@
         src: model
       }, station);
     }
-    let done = (this.style[STATION] !== undefined) ? (this.style[STATION] = model) : undefined;
+    let done = DOM.isStyle(STATION, this) ? this.style[STATION] = model : undefined;
     station = station.replace('*', ''); // disambiguate 
     if (DOM.isAttribute(STATION)) done = !this.setAttribute(STATION, model);
     if (station === 'id') DOM.addID(model, this);
@@ -117,7 +127,10 @@
   if (cls) cls.forEach(c => c ? elt.classList.add(c) : null);
   if (id) elt.setAttribute('id', id);
   this[PREPEND ? 'prepend' : 'append'](elt);
+  if (model.ready) model.ready(elem);
   if (model.onready) model.onready(elem);
+  if (model.done) model.done(elem);
+  if (model.ondone) model.ondone(elem);
   return elem;
 };
 
@@ -155,38 +168,42 @@ class Binder {
     this.update = bond => {
       if (!bond.target) return;
       let theirValue = bond.onvalue(this._value);
-      if (bond.target.tagName) return bond.target.create(theirValue, bond.property);
-      bond.target[bond.property] = theirValue
+      if (bond.target.tagName) return bond.target.create(theirValue, bond.station);
+      if (bond.target._bonds) bond.target.setter = this; // knowing the setter prevents co-binder's loop
+      bond.target[bond.station] = theirValue;
     }
   }
   addListener(func) {
     if (typeof func !== 'function') return;
-    this._listeners[this._listeners] = func;
+    this._listeners[this._listenerCount] = func;
     return this._listenerCount++;
   }
   removeListener(countIndex) {
+    if(typeof countIndex !== 'number') return;
     delete this._listeners[countIndex];
   }
   bind(...args) {
-    let target = args.filter(a => a.tagName || a._bonds)[0];
-    if (!target) return DOM.bind(this, ...args);
-    if (this._bonds && this._bonds.some(bond => bond === this)) return console.log('Two binders are bound to each other.');
+    let target = args.filter(a => a && (a.tagName || a._bonds))[0];
     let onvalue = args.filter(a => typeof a === 'function')[0];
-    let property = args.filter(a => typeof a === 'string')[0];
+    let station = args.filter(a => typeof a === 'string')[0];
+    let listener = args.filter(a => typeof a === 'number')[0];
+    if (!target) return DOM.bind(this, ...args, this.addListener(onvalue)); // bind() addListener if not in a model
+    if(typeof listener === 'number') this.removeListener(listener); // if in a model, this will remove the listener
     let bond = {
+      binder: this,
       target: target,
-      property: property ? property : 'value',
+      station: station ? station : 'value',
       onvalue: onvalue ? onvalue : v => v
     }
     this._bonds.push(bond);
     this.update(bond);
   }
   set value(val) {
-    if (val === this._value) return;
     this._value = val;
-    this._bonds.forEach(bond => this.update(bond));
+    this._bonds.forEach(bond => bond.target !== this.setter ? this.update(bond) : null);
     this.onvalue(val);
-    Object.values(this._listeners).forEach(listener => listener(val));
+    Object.values(this._listeners).forEach(func => func(val));
+    this.setter = undefined;
   }
   get value() {
     return this._value;
@@ -195,62 +212,31 @@ class Binder {
 
 // global static methods to handle the DOM
 class DOM {
+  static STYLE = 'DOM_STYLE';
+  static SET = 'DOM_SET';
+  static isSet = b => typeof b === 'boolean' ? window[DOM.SET] = b : !!window[DOM.SET];
+  static isStyled = b => typeof b === 'boolean' ? window[DOM.STYLE] = b : !!window[DOM.STYLE];
   // created the element and props in the  body or an element passed
   static create(...args) {
-    let elt = args.filter(a => a && a.tagName)[0];
-    if (!elt) elt = document.body;
+    if (!document.body) return window.addEventListener('load', _ => DOM.create(...args));
+    let elt = args.filter(a => DOM.isElement(a) || DOM.isP5Element(a))[0];
     if (elt) return elt.create(...args);
-    window.addEventListener('load', _ => DOM.create(...args));
+    DOM.isSet() ? document.body.create(...args) : DOM.setup(...args);
   }
   // returns a bind for element's props to use ONLY whithin a create() model
-  static bind(binders, onvalue = v => v) {
+  static bind(binders, onvalue = v => v, listener) { 
     if (!Array.isArray(binders)) binders = [binders];
     if (binders.some(binder => !Array.isArray(binder._bonds))) return console.log(binders, 'Non-binder found.');
     return {
+      listener: listener,
       binders: binders,
       onvalue: _ => onvalue(...binders.map(binder => binder.value))
     }
   }
-  // returns a new bind for element's props whithin a create() model, to be updated after a XMLHttpRequest
-  static load(url, onload, parseJSON = false) {
-    let binder = new Binder();
-    let obj = binder.bind(onload);
-    DOM.request(url, data => data !== undefined ? binder.value = parseJSON ? JSON.parse(data) : data : null);
-    return obj;
-  }
-  // returns a new bind for element's props whithin a create() model, to be updated after a JSON PARSED XMLHttpRequest
-  static loadJSON(url, onload) {
-    return DOM.load(url, onload, true);
-  }
-  // makes a XMLHttpRequest using POST, make (data = false) for GET method
-  static request(url, data, onsuccess = _ => null, onerror = _ => null) {
-    if (!url) return;
-    const GET = data === false;
-    if (typeof data === 'function') {
-      onerror = onsuccess;
-      onsuccess = data;
-      data = {};
-    }
-    let xobj = new XMLHttpRequest();
-    xobj.onreadystatechange = _ => xobj.readyState == 4 && xobj.status == '200' ? onsuccess(xobj.responseText) : onerror(xobj.status);
-    xobj.open(GET ? 'POST' : 'GET', url, true);
-    xobj.send(data);
-  }
-  // same as before bu terurns a JSON object
-  static requestJSON(url, data, onsuccess = _ => null, onerror = _ => null) {
-    if (typeof data === 'function') {
-      onerror = onsuccess;
-      onsuccess = data;
-      data = {};
-    }
-    DOM.request(url, data, d => onsuccess(JSON.parse(d)), onerror);
-  };
   // adds styles to the head as global CSS
   static style(style) {
-    if (window.domstyleElem === undefined) {
-      window.domstyleElem = document.head.create({
-        content: '/* Created with DOM.js style */'
-      }, 'style');
+    if (!DOM.isStyled()) {
+      DOM.isStyled(true);
       let reset = {
         '*': {
           boxSizing: 'border-box',
@@ -290,10 +276,11 @@ class DOM {
     }
     if (!style) return;
     if (Array.isArray(style)) return style.forEach(s => DOM.style(s));
-    if (typeof style !== 'string') style = DOM.css(style);
-    document.head.create({
+    if (typeof style === 'string') return document.head.create({
       content: style
     }, 'style');
+    if (Object.keys(style).some(key => DOM.isStyle(key))) DOM.create(style);
+    DOM.style(DOM.css(style));
   }
   /* converts JSON to CSS, nestings and all. Models can have id: & class: properties to be added to the selector.
   "_" in selectors are turned into ".". Use a trailing "_" to affect any selector under the parent, instead of default immediate child (>), or add an "all: true" property.*/
@@ -359,7 +346,7 @@ class DOM {
     if ([undefined, null, false].includes(ini)) return;
     if ([true, ''].includes(ini)) ini = {};
     if (typeof ini === 'string') {
-      if (ini.endsWith('.json')) return DOM.requestJSON(ini, data => DOM.setup(data));
+      if (ini.endsWith('.json')) return fetch(ini).then(data => DOM.setup(JSON.parse(data)));
       try {
         ini = JSON.parse(ini);
       } catch (e) {
@@ -367,50 +354,52 @@ class DOM {
         ini = {};
       }
     }
+    DOM.isSet(true);
     const INI = {
-      title: 'Created with DOM.create',
-      charset: 'UTF-8',
-      viewport: 'width=device-width',
+      title: false,
+      charset: false,
+      viewport: false,
+      keywords: false,
+      description: false,
       icon: false,
       meta: [],
       link: [],
-      reset: true,
       font: [],
       style: [],
       css: [],
       script: [],
-      entry: 'main.js',
+      entry: false,
       module: true,
       postscript: []
     };
     Object.entries(ini).forEach(([key, value]) => {
+      if (INI[key] === undefined) return;
       delete ini[key];
       ini[key.toLocaleLowerCase()] = value;
-    });
-    DOM.rename(ini, ['fontface', 'fonts', 'links', 'entrypoint'], ['font', 'font', 'link', 'entry']);
+    }); // makes all key lowercase
+    DOM.rename(ini, ['fontface', 'fonts', 'links', 'entrypoint', 'scripts'], ['font', 'font', 'link', 'entry', 'script']); // replaces names
     let settings = Object.assign({}, INI); // combines ini and INI into settings
     Object.assign(settings, ini);
     document.head.create({
-      title: settings.title,
-      charset: settings.charset,
-      viewport: settings.viewport,
-      icon: settings.icon,
+      title: settings.title ? settings.title : undefined,
+      charset: settings.charset ? settings.charset : undefined,
+      viewport: settings.viewport ? settings.viewport : undefined,
+      icon: settings.icon ? settings.icon : undefined,
       font: settings.font,
-      meta: DOM.asArray(settings.meta),
-      link: DOM.asArray(settings.link),
-      script: DOM.asArray(settings.script)
+      style: [settings.style, settings.css],
+      meta: settings.meta,
+      link: settings.link,
+      script: settings.script
     });
-    DOM.style([DOM.asArray(settings.style), DOM.asArray(settings.css)]);
-    settings.entry = !settings.entry ? undefined : new Object({
+    if (typeof settings.entry === 'string') settings.entry = {
       type: settings.module ? 'module' : undefined,
       src: settings.entry
-    })
+    }
     DOM.create({
-      script: [settings.entry, ...DOM.asArray(settings.postscript)]
+      script: [settings.entry, settings.postscript]
     });
-    // anything else passed in ini becomes a body prop
     Object.keys(ini).filter(key => INI[key] !== undefined).forEach(key => delete ini[key]);
-    DOM.create(ini);
+    DOM.create(ini); // anything else passed in ini is created in the body
   }
   static querystring() {
     var qs = location.search.substring(1);
@@ -420,14 +409,18 @@ class DOM {
   }
   // auxiliary methods
   static addID = (id, elt) => {
-    if (Array.isArray(elt)) return elt.forEach(e => addID(id, e));
+    if (Array.isArray(elt)) return elt.forEach(e => DOM.addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) return window[id].push(elt);
     window[id] = [window[id], elt];
   };
+  static isElement = elt => elt && elt.tagName;
+  static isP5Element = elem => elem && elem.elt;
   static isPrimitive = foo => ['boolean', 'number', 'string'].includes(typeof foo);
-  static asArray = foo => Array.isArray(foo) ? foo : [foo];
   static unCamel = str => str.replace(/([A-Z])/g, '-' + '$1').toLowerCase();
+  static isStyle = (str, elt) => Object.keys((elt ? elt : document.body ? document.body : document.createElement('div')).style).includes(str);
+  static isListener = str => ['addeventlistener', 'eventlistener', 'listener'].includes(str.toLowerCase());
+  static isEvent = str => ['abort', 'afterprint', 'animationend', 'animationiteration', 'animationstart', 'beforeprint', 'beforeunload', 'blur', 'canplay', 'canplaythrough', 'change', 'click', 'contextmenu', 'copy', 'cut', 'dblclick', 'drag', 'dragend', 'dragenter', 'dragleave', 'dragover', 'dragstart', 'drop', 'durationchange', 'ended', 'error', 'focus', 'focusin', 'focusout', 'fullscreenchange', 'fullscreenerror', 'hashchange', 'input', 'invalid', 'keydown', 'keypress', 'keyup', 'load', 'loadeddata', 'loadedmetadata', 'loadstart', 'message', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseover', 'mouseout', 'mouseup', 'offline', 'online', 'open', 'pagehide', 'pageshow', 'paste', 'pause', 'play', 'playing', 'progress', 'ratechange', 'resize', 'reset', 'scroll', 'search', 'seeked', 'seeking', 'select', 'show', 'stalled', 'submit', 'suspend', 'timeupdate', 'toggle', 'touchcancel', 'touchend', 'touchmove', 'touchstart', 'transitionend', 'unload', 'volumechange', 'waiting', 'wheel'].includes(str);
   static isAttribute = str => ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'].includes(str);
   static isPseudoClass = str => ['active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover', 'in-range', 'invalid', 'last-of-type', 'link', 'only-of-type', 'only-child', 'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid', 'visited', 'lang', 'not', 'nth-child', 'nth-last-child', 'nth-last-of-type', 'nth-of-type'].includes(str);
   static isPseudoElement = str => ['after', 'before', 'first-letter', 'first-line', 'selection'].includes(str);

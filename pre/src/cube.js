@@ -1,16 +1,16 @@
 import State from "./State.js";
 
 const [ENG, ESP] = ['eng', 'esp'];
-const WAIT = 4; //second between posts
+const WAIT = 4; //seconds between posts
 const POSTS = 5;
 const RADIUS = 40;
 
 function getCube(options = {}) {
   return new p5(function (me) {
-
     me.setup = function () {
       let onready = options.onready !== undefined ? options.onready : _ => null;
       let canvas = me.createCanvas(me.windowWidth, 400);
+      if(options.container) options.container.append(canvas.elt);
       onready(canvas.elt);
       me.centerCode = options.center !== undefined ? options.center : '000';
       me.lang = options.lang !== undefined ? options.lang : ENG;
@@ -29,7 +29,6 @@ function getCube(options = {}) {
       me.changePost = false;
       me.animate();
     }
-
     me.draw = function () {
       me.clear();
       me.translate(...me.center);
@@ -40,8 +39,7 @@ function getCube(options = {}) {
         me.animate();
         me.changePost = false;
       }
-      // draws the labels
-      if (!me.currentPost || options.noLabels) return;
+      if (!me.currentPost || options.noLabels) return; // not to draw the labels
       let y = RADIUS * 4.5;
       let x = RADIUS * 4.75;
       const esp = me.lang === ESP;
@@ -70,7 +68,6 @@ function getCube(options = {}) {
       me.textSize(RADIUS * 0.34);
       texts.forEach(t => me.text(...t));
     }
-
     me.animate = function (wait = 1000) {
       if (me.timeOut) clearTimeout(me.timeOut);
       if (me.freeze && me.currentPost === me.nextPost) return;
@@ -78,7 +75,6 @@ function getCube(options = {}) {
       me.timeOut = setTimeout(() => me.changePost = !me.isHover, wait * (isIni ? WAIT : 0.5));
       if (isIni) me.nextPost = (me.nextPost + 1) % POSTS;
     }
-
     me.view = function (view) {
       me.changePost = true;
       if (isNaN(view)) {
@@ -92,7 +88,6 @@ function getCube(options = {}) {
       me.states.forEach(s => s.hidden = view < 0 && !s.isRim && s.level - 3 > 2 * view);
       me.nextPost = view < 0 ? 0 : parseInt(view);
     }
-
     me.mouseMoved = function () {
       if (!me.canvas) return;
       me.isHover = !!parseInt(me.get(me.mouseX, me.mouseY).join('')); // any pixel color under the mouse
@@ -113,12 +108,10 @@ function getCube(options = {}) {
         me.overState = false;
       }
     }
-
     me.mouseReleased = function () {
       if (!me.isHover) return;
       if (me.onclick) me.onclick(me.overState);
     }
-
   });
 }
 

@@ -4,7 +4,7 @@
  * @repository https://github.com/lenincompres/DOM.create
  */
 
-Element.prototype.create = function (model, ...args) {
+ Element.prototype.create = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
   if (Array.isArray(model.content)) return model.content.forEach(item => {
     if ([null, undefined].includes(item)) return;
@@ -228,40 +228,6 @@ class DOM {
       onvalue: _ => onvalue(...binders.map(binder => binder.value))
     }
   }
-  // returns a new bind for element's props whithin a create() model, to be updated after a XMLHttpRequest
-  static load(url, onload, parseJSON = false) {
-    let binder = new Binder();
-    let obj = binder.bind(onload);
-    DOM.request(url, data => data !== undefined ? binder.value = parseJSON ? JSON.parse(data) : data : null);
-    return obj;
-  }
-  // returns a new bind for element's props whithin a create() model, to be updated after a JSON PARSED XMLHttpRequest
-  static loadJSON(url, onload) {
-    return DOM.load(url, onload, true);
-  }
-  // makes a XMLHttpRequest using POST, make (data = false) for GET method
-  static request(url, data, onsuccess = _ => null, onerror = _ => null) {
-    if (!url) return;
-    const GET = data === false;
-    if (typeof data === 'function') {
-      onerror = onsuccess;
-      onsuccess = data;
-      data = {};
-    }
-    let xobj = new XMLHttpRequest();
-    xobj.onreadystatechange = _ => xobj.readyState == 4 && xobj.status == '200' ? onsuccess(xobj.responseText) : onerror(xobj.status);
-    xobj.open(GET ? 'POST' : 'GET', url, true);
-    xobj.send(data);
-  }
-  // same as before bu terurns a JSON object
-  static requestJSON(url, data, onsuccess = _ => null, onerror = _ => null) {
-    if (typeof data === 'function') {
-      onerror = onsuccess;
-      onsuccess = data;
-      data = {};
-    }
-    DOM.request(url, data, d => onsuccess(JSON.parse(d)), onerror);
-  };
   // adds styles to the head as global CSS
   static style(style) {
     if (!DOM.isStyled()) {
@@ -375,7 +341,7 @@ class DOM {
     if ([undefined, null, false].includes(ini)) return;
     if ([true, ''].includes(ini)) ini = {};
     if (typeof ini === 'string') {
-      if (ini.endsWith('.json')) return DOM.requestJSON(ini, data => DOM.setup(data));
+      if (ini.endsWith('.json')) return fetch(ini).then(r => r.json()).then(d => DOM.setup(d));
       try {
         ini = JSON.parse(ini);
       } catch (e) {

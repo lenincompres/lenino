@@ -115,15 +115,12 @@ const modelQuestion = q => {
       }
     })
   }
-  return q.model;
+  return q;
 };
 
-
 const questions = new Binder([]);
-DOM.requestJSON('assets/questionnaire.json', data => {
-  data.questions.forEach(modelQuestion);
-  questions.value = data.questions;
-});
+fetch('assets/questionnaire.json').then(r => r.json())
+  .then(data => questions.value = data.questions.map(modelQuestion));
 
 export const model = {
   style: style.section,
@@ -140,7 +137,7 @@ export const model = {
     margin: '4em 0 0',
     content: [{
       h1: 'Sample',
-      div: modelQuestion(sampleQuestion)
+      div: modelQuestion(sampleQuestion).model
     }, {
       marginTop: '1em',
       a: {

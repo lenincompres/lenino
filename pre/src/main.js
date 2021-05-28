@@ -4,14 +4,15 @@ import * as results from "./results.js";
 import * as style from "./style.js";
 
 const QS = DOM.querystring();
-let rgb = QS.rgb;
-let fav = QS.color;
-if (rgb) rgb = '#' + rgb;
-if (fav) fav = '#' + fav;
+let rgb = QS.rgb ? '#' + QS.rgb : undefined;
+let fav = QS.color ? '#' + QS.color : undefined;
 
+questionnaire.results.bind(results.feature);
+//results.feature.bind(questionnaire.results);
+if (rgb) results.feature.value = rgb;
 
-document.head.create({
-  title: 'PRE Spectrum',
+DOM.create({
+  title: 'PRE Color Spectrum',
   charset: 'UTF-8',
   viewport: 'width=device-width, initial-scale=1',
   keywords: '3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction',
@@ -23,7 +24,7 @@ document.head.create({
       fontSize: '14px',
     },
     b: {
-      fontWeight: '300'
+      fontWeight: 'bold'
     },
     a: {
       color: 'white',
@@ -50,17 +51,7 @@ document.head.create({
       color: 'white',
       textShadow: '0 0 3px black',
     }
-  }
-});
-
-const cubeElement = new Binder();
-let cube = getCube({
-  noLabels: true,
-  onclick: s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null,
-  onready: elt => cubeElement.value = elt
-});
-
-DOM.create({
+  },
   textAlign: 'center',
   backgroundColor: rgb ? rgb : questionnaire.favorite,
   header: {
@@ -69,14 +60,14 @@ DOM.create({
     paddingTop: '3em',
     h1: {
       cursor: 'pointer',
-      text: 'PRE Spectrum',
+      text: 'PRE Color Spectrum',
       onclick: e => window.location.href = './'
     },
     h4: 'Physical, Rational & Emotional',
     div: {
+      id: 'cubeContainer',
       margin: '-2em auto 0',
       position: 'relative',
-      canvas: cubeElement,
       select: !rgb ? undefined : {
         position: 'absolute',
         top: '3em',
@@ -134,7 +125,7 @@ DOM.create({
           boxShadow: '1px 1px 2px black',
           backgroundColor: fav,
           href: './?rgb=' + fav.substr(1),
-          text: 'Your also have this favorite color: ' + fav
+          text: 'You also have this favorite color: ' + fav
         }, {
           fontSize: '1.25em',
           marginTop: '2em',
@@ -156,6 +147,8 @@ DOM.create({
   }
 });
 
-
-questionnaire.results.bind(results.feature);
-if (rgb) results.feature.value = rgb;
+let cube = getCube({
+  noLabels: true,
+  container: cubeContainer,
+  onclick: s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null,
+});

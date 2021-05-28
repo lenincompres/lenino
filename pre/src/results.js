@@ -6,6 +6,9 @@ import * as AUX from "./functions.js";
 
 export const mbti = new Binder('- - - -');
 export const feature = new Binder('#808080');
+const featureInfo = new Binder(states[feature.value.hexToCode()]);
+
+feature.bind(featureInfo, v => states[v.hexToCode()]);
 
 const bars = {
   e: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
@@ -73,7 +76,9 @@ export const model = {
     position: 'relative',
     width: '14em',
     padding: '1.5em 1em',
-    b: 'State & Archetype',
+    b: {
+      text: featureInfo.bind(info => info.colour)
+    },
     div: {
       canvas: stateElement
     },
@@ -85,17 +90,7 @@ export const model = {
       display: 'block',
       width: 'fit-content',
       margin: '0 auto',
-      css: {
-        textTransform: 'lowercase',
-        firstLetter: {
-          textTransform: 'uppercase'
-        }
-      },
-      text: feature.bind(v => {
-        if (!v) return;
-        let info = states[v.hexToCode()];
-        return `The ${info.adjective} state in ${info.colour} focuses on ${info.concept}, as the archetypical ${info.archetype}.`
-      })
+      html: featureInfo.bind(info => `The <b>${info.colour}</b> (${info.colour2}) color of the PRE spectrum represents the <b>${info.adjective}</b> state—a focus on ${info.concept}, as in the archetypical ${info.archetype}.`)
     }
   },
   section: {
@@ -160,6 +155,6 @@ export const model = {
       text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
     }
   }
-}
+};
 
 export default model;

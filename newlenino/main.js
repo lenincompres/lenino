@@ -7,7 +7,7 @@ import SOCIAL_LINKS from './modules/widgets/social.js'
 import slideDown from './modules/animations/slideDown.js'
 
 const isMobile = new Binder(window.innerWidth < 850);
-const currentPage = new Binder(0);;
+const currentPage = new Binder(0);
 const hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);
 
@@ -21,7 +21,7 @@ DOM.create({
     initialScale: 1,
   },
   keywords: 'lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos',
-  description: 'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life. His studies range from telecommunication engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.',
+  description: 'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life.',
   icon: 'assets/icon.png',
   link: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
   font: './assets/markerfeltnormal.ttf',
@@ -63,15 +63,15 @@ DOM.create({
       backgroundPosition: 'center top',
       header: {
         style: [STYLE.PAGE, STYLE.FLEX],
-        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
         alignContent: 'center',
-        height: isMobile.bind(val => val ? '4em' : 'auto'),
         alignItems: 'flex-end',
+        padding: '0.5em',
+        zIndex: 10,
+        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
+        height: isMobile.bind(val => val ? '4em' : 'auto'),
         position: isMobile.bind(val => val ? 'relative' : 'absolute'),
         width: isMobile.bind(val => val ? '100%' : 'fit-content'),
-        padding: '0.5em',
         margin: isMobile.bind(val => val ? 0 : '1em'),
-        zIndex: 10,
         borderRadius: isMobile.bind(val => val ? 0 : '.5em'),
         a: {
           fontSize: '2.3em',
@@ -91,7 +91,7 @@ DOM.create({
           content: '<b>Cantacuentos</b></br>storyteller · inventor · educator'
         },
         menu: {
-          display: isMobile.bind(val => val ? 'none' : 'bock'),
+          display: isMobile.bind(val => val ? 'none' : 'block'),
           a: SOCIAL_LINKS
         },
         onready: slideDown
@@ -99,15 +99,15 @@ DOM.create({
       nav: {
         style: STYLE.FLEX,
         flexDirection: 'column',
+        color: 'rgb(245, 220, 154)',
+        zIndex: 5,
         alignContent: isMobile.bind(val => val ? 'center' : 'left'),
         height: isMobile.bind(val => val ? '3.5em' : 'fit-content'),
         width: isMobile.bind(val => val ? '100%' : 'fit-content'),
         backgroundColor: isMobile.bind(val => `rgba(${val ? '0,0,0' : '255,255,255'},0.5)`),
-        padding: isMobile.bind(val => val ? '0.5em 0' : '5.75em 0.5em 0.5em'),
-        zIndex: 5,
+        padding: isMobile.bind(val => val ? '0.5em 0' : '4.5em 0.5em 0.5em'),
         borderRadius: isMobile.bind(val => val ? 0 : '0.5em'),
-        color: 'rgb(245, 220, 154)',
-        margin: isMobile.bind(val => val ? 0 : '0.25em 0 0 2em'),
+        margin: isMobile.bind(val => val ? 0 : '2em 0 0 2em'),
         position: isMobile.bind(val => val ? 'relative' : 'absolute'),
         a: {
           color: STYLE.COLOR.PAGE,
@@ -146,8 +146,8 @@ DOM.create({
       div: INSTAGRAM,
     },
     sidebar: {
-      width: isMobile.bind(val => val ? '100%' : '350px'),
       backgroundColor: 'white',
+      width: isMobile.bind(val => val ? '100%' : '350px'),
       section: [MUSICPLAYER, TWITTER]
     }
   },
