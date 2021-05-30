@@ -14,14 +14,14 @@ if (rgb) results.feature.value = rgb;
 DOM.create({
   title: 'PRE Color Spectrum',
   charset: 'UTF-8',
-  viewport: 'width=device-width, initial-scale=1',
+  viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
   keywords: '3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction',
   description: 'A psychometric tool to visualize Physical, Rational & Emotional focus.',
   icon: 'assets/favicon.gif',
   style: {
     body: {
       fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
-      fontSize: '14px',
+      fontSize: '15px',
     },
     b: {
       fontWeight: 'bold'
@@ -66,35 +66,41 @@ DOM.create({
     h4: 'Physical, Rational & Emotional',
     div: {
       id: 'cubeContainer',
-      margin: '-2em auto 0',
+      margin: '-2em auto 0'
+    },
+    select: {
+      display: 'block',
+      zIndex: 10,
       position: 'relative',
-      select: !rgb ? undefined : {
-        position: 'absolute',
-        top: '3em',
-        right: 0,
-        textAlignLast: 'right',
-        option: ['', {
-          value: 0,
-          text: 'Top view'
-        }, {
-          value: -1,
-          text: 'Center view'
-        }, {
-          value: -2,
-          text: 'Base view'
-        }, {
-          value: 1,
-          text: 'Physical break'
-        }, {
-          value: 2,
-          text: 'Rational break'
-        }, {
-          value: 3,
-          text: 'Emotional break'
-        }]
-      },
+      margin: '-2em auto 3em',
+      textAlignLast: 'center',
+      option: [ {
+        value: 'none',
+        text: ''
+      }, {
+        value: 0,
+        text: 'Top View'
+      }, {
+        value: -1,
+        text: 'Center View'
+      }, {
+        value: -2,
+        text: 'Base View'
+      }, {
+        value: 1,
+        text: 'Physical Plains'
+      }, {
+        value: 2,
+        text: 'Rational Plains'
+      }, {
+        value: 3,
+        text: 'Emotional Plains'
+      }, {
+        value: 4,
+        text: 'Base/Border/Top'
+      }],
       onchange: e => cube.view(e.target.value)
-    }
+    },
   },
   main: rgb ? undefined : questionnaire.model,
   footer: {
@@ -105,17 +111,17 @@ DOM.create({
       display: 'flex',
       flexDirection: 'column',
       h1: rgb && !fav ? 'Featured' : 'Results',
-      p: !rgb || fav ?{
-        marginBottom: '-1.5em',
+      p: !rgb || fav ? {
+        margin: '1em 0 -2.25em -11em',
         zIndex: 1,
-        text: 'Closests'
+        text: 'Closests:'
       } : undefined,
       div: results.model,
       a: {
         target: '_blank',
         content: [{
           display: rgb ? 'none' : 'block',
-          href: DOM.bind([results.feature, questionnaire.favorite], (r,f) => './?rgb=' + r.substr(1) + '&color=' + f.substr(1)),
+          href: DOM.bind([results.feature, questionnaire.favorite], (r, f) => './?rgb=' + r.substr(1) + '&color=' + f.substr(1)),
           text: 'Here is a link with these results for you to save or share.'
         }, !fav ? undefined : {
           margin: '0 auto',

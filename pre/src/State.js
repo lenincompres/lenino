@@ -89,6 +89,7 @@ function polygon(x, y, radius, npoints, sketch) {
 
 export class State {
   constructor(sketch, options) {
+    this.sketch = sketch;
     let base = options.center !== undefined ? options.center : CENTERCODE;
     let index = options.index !== undefined ? options.index : false;
     let animate = options.animate !== undefined ? options.animate : false;
@@ -136,8 +137,6 @@ export class State {
     this.coords = animate ? [0, 0] : this.posts[0];
     this.hex = code.codeToHex();
     this.value = 1;
-    this.adjective = lang === ESP ? states[code].articulo : states[code].adjective;
-    this.arch = lang === ESP ? states[code].arquetipo : states[code].archetype;
     this.info = states[code];
 
     sketch.loadImage('assets/symbolsprite18.png', img => {
@@ -146,9 +145,12 @@ export class State {
     });
 
     this.draw = _ => {
+      let x = this.value;
+      let opacity = !this.interact ? 1 : 0.5 + Math.cos(3 * Math.cos(1.57 * x)) / 2;
+      let size = this.radius;// * (!this.interact ?  1 : this.sketch.map(opacity,0,1,0.68,1.14));
       if (!this.symbolSprite) return;
       this.onupdate(this);
-      if(isNaN(this.post)) this.post = 0;
+      if (isNaN(this.post)) this.post = 0;
       let end = this.posts[this.post];
       let ended = sketch.dist(...end, ...this.coords) < 0.25;
       if (!ended) this.coords = this.coords.map((v, i) => v += (end[i] - v) * 0.25);
@@ -157,31 +159,36 @@ export class State {
       sketch.noStroke();
       sketch.translate(...this.coords);
       // base
-      drawBox(this.radius, this.color, 0.86 * Math.pow(this.value, 3), true, sketch);
+      drawBox(size, this.color, 0.86 * opacity, true, sketch);
       // icon
-      sketch.tint(...this.color, Math.pow(this.value, 2) * 255);
-      var iSize = this.radius * 0.86;
+      sketch.tint(...this.color, opacity * 255);
+      var iSize = size * 0.86;
       sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
-      // top
-      drawBox(this.radius, this.color, 0.34 * Math.pow(this.value, 3), false, sketch);
       // text
-      if(!options.noText){
-        sketch.fill(0, this.value * 255);
+      if (!options.noText) {
+        let l = sketch.lightness(this.color) < 45 || sketch.green(this.color) < 45;
+        sketch.fill(l ? 255 : 0, opacity * 255);
+        sketch.strokeWeight(2.5);
+        if(!this.interact) sketch.stroke(l ? 0 : 255,  opacity * 100);
         sketch.textFont('Verdana');
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
-        sketch.textSize(this.radius * 0.25);
-        sketch.text(this.adjective, 0, this.radius * 0.5);
+        sketch.textLeading(0);
+        sketch.textSize(size * 0.25);
+        sketch.text(this.interact ? this.info.archetype:this.info.colour2, 0, size * 0.5);
       }
+      // top
+      sketch.noStroke();
+      drawBox(size, this.color, 0.34 * opacity, false, sketch);
       //
       if (this.selected) {
         sketch.fill(0, 0);
         sketch.rotate(Math.PI / 6);
         sketch.strokeWeight(6);
         sketch.stroke(0, 140);
-        polygon(1, 1, this.radius, 6, sketch);
+        polygon(1, 1, size, 6, sketch);
         sketch.strokeWeight(4);
         sketch.stroke(255);
-        polygon(0, 0, this.radius, 6, sketch);
+        polygon(0, 0, size, 6, sketch);
       }
       sketch.pop();
     }
@@ -192,19 +199,19 @@ export class State {
   }
 
   setRef(hexRef) {
-    var distFactor = 1.05444; // normalize the center 0.5 / getDistance('2a80d5','808080');
-    this.value = 1 - distFactor * getDistance(hexRef, code.codeToHex(), true);
-    var eValue = 1 - distFactor * getDistance(hexRef, code.codeToHex());
-    this.text = round(100 * this.value) + "%" + (eValue < this.value ? "*" : "");
+    if (!hexRef) return this.value = 1;
+    if (this === hexRef) return this.value = 1;
+    if (hexRef.code) hexRef = hexRef.code.codeToHex();
+    this.value = 1 - this.getDistance(hexRef, this.code.codeToHex(), true) / this.getDistance('ffffff', '808080');
   }
 
   getDistance(hex1, hex2, closerCycle = false) {
     var [p1, p2] = [hex1.toRGB().map(v => v / 255), hex2.toRGB().map(v => v / 255)];
     if (closerCycle) p1 = p1.map((v, i) => {
       let d = v - p2[i];
-      return abs(d) <= 0.5 ? v : abs(d + 1) < abs(d - 1) ? v + 1 : v - 1;
+      return Math.abs(d) <= 0.5 ? v : Math.abs(d + 1) < Math.abs(d - 1) ? v + 1 : v - 1;
     });
-    return dist(...p2, ...p1);
+    return this.sketch.dist(...p2, ...p1);
   };
 
 }

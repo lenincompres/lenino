@@ -10,7 +10,7 @@ function getCube(options = {}) {
     me.setup = function () {
       let onready = options.onready !== undefined ? options.onready : _ => null;
       let canvas = me.createCanvas(me.windowWidth, 400);
-      if(options.container) options.container.append(canvas.elt);
+      if (options.container) options.container.append(canvas.elt);
       onready(canvas.elt);
       me.centerCode = options.center !== undefined ? options.center : '000';
       me.lang = options.lang !== undefined ? options.lang : ENG;
@@ -28,11 +28,27 @@ function getCube(options = {}) {
       me.currentPost = 0;
       me.changePost = false;
       me.animate();
+      me.size = 0.4 * me.states[0].radius;
+      me.strokeWeight(3);
+      me.textFont('Verdana');
+      me.textSize(me.size);
+      me.textAlign(me.CENTER, me.CENTER);
     }
     me.draw = function () {
       me.clear();
       me.translate(...me.center);
-      me.states.forEach(s => s.draw());
+      me.states.forEach(s => {
+        s.setRef(me.overState);
+        s.interact = !!me.overState;
+        s.draw()
+      });
+      if (me.overState) {
+        let c = me.color('#' + me.overState.info.code.codeToHex())
+        let l = me.lightness(c) < 45 || me.green(c) < 45;
+        me.stroke(c);
+        me.fill(l ? 255 : 0);
+        me.text(me.overState.info.archetype, me.mouseX - me.center[0], me.mouseY - me.center[1] - me.size);
+      }
       if (me.changePost) {
         me.states.forEach(s => s.post = s.post === 0 ? me.nextPost : 0);
         me.currentPost = me.states[0].post;

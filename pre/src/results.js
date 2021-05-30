@@ -6,9 +6,35 @@ import * as AUX from "./functions.js";
 
 export const mbti = new Binder('- - - -');
 export const feature = new Binder('#808080');
-const featureInfo = new Binder(states[feature.value.hexToCode()]);
+const featureInfo = new Binder();
 
-feature.bind(featureInfo, v => states[v.hexToCode()]);
+feature.bind(featureInfo, v => {
+  let info = states[v.hexToCode()];
+  const level = (d, i) => new Object({
+    b: {
+      color: ['red','lime','blue'][d],
+      text: '■ '
+    },
+    span: [['Physically', 'Rationally', 'Emotionally'][d] + ' ', {
+      fontWeight: 'bold',
+      textShadow: i == 2 ? '0 0 1px black, 0 0 1px black, 0 0 1px black' : undefined,
+      color: ['black', 'gray', 'white'][i],
+      text: ['relaxed', 'flexible', 'tense'][i]
+    }]
+  });
+  info.p = level(0, parseInt(info.code[0]));
+  info.r = level(1, parseInt(info.code[1]));
+  info.e = level(2, parseInt(info.code[2]));
+  return {
+    p: `The ${info.colour2.toLowerCase()} (${info.colour.toLowerCase()}) color of the PRE spectrum is the <i>${info.adjective.toLowerCase()}</i> mental state—focused on ${info.concept.toLowerCase()}, as an archetypical ${info.archetype.toLowerCase()}.`,
+    ul: {
+      textAlign: 'left',
+      margin: '1em auto 0',
+      width: 'fit-content',
+      li: [info.p, info.r, info.e]
+    }
+  }
+});
 
 const bars = {
   e: new Bar('*E|I', '6em', 'gray', 'assets/extremes.gif'),
@@ -54,12 +80,13 @@ feature.addListener(hex => {
 const stateElement = new Binder();
 var stateP5 = new p5(function (me) {
   me.setup = _ => {
-    stateElement.value = me.createCanvas(100, 100).elt;
+    stateElement.value = me.createCanvas(120, 120).elt;
     me.translate(me.width / 2, me.height / 2);
     me.update = (code) => {
       me.clear();
       let state = new State(me, {
         center: code,
+        radius: me.width / 2
       });
       state.draw();
     }
@@ -74,11 +101,8 @@ export const model = {
     borderRadius: '0.5em',
     boxShadow: '1px 1px 2px black',
     position: 'relative',
-    width: '14em',
-    padding: '1.5em 1em',
-    b: {
-      text: featureInfo.bind(info => info.colour)
-    },
+    width: '18em',
+    padding: '1.5em',
     div: {
       canvas: stateElement
     },
@@ -90,14 +114,16 @@ export const model = {
       display: 'block',
       width: 'fit-content',
       margin: '0 auto',
-      html: featureInfo.bind(info => `The <b>${info.colour}</b> (${info.colour2}) color of the PRE spectrum represents the <b>${info.adjective}</b> state—a focus on ${info.concept}, as in the archetypical ${info.archetype}.`)
+      div: {
+        content: featureInfo
+      }
     }
   },
   section: {
     style: style.floatingSign,
     margin: '1em 0',
     header: {
-      text: feature.bind(v => 'Exact code: ' + v)
+      text: feature.bind(v => 'Hex code: ' + v)
     },
     ul: {
       fontSize: 'small',

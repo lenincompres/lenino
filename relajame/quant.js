@@ -60,7 +60,7 @@ function quant(r = 1, a = random(0, 2 * PI), x = 0, y = 0) {
     o.a = atan2(-o.vy, o.vx);
     o.a = (TWO_PI + o.a) % TWO_PI;
     colorMode(HSB);
-    o.c = color(180 * o.a / PI, map(o.z, 0, TOTAL, 100, 0), map(o.v, 0, max, 10, 100));
+    o.c = color((210 + (360 - 180 * o.a / PI)) % 360, map(o.z, 0, TOTAL, 100, 0), map(o.v, 0, max, 10, 100));
     o.c = [red(o.c), green(o.c), blue(o.c)];
     colorMode(RGB);
   }

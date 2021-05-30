@@ -1,17 +1,17 @@
 function setup() {
   //vars
   var [w, h] = [windowWidth, windowHeight]
-  TOTAL = 37;
+  TOTAL = 27;
   THRESH = sqrt(w * h / (2 * PI * TOTAL));
-  MAXV = THRESH / TWO_PI;
+  MAXV = THRESH / 4;
   MINV = 0; //0.01 * MAXV;
   DELAY = 0.68 * (TOTAL * THRESH) / (PI * MAXV);
   LIFESPAN = 400;
-  let fontSize = 0.34 * THRESH;
+  let fontSize = 0.28 * THRESH;
   freeze = null;
   playing = false;
   //signature
-  document.body.style.fontSize = (0.68 * fontSize) + 'px';
+  document.body.style.fontSize = (0.66 * fontSize) + 'px';
   let signature = createDiv(`<h1>Photonic Chimes</h1><p>by Lenino (ITP/IMA TISCH NYU)</p>`);
   signature.id('signature');
   createCanvas(w, h);
@@ -36,7 +36,7 @@ function draw() {
   if (playing) {
     clear();
     quanta = quanta.filter(q => !q.dead && !q.g);
-    background(map(quanta.length,1,TOTAL,0,255));
+    background(map(quanta.length,1,TOTAL,0,64));
     quanta.forEach(q => {
       if (typeof q.draw === 'function') q.draw()
     });

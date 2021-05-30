@@ -15,7 +15,7 @@ export const projects = [{
   img: "assets/mis500locos.jpg",
   desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
-  title: "PRE Spectrum",
+  title: "PRE Color Spectrum",
   link: "http://lenino.net/pre",
   img: "http://lenino.net/pre/assets/pre.png",
   desc: "Psychometric tool focusing on Physical, Rational & Emotional functions, ideal for Jung, Freud and MBTI fans"
