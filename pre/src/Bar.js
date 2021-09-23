@@ -1,11 +1,11 @@
 export class Bar {
   
-  constructor(text, w = '10em', c1 = 'white', c2 = false) {
-    this.single = !c2;
+  constructor(text, width = '10em', barColor = 'white', baseColor = false) {
+    this.single = !baseColor;
     this.text = text;
-    this.baseColor = c2 ? c2 : 'black';
-    this.barColor = c1;
-    this.width = w;
+    this.baseColor = baseColor ? baseColor : 'black';
+    this.barColor = barColor;
+    this.width = width;
     this.percent = new Binder(50);
     this.showPercent = new Binder(false);
   }
@@ -63,9 +63,9 @@ export class Bar {
     }
   }
 
-  set value(v) {
-    if (isNaN(v)) return;
-    this.percent.value = v;//this.single ? parseInt(v) + '%' : parseInt(v) + '%|' + parseInt(100 - v) + '%';
+  set value(val) {
+    if (isNaN(val)) return;
+    this.percent.value = val;//this.single ? parseInt(v) + '%' : parseInt(v) + '%|' + parseInt(100 - v) + '%';
   }
 
   get value() {

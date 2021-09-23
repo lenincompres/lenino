@@ -1,4 +1,4 @@
-export const p5Aux = new p5(function (me) {
+const p5Aux = new p5(function (me) {
   me.setup = _ => {
     me.createCanvas(0, 0).elt.style.display = 'none';
     me.hex = (r, g, b, s, l) => {
@@ -18,8 +18,10 @@ export const hex = (r, g, b, s, l) => {
 }
 
 export const color = c => p5Aux.color(c);
+
 export const rgb = c => {
   c = color(c.startsWith('#') ? c : '#' + c);
   return [p5Aux.red(c), p5Aux.green(c), p5Aux.blue(c)]
 };
+
 export const dist = (...args) => p5Aux.dist(...args);

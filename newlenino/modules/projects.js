@@ -1,8 +1,18 @@
 export const projects = [{
+  title: "PRE Color Spectrum",
+  link: "http://lenino.net/pre",
+  img: "http://lenino.net/pre/assets/pre.png",
+  desc: "Psychometric tool focusing on Physical, Rational & Emotional functions, ideal for Jung, Freud and MBTI fans"
+}, {
   title: "DOM.create",
   link: "https://github.com/lenincompres/DOM.create",
   img: "assets/domify.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model"
+}, {
+  title: "Field Agent (Game)",
+  link: "https://lac567.itp.io/",
+  img: "assets/domify.png",
+  desc: "An online (remote) version of the CODENAME game. It supports 4 players and several viewers."
 }, {
   hidden: true,
   title: "Yonder Lands:",
@@ -14,11 +24,6 @@ export const projects = [{
   link: "https://www.imdb.com/title/tt7552938/",
   img: "assets/mis500locos.jpg",
   desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
-}, {
-  title: "PRE Color Spectrum",
-  link: "http://lenino.net/pre",
-  img: "http://lenino.net/pre/assets/pre.png",
-  desc: "Psychometric tool focusing on Physical, Rational & Emotional functions, ideal for Jung, Freud and MBTI fans"
 }, {
   title: "Illusions of Duality",
   link: "http://lenino.net/album/",

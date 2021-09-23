@@ -6,6 +6,10 @@ import * as AUX from "./functions.js";
 export const favorite = new Binder('#808080');
 export const results = new Binder('#808080');
 
+const questions = new Binder([]);
+fetch('assets/questionnaire.json').then(r => r.json())
+  .then(data => questions.value = data.questions.map(modelQuestion));
+
 const sampleQuestion = {
   "question": "How much do you like these colors?",
   "options": [{
@@ -59,10 +63,10 @@ const modelQuestion = q => {
           margin: '0 1em',
           display: 'flex',
           flexDirection: 'row',
-          placeContent: 'space-evenly',
+          placeContent: 'space-around',
           div: o.map(option => new Object({
             h3: {
-              fontSize: isVS ? '1.3em' : '1.5em',
+              fontSize: '1.5em',
               marginTop: '0.5em',
               fontWeight: 'bold',
               color: 'black',
@@ -90,12 +94,12 @@ const modelQuestion = q => {
           }
         },
         small: {
-          fontSize: 'small',
+          fontSize: isVS ? '1em' : 'small',
           color: '#06c',
-          bottom: '2em',
+          bottom: isVS ? '3.5em' : '3em',
           position: 'absolute',
           pointerEvents: 'none',
-          margin: '0 1em',
+          margin: isVS ? '0 2em' : '0 1em',
           maxWidth: '15%',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -107,7 +111,6 @@ const modelQuestion = q => {
             text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor((q.reverse ? 100 - v : v) * frequencies.length / 100)])
           }, !isVS ? undefined : {
             left: '50%',
-            bottom: '2.5em',
             marginLeft: '-0.5em',
             text: 'vs.'
           }]
@@ -118,25 +121,20 @@ const modelQuestion = q => {
   return q;
 };
 
-const questions = new Binder([]);
-fetch('assets/questionnaire.json').then(r => r.json())
-  .then(data => questions.value = data.questions.map(modelQuestion));
-
 export const model = {
   style: style.section,
   header: {
     style: style.floatingSign,
-    h4: 'Questionnaire Instructions:',
+    h4: 'Instructions:',
     p: [
-      'Rate options individually, but mind how they compare to others.',
-      'When contrasting options, indicate how much you lean to either.'
+      'Rate options individually (or indicate how much you lean to either side). Mind how they compare to others answers in the same group.',
     ]
   },
   article: {
     color: '#fff',
     margin: '4em 0 0',
     content: [{
-      h1: 'Sample',
+      h1: 'Practice',
       div: modelQuestion(sampleQuestion).model
     }, {
       marginTop: '1em',

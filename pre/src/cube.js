@@ -5,18 +5,26 @@ const WAIT = 4; //seconds between posts
 const POSTS = 5;
 const RADIUS = 40;
 
-function getCube(options = {}) {
+function getCube({
+  onready = () => null,
+  onclick = () => null,
+  container = document.body,
+  center = '000',
+  lang = ENG,
+  vicinity = false,
+  ref = undefined,
+  noLabels = false,
+}) {
   return new p5(function (me) {
     me.setup = function () {
-      let onready = options.onready !== undefined ? options.onready : _ => null;
       let canvas = me.createCanvas(me.windowWidth, 400);
-      if (options.container) options.container.append(canvas.elt);
+      if (container) container.create(canvas.elt, true);
       onready(canvas.elt);
-      me.centerCode = options.center !== undefined ? options.center : '000';
-      me.lang = options.lang !== undefined ? options.lang : ENG;
-      me.onclick = options.onclick !== undefined ? options.onclick : _ => null;
-      me.vicinity = options.vicinity;
-      me.ref = options.ref;
+      me.centerCode = center !== undefined ? center : '000';
+      me.lang = lang !== undefined ? lang : ENG;
+      me.onclick = onclick !== undefined ? onclick : _ => null;
+      me.vicinity = vicinity;
+      me.ref = ref;
       me.isHover = false;
       me.center = [me.width * 0.5, me.height * 0.5];
       me.states = new Array(27).fill().map((_, i) => new State(me, {
@@ -55,7 +63,7 @@ function getCube(options = {}) {
         me.animate();
         me.changePost = false;
       }
-      if (!me.currentPost || options.noLabels) return; // not to draw the labels
+      if (!me.currentPost || noLabels) return; // not to draw the labels
       let y = RADIUS * 4.5;
       let x = RADIUS * 4.75;
       const esp = me.lang === ESP;

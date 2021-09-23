@@ -123,7 +123,7 @@
           "hint": "play, party, indulge"
         },
         {
-          "choice": "Handy tasks",
+          "choice": "Practical tasks",
           "hint": "project, work out, organize"
         }
       ]
@@ -149,19 +149,19 @@
       "question": "What's your tendency?",
       "options": [
         [{
-          "choice": "Do things"
+          "choice": "Actions"
         }, {
-          "choice": "Ponder things"
+          "choice": "Thoughts"
         }],
         [{
-          "choice": "Follow plans"
+          "choice": "Plans"
         }, {
-          "choice": "Follow whims"
+          "choice": "Whims"
         }],
         [{
-          "choice": "Mind feelings"
+          "choice": "Feelings"
         }, {
-          "choice": "Mind facts"
+          "choice": "Facts"
         }]
       ]
     },
@@ -220,7 +220,7 @@
         },
         {
           "choice": "Meet diverse people",
-          "hint": "age, gender, lifestyle, background"
+          "hint": "ages, genders, lifestyles, backgrounds"
         }
       ]
     }

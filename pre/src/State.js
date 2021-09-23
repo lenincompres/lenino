@@ -139,7 +139,7 @@ export class State {
     this.value = 1;
     this.info = states[code];
 
-    sketch.loadImage('assets/symbolsprite18.png', img => {
+    sketch.loadImage('assets/symbolspritenew.png', img => {
       this.symbolSprite = img;
       this.draw();
     });
@@ -174,7 +174,7 @@ export class State {
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textLeading(0);
         sketch.textSize(size * 0.25);
-        sketch.text(this.interact ? this.info.archetype:this.info.colour2, 0, size * 0.5);
+        sketch.text(this.info.archetype, 0, size * 0.5);
       }
       // top
       sketch.noStroke();

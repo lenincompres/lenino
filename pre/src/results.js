@@ -26,7 +26,7 @@ feature.bind(featureInfo, v => {
   info.r = level(1, parseInt(info.code[1]));
   info.e = level(2, parseInt(info.code[2]));
   return {
-    p: `The ${info.colour2.toLowerCase()} (${info.colour.toLowerCase()}) color of the PRE spectrum is the <i>${info.adjective.toLowerCase()}</i> mental state—focused on ${info.concept.toLowerCase()}, as an archetypical ${info.archetype.toLowerCase()}.`,
+    p: `The ${info.colour.toLowerCase()} color of the PRE spectrum is the <i>${info.adjective.toLowerCase()}</i> state. It represents a psyche focused on <i>${info.concept.toLowerCase()}</i>, as an archetypical ${info.archetype.toLowerCase()}.`,
     ul: {
       textAlign: 'left',
       margin: '1em auto 0',
@@ -108,7 +108,7 @@ export const model = {
     },
     h5: {
       margin: '0.5em 0',
-      text: feature.bind(v => v ? 'The ' + states[v.hexToCode()].archetype : '')
+      text: feature.bind(v => v ? `The ${states[v.hexToCode()].archetype}\n(${states[v.hexToCode()].colour2})` : '')
     },
     small: {
       display: 'block',
