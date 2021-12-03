@@ -1,11 +1,11 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.7
+ * @version 1.0.8
  * @repository https://github.com/lenincompres/DOM.js
  */
 
-Element.prototype.get = function (station) {
+ Element.prototype.get = function (station) {
   if (!station || ['content', 'inner', 'innerhtml', 'html'].includes(station)) station = 'innerHTML';
   if (['text'].includes(station)) station = 'innerText';
   if (['outer', 'self'].includes(station)) station = 'outerHTML';

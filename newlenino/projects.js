@@ -15,8 +15,8 @@ export const projects = [{
   desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
   title: "PRE Spectrum",
-  link: "http://lenino.net/pre",
-  img: "http://lenino.net/pre/assets/pre.png",
+  link: "/pre/",
+  img: "assets/pre.png",
   desc: "Psychometric tool focusing on Physical, Rational & Emotional functions. Ideal for personality types fans."
 }, {
   hidden: true,
@@ -32,22 +32,22 @@ export const projects = [{
   desc: "<b>Journey of the Exiled Prince</b><br/>adventure fantasy novel for young adults and curious eternal children."
 }, {
   title: "Illusions of Duality",
-  link: "http://lenino.net/album/",
+  link: "album/",
   img: "assets/cover.jpg",
   desc: "Musical debut album: a storyteller's journey through conflict and empathy"
 }, {
   title: "Photonic Chimes",
-  link: "http://lenino.net/relajame",
+  link: "relajame/",
   img: "assets/chimes.jpg",
   desc: "Animation that illustrates how bonded particles may not travel as fast as their individual speed"
 }, {
   title: "Jack Rabbits",
-  link: "http://lenino.net/jackrabbits",
+  link: "jackrabbits/",
   img: "assets/jackrabbits.jpg",
   desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version"
 }, {
   title: "Las 12 Piezas Cortas",
-  link: "http://lenino.net/las12piezascortas/",
+  link: "las12piezascortas/",
   img: "assets/las12piezascortas.jpg",
   desc: "Mis primeras obras de teatro, dirigidas a la formación de nuevos talentos teatrales (incluye <b>Desayuno en Rojo Chino</b>)"
 }]

@@ -1,10 +1,10 @@
-import * as STYLE from './modules/style.js'
-import PAGES from './modules/pages.js'
-import INSTAGRAM from './modules/widgets/instagram.js'
-import TWITTER from './modules/widgets/twitter.js'
-import MUSICPLAYER from './modules/widgets/musicplayer.js'
-import SOCIAL_LINKS from './modules/widgets/social.js'
-import slideDown from './modules/animations/slideDown.js'
+import * as STYLE from './style.js'
+import PAGES from './pages.js'
+import INSTAGRAM from './widgets/instagram.js'
+import TWITTER from './widgets/twitter.js'
+import MUSICPLAYER from './widgets/musicplayer.js'
+import SOCIAL_LINKS from './widgets/social.js'
+import slideDown from './animations/slideDown.js'
 
 const isMobile = new Binder(window.innerWidth < 850);
 const currentPage = new Binder(0);
