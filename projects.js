@@ -45,6 +45,11 @@ export const projects = [{
   title: "Las 12 Piezas Cortas",
   folder: "las12piezascortas",
   desc: "Mis primeras obras de teatro, dirigidas a la formación de nuevos talentos teatrales (incluye <b>Desayuno en Rojo Chino</b>)"
+}, {
+  title: "Eloping Is Fun",
+  link: "https://elopingisfun.com/lenin/",
+  img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
+  desc: "You could book Lenin to officiate your wedding. Eloping is Fun makes the wedding of your wildest dreams stress-free, easy and fun."
 }]
 
 export default projects;
