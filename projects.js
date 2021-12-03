@@ -7,7 +7,10 @@ export const projects = [{
   title: "Animacules Game",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
-  desc: "Use movement and voice to survive as an unicellular organism. Final project for Machine Learning for the Web (ITP NYU|TISCH), using P5.js and Ml5."
+  desc: "Use movement and voice to survive as an unicellular organism. Machine Learning for the Web.",
+  tags: [
+    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5'
+  ]
 }, {
   title: "Mis 500 Locos",
   link: "https://www.imdb.com/title/tt7552938/",
@@ -44,12 +47,12 @@ export const projects = [{
 }, {
   title: "Las 12 Piezas Cortas",
   folder: "las12piezascortas",
-  desc: "Mis primeras obras de teatro, dirigidas a la formación de nuevos talentos teatrales (incluye <b>Desayuno en Rojo Chino</b>)"
+  desc: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <b>Desayuno en Rojo Chino</b>."
 }, {
   title: "Eloping Is Fun",
   link: "https://elopingisfun.com/lenin/",
   img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
-  desc: "The wedding of your wildest dreams stress-free, easy and fun. And Lenin may officiate it."
+  desc: "The wedding of your wildest dreams stress-free, easy and fun. Plus, Lenin may officiate it."
 }]
 
 export default projects;

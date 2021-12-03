@@ -30,11 +30,14 @@ export const PAGES = {
       width: '23em',
       cursor: 'pointer',
       boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
-      img: {
+      div: {
         float: 'left',
         height: '6em',
+        width: '6em',
         marginRight: '0.86em',
-        src: project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'
+        backgroundImage: `url(${project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       },
       h6: {
         marginBottom: '0.25em',
