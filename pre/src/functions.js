@@ -13,7 +13,8 @@ const p5Aux = new p5(function (me) {
 });
 
 export const hex = (r, g, b, s, l) => {
-  if (g === undefined) return parseInt(r, 10).toString(16);
+  if (g === undefined) return (r < 16 ? '0' : '') + 
+parseInt(r).toString(16);
   return p5Aux.hex(r, g, b, s, l);
 }
 

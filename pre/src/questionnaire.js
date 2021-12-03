@@ -86,10 +86,9 @@ const modelQuestion = q => {
           type: 'range',
           min: 1,
           max: 99,
-          value: answer.bind(),
+          value: answer.value,
           oninput: e => {
-            var v = parseInt(e.target.value);
-            answer.value = q.reverse ? 100 - v : v;
+            answer.value = parseInt(e.target.value);
             updateResults();
           }
         },
@@ -105,10 +104,10 @@ const modelQuestion = q => {
           textOverflow: 'ellipsis',
           content: [{
             right: 0,
-            text: isVS ? '⟶' : answer.bind(v => (q.reverse ? 100 - v : v) + '%')
+            text: isVS ? '⟶' : answer.bind(v => v + '%')
           }, {
             left: 0,
-            text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor((q.reverse ? 100 - v : v) * frequencies.length / 100)])
+            text: isVS ? '⟵' : answer.bind(v => frequencies[Math.floor(v * frequencies.length / 100)])
           }, !isVS ? undefined : {
             left: '50%',
             marginLeft: '-0.5em',
@@ -154,16 +153,20 @@ export const model = {
 
 const getAverage = (first, last) => {
   var output = Array(questions.value[first].answers.length).fill(0);
-  questions.value.filter((q, i) => i >= first && i <= last).forEach(q => output = output.plus(q.answers.map(a => a.value)));
+  questions.value.filter((q, i) => i >= first && i <= last).forEach(q => output = output.plus(q.answers.map(a => !q.reverse ? a.value : 100 - a.value)));
   return output.map(v => v / (last - first + 1));
 }
 
 const updateResults = _ => {
   favorite.value = AUX.hex(...sampleQuestion.answers.map((v, i) => i < 3 ? v.value * 255 / 100 : v.value));
-  results.value = AUX.hex(
-    ...getAverage(0, 5).map(v => v * 255 / 100),
-    getAverage(6, 9).reduce((o, v) => v + o, 0) / 3,
-    getAverage(10, 13).reduce((o, v) => v + o, 0) / 3
+
+  let rgb = getAverage(0, 5).map(v => v * 255 / 100);
+  let lights = getAverage(6, 9);
+  let sats = getAverage(10, 13);
+  console.log(rgb, sats, lights, );
+  results.value = AUX.hex(...rgb,
+    sats.reduce((o, v) => v + o, 0) / 3,
+    lights.reduce((o, v) => v + o, 0) / 3
   );
 }
 

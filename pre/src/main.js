@@ -8,7 +8,6 @@ let rgb = QS.rgb ? '#' + QS.rgb : undefined;
 let fav = QS.color ? '#' + QS.color : undefined;
 
 questionnaire.results.bind(results.feature);
-//results.feature.bind(questionnaire.results);
 if (rgb) results.feature.value = rgb;
 
 DOM.style({
@@ -82,7 +81,7 @@ DOM.create({
       textAlignLast: 'center',
       option: [{
         value: 'none',
-        text: ''
+        text: 'Animated'
       }, {
         value: 1,
         text: 'Physical Plains'
@@ -94,7 +93,7 @@ DOM.create({
         text: 'Emotional Plains'
       }, {
         value: 4,
-        text: 'Base/Border/Top'
+        text: 'Base | Top'
       }, {
         value: 0,
         text: 'Top View'

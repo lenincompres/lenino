@@ -11,9 +11,32 @@ const currentPage = new Binder(0);
 const hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);
 
-if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase()
+if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase();
 
-DOM.create({
+DOM.style({
+  a: {
+    color: STYLE.COLOR.LINK,
+    hover: {
+      color: STYLE.COLOR.HIGHLIGHT
+    },
+  },
+  a_fa: {
+    color: 'white',
+    width: '2em',
+    height: '2em',
+    padding: '0.5em',
+    margin: '0 0.25em',
+    textAlign: 'center',
+    borderRadius: '0.25em',
+    verticalAlign: 'text-bottom',
+    boxShadow: STYLE.SHADOW.NORMAL,
+    hover: {
+      boxShadow: STYLE.SHADOW.HIGHLIGHT
+    }
+  }
+});
+
+DOM.set({
   title: 'Lenino.net',
   charset: 'UTF-8',
   viewport: {
@@ -25,32 +48,10 @@ DOM.create({
   icon: 'assets/icon.png',
   link: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
   font: './assets/markerfeltnormal.ttf',
-  style: {
-    a: {
-      color: STYLE.COLOR.LINK,
-      hover: {
-        color: STYLE.COLOR.HIGHLIGHT
-      },
-      _fa: {
-        color: 'white',
-        width: '2em',
-        height: '2em',
-        padding: '0.5em',
-        margin: '0 0.25em',
-        textAlign: 'center',
-        borderRadius: '0.25em',
-        verticalAlign: 'text-bottom',
-        boxShadow: STYLE.SHADOW.NORMAL,
-        hover: {
-          boxShadow: STYLE.SHADOW.HIGHLIGHT
-        }
-      }
-    }
-  },
   fontSize: '14px',
   backgroundColor: '#023',
   div: {
-    style: STYLE.FLEX,
+    model: STYLE.FLEX,
     margin: '0 auto',
     maxWidth: '1150px',
     main: {
@@ -62,7 +63,7 @@ DOM.create({
       backgroundSize: isMobile.bind(val => val ? 'initial' : '100%'),
       backgroundPosition: 'center top',
       header: {
-        style: [STYLE.PAGE, STYLE.FLEX],
+        model: [STYLE.PAGE, STYLE.FLEX],
         alignContent: 'center',
         alignItems: 'flex-end',
         padding: '0.5em',
@@ -82,13 +83,13 @@ DOM.create({
           },
           span: {
             fontFamily: 'markerfeltnormal, Georgia, "Times New Roman", Times, serif',
-            content: 'Lenino'
+            text: 'Lenino'
           },
           click: e => currentPage.value = pageNames[0]
         },
         tagline: {
           padding: '.2em .6em',
-          content: '<b>Cantacuentos</b></br>storyteller · inventor · educator'
+          html: '<b>Cantacuentos</b></br>storyteller · inventor · educator'
         },
         menu: {
           display: isMobile.bind(val => val ? 'none' : 'block'),
@@ -97,7 +98,7 @@ DOM.create({
         onready: slideDown
       },
       nav: {
-        style: STYLE.FLEX,
+        model: STYLE.FLEX,
         flexDirection: 'column',
         color: 'rgb(245, 220, 154)',
         zIndex: 5,
@@ -135,7 +136,7 @@ DOM.create({
         onready: slideDown
       },
       article: {
-        style: STYLE.FLEX,
+        model: STYLE.FLEX,
         flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
         alignContent: isMobile.bind(val => val ? 'center' : 'start'),
         minHeight: isMobile.bind(val => val ? '600px' : '815px'),
@@ -143,7 +144,7 @@ DOM.create({
         margin: isMobile.bind(val => val ? 0 : '6em 0 0 9em'),
         content: currentPage.bind(p => PAGES[p])
       },
-      div: INSTAGRAM,
+      footer: INSTAGRAM,
     },
     sidebar: {
       backgroundColor: 'white',

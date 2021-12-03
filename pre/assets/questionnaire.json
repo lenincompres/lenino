@@ -18,16 +18,16 @@
     {
       "question": "In sports, how much are you into…",
       "options": [{
-          "choice": "Competition",
-          "hint": "challege, practice, play"
+          "choice": "Playing",
+          "hint": "challege, practice, competition"
         },
         {
-          "choice": "Scores",
+          "choice": "Keeping scores",
           "hint": "records, stats, strategies"
         },
         {
-          "choice": "Atmosphere",
-          "hint": "camaraderie, cheer, environment"
+          "choice": "Cheering up",
+          "hint": "my team, atmosphere, camaraderie"
         }
       ]
     },
@@ -43,7 +43,7 @@
         },
         {
           "choice": "Culture",
-          "hint": "art, literature, history"
+          "hint": "art, literature, poetry"
         }
       ]
     },
@@ -83,11 +83,11 @@
       "question": "In movies or books, how drawn are you to…",
       "options": [{
           "choice": "Action",
-          "hint": "thrills, pace, audiovisuals"
+          "hint": "thrill, pace, audiovisuals"
         },
         {
           "choice": "Plot",
-          "hint": "development, intrigue, rationale"
+          "hint": "development, intrigue, point"
         },
         {
           "choice": "Drama",
@@ -98,7 +98,7 @@
     {
       "question": "How likely are you to give up rest for…",
       "options": [{
-          "choice": "Spontaneous activities",
+          "choice": "Spontaneous activity",
           "hint": "play, chores, exercise"
         },
         {
@@ -145,23 +145,22 @@
       ]
     },
     {
-      "reverse": true,
       "question": "What's your tendency?",
       "options": [
         [{
-          "choice": "Actions"
-        }, {
           "choice": "Thoughts"
+        }, {
+          "choice": "Actions"
         }],
         [{
-          "choice": "Plans"
-        }, {
           "choice": "Whims"
+        }, {
+          "choice": "Plans"
         }],
         [{
-          "choice": "Feelings"
-        }, {
           "choice": "Facts"
+        }, {
+          "choice": "Feelings"
         }]
       ]
     },
@@ -203,7 +202,7 @@
           "choice": "Work alone"
         },
         {
-          "choice": "Demand freedom and control"
+          "choice": "Demand freedom or control"
         },
         {
           "choice": "Avoid others' drama"

@@ -4,7 +4,7 @@ let queue = [];
 
 let trigger = (s = SPEED) => setTimeout(_ => {
   if (!queue.length) return;
-  queue[0].create({
+  queue[0].set({
     opacity: 1,
     top: 0
   })
@@ -13,7 +13,7 @@ let trigger = (s = SPEED) => setTimeout(_ => {
 }, 333 * s);
 
 export const slideDown = (elem, s = SPEED) => {
-  elem.create({
+  elem.set({
     position: !['fixed', 'absolute'].includes(elem.style.position) ? 'relative' : undefined,
     top: '-20px',
     opacity: 0,

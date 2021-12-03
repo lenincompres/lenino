@@ -12,21 +12,23 @@ feature.bind(featureInfo, v => {
   let info = states[v.hexToCode()];
   const level = (d, i) => new Object({
     b: {
-      color: ['red','lime','blue'][d],
+      color: ['red', 'lime', 'blue'][d],
       text: '■ '
     },
-    span: [['Physically', 'Rationally', 'Emotionally'][d] + ' ', {
-      fontWeight: 'bold',
-      textShadow: i == 2 ? '0 0 1px black, 0 0 1px black, 0 0 1px black' : undefined,
-      color: ['black', 'gray', 'white'][i],
-      text: ['relaxed', 'flexible', 'tense'][i]
-    }]
+    span: [
+      ['Physically', 'Rationally', 'Emotionally'][d] + ' ', {
+        fontWeight: 'bold',
+        textShadow: i == 2 ? '0 0 1px black, 0 0 1px black, 0 0 1px black' : undefined,
+        color: ['black', 'gray', 'white'][i],
+        text: ['relaxed', 'flexible', 'tense'][i]
+      }
+    ]
   });
   info.p = level(0, parseInt(info.code[0]));
   info.r = level(1, parseInt(info.code[1]));
   info.e = level(2, parseInt(info.code[2]));
   return {
-    p: `The ${info.colour.toLowerCase()} color of the PRE spectrum is the <i>${info.adjective.toLowerCase()}</i> state. It represents a psyche focused on <i>${info.concept.toLowerCase()}</i>, as an archetypical ${info.archetype.toLowerCase()}.`,
+    p: `The ${info.colour2.toLowerCase()} (${info.colour.toLowerCase()}) color of the PRE spectrum is the ${info.adjective.toLowerCase()} state. It represents a psyche focused on ${info.concept.toLowerCase()}, as an archetypical ${info.archetype.toLowerCase()}.`,
     ul: {
       textAlign: 'left',
       margin: '1em auto 0',
@@ -108,7 +110,7 @@ export const model = {
     },
     h5: {
       margin: '0.5em 0',
-      text: feature.bind(v => v ? `The ${states[v.hexToCode()].archetype}\n(${states[v.hexToCode()].colour2})` : '')
+      text: feature.bind(v => v ? `The ${states[v.hexToCode()].archetype}` : '')
     },
     small: {
       display: 'block',
@@ -122,9 +124,6 @@ export const model = {
   section: {
     style: style.floatingSign,
     margin: '1em 0',
-    header: {
-      text: feature.bind(v => 'Hex code: ' + v)
-    },
     ul: {
       fontSize: 'small',
       css: {
@@ -145,7 +144,10 @@ export const model = {
           text: 'PRE',
           href: './'
         },
-        div: [bars.r.model, bars.g.model, bars.b.model]
+        div: [bars.r.model, bars.g.model, bars.b.model],
+        small: {
+          text: feature.bind(v => 'Code: ' + v)
+        }
       }, {
         a: {
           text: 'Freud',

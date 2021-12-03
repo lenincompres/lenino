@@ -25,7 +25,7 @@ export const PAGES = {
 
   PROJECTS: {
     section: projects.filter(p => !p.hidden).map((project, i) => new Object({
-      style: STYLE.PAGE,
+      model: STYLE.PAGE,
       fontSize: '1em',
       width: '23em',
       cursor: 'pointer',
