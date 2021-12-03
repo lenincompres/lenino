@@ -34,7 +34,7 @@ export const PAGES = {
         float: 'left',
         height: '6em',
         marginRight: '0.86em',
-        src: project.img
+        src: project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'
       },
       h6: {
         marginBottom: '0.25em',
@@ -43,7 +43,10 @@ export const PAGES = {
       p: project.desc,
       mouseover: e => activeProject.value = i,
       mouseout: e => activeProject.value = false,
-      click: e => window.open(project.link, '_blank'),
+      click: e => {
+        let link = project.link ? project.link : 'projects/' + project.folder
+        window.open(link, '_blank')
+      },
       onready: slideDown
     }))
   },

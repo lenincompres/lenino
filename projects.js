@@ -1,7 +1,7 @@
 export const projects = [{
   title: "DOM.js (DOM.set)",
   link: "https://github.com/lenincompres/DOM.js",
-  img: "assets/domify.png",
+  img: "assets/dom.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model"
 }, {
   title: "Animacules Game",
@@ -15,8 +15,7 @@ export const projects = [{
   desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
   title: "PRE Spectrum",
-  link: "pre/",
-  img: "assets/pre.png",
+  folder: "pre",
   desc: "Psychometric tool focusing on Physical, Rational & Emotional functions. Ideal for personality types fans."
 }, {
   hidden: true,
@@ -32,23 +31,19 @@ export const projects = [{
   desc: "<b>Journey of the Exiled Prince</b><br/>adventure fantasy novel for young adults and curious eternal children."
 }, {
   title: "Illusions of Duality",
-  link: "album/",
-  img: "assets/cover.jpg",
+  folder: "album",
   desc: "Musical debut album: a storyteller's journey through conflict and empathy"
 }, {
   title: "Photonic Chimes",
-  link: "relajame/",
-  img: "assets/chimes.jpg",
+  folder: "relajame",
   desc: "Animation that illustrates how bonded particles may not travel as fast as their individual speed"
 }, {
   title: "Jack Rabbits",
-  link: "jackrabbits/",
-  img: "assets/jackrabbits.jpg",
+  folder: "jackrabbits",
   desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version"
 }, {
   title: "Las 12 Piezas Cortas",
-  link: "las12piezascortas/",
-  img: "assets/las12piezascortas.jpg",
+  folder: "las12piezascortas",
   desc: "Mis primeras obras de teatro, dirigidas a la formación de nuevos talentos teatrales (incluye <b>Desayuno en Rojo Chino</b>)"
 }]
 
