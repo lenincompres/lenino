@@ -6,7 +6,7 @@ export const MUSICPLAYER = {
     height: "100%",
     scrolling: "auto",
     frameborder: "no",
-    src: "http://lenino.net/album"
+    src: "projects/album"
   }
 };
 
