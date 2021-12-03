@@ -49,7 +49,7 @@ export const projects = [{
   title: "Eloping Is Fun",
   link: "https://elopingisfun.com/lenin/",
   img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
-  desc: "You could book Lenin to officiate your wedding. Eloping is Fun makes the wedding of your wildest dreams stress-free, easy and fun."
+  desc: "The wedding of your wildest dreams stress-free, easy and fun. And you could have Lenin officiate it."
 }]
 
 export default projects;
