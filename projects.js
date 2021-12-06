@@ -7,15 +7,15 @@ export const projects = [{
   title: "Animacules Game",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
-  desc: "Use movement and voice to survive as an unicellular organism. Machine Learning for the Web.",
+  desc: "Use movement and voice to live and survive as an unicellular organism—a digital biological story of life.",
   tags: [
-    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5'
+    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
   ]
 }, {
   title: "Mis 500 Locos",
   link: "https://www.imdb.com/title/tt7552938/",
   img: "assets/mis500locos.jpg",
-  desc: "Film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
+  desc: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
   title: "PRE Spectrum",
   folder: "pre",
@@ -39,7 +39,7 @@ export const projects = [{
 }, {
   title: "Photonic Chimes",
   folder: "relajame",
-  desc: "Animation that illustrates how bonded particles may not travel as fast as their individual speed"
+  desc: "Musical and visual algorithm that illustrates how bonded particles may not travel as fast as their individual speed"
 }, {
   title: "Jack Rabbits",
   folder: "jackrabbits",
