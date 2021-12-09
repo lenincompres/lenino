@@ -4,10 +4,10 @@ export const projects = [{
   img: "assets/dom.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model"
 }, {
-  title: "Animacules Game",
+  title: "Animacules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
-  desc: "Use movement and voice to live and survive as an unicellular organism—a digital biological story of life.",
+  desc: "Use movement and voice to live and survive as an unicellular organism—a digital story of life.",
   tags: [
     'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
   ]
@@ -41,6 +41,11 @@ export const projects = [{
   folder: "relajame",
   desc: "Musical and visual algorithm that illustrates how bonded particles may not travel as fast as their individual speed"
 }, {
+  title: "Eloping Is Fun",
+  link: "https://elopingisfun.com/lenin/",
+  img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
+  desc: "The wedding of your wildest dreams stress-free, easy and fun. Plus, Lenin may officiate it."
+}, {
   title: "Jack Rabbits",
   folder: "jackrabbits",
   desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version"
@@ -48,11 +53,6 @@ export const projects = [{
   title: "Las 12 Piezas Cortas",
   folder: "las12piezascortas",
   desc: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <b>Desayuno en Rojo Chino</b>."
-}, {
-  title: "Eloping Is Fun",
-  link: "https://elopingisfun.com/lenin/",
-  img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
-  desc: "The wedding of your wildest dreams stress-free, easy and fun. Plus, Lenin may officiate it."
 }]
 
 export default projects;
