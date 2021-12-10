@@ -4,7 +4,7 @@ export const projects = [{
   img: "assets/dom.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model"
 }, {
-  title: "Animacules | Animalucos",
+  title: "Animalcules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
   desc: "Use movement and voice to live and survive as an unicellular organism—a digital story of life.",
