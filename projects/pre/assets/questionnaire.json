@@ -1,145 +1,145 @@
 {
   "questions": [{
-      "question": "When appreciating art, how much do you value…",
+      "question": "When appreciating art, how much do you value ____?",
       "options": [{
-          "choice": "Execution",
+          "choice": "the execution",
           "hint": "magnitude, elaboration, dexterity"
         },
         {
-          "choice": "Concept",
+          "choice": "the concept",
           "hint": "meaning, idea, message"
         },
         {
-          "choice": "Feeling",
+          "choice": "the feeling",
           "hint": "sentiment, emotion, nostalgia"
         }
       ]
     },
     {
-      "question": "In sports, how much are you into…",
+      "question": "In sports, how much are you into ____?",
       "options": [{
-          "choice": "Playing",
+          "choice": "playing",
           "hint": "challege, practice, competition"
         },
         {
-          "choice": "Keeping scores",
+          "choice": "keeping scores",
           "hint": "records, stats, strategies"
         },
         {
-          "choice": "Cheering up",
+          "choice": "cheering up",
           "hint": "my team, atmosphere, camaraderie"
         }
       ]
     },
     {
-      "question": "In your studies, how interested are you in…",
+      "question": "In your studies, how interested are you in ____?",
       "options": [{
-          "choice": "Industry",
+          "choice": "industry",
           "hint": "application, commerce, production"
         },
         {
-          "choice": "Science",
+          "choice": "science",
           "hint": "logic, structure, functionality"
         },
         {
-          "choice": "Culture",
+          "choice": "culture",
           "hint": "art, literature, poetry"
         }
       ]
     },
     {
-      "question": "How much does your meals resemble a…",
+      "question": "When eating, how much are your meals a ____?",
       "options": [{
-          "choice": "Feast",
+          "choice": "feast",
           "hint": "gorge, indulge, fill up"
         },
         {
-          "choice": "Diet",
+          "choice": "diet",
           "hint": "nutrition, portions, timing"
         },
         {
-          "choice": "Ritual",
+          "choice": "ritual",
           "hint": "setting, presentation, ceremony"
         }
       ]
     },
     {
-      "question": "At work, how much do you focus on…",
+      "question": "At work, how much do you focus on ____?",
       "options": [{
-          "choice": "Productivity",
+          "choice": "productivity",
           "hint": "execute, deliver, profit"
         },
         {
-          "choice": "Methodology",
+          "choice": "methodology",
           "hint": "plan, anylize, assess"
         },
         {
-          "choice": "Service",
+          "choice": "service",
           "hint": "help, support, contribution"
         }
       ]
     },
     {
-      "question": "In movies or books, how drawn are you to…",
+      "question": "In stories, how drawn are you to ____?",
       "options": [{
-          "choice": "Action",
+          "choice": "action",
           "hint": "thrill, pace, audiovisuals"
         },
         {
-          "choice": "Plot",
-          "hint": "development, intrigue, point"
+          "choice": "plot",
+          "hint": "development, intrigue, sense"
         },
         {
-          "choice": "Drama",
+          "choice": "drama",
           "hint": "romance, misfortune, joy"
         }
       ]
     },
     {
-      "question": "How likely are you to give up rest for…",
+      "question": "How likely are you to give up rest for ____?",
       "options": [{
-          "choice": "Spontaneous activity",
+          "choice": "spontaneous activity",
           "hint": "play, chores, exercise"
         },
         {
-          "choice": "Analyzing a subject",
+          "choice": "analyzing a subject",
           "hint": "ponder, clarify, research"
         },
         {
-          "choice": "Tending to feelings",
+          "choice": "tending to feelings",
           "hint": "affection, appreciation, care"
         }
       ]
     },
     {
       "reverse": true,
-      "question": "How likely are you to spend free time on…",
+      "question": "How likely are you to spend free time on ____?",
       "options": [{
-          "choice": "Mental recreation",
+          "choice": "mental recreation",
           "hint": "read, write, converse"
         },
         {
-          "choice": "Carefree fun",
+          "choice": "carefree fun",
           "hint": "play, party, indulge"
         },
         {
-          "choice": "Practical tasks",
+          "choice": "practical tasks",
           "hint": "project, work out, organize"
         }
       ]
     },
     {
-      "question": "How much do these sound like you?",
+      "question": "How much are you ____?",
       "options": [{
-          "choice": "Prompt with duties",
+          "choice": "prompt with duties",
           "hint": "Gotta be done."
         },
         {
-          "choice": "Clear about plans",
+          "choice": "clear about plans",
           "hint": "And stick to them."
         },
         {
-          "choice": "Committed to values",
+          "choice": "committed to values",
           "hint": "Won't give them up."
         }
       ]
@@ -165,17 +165,17 @@
       ]
     },
     {
-      "question": "How much do these resemble you?",
+      "question": "How much would you call yourself ____?",
       "options": [{
-          "choice": "Habitual",
+          "choice": "habitual",
           "hint": "Do as I always do"
         },
         {
-          "choice": "Resolute",
+          "choice": "resolute",
           "hint": "Stick to my decisions"
         },
         {
-          "choice": "Particular",
+          "choice": "particular",
           "hint": "Like it the way I like it"
         }
       ]
@@ -183,42 +183,42 @@
     {
       "reverse": true,
       "options": [{
-          "choice": "Alert",
+          "choice": "alert",
           "hint": "Aware of my surroundings"
         },
         {
-          "choice": "Inquisitive",
+          "choice": "inquisitive",
           "hint": "Look to learn and debate"
         },
         {
-          "choice": "Softhearted",
+          "choice": "softhearted",
           "hint": "Even with strangers or critters"
         }
       ]
     },
     {
-      "question": "How strong is your tendency to…",
+      "question": "How strong is your tendency to ____?",
       "options": [{
-          "choice": "Work alone"
+          "choice": "work alone"
         },
         {
-          "choice": "Demand freedom or control"
+          "choice": "demand freedom or control"
         },
         {
-          "choice": "Avoid others' drama"
+          "choice": "avoid others' drama"
         }
       ]
     },
     {
       "reverse": true,
       "options": [{
-          "choice": "Seek group activities"
+          "choice": "seek group activities"
         },
         {
-          "choice": "Enjoy discussions"
+          "choice": "enjoy discussions"
         },
         {
-          "choice": "Meet diverse people",
+          "choice": "meet diverse people",
           "hint": "ages, genders, lifestyles, backgrounds"
         }
       ]

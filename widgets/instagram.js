@@ -1,6 +1,5 @@
 export const INSTAGRAM = {
   width: '100%',
-  minWidth: '780px',
   margin: 0,
   backgroundColor: '#4b270f',
   a: {
@@ -14,18 +13,12 @@ export const INSTAGRAM = {
       src: 'assets/instagram_logo.png'
     },
   },
-  script: {
-    src: 'https://cdn.lightwidget.com/widgets/lightwidget.js'
+  div: {
+    class: "powr-rss-feed",
+    id: "0068a8be_1639188635"
   },
-  iframe: {
-    display: 'inline-block !important',
-    width: '100%',
-    border: 0,
-    overflow: 'hidden',
-    src: '//lightwidget.com/widgets/f00bc46ac23859a5aacb66ac5f4e54be.html',
-    scrolling: "no",
-    allowtransparency: "true",
-    class: "lightwidget-widget",
+  script: {
+    src: "https://www.powr.io/powr.js?platform=html"
   }
 };
 

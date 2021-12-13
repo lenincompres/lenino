@@ -93,7 +93,7 @@ DOM.create({
         text: 'Emotional Plains'
       }, {
         value: 4,
-        text: 'Base | Top'
+        text: 'Base|Top'
       }, {
         value: 0,
         text: 'Top View'

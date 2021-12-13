@@ -28,7 +28,7 @@ feature.bind(featureInfo, v => {
   info.r = level(1, parseInt(info.code[1]));
   info.e = level(2, parseInt(info.code[2]));
   return {
-    p: `The ${info.colour2.toLowerCase()} (${info.colour.toLowerCase()}) color of the PRE spectrum is the ${info.adjective.toLowerCase()} state. It represents a psyche focused on ${info.concept.toLowerCase()}, as an archetypical ${info.archetype.toLowerCase()}.`,
+    p: `The ${info.colour2.toLowerCase()} (${info.colour.toLowerCase()}) color is ${info.adjective.toLowerCase()}; a psyche focused on ${info.concept.toLowerCase()}, as an archetypical ${info.archetype.toLowerCase()}.`,
     ul: {
       textAlign: 'left',
       margin: '1em auto 0',

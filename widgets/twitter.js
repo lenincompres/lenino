@@ -1,5 +1,5 @@
 export const TWITTER = {
-  height: '800px',
+  height: '680px',
   overflow: 'auto',
   a: {
     class: "twitter-timeline",

@@ -111,7 +111,7 @@ const modelQuestion = q => {
           }, !isVS ? undefined : {
             left: '50%',
             marginLeft: '-0.5em',
-            text: 'vs.'
+            text: 'or'
           }]
         }
       }
@@ -133,7 +133,7 @@ export const model = {
     color: '#fff',
     margin: '4em 0 0',
     content: [{
-      h1: 'Practice',
+      h1: 'Practice Questions',
       div: modelQuestion(sampleQuestion).model
     }, {
       marginTop: '1em',
