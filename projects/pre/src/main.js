@@ -152,8 +152,8 @@ DOM.create({
         }, {
           fontSize: 'small',
           marginTop: '0.68em',
-          href: 'https://github.com/lenincompres/DOM.create',
-          text: 'Developed with DOM.create'
+          href: 'https://github.com/lenincompres/DOM.js',
+          text: 'Developed with DOM.js'
         }]
       }
     }
