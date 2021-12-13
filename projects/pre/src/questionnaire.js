@@ -126,7 +126,7 @@ export const model = {
     style: style.floatingSign,
     h4: 'Instructions:',
     p: [
-      'Rate options individually (or indicate how much you lean to either side). Mind how they compare to others answers in the same group.',
+      'Rate options individually, but mind how they compare to others answers in the same group.',
     ]
   },
   article: {
