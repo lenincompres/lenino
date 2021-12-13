@@ -17,9 +17,9 @@ export const projects = [{
   img: "assets/mis500locos.jpg",
   desc: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul"
 }, {
-  title: "PRE Spectrum",
+  title: "Physical / Rational / Emotional Spectrum",
   folder: "pre",
-  desc: "Psychometric tool focusing on Physical, Rational & Emotional functions. Ideal for personality types fans."
+  desc: "Psychometric tool to visualize interests and focus. Ideal for personality types fans."
 }, {
   hidden: true,
   title: "Field Agent (Game)",

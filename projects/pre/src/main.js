@@ -46,7 +46,7 @@ DOM.style({
 });
 
 DOM.create({
-  title: 'PRE Spectrum',
+  title: 'Pyshical/Rational/Emotional Spectrum',
   charset: 'UTF-8',
   viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
   keywords: '3dpsyche, psychology, test, psychology test, personality type, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction',
@@ -58,13 +58,12 @@ DOM.create({
     backgroundColor: style.lightSreen,
     boxShadow: '0 1em 1em ' + style.lightSreen,
     paddingTop: '3em',
-    h1: {
+    div: [{
       cursor: 'pointer',
-      text: 'PRE Spectrum',
-      onclick: e => window.location.href = './'
-    },
-    h4: 'Physical, Rational & Emotional',
-    div: {
+      onclick: e => window.location.href = './',
+      h4: 'Physical/Rational/Emotional',
+      h1: 'Spectrum',
+    }, {
       id: 'cubeContainer',
       display: 'flex',
       flexDirection: 'column',
@@ -72,7 +71,7 @@ DOM.create({
       small: 'Loading color spectrum…',
       height: '400px',
       margin: '-2em auto 0'
-    },
+    }],
     select: {
       display: 'block',
       zIndex: 10,

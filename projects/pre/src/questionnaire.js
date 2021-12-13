@@ -140,7 +140,7 @@ export const model = {
       a: {
         fontSize: '1.14em',
         target: '_blank',
-        text: favorite.bind(v => 'Resulting color code: ' + v),
+        text: favorite.bind(v => 'Resulting RGB color code: ' + v),
         href: favorite.bind(v => './?rgb=' + v.substr(1)),
       }
     }, {

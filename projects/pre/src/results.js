@@ -146,7 +146,7 @@ export const model = {
         },
         div: [bars.r.model, bars.g.model, bars.b.model],
         small: {
-          text: feature.bind(v => 'Code: ' + v)
+          text: feature.bind(v => 'RGB code: ' + v)
         }
       }, {
         a: {
