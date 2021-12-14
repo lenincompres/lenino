@@ -86,7 +86,8 @@ var stateP5 = new p5(function (me) {
     me.translate(me.width / 2, me.height / 2);
     me.update = (code) => {
       me.clear();
-      let state = new State(me, {
+      let state = new State({
+        sketch: me,
         center: code,
         radius: me.width / 2
       });

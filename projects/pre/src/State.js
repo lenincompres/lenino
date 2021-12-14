@@ -88,14 +88,20 @@ function polygon(x, y, radius, npoints, sketch) {
 }
 
 export class State {
-  constructor(sketch, options) {
+  constructor({
+    sketch,
+    center,
+    index = false,
+    animate = false,
+    radius = 40,
+    lang = ENG,
+    onupdate = s => s,
+    noText
+  }) {
+    this.noText = noText;
+    this.onupdate = onupdate;
     this.sketch = sketch;
-    let base = options.center !== undefined ? options.center : CENTERCODE;
-    let index = options.index !== undefined ? options.index : false;
-    let animate = options.animate !== undefined ? options.animate : false;
-    let radius = options.radius !== undefined ? options.radius : 40;
-    let lang = options.lang !== undefined ? options.lang : ENG;
-    this.onupdate = options.onupdate !== undefined ? options.onupdate : s => s;
+    let base = center !== undefined ? center : CENTERCODE;
     if (index === false) index = CENTERCODE.codeToOrdinal();
     let inCoords = index.codeToCoords();
     let baseCode = base.codeToCoords().plus(2).codeToCoords();
@@ -165,7 +171,7 @@ export class State {
       var iSize = size * 0.86;
       sketch.image(this.symbolSprite, -iSize * 0.5, -iSize * 0.5, iSize, iSize, (this.ordinal % 3) * STATE_ICON_GRID, Math.floor(this.ordinal / 3) * STATE_ICON_GRID, STATE_ICON_GRID, STATE_ICON_GRID);
       // text
-      if (!options.noText) {
+      if (!this.noText) {
         let l = sketch.lightness(this.color) < 45 || sketch.green(this.color) < 45;
         sketch.fill(l ? 255 : 0, opacity * 255);
         sketch.strokeWeight(2.5);

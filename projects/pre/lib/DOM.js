@@ -1,15 +1,16 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.5
- * @repository https://github.com/lenincompres/DOM.create
+ * @version 1.0.9
+ * @repository https://github.com/lenincompres/DOM.js
  */
 
  Element.prototype.get = function (station) {
-  if (['content', 'inner', 'innerhtml', 'html'].includes(station)) station = 'innerHTML';
+  if (!station || ['content', 'inner', 'innerhtml', 'html'].includes(station)) station = 'innerHTML';
   if (['text'].includes(station)) station = 'innerText';
   if (['outer', 'self'].includes(station)) station = 'outerHTML';
   if (DOM.attributes.includes(station)) return this.getAttribute(station);
+  //if (this.getAttribute(station)) return this.getAttribute(station);
   if (DOM.isStyle(station, this)) return this.style[station];
   let output = station ? this[station] : this.value;
   if (output !== undefined && output !== null) return output;
@@ -20,17 +21,23 @@
   if (output.length) return output;
 }
 
-Element.prototype.set = function (model) {
-  this.create(model);
-}
+Element.prototype.create = function (...args) {
+  this.set(...args);
+};
 
-Element.prototype.create = function (model, ...args) {
+Element.prototype.set = function (model, ...args) {
   if ([null, undefined].includes(model)) return;
+  let contentType = DOM.type(model.content);
+  if (contentType.p5Element || contentType.element) {
+    let elt = contentType.element ? contentType.element : contentType.p5Element.elt;
+    this.set(elt, ...args);
+    return Object.keys(model).filter(k => k !== 'content').forEach(k => elt.set(model[k], k, ...args));
+  }
   if (Array.isArray(model.content)) return model.content.forEach(item => {
     if ([null, undefined].includes(item)) return;
     let individual = Object.assign({}, model);
     individual.content = item;
-    this.create(individual, ...args);
+    this.set(individual, ...args);
   });
   let argsType = DOM.type(...args);
   let modelType = DOM.type(model);
@@ -38,7 +45,7 @@ Element.prototype.create = function (model, ...args) {
   const IS_HEAD = TAG === 'head';
   const CLEAR = argsType.boolean === true || argsType.string === 'content';
   let station = argsType.string; // original style|attr|tag|inner…|on…|name
-  if ([undefined, 'model', 'inner'].includes(station)) station = 'content';
+  if ([undefined, 'model', 'inner', 'set'].includes(station)) station = 'content';
   const STATION = station;
   station = station.toLowerCase(); // station lowercase
   if (station === 'content' && TAG === 'meta') station = '*content'; // disambiguate
@@ -48,9 +55,9 @@ Element.prototype.create = function (model, ...args) {
   const PREPEND = argsType.boolean === false;
   const p5Elem = argsType.p5Element;
   if (modelType.function) {
-    if (DOM.type(STATION).event) return this.addEventListener(STATION, model);
-    else if (p5Elem && typeof p5Elem[STATION] === 'function') return p5Elem[STATION](model);
-    else return this[STATION] = model;
+    if (DOM.type(STATION).event) return this.addEventListener(STATION, e => model(e, this));
+    else if (p5Elem && typeof p5Elem[STATION] === 'function') return p5Elem[STATION](e => model(e, this));
+    else return this[STATION] = e => model(e, this);
   }
   if (model._bonds) model = model.bind();
   if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener));
@@ -91,18 +98,24 @@ Element.prototype.create = function (model, ...args) {
     if (cls.length) elt.classList.add(...cls);
     return this[PREPEND ? 'prepend' : 'append'](elt);
   }
+  if (station === 'script' && IS_PRIMITIVE) return this.set({
+    script: {
+      src: model
+    }
+  });
   if (TAG === 'style' && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
   if (IS_CONTENT && !model.binders) {
     if (CLEAR) this.innerHTML = '';
     if (IS_PRIMITIVE) return this.innerHTML = model;
+    if (Array.isArray(model)) return model.forEach(m => this.set(m));
     let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
-    keys.forEach(key => this.create(model[key], key, p5Elem, PREPEND ? false : undefined));
+    keys.forEach(key => this.set(model[key], key, p5Elem, PREPEND ? false : undefined));
     return this;
   }
   if (modelType.array) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
     if (IS_LISTENER) return this.addEventListener(...model);
-    let map = model.map(m => this.create(m, [tag, ...cls].join('.'), p5Elem, PREPEND ? false : undefined));
+    let map = model.map(m => this.set(m, [tag, ...cls].join('.'), p5Elem, PREPEND ? false : undefined));
     if (id) DOM.addID(id, map);
     return map;
   }
@@ -118,7 +131,7 @@ Element.prototype.create = function (model, ...args) {
     if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(station, model);
     if (!model.content) {
       if (CLEAR) this.setAttribute(station, '');
-      return Object.entries(model).forEach(([key, value]) => this.create(value, key));
+      return Object.entries(model).forEach(([key, value]) => this.set(value, key));
     }
     if (DOM.type(model.content).object) model.content = DOM.css(model.content);
   }
@@ -126,6 +139,7 @@ Element.prototype.create = function (model, ...args) {
     if (IS_HEAD) {
       if (station === 'title') return this.innerHTML += `<title>${model}</title>`;
       if (station === 'icon') return this.innerHTML += `<link rel="icon" href="${model}">`;
+      if (station === 'image') return this.innerHTML += `<meta property="og:image" content="${model}">`;
       if (station === 'charset') return this.innerHTML += `<meta charset="${model}">`;
       if (DOM.metaNames.includes(station)) return this.innerHTML += `<meta name="${station}" content="${model}">`;
       if (DOM.htmlEquivs.includes(STATION)) return this.innerHTML += `<meta http-equiv="${DOM.unCamel(STATION)}" content="${model}">`;
@@ -136,11 +150,11 @@ Element.prototype.create = function (model, ...args) {
         }
       });
       const type = DOM.getDocumentType(model);
-      if (station === 'link') return this.create({
+      if (station === 'link') return this.set({
         rel: type,
         href: model
       }, station);
-      if (station === 'script') return this.create({
+      if (station === 'script') return this.set({
         type: type,
         src: model
       }, station);
@@ -156,7 +170,7 @@ Element.prototype.create = function (model, ...args) {
     if (tag && tag.length) tag = tag.replace('*', '');
     if (!tag || !isNaN(tag) || !tag.length) tag = 'div';
     elem = p5Elem ? createElement(tag) : document.createElement(tag);
-    elem.create(model, p5Elem);
+    elem.set(model, p5Elem);
   }
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
@@ -169,11 +183,11 @@ Element.prototype.create = function (model, ...args) {
   return elem;
 };
 
-// Adds create methdod to P5 elements
+// Adds set method to P5 elements
 if (typeof p5 !== 'undefined') {
-  p5.create = (...args) => DOM.create(...args, createDiv());
-  p5.Element.prototype.create = function (...args) {
-    return this.elt.create(...args, this);
+  p5.set = (...args) => DOM.set(...args, createDiv());
+  p5.Element.prototype.set = function (...args) {
+    return this.elt.set(...args, this);
   }
 }
 
@@ -202,13 +216,10 @@ class Binder {
     this.onvalue = v => v;
     this.update = bond => {
       if (!bond.target) return;
-      let val = bond.onvalue(this._value);
-      if (bond.target.tagName) {
-        if (bond.station === 'value') return bond.target.value != val ? bond.target.value = val : null;
-        return bond.target.create(val, bond.station, true);
-      }
+      let theirValue = bond.onvalue(this._value);
+      if (bond.target.tagName) return bond.target.set(theirValue, bond.station);
       if (bond.target._bonds) bond.target.setter = this; // knowing the setter prevents co-binder's loop
-      bond.target[bond.station] = val;
+      bond.target[bond.station] = theirValue;
     }
   }
   addListener(func) {
@@ -223,21 +234,28 @@ class Binder {
     let argsType = DOM.type(...args);
     let target = argsType.element ? argsType.element : argsType.binder;
     let onvalue = argsType.function;
-    onvalue = typeof onvalue === 'function' ? onvalue : v => v;
-    let station = argsType.string ? argsType.string : 'value';
-    let doubleBound = station === 'value' && DOM.type(target).element;
+    let station = argsType.string;
     let listener = argsType.number;
-    if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
+    if (!target) return DOM.bind(this, ...args, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, this will remove the listener
     let bond = {
       binder: this,
       target: target,
-      station: station,
-      onvalue: onvalue,
-      changeListerner: doubleBound ? target.addEventListener('change', e => this.value = target.value) : undefined
+      station: station ? station : 'value',
+      onvalue: onvalue ? onvalue : v => v
     }
     this._bonds.push(bond);
     this.update(bond);
+  }
+  flash(values, delay = 1000, revert = true) { //changes value for a time and returns to the old value or iterates through an array of values
+    if (!Array.isArray(values)) values = [values];
+    if (!Array.isArray(delay)) delay = new Array(values.length).fill(delay);
+    let oldValue = this.value;
+    this.value = values.shift();
+    setTimeout(_ => {
+      if (values.length) return this.flash(values, delay, false);
+      if (revert === true) return this.value = oldValue;
+    }, delay.shift());
   }
   set value(val) {
     this._value = val;
@@ -253,19 +271,16 @@ class Binder {
 
 // global static methods to handle the DOM
 class DOM {
-  static set(model){
-    DOM.create(model);
+  static get(station) {
+    return station && DOM.headTags.includes(station.toLowerCase()) ? document.head.get(station) : document.body.get(station);
   }
-  static get(...args) {
-    let argsType = DOM.type(...args);
-    let station = argsType.string;
-    let elt = argsType.element ? argsType.element : DOM.headTags.includes(station) ? document.head : document.body;
-    return elt.get(station)
+  static create(...args) {
+    DOM.set(...args);
   }
-  static create(model, ...args) {
+  static set(model, ...args) {
     let argsType = DOM.type(...args);
     let elt = argsType.element ? argsType.element : argsType.p5Element;
-    if (elt) return elt.create(model, ...args);
+    if (elt) return elt.set(model, ...args);
     let headModel = {};
     Object.keys(model).forEach(key => {
       if (DOM.headTags.includes(key.toLowerCase())) {
@@ -273,11 +288,11 @@ class DOM {
         delete model[key];
       }
     });
-    document.head.create(headModel);
-    if (document.body) return document.body.create(model, ...args);
-    window.addEventListener('load', _ => document.body.create(model, ...args));
+    document.head.set(headModel);
+    if (document.body) return document.body.set(model, ...args);
+    window.addEventListener('load', _ => document.body.set(model, ...args));
   }
-  // returns a bind for element's props to use ONLY in a create() model
+  // returns a bind for element's props to use ONLY in a set() model
   static bind(binders, onvalue = v => v, listener) {
     if (!Array.isArray(binders)) binders = [binders];
     if (binders.some(binder => !Array.isArray(binder._bonds))) return console.log(binders, 'Non-binder found.');
@@ -305,6 +320,11 @@ class DOM {
           quotes: 'none',
           content: 'none',
           backgroundColor: 'transparent',
+          fontSize: '100%',
+          font: 'inherit'
+        },
+        'article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section': {
+          display: 'block',
         },
         body: {
           fontFamily: 'Arial, sans-serif',
@@ -319,30 +339,51 @@ class DOM {
         a: {
           textDecoration: 'none',
           cursor: 'pointer',
-          color: 'blue',
         },
         'input, button, select': {
           padding: '0.25em',
           margin: '0.25em',
           borderRadius: '0.25em',
           border: 'solid 1px gray',
+          backgroundColor: 'white',
         },
-        'button, input[type= "button"]': {
+        'button, input[type= "button"], input[type= "submit"]': {
           cursor: 'pointer',
-          color: 'blue',
-          borderColor: 'blue',
-          minWidth: '4em'
-        }
+          borderColor: 'gray',
+          paddingLeft: '1em',
+          paddingRight: '1em',
+          backgroundColor: '#eee',
+          boxShadow: "1px 1px 1px black",
+        },
+        'button:active, input[type= "button"]:active, input[type= "submit"]:active': {
+          boxShadow: "none",
+        },
+        'ol, ul': {
+          listStyle: 'none',
+        },
+        'blockquote, q': {
+          quotes: 'none',
+          before: {
+            content: '',
+          },
+          after: {
+            content: '',
+          }
+        },
+        table: {
+          borderCollapse: 'collapse',
+          borderSpacing: 0
+        },
       };
       const H = 6;
       (new Array(H)).fill().forEach((_, i) => reset[`h${i + 1}`] = new Object({
         fontSize: `${Math.round(100 * (2 - i / H)) / 100}em`,
       }));
-      DOM.style(DOM.css(reset));
+      DOM.style('/* DOM.js CSS reset */' + DOM.css(reset));
     }
     if (!style) return;
     if (Array.isArray(style)) return style.forEach(s => DOM.style(s));
-    if (typeof style === 'string') return document.head.create({
+    if (typeof style === 'string') return document.head.set({
       content: style
     }, 'style');
     DOM.style(DOM.css(style));
@@ -384,8 +425,7 @@ class DOM {
       let subType = DOM.type(sub);
       if (subType.pseudoClass) xSel = `${sel}:${sub}`;
       else if (subType.pseudoElement) xSel = `${sel}::${sub}`;
-      else if (['_', '.'].some(s => key.startsWith(s))) xSel = `${sel}${sub}`;
-      else if (['_', '.'].some(s => key.endsWith(s)) || style.all) xSel = `${sel} ${sub.substring(0, sub.length-1)}`;
+      else if (['_', ' '].some(s => key.startsWith(s))) xSel = `${sel} ${sub.substring(1)}`;
       delete style.all;
       extra.push(DOM.css(xSel, style));
     }).join(' ');
@@ -395,7 +435,7 @@ class DOM {
   // returns html based on model without adding it to the document
   static html(model, tag = 'div') {
     let output;
-    DOM.create({
+    DOM.set({
       content: model,
       onready: elt => {
         output = elt.outerHTML;
@@ -410,9 +450,6 @@ class DOM {
     if (!qs) return Object();
     if (qs.includes('=')) return JSON.parse('{"' + decodeURI(location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
     return qs.split('/');
-  }
-  static getQuerystring() {
-    return DOM.querystring();
   }
   static addID = (id, elt) => {
     if (Array.isArray(elt)) return elt.forEach(e => DOM.addID(id, e));
@@ -466,11 +503,11 @@ class DOM {
   static isStyle = (str, elt) => ((elt ? elt : document.body ? document.body : document.createElement('div')).style)[str] !== undefined;
   static events = ['abort', 'afterprint', 'animationend', 'animationiteration', 'animationstart', 'beforeprint', 'beforeunload', 'blur', 'canplay', 'canplaythrough', 'change', 'click', 'contextmenu', 'copy', 'cut', 'dblclick', 'drag', 'dragend', 'dragenter', 'dragleave', 'dragover', 'dragstart', 'drop', 'durationchange', 'ended', 'error', 'focus', 'focusin', 'focusout', 'fullscreenchange', 'fullscreenerror', 'hashchange', 'input', 'invalid', 'keydown', 'keypress', 'keyup', 'load', 'loadeddata', 'loadedmetadata', 'loadstart', 'message', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseover', 'mouseout', 'mouseup', 'offline', 'online', 'open', 'pagehide', 'pageshow', 'paste', 'pause', 'play', 'playing', 'progress', 'ratechange', 'resize', 'reset', 'scroll', 'search', 'seeked', 'seeking', 'select', 'show', 'stalled', 'submit', 'suspend', 'timeupdate', 'toggle', 'touchcancel', 'touchend', 'touchmove', 'touchstart', 'transitionend', 'unload', 'volumechange', 'waiting', 'wheel'];
   static attributes = ['accept', 'accept-charset', 'accesskey', 'action', 'align', 'alt', 'async', 'autocomplete', 'autofocus', 'autoplay', 'bgcolor', 'border', 'charset', 'checked', 'cite', 'class', 'color', 'cols', 'colspan', 'content', 'contenteditable', 'controls', 'coords', 'data', 'datetime', 'default', 'defer', 'dir', 'dirname', 'disabled', 'download', 'draggable', 'enctype', 'for', 'form', 'formaction', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'http-equiv', 'id', 'ismap', 'kind', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'multiple', 'muted', 'name', 'novalidate', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'readonly', 'rel', 'required', 'reversed', 'rows', 'rowspan', 'sandbox', 'scope', 'selected', 'shape', 'size', 'sizes', 'spellcheck', 'src', 'srcdoc', 'srclang', 'srcset', 'start', 'step', 'style', 'tabindex', 'target', 'title', 'translate', 'type', 'usemap', 'value', 'wrap', 'width'];
-  static pseudoClasses = ['active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover', 'in-range', 'invalid', 'last-of-type', 'link', 'only-of-type', 'only-child', 'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid', 'visited', 'lang', 'not', 'nth-child', 'nth-last-child', 'nth-last-of-type', 'nth-of-type'];
+  static pseudoClasses = ['active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'last-child', 'first-of-type', 'focus', 'hover', 'in-range', 'invalid', 'last-of-type', 'link', 'only-of-type', 'only-child', 'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid', 'visited', 'lang', 'not', 'nth-child', 'nth-last-child', 'nth-last-of-type', 'nth-of-type'];
   static pseudoElements = ['after', 'before', 'first-letter', 'first-line', 'selection'];
   static metaNames = ['viewport', 'keywords', 'description', 'author', 'refresh', 'application-name', 'generator'];
   static htmlEquivs = ['contentSecurityPolicy', 'contentType', 'defaultStyle', 'content-security-policy', 'content-type', 'default-style', 'refresh'];
-  static headTags = ['meta', 'link', 'title', 'font', 'icon', ...DOM.metaNames, ...DOM.htmlEquivs];
+  static headTags = ['meta', 'link', 'title', 'font', 'icon', 'image', ...DOM.metaNames, ...DOM.htmlEquivs];
   static reserveStations = ['tag', 'id', 'onready', 'ready', 'done', 'ondone'];
   static listeners = ['addevent', 'addeventlistener', 'eventlistener', 'listener', 'on'];
   static getDocumentType = str => typeof str === 'string' ? new Object({
@@ -482,3 +519,5 @@ class DOM {
     ico: 'icon'
   })[str.split('.').pop()] : undefined;
 }
+
+DOM.style();

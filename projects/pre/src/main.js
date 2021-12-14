@@ -1,4 +1,4 @@
-import getCube from "./cube.js";
+import Cube from "./Cube.js";
 import * as questionnaire from "./questionnaire.js";
 import * as results from "./results.js";
 import * as style from "./style.js";
@@ -8,6 +8,7 @@ let rgb = QS.rgb ? '#' + QS.rgb : undefined;
 let fav = QS.color ? '#' + QS.color : undefined;
 
 questionnaire.results.bind(results.feature);
+
 if (rgb) results.feature.value = rgb;
 
 DOM.style({
@@ -45,7 +46,7 @@ DOM.style({
   }
 });
 
-DOM.create({
+DOM.set({
   title: 'Pyshical/Rational/Emotional Spectrum',
   charset: 'UTF-8',
   viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
@@ -54,16 +55,21 @@ DOM.create({
   icon: 'assets/favicon.gif',
   textAlign: 'center',
   backgroundColor: rgb ? rgb : questionnaire.favorite,
+
   header: {
     backgroundColor: style.lightSreen,
     boxShadow: '0 1em 1em ' + style.lightSreen,
-    paddingTop: '3em',
-    div: [{
+    paddingTop: '1em',
+    
+    main: {
       cursor: 'pointer',
+      lineHeight: '2.34em',
+      margin: '0 0 1em',
       onclick: e => window.location.href = './',
       h4: 'Physical/Rational/Emotional',
       h1: 'Spectrum',
-    }, {
+    },
+    section: {
       id: 'cubeContainer',
       display: 'flex',
       flexDirection: 'column',
@@ -71,9 +77,10 @@ DOM.create({
       small: 'Loading color spectrum…',
       height: '400px',
       margin: '-2em auto 0'
-    }],
+    },
     select: {
       display: 'block',
+      backgroundColor: 'transparent',
       zIndex: 10,
       position: 'relative',
       margin: '-2em auto 3em',
@@ -112,6 +119,7 @@ DOM.create({
   footer: {
     boxShadow: rgb ? '0 -1em 1em ' + rgb : results.feature.bind(v => '0 -1em 1em ' + v),
     backgroundColor: rgb ? rgb : results.feature,
+
     section: {
       style: style.section,
       display: 'flex',
@@ -122,13 +130,15 @@ DOM.create({
         zIndex: 1,
         text: 'Closests:'
       } : undefined,
+
       div: results.model,
+
       a: {
         target: '_blank',
         content: [{
           display: rgb ? 'none' : 'block',
           href: DOM.bind([results.feature, questionnaire.favorite], (r, f) => './?rgb=' + r.substr(1) + '&color=' + f.substr(1)),
-          text: 'Here is a link with these results for you to save or share.'
+          text: 'Link to these results for you to save or share.'
         }, !fav ? undefined : {
           margin: '0 auto',
           padding: '0.5em 1em',
@@ -137,7 +147,7 @@ DOM.create({
           boxShadow: '1px 1px 2px black',
           backgroundColor: fav,
           href: './?rgb=' + fav.substr(1),
-          text: 'You also have this favorite color: ' + fav
+          text: 'This is your favorite color results: ' + fav
         }, {
           fontSize: '1.25em',
           marginTop: '2em',
@@ -159,8 +169,13 @@ DOM.create({
   }
 });
 
-let cube = getCube({
+let cube = new Cube({
   noLabels: true,
   container: cubeContainer,
-  onclick: s => s ? window.location.href = './?rgb=' + s.code.codeToHex() : null,
+  onclick: loadState,
 });
+
+function loadState(state){
+  if(!state) return;
+  window.location.href = './?rgb=' + state.code.codeToHex();
+}
