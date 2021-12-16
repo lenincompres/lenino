@@ -7,7 +7,7 @@ export const projects = [{
   title: "Animalcules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
-  desc: "Use movement and voice to live and survive as an unicellular organism—a digital story of life.",
+  desc: "A digital story of life. Use movement and voice to live and survive as an unicellular organism.",
   tags: [
     'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
   ]
