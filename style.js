@@ -3,7 +3,9 @@ export const COLOR = {
   LINK_DARK: '#003333',
   BACKGROUND: 'rgb(68, 85, 51)',
   HIGHLIGHT: 'rgb(0, 180, 180)',
-  PAGE: '#F5DC9A'
+  PAGE: '#F5DC9A',
+  PALE: '#F5C888',
+  FADED:'rgba(255,225,200,0.75)'
 };
 
 export const SHADOW = {
