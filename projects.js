@@ -30,7 +30,7 @@ export const projects = [{
 }, {
   title: "P-R-E Spectrum",
   folder: "pre",
-  desc: "Psychometric tool to visualize the physical, rational and emotional spectrum of interests, focus, or personality types.",
+  desc: "Psychometric tool to visualize the physical, rational and emotional spectrum—interests, focus, personality types.",
   tags: [
     "tool",
   ]

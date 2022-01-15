@@ -66,15 +66,15 @@ DOM.set({
       backgroundPosition: 'center top',
       header: {
         model: [STYLE.PAGE, STYLE.FLEX],
-        alignContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
+        placeContent: 'center',
         padding: '0.5em',
         zIndex: 10,
-        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
-        height: isMobile.bind(val => val ? '4em' : 'auto'),
+        height: 'auto',
         position: isMobile.bind(val => val ? 'relative' : 'absolute'),
         width: isMobile.bind(val => val ? '100%' : 'fit-content'),
         margin: isMobile.bind(val => val ? 0 : '1em'),
+        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
         borderRadius: isMobile.bind(val => val ? 0 : '.5em'),
         a: {
           fontSize: '2.3em',
@@ -90,8 +90,8 @@ DOM.set({
           click: e => currentPage.value = pageNames[0]
         },
         tagline: {
-          padding: '.2em .6em',
-          html: '<b>Cantacuentos</b></br>storyteller · inventor · educator'
+          margin: '0 .6em',
+          text: 'storyteller · inventor · educator'
         },
         menu: {
           display: isMobile.bind(val => val ? 'none' : 'block'),
@@ -139,8 +139,7 @@ DOM.set({
       },
       article: {
         model: STYLE.FLEX,
-        flexDirection: isMobile.bind(val => val ? 'column' : 'row'),
-        alignContent: isMobile.bind(val => val ? 'center' : 'start'),
+        justifyContent: isMobile.bind(val => val ? 'center' : 'flex-start'),
         minHeight: isMobile.bind(val => val ? '600px' : '815px'),
         width: isMobile.bind(val => val ? '100%' : '47em'),
         margin: isMobile.bind(val => val ? 0 : '6em 0 0 9em'),

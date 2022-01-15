@@ -31,7 +31,7 @@ export const PAGES = {
 
   PROJECTS: {
     menu: {
-      width: '50em',
+      maxWidth: '50em',
       margin: '0 0.5em 0.5em',
       content: allTags.bind(val => {
         showAll();
@@ -50,10 +50,12 @@ export const PAGES = {
         }
       }),
       span: {
-        color: STYLE.COLOR.LINK_DARK,
+        color: STYLE.COLOR.FADED,
+        textShadow: STYLE.SHADOW.TEXT,
         text: activeTag.bind(val => val ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
       a: {
+        textShadow: STYLE.SHADOW.TEXT,
         text: 'clear',
         padding: '0.2em 0.68em',
         margin: '0.3em 0.3em 0 0',

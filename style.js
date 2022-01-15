@@ -9,6 +9,7 @@ export const COLOR = {
 };
 
 export const SHADOW = {
+  TEXT: '1px 1px 1px black',
   NORMAL: '1px 1px 3px black',
   INSET: '1px 1px 3px black inset',
   HIGHLIGHT: '0 0 9px white, 0 0 9px white inset'
