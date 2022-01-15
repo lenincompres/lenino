@@ -147,7 +147,7 @@ DOM.set({
           boxShadow: '1px 1px 2px black',
           backgroundColor: fav,
           href: './?rgb=' + fav.substr(1),
-          text: 'This is your favorite color results: ' + fav
+          text: 'This is the result of your favorite color: ' + fav
         }, {
           fontSize: '1.25em',
           marginTop: '2em',

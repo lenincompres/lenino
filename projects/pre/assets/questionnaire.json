@@ -26,8 +26,8 @@
           "hint": "records, stats, strategies"
         },
         {
-          "choice": "your team",
-          "hint": "cheering up, fandom, community"
+          "choice": "cheering",
+          "hint": "environment, fandom, community"
         }
       ]
     },
@@ -71,11 +71,11 @@
         },
         {
           "choice": "methodology",
-          "hint": "plan, anylize, assess"
+          "hint": "anylize, plan, assess"
         },
         {
           "choice": "service",
-          "hint": "help, support, contribution"
+          "hint": "help, support, contribute"
         }
       ]
     },
@@ -103,7 +103,7 @@
         },
         {
           "choice": "analyzing a subject",
-          "hint": "ponder, clarify, research"
+          "hint": "ponder, research, clarify"
         },
         {
           "choice": "tending to feelings",
@@ -124,7 +124,7 @@
         },
         {
           "choice": "practical tasks",
-          "hint": "project, work out, organize"
+          "hint": "build, work out, organize"
         }
       ]
     },
@@ -188,7 +188,7 @@
         },
         {
           "choice": "inquisitive",
-          "hint": "Look to learn and debate"
+          "hint": "Look to understand and debate"
         },
         {
           "choice": "softhearted",
@@ -202,7 +202,7 @@
           "choice": "work alone"
         },
         {
-          "choice": "demand freedom or control"
+          "choice": "demand freedom and control"
         },
         {
           "choice": "avoid others' drama"
@@ -219,7 +219,7 @@
         },
         {
           "choice": "meet diverse people",
-          "hint": "ages, genders, lifestyles, backgrounds"
+          "hint": "ages, genders, backgrounds"
         }
       ]
     }

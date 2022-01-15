@@ -1,12 +1,15 @@
 import slideDown from './animations/slideDown.js'
-import projects from './projects.js'
+import allProjects from './projects.js'
 import * as STYLE from './style.js';
 import SOCIAL_LINKS from './widgets/social.js'
 
 const activeProject = new Binder();
 const allTags = new Binder([]);
 const activeTag = new Binder();
+const showAll = e => activeTag.value = false;
 const sortWords = (a, b) => a < b ? -1 : 1;
+
+const projects = allProjects.filter(p => !p.hidden);
 
 export const PAGES = {
   HOME: {},
@@ -31,23 +34,35 @@ export const PAGES = {
       width: '50em',
       margin: '0 0.5em 0.5em',
       content: allTags.bind(val => {
+        showAll();
         return {
-          a: val.map(t => new Object({
-            backgroundColor: activeTag.bind(val => val === t ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.FADED),
-            color: activeTag.bind(val => val === t ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
+          a: val.map(tag => new Object({
+            backgroundColor: activeTag.bind(val => val === tag ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.FADED),
+            color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
             boxShadow: STYLE.SHADOW.NORMAL,
             borderRadius: '0.25em',
             padding: '0.2em 0.68em',
             margin: '0.3em 0.3em 0 0',
             display: 'inline-block',
-            text: t,
-            onclick: e => activeTag.value = activeTag.value === t ? false : t
+            text: tag,
+            onclick: e => activeTag.value = activeTag.value === tag ? false : tag
           }))
         }
       }),
-      onready: elt => activeTag.value = false
+      span: {
+        color: STYLE.COLOR.LINK_DARK,
+        text: activeTag.bind(val => val ? projects.filter(p => p.tags.includes(val)).length : projects.length),
+      },
+      a: {
+        text: 'clear',
+        padding: '0.2em 0.68em',
+        margin: '0.3em 0.3em 0 0',
+        onclick: showAll
+      },
+      onready: showAll,
+      onready: slideDown
     },
-    section: projects.filter(p => !p.hidden).map((project, i) => {
+    section: projects.map((project, i) => {
       activeTag.value = false;
       return {
         model: STYLE.PAGE,
@@ -56,22 +71,25 @@ export const PAGES = {
         cursor: 'pointer',
         boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
         display: activeTag.bind(val => !val || project.tags.includes(val) ? 'block' : 'none'),
-        div: {
-          float: 'left',
-          height: '6em',
-          width: '6em',
-          marginRight: '0.86em',
-          backgroundImage: `url(${project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
+        main: {
+          minHeight: '6.5em',
+          div: {
+            float: 'left',
+            height: '6em',
+            width: '6em',
+            marginRight: '0.86em',
+            backgroundImage: `url(${project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          },
+          h6: {
+            marginBottom: '0.25em',
+            text: project.title
+          },
+          p: project.desc,
         },
-        h6: {
-          marginBottom: '0.25em',
-          text: project.title
-        },
-        p: project.desc,
         ul: {
-          margin: '0.25em 0',
+          marginTop: '0.25em',
           li: project.tags.sort(sortWords).map(tag => {
             if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
             return {
@@ -80,8 +98,14 @@ export const PAGES = {
               marginRight: '0.2em',
               backgroundColor: STYLE.COLOR.PALE,
               color: STYLE.COLOR.LINK,
+              border: 'solid 1px',
+              borderColor: activeTag.bind(val => val === tag ? STYLE.COLOR.LINK : STYLE.COLOR.PALE),
               display: 'inline-block',
-              text: tag
+              text: tag,
+              click: e => {
+                activeTag.value = activeTag.value === tag ? false : tag;
+                e.stopPropagation();
+              }
             }
           })
         },

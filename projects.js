@@ -4,8 +4,7 @@ export const projects = [{
   img: "assets/dom.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model",
   tags: [
-    "code",
-    "website",
+    "coding",
   ]
 }, {
   title: "Animalcules | Animalucos",
@@ -17,7 +16,7 @@ export const projects = [{
   ],
   tags: [
     "game",
-    "website"
+    "coding",
   ]
 }, {
   title: "Mis 500 Locos",
@@ -29,12 +28,11 @@ export const projects = [{
     "writing",
   ]
 }, {
-  title: "Physical / Rational / Emotional Spectrum",
+  title: "P-R-E Spectrum",
   folder: "pre",
-  desc: "Psychometric tool to visualize interests and focus. Ideal for personality types fans.",
+  desc: "Psychometric tool to visualize the physical, rational and emotional spectrum of interests, focus, or personality types.",
   tags: [
     "tool",
-    "website",
   ]
 }, {
   hidden: true,
@@ -44,7 +42,7 @@ export const projects = [{
   desc: "An online (remote) version of the CODENAME game. It supports 4 players and several viewers.",
   tags: [
     "game",
-    "code",
+    "coding",
   ]
 }, {
   hidden: true,
@@ -67,15 +65,15 @@ export const projects = [{
 }, {
   title: "Photonic Chimes",
   folder: "relajame",
-  desc: "Musical and visual algorithm that illustrates how bonded particles may not travel as fast as their individual speed",
+  desc: "Musical and visual algorithm with particles that may not travel as fast as their individual speed once they are fused together.",
   tags: [
-    "code",
+    "coding",
   ]
 }, {
   title: "Eloping Is Fun",
   link: "https://elopingisfun.com/lenin/",
   img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
-  desc: "The wedding of your wildest dreams stress-free, easy and fun. Plus, Lenin may officiate it.",
+  desc: "Lenino may officiate the wedding of your wildest dreams stress-free, easy and fun.",
   tags: [
     "performance",
   ]
@@ -85,6 +83,7 @@ export const projects = [{
   desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version",
   tags: [
     "game",
+    "coding",
   ]
 }, {
   title: "Las 12 Piezas Cortas",
@@ -93,6 +92,17 @@ export const projects = [{
   tags: [
     "book",
     "writing",
+    "theatre",
+  ]
+}, {
+  title: "La Ve",
+  link: "https://www.youtube.com/watch?v=Fr4daDGACKs",
+  img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
+  desc: "Cover of Reginar Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
+  tags: [
+    "music",
+    "performance",
+    "theatre",
   ]
 }]
 
