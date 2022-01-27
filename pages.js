@@ -3,13 +3,13 @@ import allProjects from './projects.js'
 import * as STYLE from './style.js';
 import SOCIAL_LINKS from './widgets/social.js'
 
+const projects = allProjects.filter(p => !p.hidden);
 const activeProject = new Binder();
 const allTags = new Binder([]);
-const activeTag = new Binder();
-const showAll = e => activeTag.value = false;
+const ALL = 'all';
+const activeTag = new Binder(ALL);
+const showTag = (tag = ALL) => activeTag.value = activeTag.value === tag ? ALL : tag;
 const sortWords = (a, b) => a < b ? -1 : 1;
-
-const projects = allProjects.filter(p => !p.hidden);
 
 export const PAGES = {
   HOME: {},
@@ -34,9 +34,9 @@ export const PAGES = {
       maxWidth: '50em',
       margin: '0 0.5em 0.5em',
       content: allTags.bind(val => {
-        showAll();
+        showTag();
         return {
-          a: val.map(tag => new Object({
+          a: [ALL, ...val].map(tag => new Object({
             backgroundColor: activeTag.bind(val => val === tag ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.FADED),
             color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
             boxShadow: STYLE.SHADOW.NORMAL,
@@ -45,23 +45,15 @@ export const PAGES = {
             margin: '0.3em 0.3em 0 0',
             display: 'inline-block',
             text: tag,
-            onclick: e => activeTag.value = activeTag.value === tag ? false : tag
+            onclick: e => showTag(tag)
           }))
         }
       }),
       span: {
         color: STYLE.COLOR.FADED,
         textShadow: STYLE.SHADOW.TEXT,
-        text: activeTag.bind(val => val ? projects.filter(p => p.tags.includes(val)).length : projects.length),
+        text: activeTag.bind(val => val !== ALL ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
-      a: {
-        textShadow: STYLE.SHADOW.TEXT,
-        text: 'clear',
-        padding: '0.2em 0.68em',
-        margin: '0.3em 0.3em 0 0',
-        onclick: showAll
-      },
-      onready: showAll,
       onready: slideDown
     },
     section: projects.map((project, i) => {
@@ -72,26 +64,27 @@ export const PAGES = {
         width: '23em',
         cursor: 'pointer',
         boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
-        display: activeTag.bind(val => !val || project.tags.includes(val) ? 'block' : 'none'),
+        display: activeTag.bind(val => val === ALL || project.tags.includes(val) ? 'block' : 'none'),
         main: {
           minHeight: '6.5em',
           div: {
             float: 'left',
             height: '6em',
             width: '6em',
-            marginRight: '0.86em',
+            marginRight: '0.6em',
             backgroundImage: `url(${project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           },
           h6: {
             marginBottom: '0.25em',
+            fontWeight: 'bold',
             text: project.title
           },
           p: project.desc,
         },
         ul: {
-          marginTop: '0.25em',
+          marginTop: '0.2em',
           li: project.tags.sort(sortWords).map(tag => {
             if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
             return {

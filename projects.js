@@ -4,19 +4,19 @@ export const projects = [{
   img: "assets/dom.png",
   desc: "JavaScript library that creates DOM structures using a JS structural object as a model",
   tags: [
-    "coding",
+    "code",
   ]
 }, {
   title: "Animalcules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
-  desc: "A digital story of life. Use movement and voice to live and survive as an unicellular organism.",
+  desc: "A digital story of life. Use movement and voice to survive as an unicellular organism.",
   tags: [
     'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
   ],
   tags: [
     "game",
-    "coding",
+    "code",
   ]
 }, {
   title: "Mis 500 Locos",
@@ -42,7 +42,7 @@ export const projects = [{
   desc: "An online (remote) version of the CODENAME game. It supports 4 players and several viewers.",
   tags: [
     "game",
-    "coding",
+    "code",
   ]
 }, {
   hidden: true,
@@ -57,7 +57,7 @@ export const projects = [{
 }, {
   title: "Illusions of Duality",
   folder: "album",
-  desc: "Musical debut album: a storyteller's journey through conflict and empathy",
+  desc: "Musical album: a storyteller's journey through conflict and empathy",
   tags: [
     "music",
     "writing",
@@ -67,7 +67,7 @@ export const projects = [{
   folder: "relajame",
   desc: "Musical and visual algorithm with particles that may not travel as fast as their individual speed once they are fused together.",
   tags: [
-    "coding",
+    "code",
   ]
 }, {
   title: "Eloping Is Fun",
@@ -83,7 +83,7 @@ export const projects = [{
   desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version",
   tags: [
     "game",
-    "coding",
+    "code",
   ]
 }, {
   title: "Las 12 Piezas Cortas",
@@ -96,7 +96,7 @@ export const projects = [{
   ]
 }, {
   title: "La Ve",
-  link: "https://www.youtube.com/watch?v=Fr4daDGACKs",
+  link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
   img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
   desc: "Cover of Reginar Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
   tags: [
