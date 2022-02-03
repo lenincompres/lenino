@@ -19,7 +19,7 @@
       "question": "In sports, how much are you into ____?",
       "options": [{
           "choice": "playing",
-          "hint": "challege, practice, competition"
+          "hint": "challenge, practice, competition"
         },
         {
           "choice": "keeping scores",

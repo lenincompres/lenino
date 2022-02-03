@@ -1,7 +1,7 @@
-import Cube from "./Cube.js";
-import * as questionnaire from "./questionnaire.js";
-import * as results from "./results.js";
-import * as style from "./style.js";
+import Cube from "./src/Cube.js";
+import * as questionnaire from "./src/questionnaire.js";
+import * as results from "./src/results.js";
+import * as style from "./src/style.js";
 
 const QS = DOM.querystring();
 let rgb = QS.rgb ? '#' + QS.rgb : undefined;
