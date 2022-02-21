@@ -8,11 +8,13 @@ import slideDown from './animations/slideDown.js';
 
 /* ROUTING */
 const QS = DOM.querystring();
-QS = QS.toLowerCase();
-switch(QS){
-  case 'pre': {
-    window.location.href = "https://lenincompres.github.io/lenino/projects/pre/";
-    break;
+if (QS) {
+  QS = QS.toLowerCase();
+  switch (QS) {
+    case 'pre': {
+      window.location.href = "https://lenincompres.github.io/lenino/projects/pre/";
+      break;
+    }
   }
 }
 
