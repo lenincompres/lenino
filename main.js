@@ -1,10 +1,19 @@
-import * as STYLE from './style.js'
-import PAGES from './pages.js'
-import INSTAGRAM from './widgets/instagram.js'
-import TWITTER from './widgets/twitter.js'
-import MUSICPLAYER from './widgets/musicplayer.js'
-import SOCIAL_LINKS from './widgets/social.js'
-import slideDown from './animations/slideDown.js'
+import * as STYLE from './style.js';
+import PAGES from './pages.js';
+import INSTAGRAM from './widgets/instagram.js';
+import TWITTER from './widgets/twitter.js';
+import MUSICPLAYER from './widgets/musicplayer.js';
+import SOCIAL_LINKS from './widgets/social.js';
+import slideDown from './animations/slideDown.js';
+
+/* ROUTING */
+const QS = DOM.querystring();
+switch(QS){
+  case 'PRE': {
+    window.location.href = "https://lenincompres.github.io/lenino/projects/pre/";
+    break;
+  }
+}
 
 const isMobile = new Binder(window.innerWidth < 850);
 const currentPage = new Binder(0);
