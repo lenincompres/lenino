@@ -11,16 +11,22 @@ const featureInfo = new Binder();
 feature.bind(featureInfo, v => {
   let info = states[v.hexToCode()];
   const level = (d, i) => new Object({
-    b: {
-      color: ['red', 'lime', 'blue'][d],
-      text: '■ '
-    },
-    span: [
-      ['Physically', 'Rationally', 'Emotionally'][d] + ' ', {
-        fontWeight: 'bold',
-        textShadow: i == 2 ? '0 0 1px black, 0 0 1px black, 0 0 1px black' : undefined,
-        color: ['black', 'gray', 'white'][i],
-        text: ['relaxed', 'flexible', 'tense'][i]
+    margin: '0.25em',
+    padding: '0.25em',
+    borderRadius: '50%',
+    // backgroundColor: ['rgba(0,0,0,0.2)', 'transparent', 'white'][i],
+    // boxShadow: ['1px 1px 2px black inset',undefined,'1px 1px 2px black'][i],
+    b: [
+      new Bar(null, '1.2em', 'red', 'black', [17, 50, 83][i]),
+      new Bar(null, '1.2em', 'lime', 'black', [17, 50, 83][i]),
+      new Bar(null, '1.2em', 'blue', 'black', [17, 50, 83][i]),
+    ][d],
+    span: [{
+        marginLeft: '0.5em',
+        text: ['Physically', 'Rationally', 'Emotionally'][d] + ' '
+      },
+      {
+        text: ['relaxed', 'neutral', 'tense'][i],
       }
     ]
   });
@@ -46,9 +52,9 @@ const bars = {
   id: new Bar('Id', '6em', 'magenta'),
   ego: new Bar('Ego', '6em', 'yellow'),
   sup: new Bar('Sup.', '6em', 'cyan'),
-  r: new Bar('Phys…', '6em', 'red'),
-  g: new Bar('Rati…', '6em', 'lime'),
-  b: new Bar('Emot…', '6em', 'blue')
+  r: new Bar('', '6em', 'red'),
+  g: new Bar('', '6em', 'lime'),
+  b: new Bar('', '6em', 'blue')
 }
 
 feature.addListener(hex => {
@@ -99,7 +105,7 @@ var stateP5 = new p5(function (me) {
 
 export const model = {
   div: {
-    backgroundColor: 'white',
+    backgroundColor: '#eee',
     margin: '0 auto',
     borderRadius: '0.5em',
     boxShadow: '1px 1px 2px black',
@@ -145,31 +151,28 @@ export const model = {
           text: 'PRE',
           href: './'
         },
-        div: [bars.r.model, bars.g.model, bars.b.model],
-        small: {
-          text: feature.bind(v => 'RGB code: ' + v)
-        }
+        div: [bars.r, bars.g, bars.b],
       }, {
         a: {
           text: 'Freud',
           href: 'https://en.wikipedia.org/wiki/Id,_ego_and_super-ego',
           target: '_blank'
         },
-        div: [bars.id.model, bars.ego.model, bars.sup.model]
+        div: [bars.id, bars.ego, bars.sup]
       }, {
         a: {
           text: 'Jung',
           href: 'https://en.wikipedia.org/wiki/Jungian_cognitive_functions',
           target: '_blank'
         },
-        div: [bars.f.model, bars.s.model, bars.e.model],
+        div: [bars.f, bars.s, bars.e],
       }, {
         a: {
           text: 'MBTI',
           href: 'https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator',
           target: '_blank'
         },
-        div: bars.j.model,
+        div: bars.j,
         p: {
           fontSize: '1.5em',
           fontFamily: 'monospace',
@@ -179,9 +182,14 @@ export const model = {
       }]
     },
     footer: {
-      fontSize: '0.68em',
-      marginTop: '0.5em',
-      text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
+      small: {
+        text: feature.bind(v => 'RGB code: ' + v)
+      },
+      p: {
+        fontSize: '0.68em',
+        marginTop: '0.5em',
+        text: '* Extroversion (E) here refers to being sociable: a combination of outgoing, empathetic, open, agreeable.'
+      }
     }
   }
 };

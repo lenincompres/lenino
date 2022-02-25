@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.9
+ * @version 1.0.12
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -52,7 +52,7 @@ Element.prototype.set = function (model, ...args) {
   if (DOM.reserveStations.includes(station)) return;
   const IS_CONTENT = station === 'content';
   const IS_LISTENER = DOM.listeners.includes(station);
-  const PREPEND = argsType.boolean === false;
+  const NOT_APPEND = argsType.boolean === false;
   const p5Elem = argsType.p5Element;
   if (modelType.function) {
     if (DOM.type(STATION).event) return this.addEventListener(STATION, e => model(e, this));
@@ -96,7 +96,8 @@ Element.prototype.set = function (model, ...args) {
     else if (tag != elt.tagName.toLowerCase()) DOM.addID(tag, elt);
     if (CLEAR) this.innerHTML = '';
     if (cls.length) elt.classList.add(...cls);
-    return this[PREPEND ? 'prepend' : 'append'](elt);
+    if(NOT_APPEND) return elt;
+    return this.append(elt);
   }
   if (station === 'script' && IS_PRIMITIVE) return this.set({
     script: {
@@ -108,14 +109,13 @@ Element.prototype.set = function (model, ...args) {
     if (CLEAR) this.innerHTML = '';
     if (IS_PRIMITIVE) return this.innerHTML = model;
     if (Array.isArray(model)) return model.forEach(m => this.set(m));
-    let keys = PREPEND ? Object.keys(model).reverse() : Object.keys(model);
-    keys.forEach(key => this.set(model[key], key, p5Elem, PREPEND ? false : undefined));
+    Object.keys(model).forEach(key => this.set(model[key], key, p5Elem));
     return this;
   }
   if (modelType.array) {
     if (station === 'class') return model.forEach(c => c ? this.classList.add(c) : null);
     if (IS_LISTENER) return this.addEventListener(...model);
-    let map = model.map(m => this.set(m, [tag, ...cls].join('.'), p5Elem, PREPEND ? false : undefined));
+    let map = model.map(m => this.set(m, [tag, ...cls].join('.'), p5Elem, NOT_APPEND ? false : undefined));
     if (id) DOM.addID(id, map);
     return map;
   }
@@ -146,7 +146,7 @@ Element.prototype.set = function (model, ...args) {
       if (station === 'font') return DOM.style({
         fontFace: {
           fontFamily: model.split('/').pop().split('.')[0],
-          src: `url(${model})`
+          src: model.startsWith('url') ? model : `url(${model})`
         }
       });
       const type = DOM.getDocumentType(model);
@@ -175,7 +175,7 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute('id', id);
-  this[PREPEND ? 'prepend' : 'append'](elt);
+  this[NOT_APPEND ? 'prepend' : 'append'](elt);
   if (model.ready) model.ready(elem);
   if (model.onready) model.onready(elem);
   if (model.done) model.done(elem);
@@ -233,16 +233,21 @@ class Binder {
   bind(...args) {
     let argsType = DOM.type(...args);
     let target = argsType.element ? argsType.element : argsType.binder;
-    let onvalue = argsType.function;
-    let station = argsType.string;
+    let station = argsType.string ? argsType.string : 'value';
+    let onvalue = argsType.function ? argsType.function : v => v;
+    let values = argsType.array;
     let listener = argsType.number;
-    if (!target) return DOM.bind(this, ...args, this.addListener(onvalue)); // bind() addListener if not in a model
+    if(values && values.length){
+      if(values.length === 2) onvalue = v => v ? values[1] : values[0];
+      else onvalue = v => values[v];
+    }
+    if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, this will remove the listener
     let bond = {
       binder: this,
       target: target,
-      station: station ? station : 'value',
-      onvalue: onvalue ? onvalue : v => v
+      station: station,
+      onvalue: onvalue,
     }
     this._bonds.push(bond);
     this.update(bond);
@@ -409,6 +414,7 @@ class DOM {
       cls = [];
     }
     if (sel.toLowerCase() === 'fontface') sel = '@font-face';
+    if(sel === 'src' && !model.startsWith('url')) model = `url(${model})`;
     if (DOM.type(model).primitive !== undefined) return `${DOM.unCamel(sel)}: ${model};\n`;
     //if (Array.isArray(model)) model = assignAll(model);
     if (Array.isArray(model)) return model.map(m => DOM.css(sel, m)).join(' ');
@@ -443,6 +449,11 @@ class DOM {
       }
     }, tag);
     return output;
+  }
+  // returns an element without adding it to the DOM
+  static element(model, tag){
+    if(!tag) tag = model.tag ? tag : 'div';
+    return DOM.set(model, tag, false);
   }
   // returns querystring as a structural object 
   static querystring() {

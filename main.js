@@ -10,7 +10,6 @@ const isMobile = new Binder(window.innerWidth < 850);
 const currentPage = new Binder(0);
 const hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);
-
 window.tags = new Binder([]);
 
 if (window.location.hash) currentPage.value = window.location.hash.split('#')[1].toUpperCase();
