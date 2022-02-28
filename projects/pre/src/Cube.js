@@ -32,7 +32,7 @@ function Cube({
   me.setup = function () {
     let canvas = me.createCanvas(me.windowWidth, 400);
     me.center = [me.width * 0.5, me.height * 0.5];
-    if (container) container.create({
+    if (container) container.set({
       content: canvas.elt,
       onready: onready
     }, true);
