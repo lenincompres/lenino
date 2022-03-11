@@ -144,7 +144,14 @@ DOM.set({
         margin: isMobile.bind(val => val ? 0 : '6em 0 0 9em'),
         content: currentPage.bind(p => PAGES[p])
       },
-      footer: INSTAGRAM,
+      footer: {
+        iframe:{
+          backgroundColor: "white",
+          height: "700",
+          width: "100%",
+          src: "https://lenincompres.github.io/lenino/projects/pre/"
+        }
+      },
     },
     sidebar: {
       backgroundColor: 'white',
