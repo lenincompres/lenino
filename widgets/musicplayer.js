@@ -1,6 +1,4 @@
 export const MUSICPLAYER = {
-  width: '100%',
-  height: '900px',
   iframe: {
     width: "100%",
     height: "100%",

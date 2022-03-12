@@ -1,6 +1,4 @@
 export const TWITTER = {
-  height: '680px',
-  overflow: 'auto',
   a: {
     class: "twitter-timeline",
     href: "https://twitter.com/lenino",

@@ -33,11 +33,17 @@ export const PAGES = {
     menu: {
       maxWidth: '50em',
       margin: '0 0.5em 0.5em',
+      justifyContent: "center",
+      display: "flex",
+      flexWrap: "wrap",
       content: allTags.bind(val => {
         showTag();
         return {
           a: [ALL, ...val].map(tag => new Object({
-            backgroundColor: activeTag.bind(val => val === tag ? STYLE.COLOR.LINK_DARK : STYLE.COLOR.FADED),
+            backgroundColor: activeTag.bind({
+              [tag]: STYLE.COLOR.LINK_DARK,
+              default: STYLE.COLOR.FADED
+            }),
             color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
             boxShadow: STYLE.SHADOW.NORMAL,
             borderRadius: '0.25em',
@@ -54,10 +60,9 @@ export const PAGES = {
         textShadow: STYLE.SHADOW.TEXT,
         text: activeTag.bind(val => val !== ALL ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
-      onready: slideDown
+      onready: slideDown,
     },
     section: projects.map((project, i) => {
-      activeTag.value = false;
       return {
         model: STYLE.PAGE,
         fontSize: '1em',
@@ -94,7 +99,10 @@ export const PAGES = {
               backgroundColor: STYLE.COLOR.PALE,
               color: STYLE.COLOR.LINK,
               border: 'solid 1px',
-              borderColor: activeTag.bind(val => val === tag ? STYLE.COLOR.LINK : STYLE.COLOR.PALE),
+              borderColor: activeTag.bind({
+                [tag]: STYLE.COLOR.LINK,
+                default: STYLE.COLOR.PALE,
+              }),
               display: 'inline-block',
               text: tag,
               click: e => {
@@ -112,7 +120,11 @@ export const PAGES = {
         },
         onready: slideDown
       }
-    })
+    }),
+    onready: () => {
+      showTag();
+      activeTag.value = false;
+    }
   },
 
   CONTACT: {
