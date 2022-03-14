@@ -6,7 +6,16 @@ import MUSICPLAYER from "./widgets/musicplayer.js";
 import SOCIAL_LINKS from "./widgets/social.js";
 import slideDown from "./animations/slideDown.js";
 
-const isMobile = new Binder(window.innerWidth < 780);
+const isMobile = new Binder();
+const isWide = new Binder();
+const setSize = e => {
+  isMobile.value = window.innerWidth < 780;
+  isWide.value = window.innerWidth > 1050;
+};
+DOM.set(setSize, "onresize");
+setSize();
+
+
 const currentPage = new Binder(0);
 const hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);
@@ -56,7 +65,7 @@ DOM.set({
     maxWidth: "1150px",
     main: {
       position: "relative",
-      maxWidth: "800px",
+      maxWidth: isWide.bind(["100%", "800px"]),
       width: "100%",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
@@ -158,14 +167,13 @@ DOM.set({
     },
     sidebar: {
       backgroundColor: "white",
-      width: isMobile.bind(["350px", "100%"]),
+      width: isWide.bind(["100%", "350px"]),
       section: {
         overflow: "auto",
         width: "100%",
-        height: isMobile.bind(["750px","100vh"]),
+        height: isMobile.bind(["750px", "100vh"]),
         content: [MUSICPLAYER, TWITTER]
       },
     }
-  },
-  onresize: e => isMobile.value = window.innerWidth < 850
+  }
 });
