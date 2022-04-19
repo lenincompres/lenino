@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.27
+ * @version 1.0.28
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -41,7 +41,7 @@ Element.prototype.set = function (model, ...args) {
   let argsType = DOM.typify(...args);
   const IS_PRIMITIVE = modelType.isPrimitive;
   let station = argsType.string; // original style|attr|tag|inner…|on…|name
-  const CLEAR = argsType.boolean === true || !station && IS_PRIMITIVE || station === "content";
+  const CLEAR = !station && IS_PRIMITIVE || station === "content";
   if ([undefined, "create", "assign", "model", "inner", "set"].includes(station)) station = "content";
   const STATION = station;
   station = station.toLowerCase(); // station lowercase
@@ -186,7 +186,7 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute("id", id);
-  this.append(elt);
+  if(!argsType.boolean) this.append(elt);
   ["ready", "onready", "done", "ondone"].forEach(f => {
     if (!model[f]) return;
     model[f](elem);
@@ -324,9 +324,10 @@ class DOM {
       delete model[key];
     });
     document.head.set(headModel);
+    if(Array.isArray(model)) return model.map(m => DOM.set(m, ...args));
     // checks if the model requires a new element
-    if (DOM.typify(model).isPrimitive || Array.isArray(model) && !argsType.string) args.push("section");
     if (model.tag) args.push(model.tag);
+    else if (DOM.typify(model).isPrimitive) args.push("section");
     // checks if the model should replace the DOM
     if (argsType.boolean) document.body.innerHTML = "";
     // checks if the body is loaded
@@ -335,7 +336,7 @@ class DOM {
     window.addEventListener("load", _ => document.body.set(model, ...args));
   }
   // returns a new element without appending it to the DOM
-  static element = (model, tag = "section") => DOM.set(model, tag, elt => elt.remove());
+  static element = (model, tag = "section") => DOM.set(model, tag, true);
   // returns a new binder
   static binder(value, ...args) {
     let binder = new Binder(value);

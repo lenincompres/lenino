@@ -32,11 +32,7 @@ function Cube({
   me.setup = function () {
     let canvas = me.createCanvas(me.windowWidth, 400);
     me.center = [me.width * 0.5, me.height * 0.5];
-    if (container) container.set({
-      content: canvas.elt,
-      onready: onready
-    }, true);
-
+    if (container) container.set(canvas.elt, "content", onready);
     me.strokeWeight(3);
     me.textFont('Verdana');
     me.textSize(size);
