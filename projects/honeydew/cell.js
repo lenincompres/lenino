@@ -10,10 +10,9 @@ let cell = (mom = false, dad = false, sex = false) => {
   me.age = 0;
   me.radius = 100;
   me.sex = sex ? random() : false;
-  let bgColor = color("honeydew");
   if (typeof mom === "number") {
     me.radius = mom;
-    bgColor = dad;
+    BG = dad;
   }
   me.pos = createVector(0.5 * W, 0.5 * H);
   me.vel = createVector(0, 0);
@@ -25,7 +24,7 @@ let cell = (mom = false, dad = false, sex = false) => {
     me.saturation = constrain(s, 0, 100);
     me.color = color(me.hue, me.saturation, me.lightness, ALPHA);
   }
-  me.setColor(hue(bgColor) + 50, (lightness(bgColor) + 50) % 100, saturation(bgColor));
+  me.setColor(hue(BG) + 50, (lightness(BG) + 50) % 100, saturation(BG));
   me.mutate = (sd = DEVIATION) => {
     me.age = 0;
     let h = random() < MUTABILITY ? randomGaussian(me.hue, sd) : me.hue;

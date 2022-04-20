@@ -1,4 +1,4 @@
-let bgColor = "honeydew";
+let bgColor = "aliceblue";
 let W = window.innerWidth;
 let H = window.innerHeight;
 let MAX = 20; // initial maximum number of cells
@@ -18,6 +18,7 @@ function setup() {
       initialScale: 1,
     },
     keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, edication, speciation",
+    backgroundColor: bgColor,
     description: "",
     canvas: createCanvas(W, H)
   });
@@ -29,7 +30,7 @@ function setup() {
 }
 
 function draw() {
-  background(BG);
+  clear();
   cells.forEach(c => {
     c.update();
     c.collided = [];
