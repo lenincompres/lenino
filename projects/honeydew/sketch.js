@@ -2,7 +2,7 @@ document.body.style.overflow = "hidden";
 let bgColor = "honeydew";
 let W = window.innerWidth;
 let H = window.innerHeight;
-let MAX = 25; // initial maximum number of cells
+let MAX = 20; // initial maximum number of cells
 let R = Math.sqrt((W * H) / (2 * Math.PI * MAX));
 
 let cells = [];
@@ -59,7 +59,7 @@ function draw() {
 
   //multiply
   let freeSpace = cells.reduce((o, a) => o += PI * pow(a.radius, 2), 0) / (W * H);
-  if (freeSpace < 0.6 && count >= DELAY * sqrt(freeSpace)) {
+  if (freeSpace < 0.68 && count >= DELAY * sqrt(freeSpace)) {
     let mom = cells.reduce((o, a) => o.age > a.age ? o : a);
     if (mom) {
       cells.push(mom.divide());

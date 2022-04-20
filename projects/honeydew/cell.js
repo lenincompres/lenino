@@ -1,6 +1,6 @@
 let FRIX = 0.9;
 let B = 0.0005; //bounciness of the cells
-let MUTABILITY = 0.8; // how likely is a mutation
+let MUTABILITY = 1; // how likely is a mutation
 let DEVIATION = 2; //standard deviation for clone mutation
 let S = 0.5; // split speed
 
@@ -24,8 +24,7 @@ cell = (mom = false, dad = false) => {
     let h = random() < MUTABILITY ? randomGaussian(me.hue, sd) : me.hue;
     let l = random() < MUTABILITY ? randomGaussian(me.lightness, sd) : me.lightness;
     me.setColor(h, l);
-    me.color = color(me.hue, me.saturation, me.lightness, 50);
-    me.radius = constrain(randomGaussian(me.radius, sd / PI), 0.86 * R, 1.86 * R);
+    me.radius = constrain(randomGaussian(me.radius, sd / PI), 0.5 * R, 2 * R);
     return me;
   }
   if (mom && dad) {
@@ -70,8 +69,11 @@ cell = (mom = false, dad = false) => {
 
   me.divide = () => {
     me.vel = createVector(random(-W, W), random(-H, H)).setMag(S);
-    me.mutate();
-    return cell(me);
+    let baby = cell(me)
+    me.radius += me.radius - baby.radius;
+    me.setColor(2 * me.hue - baby.hue, 2 * me.lightness - baby.lightness);
+    me.age = 0;
+    return baby;
   };
 
   return me;
