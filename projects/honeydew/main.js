@@ -1,4 +1,3 @@
-document.body.style.overflow = "hidden";
 let bgColor = "honeydew";
 let W = window.innerWidth;
 let H = window.innerHeight;
@@ -11,7 +10,17 @@ let DELAY = 60; //minimum wait time for division
 let stage = 0;
 
 function setup() {
-  createCanvas(W, H);
+  DOM.set({
+    title: "Honeydew by Lenino",
+    charset: "UTF-8",
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+    },
+    keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, edication, speciation",
+    description: "",
+    canvas: createCanvas(W, H)
+  });
   colorMode(HSL, 100);
   BG = color(bgColor);
   cells.push(cell());
@@ -32,14 +41,14 @@ function draw() {
   stroke(bgColor);
   if (!stage) {
     textAlign(CENTER, TOP);
-    text("Circles will split into 2 copies\nas long as there is space to do so.\n\nTap anywhere to continue.", W * 0.5, H * 0.2);
+    text("Circles will split into copies,\nas long as there is space for them.\n\nTap anywhere to continue.", W * 0.5, H * 0.2);
     return;
   } else if (stage === 1) {
     textAlign(CENTER, CENTER);
     text("Some copies aren't perfect;\ntheir color or size is slightly off.\n\nTap to continue.", W * 0.5, H * 0.5);
   } else if (stage < 6) {
     textAlign(CENTER, TOP);
-    text("Can you control their spread?\nKeep it under 10 for 1 minute.\n\nTap circles to remove them.", W * 0.5, H * 0.2);
+    text("Can you control the population?\nKeep it under 10 for 1 minute.\n\nTap circles to remove them.", W * 0.5, H * 0.2);
   }
 
   //collide

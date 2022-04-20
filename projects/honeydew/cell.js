@@ -1,37 +1,45 @@
 let FRIX = 0.9;
 let B = 0.0005; //bounciness of the cells
-let MUTABILITY = 1; // how likely is a mutation
-let DEVIATION = 2; //standard deviation for clone mutation
+let MUTABILITY = 0.86; // how likely is a mutation
+let DEVIATION = 1.68; //standard deviation for clone mutation
 let S = 0.5; // split speed
+let ALPHA = 60;
 
-cell = (mom = false, dad = false) => {
+let cell = (mom = false, dad = false, sex = false) => {
   let me = {};
   me.age = 0;
-  me.radius = R;
+  me.radius = 100;
+  me.sex = sex ? random() : false;
+  let bgColor = color("honeydew");
+  if (typeof mom === "number") {
+    me.radius = mom;
+    bgColor = dad;
+  }
   me.pos = createVector(0.5 * W, 0.5 * H);
   me.vel = createVector(0, 0);
-  me.setColor = (h, l) => {
+  me.setColor = (h, l, s) => {
     if (h > 100) h -= 100;
     else if (h < 0) h = 100 - h;
     me.hue = h;
     me.lightness = constrain(l, 0, 100);
-    me.saturation = saturation(BG);
-    me.color = color(me.hue, me.saturation, me.lightness, 50);
+    me.saturation = constrain(s, 0, 100);
+    me.color = color(me.hue, me.saturation, me.lightness, ALPHA);
   }
-  me.setColor(hue(BG) + 50, (lightness(BG) + 50) % 100);
+  me.setColor(hue(bgColor) + 50, (lightness(bgColor) + 50) % 100, saturation(bgColor));
   me.mutate = (sd = DEVIATION) => {
     me.age = 0;
     let h = random() < MUTABILITY ? randomGaussian(me.hue, sd) : me.hue;
     let l = random() < MUTABILITY ? randomGaussian(me.lightness, sd) : me.lightness;
-    me.setColor(h, l);
-    me.radius = constrain(randomGaussian(me.radius, sd / PI), 0.5 * R, 2 * R);
+    let s = random() < MUTABILITY ? randomGaussian(me.saturation, sd) : me.saturation;
+    me.setColor(h, l, s);
+    me.radius = constrain(randomGaussian(me.radius, sd), 0.5 * R, 2 * R);
     return me;
   }
   if (mom && dad) {
-    me.setColor((mom.hue + dad.hue) / 2, (mom.lightness + dad.lightness) / 2);
+    me.setColor((mom.hue + dad.hue) / 2, (mom.lightness + dad.lightness) / 2, (mom.saturation + dad.saturation) / 2);
     me.radius = (mom.radius + dad.radius) / 2;
   } else if (mom) {
-    me.setColor(mom.hue, mom.lightness);
+    me.setColor(mom.hue, mom.lightness, mom.saturation);
     me.radius = mom.radius;
   }
   if (mom) {
@@ -41,15 +49,21 @@ cell = (mom = false, dad = false) => {
   }
 
   me.draw = () => {
-    let whole = 0;
-    whole *= me.radius;
-    let diam = me.radius + whole - 2 * me.vel.mag();
+    let diam = me.radius - me.vel.mag();
+    let hole = !me.sex ? 0 : 0.14;
     push();
+    translate(me.pos.x, me.pos.y);
     noStroke();
     stroke(me.color);
-    strokeWeight(me.radius - whole);
-    noFill();
-    circle(me.pos.x, me.pos.y, diam);
+    strokeWeight(diam * (1 - hole));
+    fill(me.color);
+    circle(0, 0, diam + hole * diam);
+    let d = diam * hole * 0.5;
+    strokeWeight(d);
+    if (me.sex) {
+      line(d, 0, -d, 0);
+      if(me.sex > 0.5) line(0, d, 0, -d);
+    } //noFill();
     pop();
   };
 
@@ -71,7 +85,7 @@ cell = (mom = false, dad = false) => {
     me.vel = createVector(random(-W, W), random(-H, H)).setMag(S);
     let baby = cell(me)
     me.radius += me.radius - baby.radius;
-    me.setColor(2 * me.hue - baby.hue, 2 * me.lightness - baby.lightness);
+    me.setColor(2 * me.hue - baby.hue, 2 * me.lightness - baby.lightness, 2 * me.saturation - baby.saturation);
     me.age = 0;
     return baby;
   };
