@@ -1,9 +1,15 @@
-let FRIX = 0.9;
-let B = 0.0005; //bounciness of the cells
+let FRIX = 0.92;
+let B = 0.0003; //bounciness of the cells
 let MUTABILITY = 0.86; // how likely is a mutation
 let DEVIATION = 1.68; //standard deviation for clone mutation
 let S = 0.5; // split speed
-let ALPHA = 60;
+let ALPHA = 100;
+
+let bounceNum = n => {
+  if (n > 100) return 100 - 2 * (n - 100);
+  else if (n < 0) return -2 * n;
+  return n;
+}
 
 let cell = (mom = false, dad = false, sex = false) => {
   let me = {};
@@ -20,8 +26,8 @@ let cell = (mom = false, dad = false, sex = false) => {
     if (h > 100) h -= 100;
     else if (h < 0) h = 100 - h;
     me.hue = h;
-    me.lightness = constrain(l, 0, 100);
-    me.saturation = constrain(s, 0, 100);
+    me.lightness = bounceNum(l);
+    me.saturation = bounceNum(s);
     me.color = color(me.hue, me.saturation, me.lightness, ALPHA);
   }
   me.setColor(hue(BG) + 50, (lightness(BG) + 50) % 100, saturation(BG));
@@ -48,21 +54,22 @@ let cell = (mom = false, dad = false, sex = false) => {
   }
 
   me.draw = () => {
-    let diam = me.radius - me.vel.mag();
-    let hole = !me.sex ? 0 : 0.14;
+    let diam = 2 * (me.radius - me.vel.mag());
+    let hole = !me.sex ? 0 : 0.25;
     push();
     translate(me.pos.x, me.pos.y);
     noStroke();
-    stroke(me.color);
-    strokeWeight(diam * (1 - hole));
     fill(me.color);
-    circle(0, 0, diam + hole * diam);
-    let d = diam * hole * 0.5;
-    strokeWeight(d);
+    circle(0, 0, diam);
     if (me.sex) {
+      fill(BG);
+      circle(0, 0, hole * diam);
+      stroke(me.color);
+      let d = diam * hole * 0.25;
+      strokeWeight(d);
       line(d, 0, -d, 0);
-      if(me.sex > 0.5) line(0, d, 0, -d);
-    } //noFill();
+      if (me.sex > 0.5) line(0, d, 0, -d);
+    }
     pop();
   };
 

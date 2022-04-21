@@ -1,4 +1,4 @@
-let bgColor = "aliceblue";
+let bgColor = "#bfb";
 let W = window.innerWidth;
 let H = window.innerHeight;
 let MAX = 20; // initial maximum number of cells
@@ -8,6 +8,8 @@ let cells = [];
 let count = 0; //time since last division
 let DELAY = 60; //minimum wait time for division
 let stage = 0;
+let time = 0;
+let playing = false;
 
 function setup() {
   DOM.set({
@@ -27,6 +29,8 @@ function setup() {
   cells.push(cell());
   firstColor = cells[0].color;
   firstColor.setAlpha(100);
+
+  setInterval(() => time += playing ? 1 : 0, 1000);
 }
 
 function draw() {
@@ -42,14 +46,16 @@ function draw() {
   stroke(bgColor);
   if (!stage) {
     textAlign(CENTER, TOP);
-    text("Circles will split into copies,\nas long as there is space for them.\n\nTap anywhere to continue.", W * 0.5, H * 0.2);
+    text("Circles will split into copies,\nas long as there's space.\n\nTap to continue.", W * 0.5, H * 0.2);
     return;
   } else if (stage === 1) {
     textAlign(CENTER, CENTER);
-    text("Some copies aren't perfect;\ntheir color or size is slightly off.\n\nTap to continue.", W * 0.5, H * 0.5);
+    text("Copies may have small random errors;\ntheir color or size is slightly off.\n\nTap to continue.", W * 0.5, H * 0.5);
   } else if (stage < 6) {
     textAlign(CENTER, TOP);
-    text("Can you control the population?\nKeep it under 10 for 1 minute.\n\nTap circles to remove them.", W * 0.5, H * 0.2);
+    text("Keep their number under 10\nfor 1 minute.\n\nTap to remove circles", W * 0.5, H * 0.2);
+  } else {
+    playing = true;
   }
 
   //collide
@@ -78,15 +84,26 @@ function draw() {
   }
 
   // Counts
-  push();
-  let l = lightness(BG) - 50;
-  stroke(BG);
-  fill(firstColor);
-  strokeWeight(R * 0.1);
-  textSize(R * 1.5);
-  textAlign(LEFT, TOP);
-  text(cells.length, R * 0.5, R * 0.5);
-  pop();
+  if (stage > 1) {
+    push();
+    // timer
+    stroke(BG);
+    fill(0);
+    strokeWeight(R * 0.1);
+    textSize(R);
+    textAlign(CENTER, CENTER);
+    if (cells.length >= 10) time = 0;
+    else if (playing) text(`:${time<10?0:""}${time}`, W * 0.5, R);
+    // ball count
+    fill(firstColor);
+    strokeWeight(R * 0.02);
+    textSize(R*0.68);
+    text(`${cells.length}●`, W * 0.5, H - R);
+    stroke(firstColor);
+    noFill();
+    circle(W * 0.5, H - R, 2 * R);
+    pop();
+  }
 
   count += 1;
 }
