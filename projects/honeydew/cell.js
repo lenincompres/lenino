@@ -16,9 +16,11 @@ let cell = (mom = false, dad = false, sex = false) => {
   me.age = 0;
   me.radius = 100;
   me.sex = sex ? random() : false;
+  me.bg = color("white");
   if (typeof mom === "number") {
     me.radius = mom;
-    BG = dad;
+    if(dad) me.bg = dad;
+    mom = undefined;
   }
   me.pos = createVector(0.5 * W, 0.5 * H);
   me.vel = createVector(0, 0);
@@ -30,7 +32,7 @@ let cell = (mom = false, dad = false, sex = false) => {
     me.saturation = bounceNum(s);
     me.color = color(me.hue, me.saturation, me.lightness, ALPHA);
   }
-  me.setColor(hue(BG) + 50, (lightness(BG) + 50) % 100, saturation(BG));
+  me.setColor(hue(me.bg) + 50, (lightness(me.bg) + 50) % 100, saturation(me.bg));
   me.mutate = (sd = DEVIATION) => {
     me.age = 0;
     let h = random() < MUTABILITY ? randomGaussian(me.hue, sd) : me.hue;
@@ -41,9 +43,11 @@ let cell = (mom = false, dad = false, sex = false) => {
     return me;
   }
   if (mom && dad) {
+    me.bg = mom.bg;
     me.setColor((mom.hue + dad.hue) / 2, (mom.lightness + dad.lightness) / 2, (mom.saturation + dad.saturation) / 2);
     me.radius = (mom.radius + dad.radius) / 2;
   } else if (mom) {
+    me.bg = mom.bg;
     me.setColor(mom.hue, mom.lightness, mom.saturation);
     me.radius = mom.radius;
   }
@@ -62,7 +66,7 @@ let cell = (mom = false, dad = false, sex = false) => {
     fill(me.color);
     circle(0, 0, diam);
     if (me.sex) {
-      fill(BG);
+      fill(me.bg);
       circle(0, 0, hole * diam);
       stroke(me.color);
       let d = diam * hole * 0.25;
