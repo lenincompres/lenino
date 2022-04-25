@@ -99,8 +99,7 @@ function draw() {
     // ball count
     fill(firstColor);
     strokeWeight(R * 0.02);
-    textSize(R * 0.68);
-    text(`${cells.length}●`, W * 0.5, H - R);
+    text(cells.length, W * 0.5, H - R);
     stroke(firstColor);
     noFill();
     circle(W * 0.5, H - R, 2 * R);
