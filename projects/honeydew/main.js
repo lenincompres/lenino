@@ -1,8 +1,25 @@
-let bgColor = "#fbf";
+
+let bgColor = "#bfb";
+
+DOM.set({
+  title: "Honeydew by Lenino",
+  charset: "UTF-8",
+  viewport: {
+    width: "device-width",
+    initialScale: "1.0",
+    maximumScale: "1.0",
+  },
+  keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, education, speciation",
+  backgroundColor: bgColor,
+  description: "",
+  overflow: "hidden",
+});
+
 let W = window.innerWidth;
 let H = window.innerHeight;
 let MAX = 20; // initial maximum number of cells
 let R = Math.sqrt((W * H) / (2 * Math.PI * MAX));
+console.log(W, H);
 
 let cells = [];
 let count = 0; //time since last division
@@ -13,28 +30,12 @@ let goal = 10;
 let playing = false;
 
 function setup() {
-  DOM.set({
-    title: "Honeydew by Lenino",
-    charset: "UTF-8",
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-      maximumScale: 1.0,
-      minimumScale: 1.0,
-      userScalable: "no"
-    },
-    keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, education, speciation",
-    backgroundColor: bgColor,
-    description: "",
-    overflow: "hidden",
-    canvas: createCanvas(W, H)
-  });
+  DOM.set(createCanvas(W, H));
   colorMode(HSL, 100);
   BG = color(bgColor);
   cells.push(cell(R, bgColor));
   firstColor = cells[0].color;
   firstColor.setAlpha(100);
-
   setInterval(() => timer += playing ? 1 : 0, 1000);
 }
 

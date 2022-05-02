@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.28
+ * @version 1.0.32
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -78,11 +78,10 @@ Element.prototype.set = function (model, ...args) {
       fontFace: model
     }, "css");
     if (station === "style" && !model.content) return this.set({
-      content: typeof model === "string" ? model : DOM.css(style)
+      content: typeof model === "string" ? model : DOM.css(model)
     }, station);
-    if (station === "keywords" && Array.isArray(model)) model = model.join(",");
-    if (station === "viewport" && modelType.object) model = Object.entries(model).map(([key, value]) => `${DOM.unCamelize(key)}=${value}`).join(",");
-    modelType = DOM.typify(model);
+    if (station === "keywords" && Array.isArray(model)) return this.set(model.join(","), ...args);
+    if (station === "viewport" && modelType.object) return this.set(Object.entries(model).map(([key, value]) => `${DOM.unCamelize(key)}=${value}`).join(","), ...args);
   }
   let [tag, ...cls] = STATION.split("_");
   if (STATION.includes(".")) {
@@ -158,7 +157,7 @@ Element.prototype.set = function (model, ...args) {
       if (station === "font") return DOM.set({
         fontFace: {
           fontFamily: model.split("/").pop().split(".")[0],
-          src: model.startsWith("url") ? model : `url(${model})`
+          src: model.startsWith("url") ? model : `url("${model}")`
         }
       }, "css");
       const type = DOM.getDocType(model);
@@ -186,7 +185,7 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute("id", id);
-  if(!argsType.boolean) this.append(elt);
+  if (!argsType.boolean) this.append(elt);
   ["ready", "onready", "done", "ondone"].forEach(f => {
     if (!model[f]) return;
     model[f](elem);
@@ -267,15 +266,25 @@ class Binder {
     this._bonds.push(bond);
     this.update(bond);
   }
-  flash(values, delay = 1000, revert = true) { //Iterates through values. Reverts to the intital
+  flash(values, delay = 1000, revert, callback) { //Iterates through values. Reverts to the intital
     if (!Array.isArray(values)) values = [values];
     if (!Array.isArray(delay)) delay = new Array(values.length).fill(delay);
     let oldValue = this.value;
     this.value = values.shift();
+    if (revert === false) {
+      values.push(oldValue);
+      delay.push(delay[0]);
+    }
     setTimeout(_ => {
-      if (values.length) return this.flash(values, delay, false);
+      if (values.length) return this.flash(values, delay, revert);
       if (revert === true) return this.value = oldValue;
+      if (callback) callback();
     }, delay.shift());
+  }
+  loop(values, delay) {
+    if (!Array.isArray(values)) return;
+    this.value = values.shift();
+    setTimeout(() => this.flash(values, delay, false), delay);
   }
   set value(val) {
     this._value = val;
@@ -303,8 +312,13 @@ class DOM {
     // checks if the station belongs to the head
     DOM.headTags.includes(station.toLowerCase()) ? document.head.get(station) : document.body.get(station);
   }
+  static create = (...args) => DOM.set(...args);
   // create elements based on an object model
   static set(model = "", ...args) {
+    if (!args.includes("css") && !window.DOM_RESETTED) {
+      DOM.set(DOM.RESET, "css");
+      window.DOM_RESETTED = true;
+    }
     // checks if the model is meant for an element
     let argsType = DOM.typify(...args);
     let elt = argsType.element ? argsType.element : argsType.p5Element;
@@ -313,8 +327,10 @@ class DOM {
     if (model.css) {
       DOM.set(model.css, "css");
       delete model.css;
-      model.visibility = "hidden";
-      setTimeout(() => DOM.set("visible", "visibility"), 600);
+      if (document.body) {
+        model.visibility = "hidden";
+        setTimeout(() => DOM.set("visible", "visibility"), 600);
+      }
     }
     // checks if the model is meant for the head
     let headModel = {};
@@ -324,7 +340,7 @@ class DOM {
       delete model[key];
     });
     document.head.set(headModel);
-    if(Array.isArray(model)) return model.map(m => DOM.set(m, ...args));
+    if (Array.isArray(model)) return model.map(m => DOM.set(m, ...args));
     // checks if the model requires a new element
     if (model.tag) args.push(model.tag);
     else if (DOM.typify(model).isPrimitive) args.push("section");
@@ -375,7 +391,7 @@ class DOM {
       cls = [];
     }
     if (sel.toLowerCase() === "fontface") sel = "@font-face";
-    if (sel === "src" && !model.startsWith("url")) model = `url(${model})`;
+    if (sel === "src" && !model.startsWith("url")) model = `url("${model}")`;
     if (DOM.typify(model).isPrimitive) return `${DOM.unCamelize(sel)}: ${model};\n`;
     if (Array.isArray(model)) return model.map(m => DOM.css(sel, m)).join(" ");
     if (model.class) cls.push(...model.class.split(" "));
@@ -484,92 +500,90 @@ class DOM {
     js: "text/javascript",
     ico: "icon"
   })[str.split(".").pop()] : undefined;
-}
-
-// resets the CSS
-DOM.set({
-  "*": {
-    boxSizing: "border-box",
-    verticalAlign: "baseline",
-    lineHeight: "1.25em",
-    margin: 0,
-    padding: 0,
-    border: 0,
-    borderSpacing: 0,
-    borderCollapse: "collapse",
-    listStyle: "none",
-    quotes: "none",
-    content: "none",
-    backgroundColor: "transparent",
-    fontSize: "100%",
-    font: "inherit"
-  },
-  "article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section": {
-    display: "block",
-  },
-  body: {
-    fontFamily: "Arial, sans-serif",
-    fontSize: "14px",
-  },
-  "b, strong": {
-    fontWeight: "bold",
-  },
-  "i, em": {
-    fontStyle: "italic",
-  },
-  a: {
-    textDecoration: "none",
-    cursor: "pointer",
-  },
-  "input, button, select": {
-    padding: "0.2em",
-    borderRadius: "0.25em",
-    border: "solid 1px gray",
-    backgroundColor: "white",
-  },
-  "button, input[type=\"button\"], input[type=\"submit\"]": {
-    cursor: "pointer",
-    borderColor: "gray",
-    paddingLeft: "1em",
-    paddingRight: "1em",
-    backgroundColor: "#eee",
-    boxShadow: "0.5px 0.5px 1px black",
-  },
-  "button:active, input[type=\"button\"]:active, input[type=\"submit\"]:active": {
-    boxShadow: "none",
-  },
-  "ol, ul": {
-    listStyle: "none",
-  },
-  "blockquote, q": {
-    quotes: "none",
-    before: {
-      content: "",
+  static RESET = {
+    "*": {
+      boxSizing: "border-box",
+      verticalAlign: "baseline",
+      lineHeight: "1.25em",
+      margin: 0,
+      padding: 0,
+      border: 0,
+      borderSpacing: 0,
+      borderCollapse: "collapse",
+      listStyle: "none",
+      quotes: "none",
+      content: "none",
+      backgroundColor: "transparent",
+      //fontSize: "100%",
+      //font: "inherit"
     },
-    after: {
-      content: "",
+    "article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section": {
+      display: "block",
+    },
+    body: {
+      fontFamily: "Arial, sans-serif",
+      fontSize: "14px",
+    },
+    "b, strong": {
+      fontWeight: "bold",
+    },
+    "i, em": {
+      fontStyle: "italic",
+    },
+    a: {
+      textDecoration: "none",
+      cursor: "pointer",
+    },
+    "input, button, select": {
+      padding: "0.2em",
+      borderRadius: "0.25em",
+      border: "solid 1px gray",
+      backgroundColor: "white",
+    },
+    "button, input[type=\"button\"], input[type=\"submit\"]": {
+      cursor: "pointer",
+      borderColor: "gray",
+      paddingLeft: "1em",
+      paddingRight: "1em",
+      backgroundColor: "#eee",
+      boxShadow: "0.5px 0.5px 1px black",
+    },
+    "button:active, input[type=\"button\"]:active, input[type=\"submit\"]:active": {
+      boxShadow: "none",
+    },
+    "ol, ul": {
+      listStyle: "none",
+    },
+    "blockquote, q": {
+      quotes: "none",
+      before: {
+        content: "",
+      },
+      after: {
+        content: "",
+      }
+    },
+    table: {
+      borderCollapse: "collapse",
+      borderSpacing: 0,
+    },
+    h1: {
+      fontSize: "2em",
+    },
+    h2: {
+      fontSize: "1.82em",
+    },
+    h3: {
+      fontSize: "1.67em",
+    },
+    h4: {
+      fontSize: "1.5em",
+    },
+    h5: {
+      fontSize: "1.33em",
+    },
+    h6: {
+      fontSize: "1.17em",
     }
-  },
-  table: {
-    borderCollapse: "collapse",
-    borderSpacing: 0,
-  },
-  h1: {
-    fontSize: "2em",
-  },
-  h2: {
-    fontSize: "1.82em",
-  },
-  h3: {
-    fontSize: "1.67em",
-  },
-  h4: {
-    fontSize: "1.5em",
-  },
-  h5: {
-    fontSize: "1.33em",
-  },
-  h6: {
-    fontSize: "1.17em",
   }
-}, "css");
+}
