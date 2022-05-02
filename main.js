@@ -29,6 +29,8 @@ DOM.set({
   viewport: {
     width: "device-width",
     initialScale: 1,
+    maximumScale: 1.0,
+    userScalable: "no",
   },
   keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
   description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",

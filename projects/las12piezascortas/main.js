@@ -19,7 +19,10 @@ DOM.set({
   charset: 'UTF-8',
   icon: '../../assets/icon.png',
   image: 'thumbnail.jpg',
-  viewport: "width=device-width, minimum-scale=1.0, maximum-scale=1.0",
+  meta: {
+    name: "viewport",
+    content: "width=device-width, initial-scale=1.0"
+  },
   menu: {
     css: {
       backgroundColor: COLOR.PAGE,

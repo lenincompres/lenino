@@ -19,10 +19,14 @@ function setup() {
     viewport: {
       width: "device-width",
       initialScale: 1,
+      maximumScale: 1.0,
+      minimumScale: 1.0,
+      userScalable: "no"
     },
-    keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, edication, speciation",
+    keywords: "lenin, lenino, lenin compres, cantacuentos, evolution, education, speciation",
     backgroundColor: bgColor,
     description: "",
+    overflow: "hidden",
     canvas: createCanvas(W, H)
   });
   colorMode(HSL, 100);
