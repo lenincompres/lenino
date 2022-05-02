@@ -1,4 +1,4 @@
-let bgColor = "#bfb";
+let bgColor = "#fbf";
 let W = window.innerWidth;
 let H = window.innerHeight;
 let MAX = 20; // initial maximum number of cells
