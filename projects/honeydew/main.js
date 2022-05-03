@@ -12,6 +12,7 @@ DOM.set({
   backgroundColor: bgColor,
   description: "",
   overflow: "hidden",
+  cursor: "none",
 });
 
 let W = window.innerWidth;
@@ -27,6 +28,8 @@ let timer = 0;
 let sec = 0;
 let goal = 10;
 let playing = false;
+
+let [x, y] = [0, 0];
 
 let sound = {
   tick: new Audio("tick.mp3"),
@@ -125,8 +128,15 @@ function draw() {
     //square
     strokeWeight(R * 0.2);
     if (cells.length < goal) rect(0, 0, W, H);
+
+
     pop();
   }
+
+  /*
+  circle(x, y, R * 0.5);
+  text(`${round(x)},${round(y)}`, x, y);
+  */
 
   count += 1;
 }
@@ -135,7 +145,15 @@ function mousePressed() {
   if (stage < 6) stage += 1;
   if (stage < 3) return;
 
-  let targets = cells.filter(c => dist(mouseX, mouseY, c.pos.x, c.pos.y) < c.radius);
+  [x, y] = [mouseX, mouseY];
+
+  //mapping for screen show
+  if (false) {
+    [x, y] = [W * (H - mouseY) / H, H * (W - mouseX) / W];
+    x = map(x, 100, 1100, 0, W);
+    y = map(y, 130, 1300, H, 0);
+  }
+  let targets = cells.filter(c => dist(x, y, c.pos.x, c.pos.y) < c.radius);
   if (!targets.length) return;
   let target = targets.reduce((a, b) => a.age > b.age ? a : b);
   if (target) cells = cells.filter(c => c != target);

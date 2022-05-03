@@ -1,7 +1,7 @@
 let FRIX = 0.92;
 let B = 0.0003; //bounciness of the cells
 let MUTABILITY = 0.86; // how likely is a mutation
-let DEVIATION = 1.86; //standard deviation for clone mutation
+let DEVIATION = 2; //standard deviation for clone mutation
 let S = 0.5; // split speed
 let ALPHA = 100;
 
