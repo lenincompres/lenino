@@ -24,10 +24,15 @@ let count = 0; //time since last division
 let DELAY = 60; //minimum wait time for division
 let stage = 0;
 let timer = 0;
+let sec = 0;
 let goal = 10;
 let playing = false;
 
-let audioTick = new Audio("tick.mp3");
+let sound = {
+  tick: new Audio("tick.mp3"),
+  ding: new Audio("ding.mp3"),
+  wrong: new Audio("wrong.mp3"),
+}
 
 function setup() {
   DOM.set(createCanvas(W, H));
@@ -36,10 +41,7 @@ function setup() {
   cells.push(cell(R, bgColor));
   firstColor = cells[0].color;
   firstColor.setAlpha(100);
-  setInterval(() => {
-    timer += playing ? 1 : 0;
-    if(playing && cells.length <= goal && timer > 0) audioTick.play();
-  }, 1000);
+  setInterval(() => timer += playing ? 1 : 0, 1000);
   textFont('Impact');
 }
 
@@ -60,10 +62,10 @@ function draw() {
     return;
   } else if (stage === 1) {
     textAlign(CENTER, CENTER);
-    text("Copies may have errors;\na minor size or color difference.\n\nTap to continue.", W * 0.5, H * 0.5);
+    text("Copies may have errors,\nminor size or color difference.\n\nTap to continue.", W * 0.5, H * 0.5);
   } else if (stage < 6) {
     textAlign(CENTER, TOP);
-    text(`Keep their number under ${goal}\nfor 1 minute.\n\nTap to remove circles`, W * 0.5, H * 0.2);
+    text(`Can you keep the number under ${goal}\nfor 1 minute.\n\nTap to remove circles`, W * 0.5, H * 0.2);
   } else {
     playing = true;
   }
@@ -90,28 +92,39 @@ function draw() {
     if (mom) {
       cells.push(mom.divide());
       count = 0;
+      if (sec > 0 && cells.length === goal) sound.wrong.play();
     }
   }
 
   // Counts
   if (stage > 1) {
     push();
+
     // timer
     stroke(BG);
     fill(0);
     strokeWeight(R * 0.1);
     textSize(R);
     textAlign(CENTER, CENTER);
-    let sec = timer % 60;
+    let oldSec = sec;
+    sec = timer % 60;
     if (cells.length >= goal) timer = 0;
-    else if (playing) text(`${floor(timer/60)}:${sec<10?0:""}${sec}`, W * 0.5, R);
+    else if (playing) {
+      text(`${floor(timer/60)}:${sec<10?0:""}${sec}`, W * 0.5, R);
+      if (oldSec != sec) sound.tick.play();
+    }
+
     // ball count
     fill(firstColor);
     strokeWeight(R * 0.05);
-    text(cells.length, W * 0.5, H - R);
+    text(cells.length, W * 0.5, H - R * 1.2);
     stroke(firstColor);
     noFill();
-    circle(W * 0.5, H - R, 2 * R);
+    circle(W * 0.5, H - R * 1.2, 2 * R);
+
+    //square
+    strokeWeight(R * 0.2);
+    if (cells.length < goal) rect(0, 0, W, H);
     pop();
   }
 
@@ -126,4 +139,5 @@ function mousePressed() {
   if (!targets.length) return;
   let target = targets.reduce((a, b) => a.age > b.age ? a : b);
   if (target) cells = cells.filter(c => c != target);
+  if (cells.length === goal - 1) sound.ding.play();
 }
