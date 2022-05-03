@@ -17,6 +17,7 @@ let cell = (mom = false, dad = false, sex = false) => {
   me.radius = 100;
   me.sex = sex ? random() : false;
   me.bg = color("white");
+
   if (typeof mom === "number") {
     me.radius = mom;
     if(dad) me.bg = dad;
@@ -31,8 +32,27 @@ let cell = (mom = false, dad = false, sex = false) => {
     me.lightness = bounceNum(l);
     me.saturation = bounceNum(s);
     me.color = color(me.hue, me.saturation, me.lightness, ALPHA);
+    me.hue = hue(me.color);
+    me.lightness = lightness(me.color);
   }
   me.setColor(hue(me.bg) + 50, (lightness(me.bg) + 50) % 100, saturation(me.bg));
+
+  //sound stuff
+  let types = ['sine', 'sawtooth', 'triangle', 'square'];
+  me.env = new p5.Envelope();
+  me.osc = new p5.Oscillator(types[0]);
+  me.osc.amp(me.env);
+  me.osc.freq(midiToFreq(60));
+  me.play = (n = 0) => {
+    me.osc.start();
+    me.env.setRange(map(me.radius,40,200,0,1), 0);
+    let freq = midiToFreq(map(me.hue, 0, 100, 0, 127));
+    freq = freqAngle(me.hue, me.lightness);
+    me.osc.freq(freq);
+    me.env.setADSR(0.1, 0.5, 0);
+    me.env.play();
+  }
+  //
   me.mutate = (sd = DEVIATION) => {
     me.age = 0;
     let h = random() < MUTABILITY ? randomGaussian(me.hue, sd) : me.hue;
@@ -56,6 +76,7 @@ let cell = (mom = false, dad = false, sex = false) => {
     me.vel = createVector(-mom.vel.x, -mom.vel.y);
     me.mutate();
   }
+  me.play();
 
   me.draw = () => {
     let diam = 2 * (me.radius - me.vel.mag());
@@ -97,8 +118,22 @@ let cell = (mom = false, dad = false, sex = false) => {
     me.radius += me.radius - baby.radius;
     me.setColor(2 * me.hue - baby.hue, 2 * me.lightness - baby.lightness, 2 * me.saturation - baby.saturation);
     me.age = 0;
+    me.play();
     return baby;
   };
 
   return me;
+}
+
+function freqAngle(hue, light = 50) {
+  let scale = 32;
+  let oct = 12;
+  let rings = 8;
+  let center = 60 + oct * 2;
+  let top = midiToFreq(center + rings / 2 * oct);
+  let base = midiToFreq(center - rings / 2 * oct);
+  let ringSize = (top - base) / (scale * rings);
+  let ring = map(light, 0, 100, 0, rings);
+  let note = map(hue, 0, 100, 0, ringSize);
+  return base + note + ring * ringSize;
 }

@@ -15,7 +15,6 @@ const setSize = e => {
 DOM.set(setSize, "onresize");
 setSize();
 
-
 const currentPage = new Binder(0);
 const hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);

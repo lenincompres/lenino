@@ -115,7 +115,7 @@ function quant(r = 1, a = random(0, 2 * PI), x = 0, y = 0) {
   }
   o.kill = _ => o.dead = true;
   o.play(1);
-
+ 
   return o;
 }
 

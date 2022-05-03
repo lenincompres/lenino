@@ -1,4 +1,3 @@
-
 let bgColor = "#bfb";
 
 DOM.set({
@@ -19,7 +18,6 @@ let W = window.innerWidth;
 let H = window.innerHeight;
 let MAX = 20; // initial maximum number of cells
 let R = Math.sqrt((W * H) / (2 * Math.PI * MAX));
-console.log(W, H);
 
 let cells = [];
 let count = 0; //time since last division
@@ -29,6 +27,8 @@ let timer = 0;
 let goal = 10;
 let playing = false;
 
+let audioTick = new Audio("tick.mp3");
+
 function setup() {
   DOM.set(createCanvas(W, H));
   colorMode(HSL, 100);
@@ -36,7 +36,11 @@ function setup() {
   cells.push(cell(R, bgColor));
   firstColor = cells[0].color;
   firstColor.setAlpha(100);
-  setInterval(() => timer += playing ? 1 : 0, 1000);
+  setInterval(() => {
+    timer += playing ? 1 : 0;
+    if(playing && cells.length <= goal && timer > 0) audioTick.play();
+  }, 1000);
+  textFont('Impact');
 }
 
 function draw() {
@@ -56,7 +60,7 @@ function draw() {
     return;
   } else if (stage === 1) {
     textAlign(CENTER, CENTER);
-    text("Copies may have small random errors;\ntheir color or size is slightly off.\n\nTap to continue.", W * 0.5, H * 0.5);
+    text("Copies may have errors;\na minor size or color difference.\n\nTap to continue.", W * 0.5, H * 0.5);
   } else if (stage < 6) {
     textAlign(CENTER, TOP);
     text(`Keep their number under ${goal}\nfor 1 minute.\n\nTap to remove circles`, W * 0.5, H * 0.2);
@@ -103,7 +107,7 @@ function draw() {
     else if (playing) text(`${floor(timer/60)}:${sec<10?0:""}${sec}`, W * 0.5, R);
     // ball count
     fill(firstColor);
-    strokeWeight(R * 0.02);
+    strokeWeight(R * 0.05);
     text(cells.length, W * 0.5, H - R);
     stroke(firstColor);
     noFill();
@@ -114,9 +118,9 @@ function draw() {
   count += 1;
 }
 
-function mouseClicked() {
+function mousePressed() {
   if (stage < 6) stage += 1;
-  if (stage < 2) return;
+  if (stage < 3) return;
 
   let targets = cells.filter(c => dist(mouseX, mouseY, c.pos.x, c.pos.y) < c.radius);
   if (!targets.length) return;
