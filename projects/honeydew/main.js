@@ -12,7 +12,6 @@ DOM.set({
   backgroundColor: bgColor,
   description: "",
   overflow: "hidden",
-  cursor: "none",
 });
 
 let W = window.innerWidth;
@@ -26,10 +25,16 @@ let DELAY = 60; //minimum wait time for division
 let stage = 0;
 let timer = 0;
 let sec = 0;
-let goal = 10;
+let goalNumber = 10;
+let goalTime = 60;
+let longestStreak = 0;
 let playing = false;
 
-let [x, y] = [0, 0];
+let introPrompt = [
+  "Circles will split into copies,\nas long as there's space.\n\nTap to continue.",
+  "Copies may have errors,\nsmall differences in size or color.\n\nTap to continue.",
+  `Challenge 1:\nKeep their number under ${goalNumber} for ${goalTime} seconds.\n\nTap to remove circles`,
+]
 
 let sound = {
   tick: new Audio("tick.mp3"),
@@ -61,14 +66,14 @@ function draw() {
   stroke(bgColor);
   if (!stage) {
     textAlign(CENTER, TOP);
-    text("Circles will split into copies,\nas long as there's space.\n\nTap to continue.", W * 0.5, H * 0.2);
+    text(introPrompt[stage], W * 0.5, H * 0.2);
     return;
   } else if (stage === 1) {
     textAlign(CENTER, CENTER);
-    text("Copies may have errors,\nminor size or color difference.\n\nTap to continue.", W * 0.5, H * 0.5);
+    text(introPrompt[stage], W * 0.5, H * 0.5);
   } else if (stage < 6) {
     textAlign(CENTER, TOP);
-    text(`Can you keep the number under ${goal}\nfor 1 minute.\n\nTap to remove circles`, W * 0.5, H * 0.2);
+    text(introPrompt[stage], W * 0.5, H * 0.2);
   } else {
     playing = true;
   }
@@ -95,7 +100,8 @@ function draw() {
     if (mom) {
       cells.push(mom.divide());
       count = 0;
-      if (sec > 0 && cells.length === goal) sound.wrong.play();
+      if (timer > 0 && cells.length === goalNumber) sound.wrong.play();
+      if (timer > longestStreak) longestStreak = timer;
     }
   }
 
@@ -104,39 +110,35 @@ function draw() {
     push();
 
     // timer
-    stroke(BG);
-    fill(0);
-    strokeWeight(R * 0.1);
-    textSize(R);
-    textAlign(CENTER, CENTER);
-    let oldSec = sec;
-    sec = timer % 60;
-    if (cells.length >= goal) timer = 0;
+    setText(R, 0, BG, CENTER, CENTER);
+    let oldTimer = timer;
+    if (cells.length >= goalNumber) timer = 0;
     else if (playing) {
-      text(`${floor(timer/60)}:${sec<10?0:""}${sec}`, W * 0.5, R);
-      if (oldSec != sec) sound.tick.play();
+      text(displayTime(timer), W * 0.5, R);
+      if (oldTimer != timer) sound.tick.play();
+    }
+
+    //longest streak
+    if (longestStreak > 0) {
+      setText(R * 0.2, 0, BG, LEFT, CENTER);
+      text(`Record under ${goalNumber}`, R * 0.3, H - R);
+      setText(R * 0.6);
+      text(displayTime(longestStreak), R * 0.3, H - R * 0.6);
     }
 
     // ball count
-    fill(firstColor);
-    strokeWeight(R * 0.05);
+    setText(R, firstColor, BG, CENTER, CENTER);
     text(cells.length, W * 0.5, H - R * 1.2);
     stroke(firstColor);
     noFill();
     circle(W * 0.5, H - R * 1.2, 2 * R);
 
-    //square
+    //focus square
     strokeWeight(R * 0.2);
-    if (cells.length < goal) rect(0, 0, W, H);
-
+    if (cells.length < goalNumber) rect(0, 0, W, H);
 
     pop();
   }
-
-  /*
-  circle(x, y, R * 0.5);
-  text(`${round(x)},${round(y)}`, x, y);
-  */
 
   count += 1;
 }
@@ -145,17 +147,22 @@ function mousePressed() {
   if (stage < 6) stage += 1;
   if (stage < 3) return;
 
-  [x, y] = [mouseX, mouseY];
-
-  //mapping for screen show
-  if (false) {
-    [x, y] = [W * (H - mouseY) / H, H * (W - mouseX) / W];
-    x = map(x, 100, 1100, 0, W);
-    y = map(y, 130, 1300, H, 0);
-  }
-  let targets = cells.filter(c => dist(x, y, c.pos.x, c.pos.y) < c.radius);
+  let targets = cells.filter(c => dist(mouseX, mouseY, c.pos.x, c.pos.y) < c.radius);
   if (!targets.length) return;
   let target = targets.reduce((a, b) => a.age > b.age ? a : b);
   if (target) cells = cells.filter(c => c != target);
-  if (cells.length === goal - 1) sound.ding.play();
+  if (cells.length === goalNumber - 1) sound.ding.play();
+}
+
+let displayTime = t => {
+  let s = t % 60;
+  return `${floor(t/60)}:${s<10?0:""}${s}`;
+}
+
+let setText = (size, color, lColor, ...pos) => {
+  textSize(size);
+  strokeWeight(size * 0.1);
+  if (color) fill(color);
+  if (lColor) stroke(lColor);
+  if (pos) textAlign(...pos);
 }

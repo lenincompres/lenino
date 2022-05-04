@@ -11,26 +11,28 @@
       backgroundColor: "#B0B",
       color: "#BFB",
       header: {
-        height: "10vh",
+        fontSize: "2em",
+        height: "5em",
         alignItems: "center",
         img: {
           float: "right",
-          height: "10vh",
+          height: "100%",
           margin: "0 auto",
           src: "qr.png",
         },
         section: {
-          padding: "1em",
+          padding: "0.5em",
           textAlign: "center",
-          h1: "The Speciesist Experience",
+          h1: "The Species Experience",
           p: "by Lenin Comprés",
+          click: e => window.location.reload(),
         }
       },
       iframe: {
         display: "block",
         margin: "0 auto",
         width: "100vw",
-        height: "90vh",
+        height: "calc(100vh - 10em)",
         src: "index.html",
       },
     })
