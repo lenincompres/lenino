@@ -27,7 +27,7 @@ export const PAGES = {
           backgroundColor: "white",
           p: [
             "Lenino es un cuenta-cuentos creativo, un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida “adulta”. Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno).",
-            "“Lenino” es el alter-ego afectivo de Lenin Comprés, tecnólogo creativo en la Escuela de Artes TISCH de la Universidad de Nueva York (NYU), con un título de posgrado de la Teacher's College de la Universidad de Columbia. Ha escrito obras de teatro premiadas en la República Dominicana y el guión de la película A State of Madness, que representó a ese país en los premios Oscars del 2021."
+            "“Lenino” es el alter-ego afectivo de Lenin Comprés, tecnólogo creativo en la Escuela de Artes TISCH de la Universidad de Nueva York (NYU), con un título de posgrado de Teacher's College de la Universidad de Columbia. Ha escrito obras de teatro premiadas en la República Dominicana y el guión de la película “A State of Madness”, que representó a ese país en los premios Oscars del 2021."
           ]
         }
       ],
