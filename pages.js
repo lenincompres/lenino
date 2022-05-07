@@ -1,12 +1,12 @@
-import slideDown from './animations/slideDown.js'
-import allProjects from './projects.js'
-import * as STYLE from './style.js';
-import SOCIAL_LINKS from './widgets/social.js'
+import slideDown from "./animations/slideDown.js"
+import allProjects from "./projects.js"
+import * as STYLE from "./style.js";
+import SOCIAL_LINKS from "./widgets/social.js"
 
 const projects = allProjects.filter(p => !p.hidden);
 const activeProject = new Binder();
 const allTags = new Binder([]);
-const ALL = 'all';
+const ALL = "all";
 const activeTag = new Binder(ALL);
 const showTag = (tag = ALL) => activeTag.value = activeTag.value === tag ? ALL : tag;
 const sortWords = (a, b) => a < b ? -1 : 1;
@@ -18,11 +18,11 @@ export const PAGES = {
     section: {
       style: STYLE.PAGE,
       content: [{
-          p: 'Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his "adult" life. His studies range from telecommunication engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.'
+          p: "Lenino is a storyteller, an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life. His studies range from telecommunications engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man. “Lenino” is the affectionate alter-ego of Lenin Compres, a creative technologist at NYU's TISCH School of the Arts, with a graduate degree the Teacher's College of Columbia University. He has written award-winning plays in the Dominican Republic and the script for the motion picture “A State of Madness”, which was submitted to the Oscars in 2021, on behalf of that Dominican Republic."
         },
         {
-          backgroundColor: 'white',
-          p: 'Lenino es un cuenta-cuentos creativo (el alter-ego afectivo de Lenin Comprés), un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida "adulta". Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno).'
+          backgroundColor: "white",
+          p: "Lenino es un cuenta-cuentos creativo, un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida “adulta”. Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno). “Lenino” es el alter-ego afectivo de Lenin Comprés, tecnólogo creativo en la Escuela de Artes TISCH de la Universidad de Nueva York (NYU), con un título de posgrado de la Teacher's College de la Universidad de Columbia. He escrito obras de teatro premiadas en la República Dominicana y el guión de la película A State of Madness, que representó a ese país en los premios Oscars del 2021."
         }
       ],
       onready: slideDown
@@ -31,8 +31,8 @@ export const PAGES = {
 
   PROJECTS: {
     menu: {
-      maxWidth: '50em',
-      margin: '0 0.5em 0.5em',
+      maxWidth: "50em",
+      margin: "0 0.5em 0.5em",
       justifyContent: "center",
       display: "flex",
       flexWrap: "wrap",
@@ -46,10 +46,10 @@ export const PAGES = {
             }),
             color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
             boxShadow: STYLE.SHADOW.NORMAL,
-            borderRadius: '0.25em',
-            padding: '0.2em 0.68em',
-            margin: '0.3em 0.3em 0 0',
-            display: 'inline-block',
+            borderRadius: "0.25em",
+            padding: "0.2em 0.68em",
+            margin: "0.3em 0.3em 0 0",
+            display: "inline-block",
             text: tag,
             onclick: e => showTag(tag)
           }))
@@ -65,45 +65,45 @@ export const PAGES = {
     section: projects.map((project, i) => {
       return {
         model: STYLE.PAGE,
-        fontSize: '1em',
-        width: '23em',
-        cursor: 'pointer',
+        fontSize: "1em",
+        width: "23em",
+        cursor: "pointer",
         boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
-        display: activeTag.bind(val => val === ALL || project.tags.includes(val) ? 'block' : 'none'),
+        display: activeTag.bind(val => val === ALL || project.tags.includes(val) ? "block" : "none"),
         main: {
-          minHeight: '6.5em',
+          minHeight: "6.5em",
           div: {
-            float: 'left',
-            height: '6em',
-            width: '6em',
-            marginRight: '0.6em',
-            backgroundImage: `url(${project.img ? project.img : 'projects/' + project.folder + '/thumbnail.jpg'})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            float: "left",
+            height: "6em",
+            width: "6em",
+            marginRight: "0.6em",
+            backgroundImage: `url(${project.img ? project.img : "projects/" + project.folder + "/thumbnail.jpg"})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
           },
           h6: {
-            marginBottom: '0.25em',
-            fontWeight: 'bold',
+            marginBottom: "0.25em",
+            fontWeight: "bold",
             text: project.title
           },
           p: project.desc,
         },
         ul: {
-          marginTop: '0.2em',
+          marginTop: "0.2em",
           li: project.tags.sort(sortWords).map(tag => {
             if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
             return {
-              borderRadius: '0.25em',
-              padding: '0.2em 0.4em',
-              marginRight: '0.2em',
+              borderRadius: "0.25em",
+              padding: "0.2em 0.4em",
+              marginRight: "0.2em",
               backgroundColor: STYLE.COLOR.PALE,
               color: STYLE.COLOR.LINK,
-              border: 'solid 1px',
+              border: "solid 1px",
               borderColor: activeTag.bind({
                 [tag]: STYLE.COLOR.LINK,
                 default: STYLE.COLOR.PALE,
               }),
-              display: 'inline-block',
+              display: "inline-block",
               text: tag,
               click: e => {
                 activeTag.value = activeTag.value === tag ? false : tag;
@@ -115,8 +115,8 @@ export const PAGES = {
         mouseover: e => activeProject.value = i,
         mouseout: e => activeProject.value = false,
         click: e => {
-          let link = project.link ? project.link : 'projects/' + project.folder
-          window.open(link, '_blank')
+          let link = project.link ? project.link : "projects/" + project.folder
+          window.open(link, "_blank")
         },
         onready: slideDown
       }
@@ -129,11 +129,11 @@ export const PAGES = {
 
   CONTACT: {
     menu: {
-      fontSize: '3.43em',
-      marginTop: '1em',
-      textAlign: 'center',
+      fontSize: "3.43em",
+      marginTop: "1em",
+      textAlign: "center",
       a: SOCIAL_LINKS.map(a => Object.assign({
-        margin: '0.25em',
+        margin: "0.25em",
         onready: slideDown
       }, a))
     }
