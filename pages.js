@@ -121,7 +121,7 @@ export const PAGES = {
         mouseover: e => activeProject.value = i,
         mouseout: e => activeProject.value = false,
         click: e => {
-          let link = project.link ? project.link : "projects/" + project.folder
+          let link = project.link ? project.link : project.folder
           window.open(link, "_blank")
         },
         onready: slideDown

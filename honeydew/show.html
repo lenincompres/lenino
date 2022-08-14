@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="lib/DOM.js"></script>
+</head>
+
+<body>
+  <script>
+    DOM.set({
+      backgroundColor: "#B0B",
+      color: "#BFB",
+      header: {
+        fontSize: "2em",
+        height: "5em",
+        alignItems: "center",
+        img: {
+          float: "right",
+          height: "100%",
+          margin: "0 auto",
+          src: "qr.png",
+        },
+        section: {
+          padding: "0.5em",
+          textAlign: "center",
+          h1: "The Species Experience",
+          p: "by Lenin Comprés",
+          click: e => window.location.reload(),
+        }
+      },
+      iframe: {
+        display: "block",
+        margin: "0 auto",
+        width: "100vw",
+        height: "calc(100vh - 10em)",
+        src: "index.html",
+      },
+    })
+  </script>
+</body>
+
+</html>
