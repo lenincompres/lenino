@@ -132,6 +132,7 @@ function sortDataBy(tag = "time", dir = -1) {
   let data = rawData;
   data = data.sort((a, b) => dir * a[tag].localeCompare(b[tag]));
   data = data.filter(d => d.results);
+  console.log("fine");
   results.value = data.map(item => {
     item.mbti = item.mbti.toUpperCase();
     let mbti = "";
@@ -158,10 +159,10 @@ function sortDataBy(tag = "time", dir = -1) {
       PRE: fixHex(item.results),
       daily: fixHex(item.daily),
       fave: fixHex(item.tone),
-    }
+    }/*
     item.answers.split(",").forEach((v, i) => {
       op["q" + (i + 1)] = fixHex(v);
-    });
+    });*/
     return op;
   })
 }
@@ -177,7 +178,7 @@ fetch("test_results.json", )
       item.id = item.fbId ? item.fbId.toLowerCase() :
         item.email ? item.email.toLowerCase() : item.testee.toLowerCase();
       item.name = item.fbName ? item.fbName : item.testee;
-      return item;
+    return item;
     });
     sortDataBy();
   });
