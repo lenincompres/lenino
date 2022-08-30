@@ -7,6 +7,14 @@ export const projects = [{
     "code",
   ]
 }, {
+  title: "Jack Rabbits",
+  folder: "jackrabbits",
+  desc: "The board game for playing cards on a quest through Wonderland.",
+  tags: [
+    "game",
+    "code",
+  ]
+}, {
   title: "Animalcules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",
@@ -76,14 +84,6 @@ export const projects = [{
   desc: "Lenino may officiate the wedding of your wildest dreams stress-free, easy and fun.",
   tags: [
     "performance",
-  ]
-}, {
-  title: "Jack Rabbits",
-  folder: "jackrabbits",
-  desc: "Board game inspired on lenino's music, designs and favorite books, now with a Virtual Version",
-  tags: [
-    "game",
-    "code",
   ]
 }, {
   title: "Las 12 Piezas Cortas",
