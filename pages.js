@@ -83,7 +83,7 @@ export const PAGES = {
             height: "6em",
             width: "6em",
             marginRight: "0.6em",
-            backgroundImage: `url(${project.img ? project.img : "projects/" + project.folder + "/thumbnail.jpg"})`,
+            backgroundImage: `url(${project.img ? project.img : project.folder + "/thumbnail.jpg"})`,
             backgroundSize: "cover",
             backgroundPosition: "center"
           },

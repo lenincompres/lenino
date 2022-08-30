@@ -4,7 +4,7 @@ export const MUSICPLAYER = {
     height: "100%",
     scrolling: "auto",
     frameborder: "no",
-    src: "projects/album"
+    src: "album"
   }
 };
 
