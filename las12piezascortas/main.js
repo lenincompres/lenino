@@ -71,7 +71,7 @@ DOM.set({
           href: "#4"
         },
         {
-          text: 'Pajarito voland0',
+          text: 'Pajarito volando',
           href: "#8"
         },
         {
