@@ -19,7 +19,7 @@ export const PAGES = {
       style: STYLE.PAGE,
       content: [{
           p: [
-            "Lenino is a storyteller, an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life. His studies range from telecommunications engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to modern dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.",
+            "Lenino is a storyteller, an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life. His studies range from telecommunications engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to contemporary dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.",
             "“Lenino” is the affectionate alter-ego of Lenin Compres, a creative technologist at NYU's TISCH School of the Arts, with a graduate degree from Teacher's College at Columbia University. He has written award-winning plays in the Dominican Republic and the script for the motion picture “A State of Madness”, which was submitted to the Oscars in 2021, on behalf of that country."
           ]
         },
