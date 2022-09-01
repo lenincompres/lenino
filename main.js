@@ -88,7 +88,7 @@ DOM.set({
           fontSize: "2.3em",
           href: "#home",
           img: {
-            src: "assets/icon.png",
+            src: "assets/leninoLogo.png",
             height: "30",
           },
           span: {
