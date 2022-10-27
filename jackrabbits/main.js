@@ -129,7 +129,7 @@ DOM.set({
         "Descubre maravillas mientras viajas",
         "al reino de conejos y barajas.",
       ],
-      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a Alicia en el País de las maravillas,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
+      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
     }, CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
