@@ -109,7 +109,7 @@ DOM.style({
     color: 'teal'
   },
   _courage: {
-    color: 'indigo'
+    color: 'darkslateblue'
   },
   _fortune: {
     color: 'darkgoldenrod'
@@ -154,7 +154,7 @@ DOM.set({
     }, {
       p: [
         `Lenino's ${JRName} es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.`,
-        `A diferencia de nuestros juegos clásicos, ${JRName} ofrece fantasía y exploración en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`
+        `A diferencia de nuestros juegos clásicos, ofrece fantasía y exploración como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`
       ],
     }, {
       /*h4: [{
@@ -170,9 +170,9 @@ DOM.set({
     }, {
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
-      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusion y consciencia social, ecológica y global.",
-      /*
-            h3: '<b class="wisdom">Wisdom</b>, <b class="courage">Courage</b>, <b class="fortune">Fortune</b> & <b class="charm">Charm</b> <br> is what a rabbit has at hand.',*/
+      h4: '<b class="fortune">Fortuna</b>, <b class="courage">Corage</b>, <b class="wisdom">Sapiencia</b> y <b class="charm">Encanto</b> <br> son las cualidades que tienes a mano.',
+    }, {
+      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y consciencia social, ecológica y global.",
     }, {
       img: {
         src: "images/photo1.jpg",
