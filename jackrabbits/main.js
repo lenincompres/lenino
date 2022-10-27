@@ -155,8 +155,8 @@ DOM.set({
       ]*/
     }, {
       div: [RANDOM_CARD(), RANDOM_CARD()],
-    }, {
-      h3: '<b class="wisdom">Wisdom</b>, <b class="courage">Courage</b>, <b class="fortune">Fortune</b> & <b class="charm">Charm</b> <br> is what a rabbit has at hand.',
+    }, {/*
+      h3: '<b class="wisdom">Wisdom</b>, <b class="courage">Courage</b>, <b class="fortune">Fortune</b> & <b class="charm">Charm</b> <br> is what a rabbit has at hand.',*/
     }, {
       img: {
         src: "images/photo1.jpg",
