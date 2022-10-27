@@ -73,7 +73,8 @@ DOM.style({
     lineHeight: '1.5em',
   },
   h4: {
-    margin: 0
+    margin: 0,
+    textAlign: 'center',
   },
   p: {
     margin: '0 0 1em 0'
@@ -110,7 +111,6 @@ DOM.set({
   icon: "images/icon.png",
   width: '100%',
   height: '100%',
-  textAlign: 'center',
   padding: '0px',
   margin: '0px',
   backgroundColor: '#EBEBD5',
