@@ -180,7 +180,7 @@ DOM.set({
         href: "http://lenino.net",
         target: "_blank",
         img: {
-          src: "../../assets/icon.png",
+          src: "../../assets/leninoLogo.png",
           alt: "Lenino.net"
         },
         p: "Lenino.net"
