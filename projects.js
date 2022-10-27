@@ -9,7 +9,7 @@ export const projects = [{
 }, {
   title: "Jack Rabbits",
   folder: "jackrabbits",
-  desc: "The board game for playing cards on a quest through Wonderland.",
+  desc: "The board game for playing cards on a quest through wonderlands",
   tags: [
     "game",
     "code",
