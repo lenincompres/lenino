@@ -179,10 +179,10 @@ DOM.set({
         href: "http://lenino.net",
         target: "_blank",
         img: {
-          src: "../../assets/leninoLogo.png",
+          src: "../assets/leninoLogo.png",
           alt: "Lenino.net"
         },
-        p: "Lenino.net"
+        text: "Lenino.net"
       }
     }]
   },
