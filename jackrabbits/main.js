@@ -166,14 +166,13 @@ DOM.set({
       },
       small: "The game includes 38 wooden board pieces, 4 player tokens, 2 dice, <br> 12 carrot tokens and a deck of 54 custom designed poker cards.",
     }, {
-      h2: "Instructions",
-      p: [{
+      h2: {
         a: {
           href: "instructions.pdf",
           target: "_blank",
-          text: "Game Instructions",
+          text: "Intrucciones/Instructions",
         }
-      }]
+      }
     }, {
       p: 'Follow Lenino on <a href="https://www.instagram.com/lenino/" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> or <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
     }, {
