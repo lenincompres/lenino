@@ -162,7 +162,7 @@ DOM.set({
         iframe: {
           height: isMobile.bind(["760px", "100vh"]),
           width: "100%",
-          src: "pre/",
+          src: "jackrabbits/",
         }
       },
     },
