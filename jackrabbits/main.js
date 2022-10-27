@@ -170,9 +170,9 @@ DOM.set({
     }, {
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
-      h4: '<b class="fortune">Fortuna</b>, <b class="courage">Corage</b>, <b class="wisdom">Sapiencia</b> y <b class="charm">Encanto</b> <br> son las cualidades que tienes a mano.',
+      h4: '<b class="fortune">Fortuna</b>, <b class="courage">Coraje</b>, <b class="wisdom">Sapiencia</b>  y <b class="charm">Encanto</b> <br/>son las cualidades que tienes a mano.',
     }, {
-      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y consciencia social, ecológica y global.",
+      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global.",
     }, {
       img: {
         src: "images/photo1.jpg",
@@ -185,7 +185,7 @@ DOM.set({
         a: {
           href: "instructions.pdf",
           target: "_blank",
-          text: "Intrucciones/Instructions",
+          text: "Intrucciones",
         }
       }
     }, {
