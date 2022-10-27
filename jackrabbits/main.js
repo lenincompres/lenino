@@ -7,6 +7,7 @@ const CARD = (front, back, width = 240, height = 340) => {
     display: 'inline-block',
   };
   return {
+    textAlign: "center",
     class: "card",
     cursor: 'pointer',
     display: 'inline-block',
@@ -29,7 +30,7 @@ const CARD = (front, back, width = 240, height = 340) => {
   }
 }
 
-const RANDOM_CARD = () => {
+const RANDOM_CARD = (autoFlip = false, delay = 0) => {
   let [x, y, z] = [0, 0, 0];
   let [w, h] = [240, 340];
   const randomize = () => {
@@ -39,6 +40,7 @@ const RANDOM_CARD = () => {
   };
   randomize();
   const opened = new Binder(false);
+  let counter = -delay;
   let card = CARD({
     backgroundImage: 'url(images/cardBack.png)'
   }, {
@@ -52,43 +54,56 @@ const RANDOM_CARD = () => {
     onclick: e => {
       opened.value = !opened.value;
       if (!opened.value) randomize();
+      counter = 1;
+    },
+    onready: elt => {
+      if (!autoFlip) return;
+      setInterval(e => !(counter++ % 5) ? elt.click() : null, 500);
     }
   })
 }
+
+const JRName = '<b><span class="charm">J</span><span class="fortune">A</span>C<span class="courage">K</span> R<span class="wisdom">A</span>BBITS</b>';
 
 DOM.style({
   fontFace: [{
     fontFamily: 'titleFont',
     src: 'url("IrishGrover-Regular.ttf")'
-  },{
-    fontFamily: 'body',
-    src: 'url("markerfeltnormal.ttf")'
+  }, {
+    fontFamily: 'bodyFont',
+    src: 'url("Chalkboard.ttc")'
   }],
   section: {
     margin: '1em 0'
+  },
+  a: {
+    color: "darkblue",
+    hover: {
+      color: "royalblue",
+    }
   },
   h: {
     fontFamily: 'titleFont',
     margin: '1em 0 0 0',
     lineHeight: '1.5em',
+    textAlign: 'center',
   },
   h4: {
     margin: 0,
-    textAlign: 'center',
   },
   p: {
-    margin: '0 0 1em 0'
+    margin: '0 0 1em 0',
+    textIndent: "1em",
   },
   i: {
-    fontFamily: 'titleFont',
     fontStyle: 'normal'
   },
   big: {
     fontSize: '1.8em'
   },
   b: {
-    textShadow: 'black 1px 1px',
     fontFamily: 'titleFont',
+    textShadow: 'black 1px 1px',
   },
   _wisdom: {
     color: 'teal'
@@ -115,22 +130,14 @@ DOM.set({
   margin: '0px',
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
-  fontFamily: 'Calibri, "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif',
+  fontFamily: "bodyFont",
   fontSize: "16px",
   main: {
     maxWidth: '500px',
     minWidth: '490px',
     margin: '0 auto',
     padding: '0 0 10px',
-    section: [{
-      img: {
-        src: "images/icon.png"
-      },
-      h4: [
-        "Descubre maravillas mientras viajas",
-        "al reino de conejos y barajas.",
-      ]
-    }, CARD({
+    section: [CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
     }, {
@@ -140,7 +147,15 @@ DOM.set({
         text: "El video tutorial viene muy pronto."
       }
     }, 490), {
-      p: "Lenino's <b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
+      h4: [
+        "Descubre maravillas mientras viajas",
+        "al reino de conejos y barajas.",
+      ]
+    }, {
+      p: [
+        `Lenino's ${JRName} es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.`,
+        `A diferencia de nuestros juegos clásicos, ${JRName} ofrece fantasía y exploración en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`
+      ],
     }, {
       /*h4: [{
           img: {
@@ -153,9 +168,11 @@ DOM.set({
         "Use the cards very wisely to complete the quest."
       ]*/
     }, {
-      div: [RANDOM_CARD(), RANDOM_CARD()],
-    }, {/*
-      h3: '<b class="wisdom">Wisdom</b>, <b class="courage">Courage</b>, <b class="fortune">Fortune</b> & <b class="charm">Charm</b> <br> is what a rabbit has at hand.',*/
+      div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
+    }, {
+      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusion y consciencia social, ecológica y global.",
+      /*
+            h3: '<b class="wisdom">Wisdom</b>, <b class="courage">Courage</b>, <b class="fortune">Fortune</b> & <b class="charm">Charm</b> <br> is what a rabbit has at hand.',*/
     }, {
       img: {
         src: "images/photo1.jpg",
@@ -163,7 +180,6 @@ DOM.set({
         height: "auto",
         alt: "game board"
       },
-      small: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables.",
     }, {
       h2: {
         a: {
@@ -173,16 +189,19 @@ DOM.set({
         }
       }
     }, {
-      p: 'Follow Lenino on <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> or <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
+      p: 'Síguenos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> or <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
     }, {
+      textAlign: "center",
       a: {
+        display: "block",
         href: "http://lenino.net",
         target: "_blank",
         img: {
+          width: "4em",
           src: "../assets/leninoLogo.png",
           alt: "Lenino.net"
         },
-        text: "Lenino.net"
+        div: "Lenino.net",
       }
     }]
   },
