@@ -86,7 +86,8 @@ DOM.style({
     fontSize: '1.8em'
   },
   b: {
-    textShadow: 'black 1px 1px'
+    textShadow: 'black 1px 1px',
+    fontFamily: 'titleFont',
   },
   _wisdom: {
     color: 'teal'
@@ -112,10 +113,10 @@ DOM.set({
   textAlign: 'center',
   padding: '0px',
   margin: '0px',
-  fontFamily: "body",
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
   fontFamily: 'Calibri, "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif',
+  fontSize: "16px",
   main: {
     maxWidth: '500px',
     minWidth: '490px',
@@ -128,8 +129,7 @@ DOM.set({
       h4: [
         "Descubre maravillas mientras viajas",
         "al reino de conejos y barajas.",
-      ],
-      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
+      ]
     }, CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
@@ -140,13 +140,7 @@ DOM.set({
         text: "El video tutorial viene muy pronto."
       }
     }, 490), {
-      /*h2: {
-        a: {
-          href: "https://lenincompres.github.io/jackRabbitsApp/",
-          text: "Virtual Version"
-        }
-      },
-      p: "Lenino is yet to publish the official physical game. In the mean time, you can play online with your own deck of casino cards. This virtual version replaces the board, pieces and dice, and walks you through the instructions."*/
+      p: "Lenino's <b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
     }, {
       /*h4: [{
           img: {
