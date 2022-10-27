@@ -129,7 +129,7 @@ DOM.set({
         "Descubre maravillas mientras viajas",
         "al reino de conejos y barajas.",
       ],
-      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a Alicia en El País de las maravillas,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
+      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a Alicia en el País de las maravillas,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
     }, CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
@@ -169,7 +169,7 @@ DOM.set({
         height: "auto",
         alt: "game board"
       },
-      small: "The game includes 38 wooden board pieces, 4 player tokens, 2 dice, <br> 12 carrot tokens and a deck of 54 custom designed poker cards.",
+      small: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables.",
     }, {
       h2: {
         a: {
