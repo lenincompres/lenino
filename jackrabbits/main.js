@@ -57,10 +57,13 @@ const RANDOM_CARD = () => {
 }
 
 DOM.style({
-  fontFace: {
+  fontFace: [{
     fontFamily: 'titleFont',
-    src: 'url("HP PSG.ttf")'
-  },
+    src: 'url("IrishGrover-Regular.ttf")'
+  },{
+    fontFamily: 'body',
+    src: 'url("markerfeltnormal.ttf")'
+  }],
   section: {
     margin: '1em 0'
   },
@@ -109,6 +112,7 @@ DOM.set({
   textAlign: 'center',
   padding: '0px',
   margin: '0px',
+  fontFamily: "body",
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
   fontFamily: 'Calibri, "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif',
@@ -124,7 +128,8 @@ DOM.set({
       h4: [
         "Descubre maravillas mientras viajas",
         "al reino de conejos y barajas.",
-      ]
+      ],
+      p: "<b>JACK RABBITS</b> es un juego de mesa retro-ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos,  la exploración de un tablero distinto en cada partida y los elementos de aventura de fantasía.  El arte y concepto evoca a Alicia en El País de las maravillas,  y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales.  A diferencia de nuestros juegos clásicos,  ofrece fantasía y exploración, en lugar de bancarrota financiera,  asesinato o guerra como tema principal. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.",
     }, CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
