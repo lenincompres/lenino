@@ -143,7 +143,7 @@ DOM.set({
       },
       p: "Lenino is yet to publish the official physical game. In the mean time, you can play online with your own deck of casino cards. This virtual version replaces the board, pieces and dice, and walks you through the instructions."*/
     }, {
-      h4: [{
+      /*h4: [{
           img: {
             src: "images/icon.png"
           }
@@ -152,7 +152,7 @@ DOM.set({
         "Travel the land trying to find a rightfully suited heir.",
         "Run through paths out of the castle. Try to beat the rest.",
         "Use the cards very wisely to complete the quest."
-      ]
+      ]*/
     }, {
       div: [RANDOM_CARD(), RANDOM_CARD()],
     }, {
@@ -174,7 +174,7 @@ DOM.set({
         }
       }
     }, {
-      p: 'Follow Lenino on <a href="https://www.instagram.com/lenino/" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> or <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
+      p: 'Follow Lenino on <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> or <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
     }, {
       a: {
         href: "http://lenino.net",
