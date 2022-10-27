@@ -189,7 +189,7 @@ DOM.set({
         }
       }
     }, {
-      p: 'Síguenos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a> o <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a>.'
+      p: 'Síguenos y contáctanos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> o por <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">correo-electrónico</a>.'
     }, {
       textAlign: "center",
       a: {
