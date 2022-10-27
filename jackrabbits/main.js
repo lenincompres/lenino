@@ -122,10 +122,8 @@ DOM.set({
         src: "images/icon.png"
       },
       h4: [
-        "<big>K</big>ings are up in their towers.",
-        "<big>Q</big>ueens live in a Noble house.",
-        "A <big>J</big>ack is needed to marry them;",
-        "the Jacks are found in towns."
+        "Descubre maravillas mientras viajas",
+        "al reino de conejos y barajas.",
       ]
     }, CARD({
       background: 'url(images/splash.png) center center no-repeat',
@@ -134,16 +132,16 @@ DOM.set({
       backgroundColor: 'white',
       p: {
         marginTop: '6em',
-        text: "An instructional video will be up very soon."
+        text: "El video tutorial viene muy pronto."
       }
     }, 490), {
-      h2: {
+      /*h2: {
         a: {
           href: "https://lenincompres.github.io/jackRabbitsApp/",
           text: "Virtual Version"
         }
       },
-      p: "Lenino is yet to publish the official physical game. In the mean time, you can play online with your own deck of casino cards. This virtual version replaces the board, pieces and dice, and walks you through the instructions."
+      p: "Lenino is yet to publish the official physical game. In the mean time, you can play online with your own deck of casino cards. This virtual version replaces the board, pieces and dice, and walks you through the instructions."*/
     }, {
       h4: [{
           img: {
@@ -163,7 +161,7 @@ DOM.set({
       img: {
         src: "images/photo1.jpg",
         width: "490",
-        height: "226",
+        height: "auto",
         alt: "game board"
       },
       small: "The game includes 38 wooden board pieces, 4 player tokens, 2 dice, <br> 12 carrot tokens and a deck of 54 custom designed poker cards.",
@@ -174,12 +172,6 @@ DOM.set({
           href: "instructions.pdf",
           target: "_blank",
           text: "Game Instructions",
-        }
-      }, {
-        a: {
-          href: "presets.pdf",
-          target: "_blank",
-          text: "Preset Boards"
         }
       }]
     }, {
