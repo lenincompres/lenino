@@ -27,10 +27,10 @@ function Mover(x, y, draw = () => null, update = () => null, visible = true){
     }
   }
 
-  me.goto = (x, y, s = 0.2) => {
-    me.destX = x;
-    me.destY = y;
-    me.s = s;
+  me.goto = (x, y, s) => {
+    me.destX = x != undefined ? x : me.x;
+    me.destY = y != undefined ? y : me.y;
+    me.s = s != undefined ? s : me.s;
   }
 
   return me;
