@@ -1,6 +1,7 @@
-const M = 50;
-const W = 900;
+
 const H = 600;
+const W = 1.5 * H;
+const M = 5 * H / 60;
 const W2 = 0.5 * W;
 const H2 = 0.5 * H;
 const STATES = ["INTRO", "RESET", "READY", "PITCH", "OUT", "HIT", "OVER"];
@@ -16,6 +17,7 @@ let counterTimeout;
 let bases = [0, 0, 0];
 let runCount = 0;
 let outCount = 0;
+let maxTime = 2000;
 
 function setState(n) {
   if (typeof n === "string") n = STATES.indexOf(n);
@@ -24,23 +26,13 @@ function setState(n) {
   state = STATES[n];
 
   if (state === "INTRO") {
+    bases = [0, 0, 0];
+    outCount = 0;
+    runCount = 0;
     setCounter(() => setState(2));
   } else if (state === "OVER") {
     setCounter(() => setState());
-  }
-
-  if (state === "PITCH") {
-    question = quiz[currentQ];
-    correctAnswer = question.answers[0];
-    if (!question.value) question.value = 1;
-    question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
-    currentQ = (currentQ + 1) % quiz.length;
-    setCounter(() => pitchBall());
-  } else {
-    currentA = -1;
-  }
-
-  if (state === "OUT" || state === "HIT") {
+  } else if (state === "OUT" || state === "HIT") {
     if (state === "HIT") {
       bases.unshift(...Array(question.value - 1).fill(0), 1);
       runCount += bases.pop();
@@ -51,10 +43,19 @@ function setState(n) {
     setCounter(() => setState("RESET"));
   }
 
-  if (state === "INTRO") {
-    bases = [0, 0, 0];
-    outCount = 0;
-    runCount = 0;
+  if (state === "PITCH") {
+    let q = quiz[currentQ];
+    question = {
+      question: q.question,
+      answers: [...q.answers],
+      correct: q.answers[0],
+      value: typeof q.value === "number" ? q.value : 1,
+    };
+    question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
+    currentQ = (currentQ + 1) % quiz.length;
+    setCounter(() => pitchBall());
+  } else {
+    currentA = -1;
   }
 
   title.update();
@@ -88,9 +89,9 @@ function setup() {
     textSize(state === "OVER" || state === "INTRO" ? 1.1 * M : 0.8 * M);
     text(state === "OVER" ? "Game Over" : "Strikeout Trivia", 0, 0);
   }, () => {
-    title.isStart = state === "INTRO" || state === "OVER";
-    title.destX = title.isStart ? W2 : 0.35 * W;
-    title.destY = title.isStart ? H2 : 1.35 * M;
+    let isStart = state === "INTRO" || state === "OVER";
+    title.destX = isStart ? W2 : 0.35 * W;
+    title.destY = isStart ? H2 : 1.35 * M;
   });
 
   headline = Mover(W2, 0.6 * H, () => {
@@ -100,7 +101,7 @@ function setup() {
     let promtText = [
       "by Lenino",
       "↓ for next",
-      "↑ for ready",
+      "↑ when ready",
       question.question,
       "You're out!",
       "It's a hit!",
@@ -132,9 +133,8 @@ function setup() {
     text(question.answers[currentA], 0, 0);
   });
 
-  counter = Mover(W2, 0.85 * H, () => {
+  counter = Mover(W2, 0.83 * H, () => {
     if (state !== "READY" && state !== "PITCH") return;
-    //if (state === "PITCH" && currentA < 0) return;
     if (countNumber <= 0 || countNumber > 3) return;
     textFont(numberFont);
     let isPitch = currentA >= 0;
@@ -171,38 +171,32 @@ function setup() {
     });
 
     // outs
+    noStroke();
     fill("darkred");
     textSize(1.3 * M);
     Array(outCount).fill().forEach((_, i) => {
-      text("✗", 0, (9 - i) * M);
+      text("✗", 0, (9.2 - i) * M);
     });
 
     //runs
-    noStroke();
     fill("white");
     strokeWeight(2);
     circle(0, 2 * d, 0.8 * M);
-    noStroke();
-    textSize(0.7 * M);
+    textSize(runCount < 10 ? M : 0.6 * M);
     fill("green");
     textFont(numberFont);
     text(runCount, 0, 2 * d);
-
   });
 
   setCounter(() => setState());
-
 }
 
 function draw() {
-
-  //background
   background("darkgreen");
   noStroke();
-  fill(255);
+  fill(state === "INTRO" || state === "OVER" ? 210 : 255);
   rect(0.5 * M, 0.5 * M, W - M, H - M, M);
-
-  //title
+  
   graph.draw();
   diamond.draw();
   balls.forEach(b => b.draw());
@@ -210,11 +204,6 @@ function draw() {
   headline.draw();
   pitch.draw();
   counter.draw();
-
-  //leyend
-  fill(0);
-  //text("State: " + state + ", " + currentState, M, H - M);
-
 }
 
 function keyPressed() {
@@ -227,18 +216,6 @@ function keyReleased() {
   if (state === "READY") return stopCounter();
   if (state === "PITCH") return swing();
 }
-
-let maxTime = 2000;
-
-function pitchBall() {
-  if (state !== "PITCH") return;
-  currentA += 1;
-  if (currentA >= question.answers.length) {
-    return setState("OUT");
-  }
-  setCounter(() => pitchBall());
-  balls.forEach(b => b.update());
-};
 
 function setCounter(trigger = () => null, n = 4) {
   if (counterTimeout) clearTimeout(counterTimeout);
@@ -253,8 +230,16 @@ function stopCounter() {
   countNumber = 0;
 }
 
+function pitchBall() {
+  if (state !== "PITCH") return;
+  currentA += 1;
+  if (currentA >= question.answers.length) return setState("OUT");
+  setCounter(() => pitchBall());
+  balls.forEach(b => b.update());
+};
+
 function swing() {
   if (state !== "PITCH") return;
-  let isHit = question.answers[currentA] === correctAnswer;
+  let isHit = question.answers[currentA] === question.correct;
   setState(isHit ? "HIT" : "OUT");
 }
