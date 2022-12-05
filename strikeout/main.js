@@ -17,38 +17,17 @@ let bases = [0, 0, 0];
 let runCount = 0;
 let outCount = 0;
 let maxTime = 2000;
+let visuals = [];
 
 const serial = new p5.WebSerial();
-let batData = {
-  x: 0,
-  y: 0,
-  z: 0,
-};
+let batData = {};
+let batIsUp = null;
 
 function setState(n) {
   if (typeof n === "string") n = STATES.indexOf(n);
   if (n === undefined) n = (currentState + 1) % STATES.length;
   currentState = n;
   state = STATES[n];
-
-  // check to see if serial is available:
-  if (!navigator.serial) {
-    alert("WebSerial is not supported in this browser. Try Chrome or MS Edge.");
-  }
-  // if serial is available, add connect/disconnect listeners:
-  navigator.serial.addEventListener("connect", portConnect);
-  navigator.serial.addEventListener("disconnect", portDisconnect);
-  // check for any ports that are available:
-  serial.getPorts();
-  // if there's no port chosen, choose one:
-  serial.on("noport", makePortButton);
-  // open whatever port is available:
-  serial.on("portavailable", openPort);
-  // handle serial errors:
-  serial.on("requesterror", portError);
-  // handle any incoming serial data:
-  serial.on("data", serialEvent);
-  serial.on("close", makePortButton);
 
   if (state === "INTRO") {
     bases = [0, 0, 0];
@@ -66,6 +45,8 @@ function setState(n) {
       if (outCount >= 3) return setState("OVER");
     }
     setCounter(() => setState("RESET"));
+  } else if (state === "RESET") {
+    if (batIsUp === false) setTimeout(() => setState("READY"), 100);
   }
 
   if (state === "PITCH") {
@@ -79,14 +60,11 @@ function setState(n) {
     question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
     currentQ = (currentQ + 1) % quiz.length;
     setCounter(() => pitchBall());
-  } else {
-    currentA = -1;
   }
 
-  title.update();
-  headline.update();
-  balls.forEach(b => b.update());
-  pitch.update();
+  if (state !== "PITCH") currentA = -1;
+
+  visuals.forEach(v => v.update());
 };
 
 function preload() {
@@ -108,6 +86,32 @@ function setup() {
   createCanvas(W, H);
   textAlign(CENTER, CENTER);
 
+  // check to see if serial is available:
+  if (!navigator.serial) {
+    alert("WebSerial is not supported in this browser. Try Chrome or MS Edge.");
+  }
+  // if serial is available, add connect/disconnect listeners:
+  navigator.serial.addEventListener("connect", portConnect);
+  navigator.serial.addEventListener("disconnect", portDisconnect);
+  // check for any ports that are available:
+  serial.getPorts();
+  // if there's no port chosen, choose one:
+  serial.on("noport", makePortButton);
+  // open whatever port is available:
+  serial.on("portavailable", openPort);
+  // handle serial errors:
+  serial.on("requesterror", portError);
+  // handle any incoming serial data:
+  serial.on("data", serialEvent);
+  serial.on("close", makePortButton);
+
+  graph = Mover(W2, H2, () => {
+    let img = [null, resetImg, readyImg, null, outImg, hitImg, null][currentState];
+    if (!img) return;
+    imageSized(img, 2 * M / img.height);
+  });
+  visuals.push(graph);
+
   title = Mover(W2, H2, () => {
     textFont(titleFont);
     fill("darkred");
@@ -115,8 +119,9 @@ function setup() {
     text(state === "OVER" ? "Game Over" : "Strikeout Trivia", 0, 0);
   }, () => {
     let isStart = state === "INTRO" || state === "OVER";
-    title.goto(isStart ? W2 : 0.35 * W, isStart ? H2 : 1.35 * M);
+    title.moveTo(isStart ? W2 : 0.35 * W, isStart ? H2 : 1.35 * M);
   });
+  visuals.push(title);
 
   headline = Mover(W2, 0.6 * H, () => {
     fill(48);
@@ -124,8 +129,8 @@ function setup() {
     textSize(0.68 * M);
     let promtText = [
       "by Lenino",
-      "↓ for next",
-      "↑ when ready",
+      "↓ next",
+      "↑ get ready",
       question.question,
       "You're out!",
       "It's a hit!",
@@ -133,8 +138,9 @@ function setup() {
     ][currentState];
     text(promtText, 0, 0);
   }, () => {
-    headline.goto(undefined, H * [0.6, 0.7, 0.7, 0.3, 0.72, 0.72, 0.6][currentState]);
+    headline.moveToY(H * [0.6, 0.7, 0.7, 0.3, 0.72, 0.72, 0.6][currentState]);
   });
+  visuals.push(headline);
 
   balls = Array(4).fill().map((_, i) => Mover(0.1 * W, 0.6 * H + M * i, () => {
     if (state !== "PITCH") return;
@@ -146,8 +152,9 @@ function setup() {
     let [isLess, isSame] = [currentA < i, currentA === i];
     let x = isLess ? 0.1 * W : isSame ? W2 : 1.5 * W;
     let y = isLess ? 0.6 * H + M * i : isSame ? 0.6 * H : H;
-    balls[i].goto(x, y);
+    balls[i].moveTo(x, y);
   }));
+  visuals.push(...balls);
 
   pitch = Mover(W2, 0.44 * H, () => {
     if (!question.answers || state !== "PITCH") return;
@@ -156,9 +163,11 @@ function setup() {
     textSize(M);
     text(question.answers[currentA], 0, 0);
   });
+  visuals.push(pitch);
 
   counter = Mover(W2, 0.83 * H, () => {
     if (state !== "READY" && state !== "PITCH") return;
+    if (state === "PITCH" && currentA < 0) return;
     if (countNumber <= 0 || countNumber > 3) return;
     textFont(numberFont);
     let isPitch = currentA >= 0;
@@ -167,12 +176,7 @@ function setup() {
     textSize(1.5 * M);
     text(countNumber, 0, 0);
   });
-
-  graph = Mover(W2, H2, () => {
-    let img = [null, resetImg, readyImg, null, outImg, hitImg, null][currentState];
-    if (!img) return;
-    imageSized(img, 2 * M / img.height);
-  });
+  visuals.push(counter);
 
   diamond = Mover(W - 2 * M, 1 * M, () => {
     if (state === "INTRO") return;
@@ -202,7 +206,7 @@ function setup() {
     });
 
     //runs
-    fill("white");
+    fill(state === "OVER" || state === "INTRO" ? 210 : "white");
     strokeWeight(2);
     circle(0, 2 * d, 0.8 * M);
     textSize(runCount < 10 ? M : 0.6 * M);
@@ -210,6 +214,7 @@ function setup() {
     textFont(numberFont);
     text(runCount, 0, 2 * d);
   });
+  visuals.push(diamond);
 
   setCounter(() => setState());
 }
@@ -219,14 +224,7 @@ function draw() {
   noStroke();
   fill(state === "INTRO" || state === "OVER" ? 210 : 255);
   rect(0.5 * M, 0.5 * M, W - M, H - M, M);
-
-  graph.draw();
-  diamond.draw();
-  balls.forEach(b => b.draw());
-  title.draw();
-  headline.draw();
-  pitch.draw();
-  counter.draw();
+  visuals.forEach(v => v.draw());
 }
 
 //CONTROLS
@@ -237,37 +235,21 @@ function keyPressed() {
   }
 }
 
-let [lastX, lastY] = [0, 0];
-let batSeed
-let batIsUp = null;
-
-function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro){
+function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro) {
   batData = {
-    heading: h,
+    head: h,
     pitch: p,
     roll: r,
-    xAcc: xAcc,
-    yAcc: yAcc,
-    zAcc: zAcc,
+    xA: xAcc,
+    yA: yAcc,
+    zA: zAcc,
+    xG: xGyro,
+    yG: yGyro,
+    zG: zGyro,
   };
   let d = 500;
   p > 0 ? batUp() : batDown();
 }
-
-/*
-function keyReleased() {
-  if (state === "READY") return stopCounter();
-  if (state === "PITCH") return batSwing();
-}
-
-function mouseMoved() {
-  let d = 0.3 * M;
-  if (mouseY < lastY - d) batUp();
-  else if (mouseY > lastY + d) batDown();
-  [lastX, lastY] = [mouseX, mouseY];
-}
-*/
-
 
 function batDown() {
   if (batIsUp !== null && !batIsUp) return;
@@ -282,19 +264,23 @@ function batUp() {
 }
 
 function batSwitched() {
-  console.log(batIsUp ? "UP" : "DOWN");
   if (batIsUp) {
     if (state === "READY") setCounter(() => setState("PITCH"), 3);
-    if (state === "RESET" || state === "READY") headline.goto(undefined, 0.7 * H);
+    if (state === "RESET" || state === "READY") headline.moveToY(0.7 * H);
   } else {
     if (state === "RESET" || state === "READY") {
       state === "RESET" ? setState("READY") : stopCounter();
-      headline.goto(undefined, 0.75 * H);
-    } else if (state === "PITCH" && dist(mouseX, mouseY, lastX, lastY) > 0.6 * M) {
-      let isHit = question.answers[currentA] === question.correct;
-      setState(isHit ? "HIT" : "OUT");
+      headline.moveToY(0.75 * H);
+    } else if (state === "PITCH") {
+      batSwing();
     }
   }
+}
+
+function batSwing() {
+  if (state !== "PITCH") return;
+  let isHit = question.answers[currentA] === question.correct;
+  setState(isHit ? "HIT" : "OUT");
 }
 
 // FUNCTIONS
@@ -332,6 +318,7 @@ function imageSized(img, f) {
 
 // -------------------- Serial stuff --------------------
 
+portButton = {};
 // if there's no port selected, 
 // make a port select button appear:
 function makePortButton() {
@@ -360,7 +347,9 @@ function openPort() {
     serial.write("x");
   }
   // hide the port button once a port is chosen:
-  if (portButton) portButton.hide();
+  try {
+    if (portButton) portButton.hide();
+  } catch (e) {}
 }
 
 // read any incoming data:
