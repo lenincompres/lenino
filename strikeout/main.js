@@ -23,50 +23,6 @@ const serial = new p5.WebSerial();
 let batData = {};
 let batIsUp = null;
 
-function setState(n) {
-  if (typeof n === "string") n = STATES.indexOf(n);
-  if (n === undefined) n = (currentState + 1) % STATES.length;
-  currentState = n;
-  state = STATES[n];
-
-  if (state === "INTRO") {
-    bases = [0, 0, 0];
-    outCount = 0;
-    runCount = 0;
-    setCounter(() => setState(2));
-  } else if (state === "OVER") {
-    setCounter(() => setState());
-  } else if (state === "OUT" || state === "HIT") {
-    if (state === "HIT") {
-      bases.unshift(...Array(question.value - 1).fill(0), 1);
-      runCount += bases.pop();
-    } else {
-      outCount += 1;
-      if (outCount >= 3) return setState("OVER");
-    }
-    setCounter(() => setState("RESET"));
-  } else if (state === "RESET") {
-    if (batIsUp === false) setTimeout(() => setState("READY"), 100);
-  }
-
-  if (state === "PITCH") {
-    let q = quiz[currentQ];
-    question = {
-      question: q.question,
-      answers: [...q.answers],
-      correct: q.answers[0],
-      value: typeof q.value === "number" ? q.value : 1,
-    };
-    question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
-    currentQ = (currentQ + 1) % quiz.length;
-    setCounter(() => pitchBall());
-  }
-
-  if (state !== "PITCH") currentA = -1;
-
-  visuals.forEach(v => v.update());
-};
-
 function preload() {
   titleFont = loadFont('assets/Sportypo.ttf');
   numberFont = loadFont('assets/Sport.ttf');
@@ -79,31 +35,17 @@ function preload() {
   diamondImg = loadImage('assets/diamond.png');
 }
 
-quiz.sort(() => (Math.random() > .5) ? 1 : -1);
-
 function setup() {
-
   createCanvas(W, H);
   textAlign(CENTER, CENTER);
 
-  // check to see if serial is available:
-  if (!navigator.serial) {
-    alert("WebSerial is not supported in this browser. Try Chrome or MS Edge.");
-  }
-  // if serial is available, add connect/disconnect listeners:
-  navigator.serial.addEventListener("connect", portConnect);
-  navigator.serial.addEventListener("disconnect", portDisconnect);
-  // check for any ports that are available:
-  serial.getPorts();
-  // if there's no port chosen, choose one:
-  serial.on("noport", makePortButton);
-  // open whatever port is available:
-  serial.on("portavailable", openPort);
-  // handle serial errors:
-  serial.on("requesterror", portError);
-  // handle any incoming serial data:
-  serial.on("data", serialEvent);
-  serial.on("close", makePortButton);
+  if (webSerialSetup) webSerialSetup(data => {
+    if (data.indexOf("bat: ") >= 0) {
+      batUpdate(...data.split(" ")[1].split(","));
+    }
+  });
+
+  quiz.sort(() => (Math.random() > .5) ? 1 : -1);
 
   graph = Mover(W2, H2, () => {
     let img = [null, resetImg, readyImg, null, outImg, hitImg, null][currentState];
@@ -235,6 +177,8 @@ function keyPressed() {
   }
 }
 
+let batTop;
+
 function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro) {
   batData = {
     head: h,
@@ -249,6 +193,14 @@ function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro) {
   };
   let d = 500;
   p > 0 ? batUp() : batDown();
+  if (batIsUp) {
+    if (!batTop) batTop = [h, p];
+    else if (p > batTop[0]) batTop = [h, p];
+    else if (dist(...batTop, h, p) > 15) {
+      batSwing();
+      batTop = false;
+    }
+  }
 }
 
 function batDown() {
@@ -271,8 +223,6 @@ function batSwitched() {
     if (state === "RESET" || state === "READY") {
       state === "RESET" ? setState("READY") : stopCounter();
       headline.moveToY(0.75 * H);
-    } else if (state === "PITCH") {
-      batSwing();
     }
   }
 }
@@ -284,6 +234,50 @@ function batSwing() {
 }
 
 // FUNCTIONS
+
+function setState(n) {
+  if (typeof n === "string") n = STATES.indexOf(n);
+  if (n === undefined) n = (currentState + 1) % STATES.length;
+  currentState = n;
+  state = STATES[n];
+
+  if (state === "INTRO") {
+    bases = [0, 0, 0];
+    outCount = 0;
+    runCount = 0;
+    setCounter(() => setState(2));
+  } else if (state === "OVER") {
+    setCounter(() => setState());
+  } else if (state === "OUT" || state === "HIT") {
+    if (state === "HIT") {
+      bases.unshift(...Array(question.value - 1).fill(0), 1);
+      runCount += bases.pop();
+    } else {
+      outCount += 1;
+      if (outCount >= 3) return setState("OVER");
+    }
+    setCounter(() => setState("RESET"));
+  } else if (state === "RESET") {
+    if (batIsUp === false) setTimeout(() => setState("READY"), 100);
+  }
+
+  if (state === "PITCH") {
+    let q = quiz[currentQ];
+    question = {
+      question: q.question,
+      answers: [...q.answers],
+      correct: q.answers[0],
+      value: typeof q.value === "number" ? q.value : 1,
+    };
+    question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
+    currentQ = (currentQ + 1) % quiz.length;
+    setCounter(() => pitchBall());
+  }
+
+  if (state !== "PITCH") currentA = -1;
+
+  visuals.forEach(v => v.update());
+};
 
 function setCounter(trigger = () => null, n = 4) {
   if (counterTimeout) clearTimeout(counterTimeout);
@@ -306,76 +300,6 @@ function pitchBall() {
   balls.forEach(b => b.update());
 };
 
-function swing() {
-  if (state !== "PITCH") return;
-  let isHit = question.answers[currentA] === question.correct;
-  setState(isHit ? "HIT" : "OUT");
-}
-
 function imageSized(img, f) {
   image(img, -f * img.width, -f * img.height, 2 * f * img.width, 2 * f * img.height);
-}
-
-// -------------------- Serial stuff --------------------
-
-portButton = {};
-// if there's no port selected, 
-// make a port select button appear:
-function makePortButton() {
-  // create and position a port chooser button:
-  portButton = createButton('choose port');
-  portButton.position(10, 10);
-  // give the port button a mousepressed handler:
-  portButton.mousePressed(choosePort);
-}
-
-// make the port selector window appear:
-function choosePort() {
-  serial.requestPort();
-}
-
-// open the selected port, and make the port 
-// button invisible:
-function openPort() {
-  // wait for the serial.open promise to return,
-  // then call the initiateSerial function
-  serial.open().then(initiateSerial);
-
-  // once the port opens, let the user know:
-  function initiateSerial() {
-    console.log("port open");
-    serial.write("x");
-  }
-  // hide the port button once a port is chosen:
-  try {
-    if (portButton) portButton.hide();
-  } catch (e) {}
-}
-
-// read any incoming data:
-function serialEvent() {
-  // read a string from the serial port
-  // until you get carriage return and newline:
-  var inString = serial.readStringUntil("\r\n");
-  if (inString && inString.indexOf("bat: ") >= 0) {
-    batUpdate(...inString.split(" ")[1].split(","));
-  }
-}
-
-// pop up an alert if there's a port error:
-function portError(err) {
-  alert("Serial port error: " + err);
-}
-
-// try to connect if a new serial port 
-// gets added (i.e. plugged in via USB):
-function portConnect() {
-  console.log("port connected");
-  serial.getPorts();
-}
-
-// if a port is disconnected:
-function portDisconnect() {
-  serial.close();
-  console.log("port disconnected");
 }
