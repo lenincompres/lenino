@@ -3,10 +3,10 @@ let quiz = [{
   question: "Which one is a diode?",
   value: 4,
   answers: [
-    "An LED",
-    "A resistor",
-    "A potentiometer",
-    "A gyroscope",
+    "LED",
+    "resistor",
+    "potentiometer",
+    "gyroscope",
   ]
 },{
   question: "What year was the iPhone first released?",

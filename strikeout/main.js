@@ -21,7 +21,6 @@ function preload() {
   ballImg = loadImage('assets/ball.png');
   resetImg = loadImage('assets/reset.png');
   readyImg = loadImage('assets/ready.png');
-  answerImg = loadImage('assets/answer.png');
   outImg = loadImage('assets/out.png');
   hitImg = loadImage('assets/hit.png');
   diamondImg = loadImage('assets/diamond.png');
@@ -31,11 +30,12 @@ function preload() {
 }
 
 function setup() {
+  let ratio = 1.7;
   W = windowWidth;
-  H = W / 1.5;
-  if (H * 0.6 > windowHeight) {
+  H = W / ratio;
+  if (H > windowHeight) {
     H = windowHeight * 0.9;
-    W = 1.5 * H;
+    W = ratio * H;
   }
   M = 5 * H / 60;
   W2 = 0.5 * W;
@@ -82,7 +82,7 @@ function setup() {
     text(state === "OVER" ? "Game Over" : "Strikeout Trivia", 0, 0);
   }, () => {
     let isStart = state === "INTRO" || state === "OVER" || state === "END";
-    title.moveTo(isStart ? W2 : 0.35 * W, isStart ? H2 : 1.35 * M);
+    title.moveTo(isStart ? W2 : 0.3 * W, isStart ? H2 : 1.3 * M);
   });
   visuals.push(title);
 
@@ -100,8 +100,8 @@ function setup() {
     textSize(0.68 * M);
     let promtText = [
       "by Lenino",
-      "↓ next",
-      "Get ready",
+      "Lower bat ↓",
+      "Get ready ↑",
       question.question,
       "You're out!",
       `It's a ${theValue}!`,
@@ -335,7 +335,7 @@ function imageSized(img, f) {
 }
 
 function newRun(n){
-  diamond.moveTo(W - 5 * M, 3 * M);
+  diamond.moveTo(W2 + 2 * M, H2 - 2 * M);
   runCount = n;
   setTimeout(() => diamond.moveTo(W - 2 * M, M), 200);
 }
