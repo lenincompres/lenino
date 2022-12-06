@@ -1,7 +1,6 @@
 const STATES = ["INTRO", "RESET", "READY", "PITCH", "OUT", "HIT", "OVER", "END"];
 let currentState = 0;
 let state = STATES[0];
-
 let currentQ = -1;
 let currentA = -1;
 let question = {};
@@ -48,7 +47,7 @@ function setup() {
     footer: {
       color: "#9f9",
       p: [
-        "Created by Lenino for ITP TISCH NYU - Physical Computing with Tom Igoe.",
+        "Created by Lenino for ITP TISCH NYU • Physical Computing with Tom Igoe.",
         "Brooklyn, NY. 2022"
       ]
     }
@@ -58,8 +57,14 @@ function setup() {
   if (webSerialSetup) webSerialSetup(data => {
     if (data.indexOf("bat: ") >= 0) {
       batUpdate(...data.split(" ")[1].split(","));
+    } else {
+      console.log(data);
     }
   });
+
+  /*if (setupBLE) setupBLE("19B10010-E8F2-537E-4F6C-D104768A1214", data => {
+    console.log("BLE data:", data);
+  });*/
 
   quiz.sort(() => (Math.random() > .5) ? 1 : -1);
 
@@ -109,7 +114,7 @@ function setup() {
   });
   visuals.push(headline);
 
-  balls = Array(4).fill().map((_, i) => Mover(0.1 * W, 0.6 * H + M * i, () => {
+  balls = Array(4).fill().map((_, i) => Mover(-2 * M, H - 2 * M, () => {
     if (state !== "PITCH") return;
     fill(86);
     noStroke();
@@ -117,8 +122,8 @@ function setup() {
     imageSized(ballImg, (isLess ? 0.5 : isSame ? 1.5 : 3) * M / ballImg.width);
   }, () => {
     let [isLess, isSame] = [currentA < i, currentA === i];
-    let x = isLess ? 0.1 * W : isSame ? W2 : 1.5 * W;
-    let y = isLess ? 0.6 * H + M * i : isSame ? 0.6 * H : H;
+    let x = isLess ? (currentA < 0 ? -M : 2 * M) : isSame ? W2 : 1.5 * W;
+    let y = isLess ? (H - 5 * M) + M * i : isSame ? 0.6 * H : H;
     balls[i].moveTo(x, y);
   }));
   visuals.push(...balls);
@@ -145,7 +150,7 @@ function setup() {
   });
   visuals.push(counter);
 
-  diamond = Mover(W - 2 * M, 1 * M, () => {
+  diamond = Mover(W - 2 * M, M, () => {
     if (state === "INTRO") return;
     stroke("darkgreen");
     noFill();
@@ -161,16 +166,9 @@ function setup() {
       let t = v ? "◉" : "●";
       text(t, [d, 0, -d][i], [d, 0, d][i]);
     });
-    // outs
-    noStroke();
-    fill("darkred");
-    textSize(1.3 * M);
-    Array(outCount).fill().forEach((_, i) => {
-      text("✗", 0, (9.2 - i) * M);
-    });
     //runs
+    noStroke();
     fill(state === "OVER" || state === "INTRO" ? 210 : "white");
-    strokeWeight(2);
     circle(0, 2 * d, 0.8 * M);
     textSize(runCount < 10 ? M : 0.6 * M);
     fill("green");
@@ -178,6 +176,15 @@ function setup() {
     text(runCount, 0, 2 * d);
   });
   visuals.push(diamond);
+
+  outDisplay = Mover(W - 2 * M, H - 2 * M, () => {
+    // outs
+    noStroke();
+    fill("darkred");
+    textSize(1.3 * M);
+    Array(outCount).fill().forEach((_, i) => text("✗", 0, -i * M));
+  });
+  visuals.push(outDisplay);
 
   setCounter(() => setState());
 }
@@ -275,13 +282,15 @@ function setState(n) {
       value: q.value,
     };
     question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
+    balls.forEach((b, i) => setTimeout(() => b.moveTo(2 * M), i * 60));
     setCounter(() => pitchBall(), 3);
   } else if (state === "OUT" || state === "HIT") {
     currentA = -1;
     if (state === "HIT") {
       hitSound.play();
       bases.unshift(...Array(question.value - 1).fill(0), 1);
-      runCount = bases.reduce((v, o, i) => i > 3 ? o + v : o, 0);
+      let newRunCount = bases.reduce((v, o, i) => i > 3 ? o + v : o, 0);
+      if(newRunCount > runCount) newRun(newRunCount);
       quiz.splice(currentQ, 1);
       currentQ -= 1;
       if (!quiz.length) return setState("END");
@@ -323,4 +332,10 @@ function pitchBall() {
 
 function imageSized(img, f) {
   image(img, -f * img.width, -f * img.height, 2 * f * img.width, 2 * f * img.height);
+}
+
+function newRun(n){
+  diamond.moveTo(W - 5 * M, 3 * M);
+  runCount = n;
+  setTimeout(() => diamond.moveTo(W - 2 * M, M), 200);
 }
