@@ -1,13 +1,8 @@
-const H = 600;
-const W = 1.5 * H;
-const M = 5 * H / 60;
-const W2 = 0.5 * W;
-const H2 = 0.5 * H;
-const STATES = ["INTRO", "RESET", "READY", "PITCH", "OUT", "HIT", "OVER"];
+const STATES = ["INTRO", "RESET", "READY", "PITCH", "OUT", "HIT", "OVER", "END"];
 let currentState = 0;
 let state = STATES[0];
 
-let currentQ = 0;
+let currentQ = -1;
 let currentA = -1;
 let question = {};
 let answerText = "";
@@ -18,8 +13,6 @@ let runCount = 0;
 let outCount = 0;
 let maxTime = 2000;
 let visuals = [];
-
-const serial = new p5.WebSerial();
 let batData = {};
 let batIsUp = null;
 
@@ -33,10 +26,33 @@ function preload() {
   outImg = loadImage('assets/out.png');
   hitImg = loadImage('assets/hit.png');
   diamondImg = loadImage('assets/diamond.png');
+  hitSound = loadSound('assets/hit.mp3');
+  swingSound = loadSound('assets/swing.wav');
+  catchSound = loadSound('assets/catch.mp3');
 }
 
 function setup() {
-  createCanvas(W, H);
+  W = windowWidth;
+  H = W / 1.5;
+  if (H * 0.6 > windowHeight) {
+    H = windowHeight * 0.9;
+    W = 1.5 * H;
+  }
+  M = 5 * H / 60;
+  W2 = 0.5 * W;
+  H2 = 0.5 * H;
+  DOM.set({
+    background: "darkgreen",
+    textAlign: "center",
+    canvas: createCanvas(W, H),
+    footer: {
+      color: "#9f9",
+      p: [
+        "Created by Lenino for ITP TISCH NYU - Physical Computing with Tom Igoe.",
+        "Brooklyn, NY. 2022"
+      ]
+    }
+  });
   textAlign(CENTER, CENTER);
 
   if (webSerialSetup) webSerialSetup(data => {
@@ -48,7 +64,7 @@ function setup() {
   quiz.sort(() => (Math.random() > .5) ? 1 : -1);
 
   graph = Mover(W2, H2, () => {
-    let img = [null, resetImg, readyImg, null, outImg, hitImg, null][currentState];
+    let img = [null, resetImg, readyImg, null, outImg, hitImg, null, null][currentState];
     if (!img) return;
     imageSized(img, 2 * M / img.height);
   });
@@ -60,27 +76,36 @@ function setup() {
     textSize(state === "OVER" || state === "INTRO" ? 1.1 * M : 0.8 * M);
     text(state === "OVER" ? "Game Over" : "Strikeout Trivia", 0, 0);
   }, () => {
-    let isStart = state === "INTRO" || state === "OVER";
+    let isStart = state === "INTRO" || state === "OVER" || state === "END";
     title.moveTo(isStart ? W2 : 0.35 * W, isStart ? H2 : 1.35 * M);
   });
   visuals.push(title);
 
   headline = Mover(W2, 0.6 * H, () => {
+    let theValue = ["hit", "double", "triple", "homerun"][question.value - 1];
+    if (state === "PITCH") {
+      textSize(0.5 * M);
+      textFont(numberFont);
+      fill(["white", "darkgreen", "green", "limegreen", "lime"][question.value - 1]);
+      text(theValue, 0, -0.8 * M);
+    }
     fill(48);
     noStroke();
+    textFont("arial");
     textSize(0.68 * M);
     let promtText = [
       "by Lenino",
       "↓ next",
-      "↑ get ready",
+      "Get ready",
       question.question,
       "You're out!",
-      "It's a hit!",
-      runCount + " runs",
+      `It's a ${theValue}!`,
+      "Try again",
+      `It's a ${theValue}, and you won!`
     ][currentState];
     text(promtText, 0, 0);
   }, () => {
-    headline.moveToY(H * [0.6, 0.7, 0.7, 0.3, 0.72, 0.72, 0.6][currentState]);
+    headline.moveToY(H * [0.6, 0.7, 0.7, 0.3, 0.72, 0.72, 0.6, 0.6][currentState]);
   });
   visuals.push(headline);
 
@@ -122,15 +147,13 @@ function setup() {
 
   diamond = Mover(W - 2 * M, 1 * M, () => {
     if (state === "INTRO") return;
-
     stroke("darkgreen");
     noFill();
     strokeWeight(3);
     let d = 1 * M;
-    rotate(PI / 4);;
+    rotate(PI / 4);
     square(0, 0, 1.5 * d);
     rotate(-PI / 4);
-
     // bases
     textSize(0.8 * M);
     bases.forEach((v, i) => {
@@ -138,7 +161,6 @@ function setup() {
       let t = v ? "◉" : "●";
       text(t, [d, 0, -d][i], [d, 0, d][i]);
     });
-
     // outs
     noStroke();
     fill("darkred");
@@ -146,7 +168,6 @@ function setup() {
     Array(outCount).fill().forEach((_, i) => {
       text("✗", 0, (9.2 - i) * M);
     });
-
     //runs
     fill(state === "OVER" || state === "INTRO" ? 210 : "white");
     strokeWeight(2);
@@ -171,12 +192,6 @@ function draw() {
 
 //CONTROLS
 
-function keyPressed() {
-  if (state !== "PITCH" && countNumber === 0) {
-    state === "READY" ? setCounter(() => setState("PITCH"), 3) : setState();
-  }
-}
-
 let batTop;
 
 function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro) {
@@ -191,12 +206,11 @@ function batUpdate(h, p, r, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro) {
     yG: yGyro,
     zG: zGyro,
   };
-  let d = 500;
-  p > 0 ? batUp() : batDown();
-  if (batIsUp) {
+  p > 10 ? batUp() : batDown();
+  if (batIsUp && state === "PITCH") {
     if (!batTop) batTop = [h, p];
     else if (p > batTop[0]) batTop = [h, p];
-    else if (dist(...batTop, h, p) > 15) {
+    else if (dist(...batTop, h, p) > 16) {
       batSwing();
       batTop = false;
     }
@@ -221,8 +235,8 @@ function batSwitched() {
     if (state === "RESET" || state === "READY") headline.moveToY(0.7 * H);
   } else {
     if (state === "RESET" || state === "READY") {
-      state === "RESET" ? setState("READY") : stopCounter();
       headline.moveToY(0.75 * H);
+      state === "RESET" ? setState("READY") : stopCounter();
     }
   }
 }
@@ -230,6 +244,7 @@ function batSwitched() {
 function batSwing() {
   if (state !== "PITCH") return;
   let isHit = question.answers[currentA] === question.correct;
+  swingSound.play();
   setState(isHit ? "HIT" : "OUT");
 }
 
@@ -240,42 +255,48 @@ function setState(n) {
   if (n === undefined) n = (currentState + 1) % STATES.length;
   currentState = n;
   state = STATES[n];
-
   if (state === "INTRO") {
     bases = [0, 0, 0];
     outCount = 0;
     runCount = 0;
     setCounter(() => setState(2));
-  } else if (state === "OVER") {
-    setCounter(() => setState());
-  } else if (state === "OUT" || state === "HIT") {
-    if (state === "HIT") {
-      bases.unshift(...Array(question.value - 1).fill(0), 1);
-      runCount += bases.pop();
-    } else {
-      outCount += 1;
-      if (outCount >= 3) return setState("OVER");
-    }
-    setCounter(() => setState("RESET"));
   } else if (state === "RESET") {
     if (batIsUp === false) setTimeout(() => setState("READY"), 100);
-  }
-
-  if (state === "PITCH") {
+  } else if (state === "READY") {
+    currentA = -1;
+  } else if (state === "PITCH") {
+    currentQ = (currentQ + 1) % quiz.length;
     let q = quiz[currentQ];
+    if (typeof q.value !== "number" || q.value < 1) q.value = 1;
     question = {
       question: q.question,
       answers: [...q.answers],
       correct: q.answers[0],
-      value: typeof q.value === "number" ? q.value : 1,
+      value: q.value,
     };
     question.answers.sort(() => (Math.random() > .5) ? 1 : -1);
-    currentQ = (currentQ + 1) % quiz.length;
-    setCounter(() => pitchBall());
+    setCounter(() => pitchBall(), 3);
+  } else if (state === "OUT" || state === "HIT") {
+    currentA = -1;
+    if (state === "HIT") {
+      hitSound.play();
+      bases.unshift(...Array(question.value - 1).fill(0), 1);
+      runCount = bases.reduce((v, o, i) => i > 3 ? o + v : o, 0);
+      quiz.splice(currentQ, 1);
+      currentQ -= 1;
+      if (!quiz.length) return setState("END");
+    } else {
+      catchSound.play();
+      quiz[currentQ].value -= 1;
+      outCount += 1;
+      if (outCount >= 3) return setState("OVER");
+    }
+    setCounter(() => setState("RESET"));
+  } else if (state === "OVER") {
+    setCounter(() => location.reload(), 6);
+  } else if (state === "END") {
+    setCounter(() => location.reload(), 8);
   }
-
-  if (state !== "PITCH") currentA = -1;
-
   visuals.forEach(v => v.update());
 };
 

@@ -1,3 +1,4 @@
+const serial = new p5.WebSerial();
 let webSerialOnData = () => null;
 
 function webSerialSetup(onData = () => null) {
