@@ -162,12 +162,12 @@ DOM.set({
     section: [CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
-    }, {
+    }, {/*
       backgroundColor: 'white',
       p: {
         marginTop: '6em',
         text: "El video tutorial viene muy pronto."
-      }
+      }*/
     }, 490), {
       h4: [
         "Descubre maravillas mientras viajas",
