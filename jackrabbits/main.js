@@ -180,6 +180,8 @@ DOM.set({
     }, {
       h2: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
       iframe: {
+        width: "680",
+        height: "344",
         backgroundColor: "black",
         frameborder: "0",
         allowtransparency: "true",
