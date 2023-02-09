@@ -179,14 +179,13 @@ DOM.set({
       ],
     }, {
       h2: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
-      iframe: {
-        width: "680",
-        height: "344",
-        backgroundColor: "black",
-        frameborder: "0",
-        allowtransparency: "true",
-        scrolling: "no",
-        src: "https://tabletopia.com/games/jack-rabbits/680x340",
+      a:{
+        href: "https://tabletopia.com/games/jack-rabbits",
+        target: "_blank",
+        img: {
+          width: "100%",
+          src: "tabletopia_link.png",
+        }
       },
       p: "Muy pronto estaremos lanzando una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento."
     }, {
