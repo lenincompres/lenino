@@ -178,10 +178,9 @@ DOM.set({
         `Lenino's ${JRName} es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`
       ],
     }, {
-      h1: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
+      h2: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
       iframe: {
-        width: "680",
-        height: "340",
+        backgroundColor: "black",
         frameborder: "0",
         allowtransparency: "true",
         scrolling: "no",
