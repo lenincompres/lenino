@@ -187,7 +187,7 @@ DOM.set({
           src: "tabletopia_link.png",
         }
       },
-      p: "Muy pronto estaremos lanzando una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento."
+      p: "Muy pronto lanzaremos una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento."
     }, {
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
