@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.32
+ * @version 1.0.34
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -286,6 +286,9 @@ class Binder {
     this.value = values.shift();
     setTimeout(() => this.flash(values, delay, false), delay);
   }
+  apply(val) {
+    this.value = val;
+  }
   set value(val) {
     this._value = val;
     this._bonds.forEach(bond => {
@@ -385,9 +388,9 @@ class DOM {
     let extra = [];
     let cls = sel.split("_");
     sel = cls.shift();
-    if (sel === "h") {
+    if (sel === "h" || sel.endsWith(" h")) {
       cls = cls.length ? ("." + cls.join(".")) : "";
-      sel = Array(6).fill().map((_, i) => "h" + (i + 1) + cls).join(", ");
+      sel = Array(6).fill().map((_, i) => sel + (i + 1) + cls).join(", ");
       cls = [];
     }
     if (sel.toLowerCase() === "fontface") sel = "@font-face";
@@ -504,7 +507,7 @@ class DOM {
     "*": {
       boxSizing: "border-box",
       verticalAlign: "baseline",
-      lineHeight: "1.25em",
+      lineHeight: "inherit",
       margin: 0,
       padding: 0,
       border: 0,

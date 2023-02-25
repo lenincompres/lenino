@@ -5,15 +5,15 @@ const TEXT = {
   },
   PAGE_TITLE: {
     ENG: "Suit Yourself",
-    ESP: "¿Cuál es tu símbolo?",
+    ESP: "Echa tus cartas",
   },
   PAGE_TITLE_DONE: {
     ENG: "This is your hand",
     ESP: "Esta es tu mano",
   },
   PAGE_SUBTITLE: {
-    ENG: "Rate these traits according to your natural tendency.",
-    ESP: "Valora estos rasgos de acuerdo a tu enfoque natural.",
+    ENG: "Rate these traits according to your natural tendency, and discover which is your suit.",
+    ESP: "Valora estos rasgos de acuerdo a tu enfoque natural y revelarás cuál es tu símbolo.",
   },
   YOUR: {
     ENG: "Your ",
@@ -28,11 +28,11 @@ const TEXT = {
       ESP: "Fíjate en los puntos disponibles.",
     },
     {
-      ENG: "Let go from other traits to gain this.",
-      ESP: "Renuncia a otros para ganar aquí.",
+      ENG: "Reduce some traits to gain others.",
+      ESP: "Reduce unos para poder subir otros.",
     },
     {
-      ENG: "Exchange your traits for this.",
+      ENG: "Exchange other traits for this.",
       ESP: "Canjea los demás para adquirir este.",
     },
   ],
@@ -61,32 +61,13 @@ const TEXT = {
     ESP: "Reiniciar",
   },
   DESCRIPTION: {
-    ENG: (suits = []) => {
-      console.log(suits);
-      let suit = suits[0];
-      return {
-        p: `According to your value of the cards, you're suited with <b style="color:${suit.color}">${SUIT[suit.symbol].ENG}</b>, a symbol for ${SUIT[suit.cast].ENG} focused on ${SUIT[suit.symbol].meaning.ENG}.`,
-        ul: {
-          margin: "1em",
-          li: suits.map(s => getPct(s))
-        },
-      }
-    },
-    ESP: (suits = []) => {
-      let suit = suits[0];
-      return {
-        p: `De acuerdo a tu valoración, tu símbolo es el de <b style="color:${suit.color}">${SUIT[suit.symbol].ESP}</b>, el de ${SUIT[suit.cast].ESP} enfocandos en ${SUIT[suit.symbol].meaning.ESP}.`,
-        ul: {
-          margin: "1em",
-          li: suits.map(s => getPct(s))
-        },
-      };
-    },
+    ENG: (suit) => `According to your valuation, <b style="color:${suit.color}">${SUIT[suit.symbol].ENG}</b> suit you best.</br>This is the symbol for ${SUIT[suit.cast].ENG} focused on ${SUIT[suit.symbol].meaning.ENG}.`,
+    ESP: (suit) => `De acuerdo a tu valoración, tu símbolo es el de <b style="color:${suit.color}">${SUIT[suit.symbol].ESP}</b>, los ${SUIT[suit.cast].ESP} enfocandos en ${SUIT[suit.symbol].meaning.ESP}.`,
   },
 }
 
 const getPct = (suit) => {
-  if(!suit.pct) return;
+  if (!suit.pct) return;
   return {
     img: {
       verticalAlign: "middle",
@@ -116,8 +97,8 @@ const SUIT = {
     ENG: "spades",
     ESP: "espadas",
     meaning: {
-      ENG: "courage, order and faith",
-      ESP: "la valentía, el orden y la fe",
+      ENG: "courage, principles and work",
+      ESP: "la valentía, los princípios y el esfuerzo",
     }
   },
   hearts: {

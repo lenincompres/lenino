@@ -2,45 +2,12 @@ function getArray(n, f = () => null) {
   return Array(n).fill().map((_, i) => f(i));
 }
 
-const [CARD_MIN, CARD_MAX] = [2, 10];
-
-const [SUIT_D, SUIT_H, SUIT_C, SUIT_S] = [{
-  symbol: "diamonds",
-  alt: "gold",
-  cast: "merchant",
-  trait: "wealth",
-  color: "goldenrod",
-  image: "assets/suit-diamonds.png",
-}, {
-  symbol: "hearts",
-  alt: "cups",
-  cast: "charmer",
-  trait: "charm",
-  color: "brown",
-  image: "assets/suit-hearts.png",
-}, {
-  symbol: "clubs",
-  alt: "clovers",
-  cast: "sage",
-  trait: "wisdom",
-  color: "teal",
-  image: "assets/suit-clovers.png",
-}, {
-  symbol: "spades",
-  alt: "swords",
-  cast: "warrior",
-  trait: "strength",
-  color: "darkslateblue",
-  image: "assets/suit-spades.png",
-}];
-
-
-class card {
+class Card {
   constructor(number, suit, callback = () => null) {
     this._buttonEnabled = new Binder(true);
     this._canAdd = new Binder(true);
     this._number = new Binder(2);
-    this._suit = new Binder(SUIT_C);
+    this._suit = new Binder(Card.SUIT.D);
     this.number = number;
     this.callback = () => callback(this);
     let numbers = getArray(2, i => DOM.element({
@@ -118,9 +85,9 @@ class card {
           color: "white",
           borderColor: this.suit.color,
           content: [{
-            background: this._number.bind(v => v > CARD_MIN ? this.suit.color : "transparent"),
-            color: this._number.bind(v => v > CARD_MIN ? "white" : this.suit.color),
-            opacity: this._number.bind(v => v > CARD_MIN ? 1 : 0.4),
+            background: this._number.bind(v => v > Card.MIN ? this.suit.color : "transparent"),
+            color: this._number.bind(v => v > Card.MIN ? "white" : this.suit.color),
+            opacity: this._number.bind(v => v > Card.MIN ? 1 : 0.4),
             text: "⬇",
             click: e => this.number -= 1,
           }, {
@@ -136,8 +103,8 @@ class card {
   }
 
   set number(v) {
-    if (this.number >= CARD_MAX) this.canAdd = false;
-    if (v < CARD_MIN || v > CARD_MAX) return;
+    if (this.number >= Card.MAX) this.canAdd = false;
+    if (v < Card.MIN || v > Card.MAX) return;
     this._number.value = v;
     this.callback ? this.callback(v) : null;
   }
@@ -170,4 +137,37 @@ class card {
     this._buttonEnabled.value;
   }
 
+  static MIN = 2;
+  static MAX = 10;
+  
+  static SUIT = {
+    D : {
+    symbol: "diamonds",
+    alt: "gold",
+    cast: "merchant",
+    trait: "wealth",
+    color: "goldenrod",
+    image: "assets/suit-diamonds.png",
+  }, H: {
+    symbol: "hearts",
+    alt: "cups",
+    cast: "charmer",
+    trait: "charm",
+    color: "brown",
+    image: "assets/suit-hearts.png",
+  }, C: {
+    symbol: "clubs",
+    alt: "clovers",
+    cast: "sage",
+    trait: "wisdom",
+    color: "teal",
+    image: "assets/suit-clovers.png",
+  }, S:{
+    symbol: "spades",
+    alt: "swords",
+    cast: "warrior",
+    trait: "strength",
+    color: "darkslateblue",
+    image: "assets/suit-spades.png",
+  }};
 }

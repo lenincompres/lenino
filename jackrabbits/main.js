@@ -67,10 +67,10 @@ const JRName = '<b><span class="charm">J</span><span class="fortune">A</span>C<s
 
 DOM.style({
   fontFace: [{
-    fontFamily: 'titleFont',
+    fontFamily: 'title',
     src: 'url("assets/IrishGrover-Regular.ttf")'
   }, {
-    fontFamily: 'bodyFont',
+    fontFamily: 'body',
     src: 'url("assets/Chalkboard.ttc")'
   }],
   section: {
@@ -83,7 +83,7 @@ DOM.style({
     }
   },
   h: {
-    fontFamily: 'titleFont',
+    fontFamily: 'title',
     margin: '1em 0 0 0',
     lineHeight: '1.5em',
     textAlign: 'center',
@@ -103,7 +103,7 @@ DOM.style({
     fontSize: '1.8em'
   },
   b: {
-    fontFamily: 'titleFont',
+    fontFamily: 'title',
     textShadow: 'black 1px 1px',
   },
   _wisdom: {
@@ -131,7 +131,7 @@ DOM.set({
   margin: '0px',
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
-  fontFamily: "bodyFont",
+  fontFamily: "body",
   fontSize: "16px",
   textAlign: "center",
   header: {
