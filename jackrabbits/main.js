@@ -117,7 +117,7 @@ DOM.style({
   },
   _charm: {
     color: 'brown'
-  }
+  },
 });
 
 DOM.set({
@@ -127,7 +127,7 @@ DOM.set({
   icon: "images/icon.png",
   width: '100%',
   height: '100%',
-  padding: '0px',
+  padding: '1.5em',
   margin: '0px',
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
@@ -156,35 +156,39 @@ DOM.set({
   },
   main: {
     maxWidth: '680px',
-    minWidth: '490px',
     margin: '0 auto',
     padding: '0 0 10px',
-    section: [CARD({
-      background: 'url(images/splash.png) center center no-repeat',
-      backgroundColor: 'lightgoldenrodyellow'
-    }, {/*
-      backgroundColor: 'white',
-      p: {
-        marginTop: '6em',
-        text: "El video tutorial viene muy pronto."
-      }*/
-    }, 490), {
+    section: [{
+      margin: "0 -10em",
+      div: CARD({
+        background: 'url(images/splash.png) center center no-repeat',
+        backgroundColor: 'lightgoldenrodyellow'
+      }, {
+        /*
+              backgroundColor: 'white',
+              p: {
+                marginTop: '6em',
+                text: "El video tutorial viene muy pronto."
+              }*/
+      }, 490)
+    }, {
       h4: [
         "Descubre maravillas mientras viajas",
         "al reino de conejos y barajas.",
       ]
     }, {
       p: [
-        `Lenino's ${JRName} es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`
+        `Lenino's ${JRName} es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`,
+        "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global.",
       ],
     }, {
       h2: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
-      a:{
+      a: {
         href: "https://tabletopia.com/games/jack-rabbits",
         target: "_blank",
         img: {
           width: "100%",
-          src: "tabletopia_link.png",
+          src: "images/tabletopia_link.png",
         }
       },
       p: "Muy pronto lanzaremos una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento."
@@ -192,12 +196,11 @@ DOM.set({
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
       h4: '<b class="fortune">Fortuna</b>, <b class="courage">Coraje</b>, <b class="wisdom">Sapiencia</b>  y <b class="charm">Encanto</b> <br/>son las cualidades que tienes a mano.',
-    }, {
-      p: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global.",
+      section: GET_SUITED_MODEL("suityourself/"),
     }, {
       img: {
         src: "images/photo1.jpg",
-        width: "490",
+        width: "100%",
         height: "auto",
         alt: "game board"
       },

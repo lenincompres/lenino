@@ -3,7 +3,7 @@ function getArray(n, f = () => null) {
 }
 
 class Card {
-  constructor(number, suit, callback = () => null) {
+  constructor(number, suit, callback = () => null, root = "") {
     this._buttonEnabled = new Binder(true);
     this._canAdd = new Binder(true);
     this._number = new Binder(2);
@@ -17,14 +17,15 @@ class Card {
       bottom: i % 2 ? 0 : undefined,
       right: i % 2 ? 0 : undefined,
       transform: i % 2 ? "rotate(180deg)" : undefined,
-      h2: {
+      b: {
+        fontSize: "1.6em",
         color: this._suit.bind(v => v.color),
         display: "inline-block",
         text: this._number,
       },
       img: {
         height: "1.3em",
-        src: this._suit.bind(s => s.image),
+        src: this._suit.bind(s => root + s.image),
       }
     }));
 
@@ -53,7 +54,7 @@ class Card {
       transform: `rotate(${["-60", "60", "240", "120"][i]}deg)`,
     }));
     let imgs = [img_center, ...img_middle, ...img_corners, ...img_sides];
-    imgs.forEach(img => img.src = this.suit.image);
+    imgs.forEach(img => img.src = root + this.suit.image);
 
     this.element = DOM.element({
       background: "white",

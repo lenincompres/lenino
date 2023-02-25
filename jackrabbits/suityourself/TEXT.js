@@ -1,4 +1,4 @@
-const TEXT = {
+const GET_SUITED_TEXT = {
   GET_JK: {
     ENG: "Get the Jack Rabbits game",
     ESP: "Adquiere Jack Rabbits!",
@@ -14,6 +14,10 @@ const TEXT = {
   PAGE_SUBTITLE: {
     ENG: "Rate these traits according to your natural tendency, and discover which is your suit.",
     ESP: "Valora estos rasgos de acuerdo a tu enfoque natural y revelarás cuál es tu símbolo.",
+  },
+  PAGE_SUBTITLE_DONE: {
+    ENG: "According to your valuation",
+    ESP: "De acuerdo a tu valoración",
   },
   YOUR: {
     ENG: "Your ",
@@ -61,27 +65,9 @@ const TEXT = {
     ESP: "Reiniciar",
   },
   DESCRIPTION: {
-    ENG: (suit) => `According to your valuation, <b style="color:${suit.color}">${SUIT[suit.symbol].ENG}</b> suit you best.</br>This is the symbol for ${SUIT[suit.cast].ENG} focused on ${SUIT[suit.symbol].meaning.ENG}.`,
-    ESP: (suit) => `De acuerdo a tu valoración, tu símbolo es el de <b style="color:${suit.color}">${SUIT[suit.symbol].ESP}</b>, los ${SUIT[suit.cast].ESP} enfocandos en ${SUIT[suit.symbol].meaning.ESP}.`,
+    ENG: (suit) => `<b style="color:${suit.color};text-transform: capitalize;">${SUIT[suit.symbol].ENG}</b> suit you best. This is the symbol for ${SUIT[suit.cast].ENG} focused on ${SUIT[suit.symbol].meaning.ENG}.`,
+    ESP: (suit) => `Tu símbolo es el de <b style="color:${suit.color}">${SUIT[suit.symbol].ESP}</b>, los ${SUIT[suit.cast].ESP} enfocandos en ${SUIT[suit.symbol].meaning.ESP}.`,
   },
-}
-
-const getPct = (suit) => {
-  if (!suit.pct) return;
-  return {
-    img: {
-      verticalAlign: "middle",
-      height: "1em",
-      src: suit.image
-    },
-    b: {
-      textAlign: "left",
-      display: "inline-block",
-      width: "3em",
-      color: suit.color,
-      text: suit.pct + "%",
-    }
-  }
 }
 
 const SUIT = {

@@ -21,7 +21,7 @@ const MAIN_MENU = {
         }
       }, {
         a: {
-          text: TEXT.GET_JK[LANG],
+          text: GET_SUITED_TEXT.GET_JK[LANG],
           href: "http://jackrabbits.lenino.net",
         }
       }, {
@@ -48,9 +48,6 @@ DOM.style({
     fontFamily: 'body',
     src: '../assets/Chalkboard.ttc'
   }],
-  html: {
-    scrollBehavior: "smooth",
-  },
 });
 
 DOM.set({
@@ -68,5 +65,5 @@ DOM.set({
   textAlign: "center",
   padding: "1em",
   menu: MAIN_MENU,
-  container: GET_SUITED_MODEL,
+  container: GET_SUITED_MODEL(),
 });
