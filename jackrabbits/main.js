@@ -68,10 +68,10 @@ const JRName = '<b><span class="charm">J</span><span class="fortune">A</span>C<s
 DOM.style({
   fontFace: [{
     fontFamily: 'titleFont',
-    src: 'url("IrishGrover-Regular.ttf")'
+    src: 'url("assets/IrishGrover-Regular.ttf")'
   }, {
     fontFamily: 'bodyFont',
-    src: 'url("Chalkboard.ttc")'
+    src: 'url("assets/Chalkboard.ttc")'
   }],
   section: {
     margin: '1em 0'
