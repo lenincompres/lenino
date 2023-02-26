@@ -1,9 +1,9 @@
-class GET_SUITED_TEXT {
+class TEXT {
   static GET_JK = {
     ENG: "Get the Jack Rabbits game",
     ESP: "Adquiere Jack Rabbits!",
   }
-  static PAGE_TITLE= {
+  static PAGE_TITLE = {
     ENG: "Suit Yourself",
     ESP: "Echa tus cartas",
   }
@@ -12,8 +12,8 @@ class GET_SUITED_TEXT {
     ESP: "Esta es tu mano",
   }
   static PAGE_SUBTITLE = {
-    ENG: "Rate these traits according to your natural tendency, and discover which is your suit.",
-    ESP: "Valora estos rasgos de acuerdo a tu enfoque natural y revelarás cuál es tu símbolo.",
+    ENG: "This interaction will reveal the suit you belong to. Each card represents a trait you must value according to your nature. You will have 8 points (pips) to distribute among the cards.",
+    ESP: "Esta interacción revelará cuál es tu símbolo. Cada carta representa una cualidad que valóralas de acuerdo a tu naturaleza. Tendrás 8 puntos disponibles para agregarles.",
   }
   static PAGE_SUBTITLE_DONE = {
     ENG: "According to your valuation",
@@ -24,33 +24,37 @@ class GET_SUITED_TEXT {
     ESP: "Tu ",
   }
   static CARD_HINTS = [{
-      ENG: "Use the arrows to change the value.",
-      ESP: "Cambia el valor usando las flechas.",
+      ENG: "Change the value by clicking +1 or -1.",
+      ESP: "Pulsa +1 ó -1 para cambiar el valor.",
     },
     {
-      ENG: "Mind the points you have left.",
-      ESP: "Fíjate en los puntos disponibles.",
+      ENG: "Mind the currency available bellow.",
+      ESP: "Fíjate en los puntos disponibles abajo.",
     },
     {
-      ENG: "Reduce some traits to gain others.",
-      ESP: "Reduce unos para poder subir otros.",
+      ENG: "If you need pips, reduce other cards.",
+      ESP: "Si necesitas puntos, reduce las cartas.",
     },
     {
-      ENG: "Exchange other traits for this.",
-      ESP: "Canjea los demás para adquirir este.",
+      ENG: "Modify other cards to affect this one.",
+      ESP: "Modifica las demás para cambiar esta.",
     },
   ]
   static POINTS_LEFT = {
-    ENG: " points left.",
-    ESP: " puntos disponibles.",
+    ENG: "Pips available",
+    ESP: "Puntos disponibles",
   }
   static NEXT = {
-    ENG: "Next",
-    ESP: "Siguiente",
+    ENG: "Next ",
+    ESP: "Continuar ",
+  }
+  static BEGIN = {
+    ENG: "Begin",
+    ESP: "Comienza",
   }
   static TIE = {
-    ENG: "To have a definite suit, you must break the tie between ",
-    ESP: "Para definir un símbolo, necesitas romper el empate entre ",
+    ENG: suits => `To have a definite suit, you must break the tie between ${TEXT.concat(suits, "and")}.`,
+    ESP: suits => `Para definir un símbolo, necesitas romper el empate entre ${TEXT.concat(suits, "y")}.`,
   }
   static AND = {
     ENG: "and",
@@ -65,8 +69,8 @@ class GET_SUITED_TEXT {
     ESP: "Reiniciar",
   }
   static DESCRIPTION = {
-    ENG: (suit) => `<b style="color:${suit.color};text-transform: capitalize;">${SUIT[suit.symbol].ENG}</b> suit you best. This is the symbol for ${SUIT[suit.cast].ENG} focused on ${SUIT[suit.symbol].meaning.ENG}.`,
-    ESP: (suit) => `Tu símbolo es el de <b style="color:${suit.color}">${SUIT[suit.symbol].ESP}</b>, los ${SUIT[suit.cast].ESP} enfocandos en ${SUIT[suit.symbol].meaning.ESP}.`,
+    ENG: suit => `According to your valuation, <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are the ones that suit you best. This is the suit for ${TEXT[suit.cast].ENG} focused on ${TEXT[suit.symbol].meaning.ENG}.`,
+    ESP: suit => `De acuerdo con tu valoración, tu símbolo es el de <b style="color:${suit.color}">${TEXT[suit.symbol].ESP}</b> (${TEXT[suit.alt].ESP}). El símbolo de los ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
   }
   static diamonds = {
     ENG: "diamonds",
@@ -78,10 +82,10 @@ class GET_SUITED_TEXT {
   }
   static spades = {
     ENG: "spades",
-    ESP: "espadas",
+    ESP: "picas",
     meaning: {
-      ENG: "courage, principles and work",
-      ESP: "la valentía, los princípios y el esfuerzo",
+      ENG: "courage, determination and work",
+      ESP: "la valentía, la determinación y el esfuerzo",
     }
   }
   static hearts = {
@@ -92,9 +96,9 @@ class GET_SUITED_TEXT {
       ESP: "el arte, el placer y la libertad",
     }
   }
-  static clubs = {
-    ENG: "clubs",
-    ESP: "bastos",
+  static clovers = {
+    ENG: "clovers",
+    ESP: "tréboles",
     meaning: {
       ENG: "knowledge, truth and nature",
       ESP: "el conocimiento, la naturaleza y la verdad",
@@ -111,6 +115,10 @@ class GET_SUITED_TEXT {
   static cups = {
     ENG: "cups",
     ESP: "copas",
+  }
+  static clubs = {
+    ENG: "clubs",
+    ESP: "bastos",
   }
   static merchant = {
     ENG: "merchants",
@@ -144,6 +152,10 @@ class GET_SUITED_TEXT {
     ENG: "wisdom",
     ESP: "sabiduría",
   }
+  static concat = (cards, and) => {
+    let last = cards.pop();
+    return `${cards.join(", ")} ${and} ${last}`;
+  }
 }
 
-export default GET_SUITED_TEXT;
+export default TEXT;

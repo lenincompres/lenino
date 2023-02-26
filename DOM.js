@@ -1,11 +1,11 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.34
+ * @version 1.0.36
  * @repository https://github.com/lenincompres/DOM.js
  */
 
- Element.prototype.get = function (station) {
+Element.prototype.get = function (station) {
   let output;
   if (!station && this.tagName.toLocaleLowerCase() === "input") output = this.value;
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
@@ -41,6 +41,7 @@ Element.prototype.set = function (model, ...args) {
   let argsType = DOM.typify(...args);
   const IS_PRIMITIVE = modelType.isPrimitive;
   let station = argsType.string; // original style|attr|tag|inner…|on…|name
+  if (station === "id") return DOM.addID(model, this);
   const CLEAR = !station && IS_PRIMITIVE || station === "content";
   if ([undefined, "create", "assign", "model", "inner", "set"].includes(station)) station = "content";
   const STATION = station;
@@ -243,6 +244,9 @@ class Binder {
   removeListener(countIndex) {
     delete this._listeners[countIndex];
   }
+  as(...args) {
+    return typeof args[0] === "function" ? this.bind(args.shift(), args) : this.bind(args);
+  }
   bind(...args) {
     let argsType = DOM.typify(...args);
     let target = argsType.element ? argsType.element : argsType.binder;
@@ -252,8 +256,12 @@ class Binder {
     let values = argsType.array;
     let model = argsType.object;
     if (values && values.length) {
-      if (values.length === 2) onvalue = v => v ? values[1] : values[0];
-      else onvalue = v => values[v] !== undefined ? values[v] : "";
+      let test = onvalue;
+      onvalue = v => {
+        v = test(v);
+        if(typeof test(v) === "boolean") v = v ? 1 : 0;
+        return values[v];
+      };
     } else if (model && model !== target) onvalue = v => model[v] !== undefined ? model[v] : model.default !== undefined ? model.default : model.false;
     if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, removes the listener
@@ -331,8 +339,8 @@ class DOM {
       DOM.set(model.css, "css");
       delete model.css;
       if (document.body) {
-        model.visibility = "hidden";
-        setTimeout(() => DOM.set("visible", "visibility"), 600);
+        DOM.set("none", "display");
+        setTimeout(() => DOM.set("block", "display"), 50);
       }
     }
     // checks if the model is meant for the head
@@ -432,6 +440,7 @@ class DOM {
     return qs.split("/");
   }
   static addID = (id, elt) => {
+    elt.setAttribute("id", id);
     if (Array.isArray(elt)) return elt.forEach(e => DOM.addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) return window[id].push(elt);

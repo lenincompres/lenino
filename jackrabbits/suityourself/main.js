@@ -1,11 +1,11 @@
 import SuitYourself from "./SuitYourself.js";
-import GET_SUITED_TEXT from "./TEXT.js";
+import TEXT from "./TEXT.js";
 
 const THIS_URL = window.location.href.split('?')[0];
 const QS = DOM.querystring();
 window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
 
-const MAIN_MENU = {
+const MAIN_MENU_MODEL = {
   width: "100%",
   margin: "0 auto 2.5em",
   maxWidth: "30em",
@@ -28,7 +28,7 @@ const MAIN_MENU = {
         }
       }, {
         a: {
-          text: GET_SUITED_TEXT.GET_JK[LANG],
+          text: TEXT.GET_JK[LANG],
           href: "http://jackrabbits.lenino.net",
         }
       }, {
@@ -47,8 +47,6 @@ const MAIN_MENU = {
   }
 };
 
-let game = new SuitYourself();
-
 DOM.style({
   fontFace: [{
     fontFamily: 'title',
@@ -63,7 +61,7 @@ DOM.set({
   meta: "utf-8",
   title: "Jack Rabbits' Suit Yourself",
   viewport: "width=device-width, minimum-scale=1.0, maximum-scale=1.0",
-  icon: "images/icon.png",
+  icon: "../images/icon.png",
   background: "silver",
   textAlign: "center",
   fontFamily: "body",
@@ -73,6 +71,6 @@ DOM.set({
   flexDirection: "column",
   textAlign: "center",
   padding: "1em",
-  menu: MAIN_MENU,
-  container: game.element,
+  menu: MAIN_MENU_MODEL,
+  main: new SuitYourself(),
 });

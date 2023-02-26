@@ -1,3 +1,9 @@
+import SuitYourself from "./suityourself/SuitYourself.js";
+
+const THIS_URL = window.location.href.split('#')[0].split('?')[0];
+const QS = DOM.querystring();
+window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
+
 const CARD = (front, back, width = 240, height = 340) => {
   const IMG_STYLE = {
     height: height + 'px',
@@ -196,13 +202,13 @@ DOM.set({
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
       h4: '<b class="fortune">Fortuna</b>, <b class="courage">Coraje</b>, <b class="wisdom">Sapiencia</b>  y <b class="charm">Encanto</b> <br/>son las cualidades que tienes a mano.',
-      section: GET_SUITED_MODEL("suityourself/"),
+      section: new SuitYourself(THIS_URL + "/suityourself/"),
     }, {
       img: {
         src: "images/photo1.jpg",
         width: "100%",
         height: "auto",
-        alt: "game board"
+        alt: "game board",
       },
     }, {
       h2: {
@@ -213,7 +219,7 @@ DOM.set({
         }
       }
     }, {
-      p: 'Síguenos y contáctanos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> o por <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">correo-electrónico</a>.'
+      p: 'Síguenos y contáctanos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> o por <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">correo-electrónico</a>.',
     }, {
       textAlign: "center",
       a: {
