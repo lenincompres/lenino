@@ -1,3 +1,10 @@
+import SuitYourself from "./SuitYourself.js";
+import GET_SUITED_TEXT from "./TEXT.js";
+
+const THIS_URL = window.location.href.split('?')[0];
+const QS = DOM.querystring();
+window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
+
 const MAIN_MENU = {
   width: "100%",
   margin: "0 auto 2.5em",
@@ -40,6 +47,8 @@ const MAIN_MENU = {
   }
 };
 
+let game = new SuitYourself();
+
 DOM.style({
   fontFace: [{
     fontFamily: 'title',
@@ -58,12 +67,12 @@ DOM.set({
   background: "silver",
   textAlign: "center",
   fontFamily: "body",
-  backgroundColor: BG_COLOR,
+  backgroundColor: " silver",
   backgroundImage: 'url(../images/bg.png)',
   display: "flex",
   flexDirection: "column",
   textAlign: "center",
   padding: "1em",
   menu: MAIN_MENU,
-  container: GET_SUITED_MODEL(),
+  container: game.element,
 });

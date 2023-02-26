@@ -140,7 +140,6 @@ class Card {
 
   static MIN = 2;
   static MAX = 10;
-  
   static SUIT = {
     D : {
     symbol: "diamonds",
@@ -172,3 +171,5 @@ class Card {
     image: "assets/suit-spades.png",
   }};
 }
+
+export default Card;
