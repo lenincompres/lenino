@@ -22,7 +22,7 @@ class Card extends HTMLElement {
     const DISABLED_COLOR = "#ddd";
 
     let img_center = {
-      opacity: this._number.as(v => isNaN(v) && v % 2,
+      opacity: this._number.as(v => v % 2,
         0,
         1,
       ),

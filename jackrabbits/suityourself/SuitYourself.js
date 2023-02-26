@@ -1,6 +1,9 @@
 import Card from "./Card.js";
 import TEXT from "./TEXT.js";
 
+const WIDTH = new Binder(window.innerWidth);
+addEventListener("resize", e => WIDTH.value = window.innerWidth);
+
 class SuitYourself extends HTMLElement {
 
   constructor(root = "") {
@@ -113,6 +116,7 @@ class SuitYourself extends HTMLElement {
 
     let main = {
       position: "relative",
+      width: WIDTH.as(v => v + "px"),
       minWidth: "33em",
       ul: {
         id: "mainContent",
