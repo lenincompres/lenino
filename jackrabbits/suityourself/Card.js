@@ -142,7 +142,7 @@ class Card extends HTMLElement {
   }
 
   set number(v) {
-    if(isNaN(v)) this._number.value = v;
+    this._number.value = v;
     if (this.number >= Card.MAX) this.canAdd = false;
     if (v < Card.MIN || v > Card.MAX) return;
     this._number.value = v;
@@ -150,8 +150,7 @@ class Card extends HTMLElement {
   }
 
   get number() {
-    if(!isNaN[v]) return this._number.value;
-    return Card.VALS[v];
+    return this._number.value;
   }
 
   set suit(v) {
