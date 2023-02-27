@@ -65,26 +65,28 @@ class Card extends HTMLElement {
     this.set({
       display: "block",
       background: "white",
-      borderRadius: "1em",
+      borderRadius: "0.7em",
       boxShadow: "1px 1px 3px black",
       position: "relative",
-      width: "11em",
-      height: "17.5em",
+      width: "10em",
+      height: "15.5em",
       header: {
         section: getArray(2, i => new Object({
           position: "absolute",
-          margin: "5% 7%",
+          margin: "5% 5%",
           bottom: i % 2 ? 0 : undefined,
           right: i % 2 ? 0 : undefined,
           transform: i % 2 ? "rotate(180deg)" : undefined,
-          h1: {
+          p: {
+            fontFamily: "title",
             textShadow: "none",
-            fontSize: "1.6em",
+            fontSize: "1.5em",
             color: this._suit.as(v => v.color),
             text: this._number,
           },
           img: {
-            height: "1.3em",
+            marginTop: "-0.5em",
+            height: "1em",
             src: this._suit.as(s => root + s.image),
           }
         }))
@@ -107,14 +109,17 @@ class Card extends HTMLElement {
         height: "100%",
         display: this._buttonEnabled.as("none", "flex"),
         button: {
-          margin: "1em",
+          fontSize: "1.05em",
+          fontFamily: "title",
+          margin: "0.7em",
           background: "transparent",
           transition: "0.2s",
+          opacity: "0.8",
           content: [{
             style: this._canAdd.as({
               pointerEvents: "none",
-              color: DISABLED_COLOR,
-              borderColor: DISABLED_COLOR,
+              color: "#ccc",
+              borderColor: "#ccc",
             }, {
               pointerEvents: "initial",
               color: this.suit.color,

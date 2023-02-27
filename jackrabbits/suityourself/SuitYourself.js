@@ -117,14 +117,14 @@ class SuitYourself extends HTMLElement {
     let main = {
       position: "relative",
       width: WIDTH.as(v => v + "px"),
-      minWidth: "33em",
+      minWidth: "30em",
       ul: {
         id: "mainContent",
         display: "flex",
         flexWrap: "wrap",
         placeContent: "center",
         li: this.cards.map((card, i) => new Object({
-          width: "11em",
+          width: "10em",
           transition: "0.5s",
           zIndex: this._orderedCards.as(v => 4 - v.indexOf(card)),
           style: this._stage.as(v => v >= card.appearStage, {
@@ -140,7 +140,7 @@ class SuitYourself extends HTMLElement {
             if (!i) return 0;
             if (!v) return "1em";
             if (v < 4) return `${-0.1 * v}em`;
-            return "-11em";
+            return "-10em";
           }),
           marginTop: this._stage.as(v => {
             if (!v || v > 3) return 0;
@@ -164,7 +164,7 @@ class SuitYourself extends HTMLElement {
               1,
             ),
             textAlign: "center",
-            p: TEXT.CARD_HINTS.map(H => H[LANG])[i]
+            p: TEXT.CARD_HINTS.map(H => H[LANG])[i],
           },
           main: card,
           footer: {
@@ -283,7 +283,8 @@ class SuitYourself extends HTMLElement {
   }
 
   nextStage() {
-    if (this.stage === 3 && this.topCard.length == 1) {
+    if (this.stage === 3) {
+      if(this.topCard.length > 1) return;
       this.cards.forEach(c => c.enabled = false);
       window.location.href = '#suitYourself';
     }

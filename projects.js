@@ -9,6 +9,7 @@ export const projects = [{
 }, {
   title: "Jack Rabbits",
   folder: "jackrabbits",
+  img: "assets/jackrabbits.jpg",
   desc: "The board game for playing cards on a quest through wonderlands",
   tags: [
     "game",

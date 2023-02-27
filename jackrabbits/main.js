@@ -1,8 +1,8 @@
 import SuitYourself from "./suityourself/SuitYourself.js";
+import TopMenu from "./TopMenu.js";
+import TEXT from "./TEXT.js";
 
 const THIS_URL = window.location.href.split('#')[0].split('?')[0];
-const QS = DOM.querystring();
-window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
 
 const CARD = (front, back, width = 240, height = 340) => {
   const IMG_STYLE = {
@@ -140,25 +140,8 @@ DOM.set({
   fontFamily: "body",
   fontSize: "16px",
   textAlign: "center",
-  header: {
-    menu: {
-      /*
-      margin: "0.25em 0 2em",
-      ul: {
-        display: "flex",
-        li: [{
-          a: "Kickstarter",
-        }, {
-          a: "Instagram",
-        }, {
-          a: "Tabletopia",
-        }, {
-          a: "Lenino",
-        },
-      ]
-     }
-     */
-    }
+  header:{
+    menu: new TopMenu(),
   },
   main: {
     maxWidth: '680px',
@@ -169,26 +152,13 @@ DOM.set({
       div: CARD({
         background: 'url(images/splash.png) center center no-repeat',
         backgroundColor: 'lightgoldenrodyellow'
-      }, {
-        /*
-              backgroundColor: 'white',
-              p: {
-                marginTop: '6em',
-                text: "El video tutorial viene muy pronto."
-              }*/
-      }, 490)
+      }, {}, 490)
     }, {
-      h4: [
-        "Descubre maravillas mientras viajas",
-        "al reino de conejos y barajas.",
-      ]
+      h4: TEXT.SUBTITLE[LANG],
     }, {
-      p: [
-        `Lenino's ${JRName} es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos.`,
-        "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global.",
-      ],
+      p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
     }, {
-      h2: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
+      h2: TEXT.TABLETOPIA.TITLE[LANG],
       a: {
         href: "https://tabletopia.com/games/jack-rabbits",
         target: "_blank",
@@ -197,11 +167,11 @@ DOM.set({
           src: "images/tabletopia_link.png",
         }
       },
-      p: "Muy pronto lanzaremos una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento."
+      p: TEXT.TABLETOPIA.INFO[LANG]
     }, {
       div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
     }, {
-      h4: '<b class="fortune">Fortuna</b>, <b class="courage">Coraje</b>, <b class="wisdom">Sapiencia</b>  y <b class="charm">Encanto</b> <br/>son las cualidades que tienes a mano.',
+      h4: TEXT.CATCH_PRHASE[LANG],
       section: new SuitYourself(THIS_URL + "/suityourself/"),
     }, {
       img: {
@@ -213,13 +183,13 @@ DOM.set({
     }, {
       h2: {
         a: {
-          href: "instructions.pdf",
+          href: "assets/instructions.pdf",
           target: "_blank",
           text: "Intrucciones",
         }
       }
     }, {
-      p: 'Síguenos y contáctanos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> o por <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">correo-electrónico</a>.',
+      p: TEXT.FOLLOW_US[LANG],
     }, {
       textAlign: "center",
       a: {

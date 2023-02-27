@@ -12,8 +12,8 @@ class TEXT {
     ESP: "Esta es tu mano",
   }
   static PAGE_SUBTITLE = {
-    ENG: "This interaction will reveal the suit you belong to. Each card represents a trait you must value according to your nature. You will have 8 points (pips) to distribute among the cards.",
-    ESP: "Esta interacción revelará cuál es tu símbolo. Cada carta representa una cualidad que valóralas de acuerdo a tu naturaleza. Tendrás 8 puntos disponibles para agregarles.",
+    ENG: "This short interaction will reveal the suit that matches you. Each card represents a trait to value according to your nature. You'll have 8 points to distribute among them.",
+    ESP: "Con esta breve interacción podrás revelar a qué símbolo perteneces. Cada carta representa una cualidad que valóralas de acuerdo a tu naturaleza. Tendrás 8 puntos disponibles.",
   }
   static PAGE_SUBTITLE_DONE = {
     ENG: "According to your valuation",
@@ -32,8 +32,8 @@ class TEXT {
       ESP: "Fíjate en los puntos disponibles abajo.",
     },
     {
-      ENG: "If you need pips, reduce other cards.",
-      ESP: "Si necesitas puntos, reduce las cartas.",
+      ENG: "Need more pips? Reduce the others.",
+      ESP: "Necesitas puntos? Reduce las demás.",
     },
     {
       ENG: "Modify other cards to affect this one.",
@@ -69,8 +69,8 @@ class TEXT {
     ESP: "Reiniciar",
   }
   static DESCRIPTION = {
-    ENG: suit => `According to your valuation, <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are the ones that suit you best. This is the suit for ${TEXT[suit.cast].ENG} focused on ${TEXT[suit.symbol].meaning.ENG}.`,
-    ESP: suit => `De acuerdo con tu valoración, tu símbolo es el de <b style="color:${suit.color}">${TEXT[suit.symbol].ESP}</b> (${TEXT[suit.alt].ESP}). El símbolo de los ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
+    ENG: suit => `According to your valuation, the <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are your best suit. This is the symbol for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
+    ESP: suit => `De acuerdo con tu valoración, tu símbolo es el de <b style="color:${suit.color}">${TEXT[suit.symbol].ESP}</b>. Este símbolo, también llamado <b style="color:${suit.color}">${TEXT[suit.alt].ESP}</b>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
   }
   static diamonds = {
     ENG: "diamonds",
@@ -93,7 +93,7 @@ class TEXT {
     ESP: "corazones",
     meaning: {
       ENG: "pleasure, freedom and art",
-      ESP: "el arte, el placer y la libertad",
+      ESP: "el placer, el arte  y la libertad",
     }
   }
   static clovers = {
