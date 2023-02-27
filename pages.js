@@ -12,30 +12,26 @@ const showTag = (tag = ALL) => activeTag.value = activeTag.value === tag ? ALL :
 const sortWords = (a, b) => a < b ? -1 : 1;
 
 export const PAGES = {
-  HOME: {},
+  HOME: (lang = "ENG") => new Object({}),
 
-  BIO: {
+  BIO: (lang = "ENG") => new Object({
     section: {
       style: STYLE.PAGE,
       content: [{
-          p: [
-            "Lenino is a storyteller, an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life. His studies range from telecommunications engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to contemporary dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.",
-            "“Lenino” is the affectionate alter-ego of Lenin Compres, a creative technologist at NYU's TISCH School of the Arts, with a graduate degree from Teacher's College at Columbia University. He has written award-winning plays in the Dominican Republic and the script for the motion picture “A State of Madness”, which was submitted to the Oscars in 2021, on behalf of that country."
-          ]
-        },
-        {
-          backgroundColor: "white",
-          p: [
+          p: lang === "ESP" ? [
             "Lenino es un cuenta-cuentos creativo, un explorador de la ciencia, la tecnología y el arte nacido en la República Dominicana y residente en Nueva York toda su vida “adulta”. Sus estudios van desde ingeniería en medios interactivos hasta las ciencias del aprendizaje. Sus entrenamientos abarcan la actuación, dramaturgia, danza contemporanea y canto. Es un pianista autodidacta y un nerdo profeso (un renacentista post-moderno).",
             "“Lenino” es el alter-ego afectivo de Lenin Comprés, tecnólogo creativo en la Escuela de Artes TISCH de la Universidad de Nueva York (NYU), con un título de posgrado de Teacher's College de la Universidad de Columbia. Ha escrito obras de teatro premiadas en la República Dominicana y el guión de la película “A State of Madness”, que representó a ese país en los premios Oscars del 2021."
+          ] : [
+            "Lenino is a storyteller, an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life. His studies range from telecommunications engineering and interactive media to cognitive studies in education. His trainings range from acting and scriptwriting to contemporary dance and vocals. He is a self-taught piano player and a self-professed nerd—a post-modern renaissance man.",
+            "“Lenino” is the affectionate alter-ego of Lenin Compres, a creative technologist at NYU's TISCH School of the Arts, with a graduate degree from Teacher's College at Columbia University. He has written award-winning plays in the Dominican Republic and the script for the motion picture “A State of Madness”, which was submitted to the Oscars in 2021, on behalf of that country."
           ]
         }
       ],
       onready: slideDown
     }
-  },
+  }),
 
-  PROJECTS: {
+  PROJECTS: (lang = "ENG") => new Object({
     menu: {
       maxWidth: "50em",
       margin: "0 0.5em 0.5em",
@@ -92,7 +88,7 @@ export const PAGES = {
             fontWeight: "bold",
             text: project.title
           },
-          p: project.desc,
+          p: project.desc[lang],
         },
         ul: {
           marginTop: "0.2em",
@@ -131,9 +127,9 @@ export const PAGES = {
       showTag();
       activeTag.value = false;
     }
-  },
+  }),
 
-  CONTACT: {
+  CONTACT: (lang = "ENG") => new Object({
     menu: {
       fontSize: "3.43em",
       marginTop: "1em",
@@ -143,7 +139,7 @@ export const PAGES = {
         onready: slideDown
       }, a))
     }
-  }
+  }),
 
 }
 

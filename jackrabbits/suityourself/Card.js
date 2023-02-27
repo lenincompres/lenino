@@ -68,8 +68,8 @@ class Card extends HTMLElement {
       borderRadius: "0.7em",
       boxShadow: "1px 1px 3px black",
       position: "relative",
-      width: "10em",
-      height: "15.5em",
+      width: "8em",
+      height: "12em",
       header: {
         section: getArray(2, i => new Object({
           position: "absolute",
@@ -77,16 +77,16 @@ class Card extends HTMLElement {
           bottom: i % 2 ? 0 : undefined,
           right: i % 2 ? 0 : undefined,
           transform: i % 2 ? "rotate(180deg)" : undefined,
+          fontSize: "1.1em",
           p: {
             fontFamily: "title",
             textShadow: "none",
-            fontSize: "1.5em",
             color: this._suit.as(v => v.color),
             text: this._number,
           },
           img: {
             marginTop: "-0.5em",
-            height: "1em",
+            width: "1em",
             src: this._suit.as(s => root + s.image),
           }
         }))
@@ -111,32 +111,24 @@ class Card extends HTMLElement {
         button: {
           fontSize: "1.05em",
           fontFamily: "title",
-          margin: "0.7em",
+          margin: "3%",
           background: "transparent",
-          transition: "0.2s",
+          transition: "0.5s",
           opacity: "0.8",
+          color: this.suit.color + "!important",
+          borderColor: this.suit.color + "!important",
           content: [{
-            style: this._canAdd.as({
-              pointerEvents: "none",
-              color: "#ccc",
-              borderColor: "#ccc",
-            }, {
-              pointerEvents: "initial",
-              color: this.suit.color,
-              borderColor:  this.suit.color,
-            }),
+            style: this._canAdd.as(
+              BUTTON_STYLE.DISABLED,
+              BUTTON_STYLE.ENABLED(this.suit.color),
+            ),
             text: "+1",
             click: e => this.canAdd ? this.number += 1 : null,
           }, {
-            style: this._number.as(v => v > Card.MIN, {
-              pointerEvents: "none",
-              color: DISABLED_COLOR,
-              borderColor: DISABLED_COLOR,
-            }, {
-              pointerEvents: "initial",
-              color: this.suit.color,
-              borderColor:  this.suit.color,
-            }),
+            style: this._number.as(v => v > Card.MIN,
+              BUTTON_STYLE.DISABLED,
+              BUTTON_STYLE.ENABLED(this.suit.color),
+            ),
             text: "-1",
             click: e => this.number -= 1,
           }]

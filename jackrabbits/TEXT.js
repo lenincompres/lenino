@@ -30,6 +30,11 @@ class TEXT {
     ENG: `<b class="fortune">Fortune</b>, <b class="courage">Courage</b>, <b class="wisdom">Wisdom</b> and <b class="charm">Charm</b> <br/>is what a rabbit has at hand.`
   }
 
+  static INSTRUCTIONS = {
+    ESP: "Instrucciones",
+    ENG: "Instructions",
+  }
+
   static FOLLOW_US = {
     ESP: 'Síguenos y contáctanos en <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> o por <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">correo-electrónico</a>.',
     ENG: 'Follow and contact us <a href="https://www.instagram.com/lenino.jackrabbits" target="_blank">Instagram</a>, <a href="https://www.facebook.com/leninomusic" target="_blank">Facebook</a>, <a href="https://www.twitter.com/lenino" target="_blank">Twitter</a> or <a href="mailto:leninosjackrabbits@gmail.com" target="_blank">email</a>.'

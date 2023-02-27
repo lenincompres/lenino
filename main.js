@@ -6,33 +6,64 @@ import MUSICPLAYER from "./widgets/musicplayer.js";
 import SOCIAL_LINKS from "./widgets/social.js";
 import slideDown from "./animations/slideDown.js";
 
-const isMobile = new Binder();
-const isWide = new Binder();
-const setSize = e => {
-  isMobile.value = window.innerWidth < 780;
-  isWide.value = window.innerWidth > 1050;
-};
-DOM.set(setSize, "onresize");
-setSize();
+window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
+const QS = DOM.querystring();
+window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
 
-const currentPage = new Binder(0);
-const hoverPage = new Binder();
+const _isMobile = new Binder();
+const _isWide = new Binder();
+
+const _currentPage = new Binder(0);
+const _hoverPage = new Binder();
 const pageNames = Object.keys(PAGES);
 window.tags = new Binder([]);
 
-if (window.location.hash) currentPage.value = window.location.hash.split("#")[1].toUpperCase();
+function setSize(e) {
+  _isMobile.value = window.innerWidth < 780;
+  _isWide.value = window.innerWidth > 1050;
+};
+setSize();
+
+if (window.location.hash) _currentPage.value = window.location.hash.split("#")[1].toUpperCase();
+
+const TEXT = {
+  bio: {
+    ENG: "bio",
+    ESP: "bio",
+  },
+  projects: {
+    ENG: "projects",
+    ESP: "proyectos",
+  },
+  bio: {
+    ENG: "bio",
+    ESP: "bio",
+  },
+  storyteller: {
+    ENG: "storyteller",
+    ESP: "cantacuentos",
+  },
+  educator: {
+    ENG: "educator",
+    ESP: "educador",
+  },
+};
 
 DOM.set({
-  title: "Lenino.net",
-  charset: "UTF-8",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1.0,
-    userScalable: "no",
+  head: {
+    title: "Lenino.net",
+    charset: "UTF-8",
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+      maximumScale: 1.0,
+      userScalable: "no",
+    },
+    keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
+    description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+    link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+    icon: "assets/icon.png",
   },
-  keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
-  description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
   css: {
     a: {
       color: STYLE.COLOR.LINK,
@@ -55,23 +86,46 @@ DOM.set({
       }
     },
   },
-  icon: "assets/icon.png",
-  link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-  font: "./assets/markerfeltnormal.ttf",
+  font: {
+    fontFamily: 'title',
+    src: 'url("./assets/markerfeltnormal.ttf")'
+  },
   fontSize: "14px",
   backgroundColor: "#023",
-  section: {
+  container: {
     model: STYLE.FLEX,
     margin: "0 auto",
-    maxWidth: "1150px",
+    maxWidth: "800px",
     main: {
       position: "relative",
-      maxWidth: isWide.bind(["100%", "800px"]),
+      maxWidth: _isWide.as("100%", "800px"),
       width: "100%",
+      boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: isMobile.bind(["100%", "initial"]),
+      backgroundSize: _isMobile.as("100%", "initial"),
       backgroundPosition: "center top",
+      menu: {
+        position: "absolute",
+        right: 0,
+        margin: "1em",
+        zIndex: 100,
+        a: {
+          hover: {
+            textShadow: "0 0 2px white",
+          },
+          color: _isMobile.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
+          content: [{
+            display: window.LANG !== "ENG" ? "block" : "none",
+            text: "English »",
+            href: THIS_URL,
+          }, {
+            display: window.LANG !== "ESP" ? "block" : "none",
+            text: "Español »",
+            href: THIS_URL + "?lang=esp",
+          }]
+        }
+      },
       header: {
         model: [STYLE.PAGE, STYLE.FLEX],
         alignItems: "center",
@@ -79,11 +133,11 @@ DOM.set({
         padding: "0.5em",
         zIndex: 10,
         height: "auto",
-        position: isMobile.bind(["absolute", "relative"]),
-        width: isMobile.bind(["fit-content", "100%"]),
-        margin: isMobile.bind(["1em", 0]),
-        flexDirection: isMobile.bind(["row", "column"]),
-        borderRadius: isMobile.bind([".5em", 0]),
+        position: _isMobile.as("absolute", "relative"),
+        width: _isMobile.as("fit-content", "100%"),
+        margin: _isMobile.as("1em", 0),
+        flexDirection: _isMobile.as("row", "column"),
+        borderRadius: _isMobile.as(".5em", 0),
         a: {
           fontSize: "2.3em",
           href: "#home",
@@ -92,34 +146,40 @@ DOM.set({
             height: "30",
           },
           span: {
-            fontFamily: "markerfeltnormal, Georgia, \"Times New Roman\", Times, serif",
+            fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
             text: "Lenino",
           },
-          click: e => currentPage.value = pageNames[0],
+          click: e => _currentPage.value = pageNames[0],
         },
         tagline: {
           margin: "0 .6em",
-          text: "storyteller · inventor · educator",
+          text: `${TEXT.storyteller[LANG]} · inventor · ${TEXT.educator[LANG]}`,
         },
         menu: {
-          display: isMobile.bind(["block", "none"]),
+          display: _isMobile.as("block", "none"),
           a: SOCIAL_LINKS,
         },
         onready: slideDown,
       },
       nav: {
-        model: STYLE.FLEX,
+        style: STYLE.FLEX,
         flexDirection: "column",
         color: "rgb(245, 220, 154)",
         zIndex: 5,
-        alignContent: isMobile.bind(["left", "center"]),
-        height: isMobile.bind(["fit-content", "3.5em"]),
-        width: isMobile.bind(["fit-content", "100%"]),
-        backgroundColor: isMobile.bind(val => `rgba(${val ? "0,0,0" : "255,255,255"},0.5)`),
-        padding: isMobile.bind(["4.5em 0.5em 0.5em", "0.5em 0"]),
-        borderRadius: isMobile.bind(["0.5em", 0]),
-        margin: isMobile.bind(["2em 0 0 2em", 0]),
-        position: isMobile.bind(["absolute", "relative"]),
+        alignContent: _isMobile.as("left", "center"),
+        height: _isMobile.as("fit-content", "3.5em"),
+        width: _isMobile.as("fit-content", "100%"),
+        backgroundColor: _isMobile.as(
+          "rgba(255,255,255,0.5)",
+          "black",
+        ),
+        padding: _isMobile.as(
+          "4.5em 0.5em 0.5em",
+          "0.5em 0"
+        ),
+        borderRadius: _isMobile.as("0.5em", 0),
+        margin: _isMobile.as("2em 0 0 2em", 0),
+        position: _isMobile.as("absolute", "relative"),
         a: {
           color: STYLE.COLOR.PAGE,
           width: "4em",
@@ -130,51 +190,48 @@ DOM.set({
           borderRadius: "0.25em",
           fontWeight: "normal",
           content: pageNames.map(name => new Object({
-            backgroundColor: currentPage.bind({
+            backgroundColor: _currentPage.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
             }),
-            display: isMobile.bind(val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0] ? "block" : "none"),
-            boxShadow: DOM.bind([hoverPage, currentPage], (over, current) =>
-              current === name ? STYLE.SHADOW.INSET :
-              over === name ? STYLE.SHADOW.HIGHLIGHT :
-              STYLE.SHADOW.NORMAL),
+            display: _isMobile.as(
+              val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0],
+              "none",
+              "block",
+            ),
+            boxShadow: bind(
+              [_hoverPage, _currentPage],
+              (over, current) =>
+              current === name ?
+              STYLE.SHADOW.INSET :
+              over === name ?
+              STYLE.SHADOW.HIGHLIGHT :
+              STYLE.SHADOW.NORMAL
+            ),
             href: "#" + name,
             text: name.toLowerCase(),
-            click: e => currentPage.value = name,
-            mouseover: e => hoverPage.value = name,
-            mouseout: e => hoverPage.value = false,
+            click: e => _currentPage.value = name,
+            mouseover: e => _hoverPage.value = name,
+            mouseout: e => _hoverPage.value = false,
           }))
         },
         onready: slideDown
       },
       article: {
         model: STYLE.FLEX,
-        justifyContent: isMobile.bind(["flex-start", "center"]),
+        justifyContent: _isMobile.as("flex-start", "center"),
         minHeight: "607px",
-        width: isMobile.bind(["47em", "100%"]),
-        margin: isMobile.bind(["6em 0 1.5em 9em", "0 0 1em 0"]),
-        content: currentPage.bind(p => PAGES[p]),
+        width: _isMobile.as("47em", "100%"),
+        margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
+        content: _currentPage.as(p => PAGES[p] ? PAGES[p](LANG) : undefined),
       },
       footer: {
-        backgroundColor: "black",
-        paddingTop: "2em",
-        iframe: {
-          height: isMobile.bind(["760px", "100vh"]),
-          width: "100%",
-          src: "jackrabbits/",
-        }
+        padding: "1em",
+        backgroundColor: "#11161A",
+        color: "gray",
+        textAlign: "center",
       },
     },
-    sidebar: {
-      backgroundColor: "white",
-      width: isWide.bind(["100%", "350px"]),
-      section: {
-        overflow: "auto",
-        width: "100%",
-        height: isMobile.bind(["750px", "100vh"]),
-        content: [MUSICPLAYER, TWITTER]
-      },
-    }
-  }
+  },
+  onresize: setSize,
 });

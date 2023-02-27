@@ -11,33 +11,29 @@ class TEXT {
     ENG: "This is your hand",
     ESP: "Esta es tu mano",
   }
-  static PAGE_SUBTITLE = {
-    ENG: "This short interaction will reveal the suit that matches you. Each card represents a trait to value according to your nature. You'll have 8 points to distribute among them.",
-    ESP: "Con esta breve interacción podrás revelar a qué símbolo perteneces. Cada carta representa una cualidad que valóralas de acuerdo a tu naturaleza. Tendrás 8 puntos disponibles.",
-  }
-  static PAGE_SUBTITLE_DONE = {
-    ENG: "According to your valuation",
-    ESP: "De acuerdo a tu valoración",
+  static PAGE_DESCRIPTION = {
+    ENG: "Which one is <b>YOUR</b> suit? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (pips) to increase the cards bellow. Click <b>BEGIN</b> to start.",
+    ESP: "Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>COMIENZAR</b>.",
   }
   static YOUR = {
     ENG: "Your ",
     ESP: "Tu ",
   }
   static CARD_HINTS = [{
-      ENG: "Change the value by clicking +1 or -1.",
-      ESP: "Pulsa +1 ó -1 para cambiar el valor.",
+      ENG: "Use +1 and -1 to change the value.",
+      ESP: "Usa +1 y -1 para cambiar el valor.",
     },
     {
-      ENG: "Mind the currency available bellow.",
-      ESP: "Fíjate en los puntos disponibles abajo.",
+      ENG: "See the pips available bellow.",
+      ESP: "Ve los puntos disponibles abajo.",
     },
     {
-      ENG: "Need more pips? Reduce the others.",
-      ESP: "Necesitas puntos? Reduce las demás.",
+      ENG: "Reduce others to increase this one.",
+      ESP: "Reduce otra para incrementar esta.",
     },
     {
-      ENG: "Modify other cards to affect this one.",
-      ESP: "Modifica las demás para cambiar esta.",
+      ENG: "Change others to affect this one.",
+      ESP: "Cambia esta usando las otras.",
     },
   ]
   static POINTS_LEFT = {
@@ -48,13 +44,21 @@ class TEXT {
     ENG: "Next ",
     ESP: "Continuar ",
   }
+  static WHEN_READY = {
+    ENG: "Modify the cards at will and click <b>NEXT</b> when safistied.",
+    ESP: "Modifica las cartas a gusto y luego pincha <b>CONTINUAR</b>.",
+  }
+  static WHEN_DONE = {
+    ENG: "Modify and click <b>DONE</b> when safistied.",
+    ESP: "Modifica a gusto y luego pincha <b>LISTO</b>.",
+  }
   static BEGIN = {
     ENG: "Begin",
-    ESP: "Comienza",
+    ESP: "Comenzar",
   }
   static TIE = {
     ENG: suits => `To have a definite suit, you must break the tie between ${TEXT.concat(suits, "and")}.`,
-    ESP: suits => `Para definir un símbolo, necesitas romper el empate entre ${TEXT.concat(suits, "y")}.`,
+    ESP: suits => `Para para tener un símbolo definitivo, necesitas romper el empate entre ${TEXT.concat(suits, "y")}.`,
   }
   static AND = {
     ENG: "and",
@@ -69,7 +73,7 @@ class TEXT {
     ESP: "Reiniciar",
   }
   static DESCRIPTION = {
-    ENG: suit => `According to your valuation, the <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are your best suit. This is the symbol for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
+    ENG: suit => `According to your valuation, the <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are your suit. This is the symbol for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
     ESP: suit => `De acuerdo con tu valoración, tu símbolo es el de <b style="color:${suit.color}">${TEXT[suit.symbol].ESP}</b>. Este símbolo, también llamado <b style="color:${suit.color}">${TEXT[suit.alt].ESP}</b>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
   }
   static diamonds = {

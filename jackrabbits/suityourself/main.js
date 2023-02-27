@@ -7,13 +7,15 @@ DOM.set({
   title: "Jack Rabbits' Suit Yourself",
   viewport: "width=device-width, minimum-scale=1.0, maximum-scale=1.0",
   icon: "../images/icon.png",
-  fontFace: [{
+  font: [{
     fontFamily: 'title',
     src: '../assets/IrishGrover-Regular.ttf'
   }, {
     fontFamily: 'body',
     src: '../assets/Chalkboard.ttc'
   }],
+  margin: "0 auto",
+  maxWidth: "50em",
   background: "silver",
   textAlign: "center",
   fontFamily: "body",

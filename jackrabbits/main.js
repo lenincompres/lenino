@@ -71,14 +71,7 @@ const RANDOM_CARD = (autoFlip = false, delay = 0) => {
 
 const JRName = '<b><span class="charm">J</span><span class="fortune">A</span>C<span class="courage">K</span> R<span class="wisdom">A</span>BBITS</b>';
 
-DOM.style({
-  fontFace: [{
-    fontFamily: 'title',
-    src: 'url("assets/IrishGrover-Regular.ttf")'
-  }, {
-    fontFamily: 'body',
-    src: 'url("assets/Chalkboard.ttc")'
-  }],
+const css = {
   section: {
     margin: '1em 0'
   },
@@ -124,13 +117,84 @@ DOM.style({
   _charm: {
     color: 'brown'
   },
-});
+};
+
+const main = {
+  maxWidth: '680px',
+  margin: '0 auto',
+  padding: '0 0 10px',
+  section: [{
+    margin: "0 -10em",
+    div: CARD({
+      background: 'url(images/splash.png) center center no-repeat',
+      backgroundColor: 'lightgoldenrodyellow'
+    }, {}, 490)
+  }, {
+    h4: TEXT.SUBTITLE[LANG],
+  }, {
+    p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
+  }, {
+    h2: TEXT.TABLETOPIA.TITLE[LANG],
+    a: {
+      href: "https://tabletopia.com/games/jack-rabbits",
+      target: "_blank",
+      img: {
+        width: "100%",
+        src: "images/tabletopia_link.png",
+      }
+    },
+    p: TEXT.TABLETOPIA.INFO[LANG]
+  }, {
+    div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
+  }, {
+    h4: TEXT.CATCH_PRHASE[LANG],
+    section: new SuitYourself(THIS_URL + "/suityourself/"),
+  }, {
+    img: {
+      src: "images/photo1.jpg",
+      width: "100%",
+      height: "auto",
+      alt: "game board",
+    },
+  }, {
+    h2: {
+      a: {
+        href: "assets/instructions.pdf",
+        target: "_blank",
+        text: TEXT.INSTRUCTIONS[LANG],
+      }
+    }
+  }, {
+    p: TEXT.FOLLOW_US[LANG],
+  }, {
+    textAlign: "center",
+    a: {
+      display: "block",
+      href: "http://lenino.net",
+      target: "_blank",
+      img: {
+        width: "4em",
+        src: "../assets/leninoLogo.png",
+        alt: "Lenino.net"
+      },
+      div: "Lenino.net",
+    }
+  }]
+};
 
 DOM.set({
+  font: [{
+    fontFamily: 'title',
+    src: 'url("assets/IrishGrover-Regular.ttf")'
+  }, {
+    fontFamily: 'body',
+    src: 'url("assets/Chalkboard.ttc")'
+  }],
   meta: "utf-8",
   title: "Lenino's Jack Rabbits",
   viewport: "width=device-width, minimum-scale=1.0, maximum-scale=1.0",
   icon: "images/icon.png",
+  css: css,
   width: '100%',
   height: '100%',
   padding: '1.5em',
@@ -140,70 +204,7 @@ DOM.set({
   fontFamily: "body",
   fontSize: "16px",
   textAlign: "center",
-  header:{
-    menu: new TopMenu(),
-  },
-  main: {
-    maxWidth: '680px',
-    margin: '0 auto',
-    padding: '0 0 10px',
-    section: [{
-      margin: "0 -10em",
-      div: CARD({
-        background: 'url(images/splash.png) center center no-repeat',
-        backgroundColor: 'lightgoldenrodyellow'
-      }, {}, 490)
-    }, {
-      h4: TEXT.SUBTITLE[LANG],
-    }, {
-      p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
-    }, {
-      h2: TEXT.TABLETOPIA.TITLE[LANG],
-      a: {
-        href: "https://tabletopia.com/games/jack-rabbits",
-        target: "_blank",
-        img: {
-          width: "100%",
-          src: "images/tabletopia_link.png",
-        }
-      },
-      p: TEXT.TABLETOPIA.INFO[LANG]
-    }, {
-      div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
-    }, {
-      h4: TEXT.CATCH_PRHASE[LANG],
-      section: new SuitYourself(THIS_URL + "/suityourself/"),
-    }, {
-      img: {
-        src: "images/photo1.jpg",
-        width: "100%",
-        height: "auto",
-        alt: "game board",
-      },
-    }, {
-      h2: {
-        a: {
-          href: "assets/instructions.pdf",
-          target: "_blank",
-          text: "Intrucciones",
-        }
-      }
-    }, {
-      p: TEXT.FOLLOW_US[LANG],
-    }, {
-      textAlign: "center",
-      a: {
-        display: "block",
-        href: "http://lenino.net",
-        target: "_blank",
-        img: {
-          width: "4em",
-          src: "../assets/leninoLogo.png",
-          alt: "Lenino.net"
-        },
-        div: "Lenino.net",
-      }
-    }]
-  },
-  onload: e => $(".card").flip()
+  header: new TopMenu(),
+  main: main,
+  onload: e => $(".card").flip(),
 });
