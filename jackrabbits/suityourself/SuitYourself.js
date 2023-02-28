@@ -357,8 +357,8 @@ class SuitYourself extends HTMLElement {
             if (navigator.share) {
               navigator.share({
                 title: TEXT.PAGE_TITLE[LANG],
-                text: "",
-                url: url,
+                text: TEXT.SHARE_MESSAGE[LANG],
+                url: this._shareURL.value,
               }).then(() => {
                 e.target.set("none", "display");
               }).catch(console.error);
