@@ -101,6 +101,7 @@ class SuitYourself extends HTMLElement {
     const TEXT_WIDTH = "28em";
 
     const css = {
+      userSelect: "none",
       "*": {
         margin: 0,
       },
@@ -396,7 +397,6 @@ class SuitYourself extends HTMLElement {
       position: "relative",
       border: "1px solid black",
       backgroundColor: "rgba(240,255,240,0.4)",
-      userSelect: "none",
       header: header,
       main: main,
       footer: {
