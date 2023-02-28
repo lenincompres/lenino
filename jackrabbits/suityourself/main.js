@@ -2,11 +2,6 @@ import TopMenu from "../TopMenu.js";
 import TEXT from "./TEXT.js";
 import SuitYourself from "./SuitYourself.js";
 
-const QS = DOM.querystring();
-const NAME = QS.name ? QS.name : undefined;
-const HAND = QS.hand ? QS.hand.split(",").map(n => parseInt(n)) : false;
-console.log(HAND, QS.name);
-
 DOM.set({
   meta: "utf-8",
   title: "Jack Rabbits' Suit Yourself",
@@ -19,6 +14,7 @@ DOM.set({
     fontFamily: 'body',
     src: '../assets/Chalkboard.ttc'
   }],
+  script: "//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js",
   margin: "0 auto",
   maxWidth: "50em",
   background: "silver",
@@ -31,5 +27,5 @@ DOM.set({
   textAlign: "center",
   padding: "1em",
   menu: new TopMenu(),
-  main: new SuitYourself(undefined, HAND, NAME),
+  main: new SuitYourself(),
 });

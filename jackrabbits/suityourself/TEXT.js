@@ -8,8 +8,8 @@ class TEXT {
     ESP: "Echa tus cartas",
   }
   static PAGE_TITLE_DONE = {
-    ENG: "This is your hand",
-    ESP: "Esta es tu mano",
+    ENG: name => name ? `This is <b>${name}</b>'s hand` : "This is your hand",
+    ESP: name => name ? `Esta es la mano de <b>${name}</b>` : "Esta es tu mano",
   }
   static YOUR = {
     ENG: "Your ",
@@ -61,24 +61,40 @@ class TEXT {
     ESP: "listo",
   }
   static WHEN_DONE = {
-    ENG: `Modify and click <b>${TEXT.DONE.ENG}</b> when safistied.`,
-    ESP: `Modifica a gusto y luego pincha <b>${TEXT.DONE.ESP}</b>.`,
+    ENG: `Click <b>${TEXT.DONE.ENG}</b> when safistied.`,
+    ESP: `Pincha <b>${TEXT.DONE.ESP}</b> cuando estés satisfecho.`,
   }
   static RESTART = {
     ENG: "Restart",
     ESP: "Reiniciar",
   }
   static FIND_YOURS = {
-    ENG: "Find Yours",
-    ESP: "Encuentra el tuyo",
+    ENG: "Reveal your hand",
+    ESP: "Revela tu mano",
   }
   static PAGE_DESCRIPTION = {
-    ENG: `Which one is <b>your</b> suit? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (pips) to increase the cards bellow. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
+    ENG: `Which one is <b>your</b> suit order? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (or “pips”) to increase the cards bellow. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
     ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>${TEXT.BEGIN.ENG}</b>.`,
   }
   static DESCRIPTION = {
-    ENG: (suit, name) => `According to ${name ? `<b>${name}</b>'s` : "your"} valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} suit. This symbol, also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>, is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
-    ESP: (suit, name) => `De acuerdo con tu valoración, tu símbolo es el de <strong style="color:${suit.color}">${TEXT[suit.symbol].ESP}</strong>. Este símbolo, también llamado <strong style="color:${suit.color}">${TEXT[suit.alt].ESP}</strong>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
+    ENG: (suit, name) => `This is how ${name ? `<b>${name}</b> values` : "you value"} the 4 main personality traits shown in the cards. According to this valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} main suit. This symbol—also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>—is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
+    ESP: (suit, name) => `Así es como ${name ? `<b>${name}</b> valora` : "valoras"} los 4 principales rasgos de la personalidad en las cartas. De acuerdo con esta valoración, ${name ? `el símbolo principal de <b>${name}</b>` : "tu símbolo principal"} es el de <strong style="color:${suit.color}">${TEXT[suit.symbol].ESP}</strong>. Este símbolo, también llamado <strong style="color:${suit.color}">${TEXT[suit.alt].ESP}</strong>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
+  }
+  static SHARE_HAND = {
+    ENG: "Share your hand",
+    ESP: "Comparte tu mano",
+  }
+  static SHARE_MESSAGE ={
+    ENG: "This is my hand, how I value the 4 main personality traits shown in the cards. Get to know me.",
+    ESP: "Esta es mi mano, como valoro los 4 principales rasgos de la personalidad en las cartas. Ven a conocerme."
+  }
+  static name = {
+    ENG: "name",
+    ESP: "nombre",
+  }
+  static share = {
+    ENG: "share",
+    ESP: "comparte",
   }
   static diamonds = {
     ENG: "diamonds",

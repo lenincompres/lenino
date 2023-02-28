@@ -1,11 +1,19 @@
 import Card from "./Card.js";
 import TEXT from "./TEXT.js";
 
+const QS = DOM.querystring();
+const NAME = QS.jrsyname ? QS.jrsyname : undefined;
+const HAND = QS.jrsyhand ? QS.jrsyhand.split(",").map(n => parseInt(n)) : false;
+
+const MY_URL = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+
 const WIDTH = new Binder(window.innerWidth);
 addEventListener("resize", e => WIDTH.value = window.innerWidth);
 
 const [STAGE_INTRO, STAGE_START, STAGE_WISDOM, STAGE_WEALTH, STAGE_DONE] = [0, 1, 2, 3, 4];
 const STAGES = [STAGE_INTRO, STAGE_START, STAGE_WISDOM, STAGE_WEALTH, STAGE_DONE];
+
+let nameInput;
 
 const HIDE_MODEL = (binder, test = v => v) => {
   return {
@@ -42,7 +50,7 @@ window.BUTTON_STYLE = {
 
 class SuitYourself extends HTMLElement {
 
-  constructor(root = "", HAND, NAME) {
+  constructor(root = "") {
     super();
 
     this.strength = new Card({
@@ -78,9 +86,12 @@ class SuitYourself extends HTMLElement {
     this.wisdom.appearStage = 2;
     this.wealth.appearStage = 3;
 
+
+    this._shareURL = new Binder();
     this._topCards = new Binder([]);
     this._stage = new Binder(HAND ? STAGE_DONE : STAGE_INTRO);
     this.updateCount();
+    this.updateShare();
 
     this.width = new Binder(window.innerWidth);
     window.addEventListener("resize", () => {
@@ -96,7 +107,7 @@ class SuitYourself extends HTMLElement {
       h: {
         textShadow: "1px 1px 0 black",
         fontFamily: 'title',
-        color: "darkgreen",
+        color: "forestgreen",
       },
       p: {
         textIndent: 0,
@@ -128,7 +139,7 @@ class SuitYourself extends HTMLElement {
         width: "fit-content",
         height: "2em",
         minWidth: "2em",
-        margin: "0.1em",
+        margin: "0.25em 0.5em",
         "*": {
           height: "1em",
           pointerEvents: "none",
@@ -149,9 +160,9 @@ class SuitYourself extends HTMLElement {
       maxWidth: TEXT_WIDTH,
       marginBottom: "1em",
       h1: {
-        text: this._stage.as(stage => stage === STAGE_DONE,
-          TEXT.PAGE_TITLE_DONE[LANG],
+        content: this._stage.as(stage => stage === STAGE_DONE,
           TEXT.PAGE_TITLE[LANG],
+          TEXT.PAGE_TITLE_DONE[LANG](NAME),
         ),
       },
       section: {
@@ -208,7 +219,6 @@ class SuitYourself extends HTMLElement {
             return `rotate(${ang}deg)`;
           }),
           header: {
-            color: "darkgreen",
             margin: "0.5em auto 0",
             model: HIDE_MODEL(this._stage, stage => stage === card.hintStage),
             textAlign: "center",
@@ -232,7 +242,7 @@ class SuitYourself extends HTMLElement {
       },
     }
 
-    const aside = {
+    const instructions = {
       margin: "0 auto",
       width: "fit-content",
       maxWidth: TEXT_WIDTH,
@@ -287,10 +297,9 @@ class SuitYourself extends HTMLElement {
       }]
     }
 
-    const footer = {
+    const controls = {
       overflow: "hidden",
       width: "100%",
-      marginTop: "2em",
       button: {
         fontSize: "1.3em",
         transition: "0.5s",
@@ -311,17 +320,69 @@ class SuitYourself extends HTMLElement {
           ),
         },
         click: e => {
-          if (this.stage == STAGE_DONE && NAME) {
-            let end = window.location.href.lastIndexOf("/");
-            window.location.href = window.location.href.substr(0, end);
-            return;
-          }
+          if (this.stage == STAGE_DONE && NAME)
+            return window.location.href = MY_URL;
           this.nextStage();
         },
+      }
+    };
+
+    let _canShare = new Binder(false);
+    const sharing = {
+      margin: "1em 0",
+      model: HIDE_MODEL(this._stage, stage => stage === STAGE_DONE && !NAME),
+      h6: TEXT.SHARE_HAND[LANG],
+      form: {
+        marginTop: "0.5em",
+        label: {
+          textTransform: "capitalize",
+          text: `${TEXT.name[LANG]}: `,
+        },
+        input: {
+          width: "8em",
+          oninput: e => {
+            _canShare.value = e.target.value.length > 2;
+            this.updateShare(e.target.value);
+          },
+        },
+        button: {
+          ready: elt => !navigator.share ? elt.set("none", "display") : null,
+          style: _canShare.as(
+            BUTTON_STYLE.DISABLED,
+            BUTTON_STYLE.ENABLED(),
+          ),
+          text: TEXT.share[LANG],
+          click: e => {
+            this.storeData();
+            if (navigator.share) {
+              navigator.share({
+                title: TEXT.PAGE_TITLE[LANG],
+                text: "",
+                url: url,
+              }).then(() => {
+                e.target.set("none", "display");
+              }).catch(console.error);
+            }
+          },
+        }
       },
-      section: {
-        model: HIDE_MODEL(this._stage, stage => stage === STAGE_DONE),
-        //p: "Share you results."
+      menu: {
+        marginTop: "0.5em",
+        a: {
+          margin: "0 1em",
+          target: "_blank",
+          click: e => this.storeData(),
+          content: [{
+            text: "Facebook➚",
+            href: this._shareURL.as(url => `https://www.facebook.com/sharer.php?u=${url}`),
+          }, {
+            text: "Twitter➚",
+            href: this._shareURL.as(url => `https://twitter.com/intent/tweet?url=${url}` + `&text=${TEXT.SHARE_MESSAGE[LANG]}&hashtags=lenino,leninosjackrabbits,jackrabbits,boardgames,personalitytypes`),
+          }, {
+            text: "LinkedIn➚",
+            href: this._shareURL.as(url => `https://www.linkedin.com/sharing/share-offsite/&url=${url}&title=${TEXT.PAGE_TITLE[LANG]}&summary=${TEXT.SHARE_MESSAGE[LANG]}`),
+          }]
+        }
       }
     };
 
@@ -338,8 +399,9 @@ class SuitYourself extends HTMLElement {
       userSelect: "none",
       header: header,
       main: main,
-      aside: aside,
-      footer: footer,
+      footer: {
+        section: [instructions, sharing, controls],
+      }
     });
   }
 
@@ -361,26 +423,38 @@ class SuitYourself extends HTMLElement {
     this.orderedCards = [...this.cards].sort((a, b) => b.number - a.number);
   }
 
+  storeData() {
+    console.log("Store date for the future:", nameInput.value, this.strength.number, this.charm.number, this.wisdom.number);
+  }
+
   get stage() {
     return this._stage.value;
   }
 
   set stage(v) {
     this._stage.value = v;
-    if (!v) {
+    if (v === STAGE_INTRO) {
       this.cards.forEach((c, i) => {
         c.enabled = false;
         c.number = Card.MIN;
       });
       this.wealth.number = Card.MAX;
-    } else if (v === 1) {
+    } else if (v === STAGE_START) {
       this.cards.forEach((c, i) => {
         c.enabled = true;
         c.number = Card.MIN;
       });
       this.wealth.enabled = false;
       this.wealth.number = Card.MAX;
+    } else if (v === STAGE_DONE) {
+      this.updateShare();
     }
+  }
+
+  updateShare(name) {
+    let url = MY_URL + `/?lang=${LANG}&jksyhand=${this.strength.number},${this.charm.number},${this.wisdom.number}`
+    if (name) url += `&jksyname=${name}`;
+    this._shareURL.value = url;
   }
 
   get topCards() {

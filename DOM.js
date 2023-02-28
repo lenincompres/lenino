@@ -11,7 +11,7 @@ Element.prototype.get = function (station) {
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
   else if (["text"].includes(station)) output = this.innerText;
   else if (["outer", "self"].includes(station)) output = this.outerHTML;
-  else if (DOM.attributes.includes(station)) output = this.getAttribute(station);
+  else if (DOM.attributes.includes(station) || station.startsWith("data")) output = this.getAttribute(station);
   else if (DOM.isStyle(station, this)) output = this.style[station];
   else output = station ? this[station] : this.value;
   if (output !== undefined && output !== null) return isNaN(output) ? output : parseFloat(output);
@@ -53,7 +53,7 @@ Element.prototype.set = function (model, ...args) {
   });
   let uncamel = DOM.unCamelize(STATION);
   // needs dissambiguation for head link and pseaudoclass
-  if (station !== "link" && (DOM.pseudoClasses.includes(uncamel) || DOM.pseudoElements.includes(uncamel))) return this.set({
+  if (!["link", "target"].includes(station) && (DOM.pseudoClasses.includes(uncamel) || DOM.pseudoElements.includes(uncamel))) return this.set({
     css: {
       [uncamel]: model
     }
@@ -186,7 +186,7 @@ Element.prototype.set = function (model, ...args) {
       }, station);
     }
     let done = DOM.isStyle(STATION, this) ? this.style[STATION] = model : undefined;
-    if (DOM.typify(STATION).attribute || station.includes("*")) done = !this.setAttribute(station.replace("*", ""), model);
+    if (DOM.typify(STATION).attribute || station.includes("*") || STATION.startsWith("data")) done = !this.setAttribute(station.replace("*", ""), model);
     if (station === "id") DOM.addID(model, this);
     if (done !== undefined) return;
   }

@@ -1,5 +1,5 @@
 
-window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
+window.THIS_URL = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 
 const QS = DOM.querystring();
 window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
