@@ -13,7 +13,7 @@ class TEXT {
   }
   static PAGE_DESCRIPTION = {
     ENG: "Which one is <b>YOUR</b> suit? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (pips) to increase the cards bellow. Click <b>BEGIN</b> to start.",
-    ESP: "Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>COMIENZAR</b>.",
+    ESP: "Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>COMENZAR</b>.",
   }
   static YOUR = {
     ENG: "Your ",
