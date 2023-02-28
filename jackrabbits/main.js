@@ -202,7 +202,6 @@ DOM.set({
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
   fontFamily: "body",
-  fontSize: "16px",
   textAlign: "center",
   header: new TopMenu(),
   main: main,
