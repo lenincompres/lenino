@@ -80,7 +80,6 @@ class Card extends HTMLElement {
           fontSize: "1.1em",
           p: {
             fontFamily: "title",
-            textShadow: "none",
             color: this._suit.as(v => v.color),
             text: this._number,
           },

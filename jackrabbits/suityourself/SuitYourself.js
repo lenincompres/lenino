@@ -4,6 +4,9 @@ import TEXT from "./TEXT.js";
 const WIDTH = new Binder(window.innerWidth);
 addEventListener("resize", e => WIDTH.value = window.innerWidth);
 
+const [STAGE_INTRO, STAGE_START, STAGE_WISDOM, STAGE_WEALTH, STAGE_DONE] = [0, 1, 2, 3, 4];
+const STAGES = [STAGE_INTRO, STAGE_START, STAGE_WISDOM, STAGE_WEALTH, STAGE_DONE];
+
 const HIDE_MODEL = (binder, test = v => v) => {
   return {
     transition: "0.5s",
@@ -39,27 +42,29 @@ window.BUTTON_STYLE = {
 
 class SuitYourself extends HTMLElement {
 
-  constructor(root = "") {
+  constructor(root = "", HAND, NAME) {
     super();
 
     this.strength = new Card({
       suit: Card.SUIT.S,
       callback: () => this.updateCount(),
       root: root,
+      number: HAND ? HAND[0] : undefined,
     });
     this.charm = new Card({
       callback: () => this.updateCount(),
       suit: Card.SUIT.H,
       root: root,
+      number: HAND ? HAND[1] : undefined,
     });
     this.wisdom = new Card({
       callback: () => this.updateCount(),
       suit: Card.SUIT.C,
       root: root,
+      number: HAND ? HAND[2] : undefined,
     });
     this.wealth = new Card({
       root: root,
-      number: 10,
     });
     this.cards = [this.strength, this.charm, this.wisdom, this.wealth];
     this.orderedCards = [];
@@ -73,8 +78,9 @@ class SuitYourself extends HTMLElement {
     this.wisdom.appearStage = 2;
     this.wealth.appearStage = 3;
 
-    this._topCard = new Binder([]);
-    this._stage = new Binder(0);
+    this._topCards = new Binder([]);
+    this._stage = new Binder(HAND ? STAGE_DONE : STAGE_INTRO);
+    this.updateCount();
 
     this.width = new Binder(window.innerWidth);
     window.addEventListener("resize", () => {
@@ -97,9 +103,12 @@ class SuitYourself extends HTMLElement {
         textAlign: "center",
       },
       b: {
-        color: "darkgreen",
-        textShadow: "1px 1px 0 black",
+        textTransform: "uppercase",
         fontFamily: 'title',
+      },
+      strong: {
+        fontWeight: "bolder",
+        textShadow: "1px 1px 0 black",
       },
       a: {
         color: "darkblue",
@@ -140,13 +149,13 @@ class SuitYourself extends HTMLElement {
       maxWidth: TEXT_WIDTH,
       marginBottom: "1em",
       h1: {
-        text: this._stage.as(v => v < 4,
+        text: this._stage.as(stage => stage === STAGE_DONE,
           TEXT.PAGE_TITLE_DONE[LANG],
           TEXT.PAGE_TITLE[LANG],
         ),
       },
       section: {
-        model: HIDE_MODEL(this._stage, v => v === 0),
+        model: HIDE_MODEL(this._stage, stage => stage === STAGE_INTRO),
         p: TEXT.PAGE_DESCRIPTION[LANG],
       }
     };
@@ -162,30 +171,35 @@ class SuitYourself extends HTMLElement {
         placeContent: "center",
         li: this.cards.map((card, i) => new Object({
           width: "8em",
-          zIndex: this._stage.as(v => 4 - (v > 3 ? this.orderedCards.indexOf(card) : i)),
+          zIndex: this._stage.as(stage =>
+            stage === STAGE_DONE ?
+            4 - this.orderedCards.indexOf(card) :
+            4 - i
+          ),
           transition: "0.5s",
-          style: this._stage.as(v => v >= card.appearStage, {
-            position: "absolute",
-            pointerEvents: "none",
-            opacity: 0,
-          }, {
-            position: "relative",
-            pointerEvents: "initial",
-            opacity: 1,
-          }),
-          marginLeft: this._stage.as(v => {
+          style: this._stage.as(
+            stage => stage >= card.appearStage, {
+              position: "absolute",
+              pointerEvents: "none",
+              opacity: 0,
+            }, {
+              position: "relative",
+              pointerEvents: "initial",
+              opacity: 1,
+            }),
+          marginLeft: this._stage.as(stage => {
             if (!i) return 0;
-            if (!v) return "1em";
-            if (v < 4) return `${-0.3 * v}em`;
+            if (!stage) return "1em";
+            if (stage < 4) return `${-0.3 * stage}em`;
             return "-8em";
           }),
-          marginTop: this._stage.as(v => {
-            if (!v || v > 3) return 0;
-            return 1.25 * Math.abs(i - v / 2) + "em";
+          marginTop: this._stage.as(stage => {
+            if (stage === STAGE_INTRO || stage === STAGE_DONE) return 0;
+            return 1.25 * Math.abs(i - stage / 2) + "em";
           }),
-          transform: this._stage.as(v => {
-            let ang = v ? 5 : 0;
-            if (v < 4) ang = -ang * v + i * 2 * ang;
+          transform: this._stage.as(stage => {
+            let ang = stage ? 5 : 0;
+            if (stage < 4) ang = -ang * stage + i * 2 * ang;
             else {
               ang = 20;
               let n = 4 - this.orderedCards.indexOf(card);
@@ -196,18 +210,18 @@ class SuitYourself extends HTMLElement {
           header: {
             color: "darkgreen",
             margin: "0.5em auto 0",
-            model: HIDE_MODEL(this._stage, v => v === card.hintStage),
+            model: HIDE_MODEL(this._stage, stage => stage === card.hintStage),
             textAlign: "center",
             p: TEXT.CARD_HINTS.map(H => H[LANG])[i],
           },
           main: card,
           footer: {
-            visibility: this._stage.as(v => v < 4,
+            visibility: this._stage.as(stage => stage < 4,
               "hidden",
               "visible",
             ),
             //label: TEXT.YOUR[LANG],
-            b: {
+            h2: {
               textTransform: "Capitalize",
               fontSize: "1.25em",
               color: card.suit.color,
@@ -222,28 +236,28 @@ class SuitYourself extends HTMLElement {
       margin: "0 auto",
       width: "fit-content",
       maxWidth: TEXT_WIDTH,
-      model: HIDE_MODEL(this._stage, v => !!v),
+      model: HIDE_MODEL(this._stage, stage => stage !== STAGE_INTRO),
       section: [{
         // shows points you have left
         marginTop: "1em",
-        model: HIDE_MODEL(this._stage, v => v < 3 && v > 0),
-        b: {
-          fontSize: "2em",
+        model: HIDE_MODEL(this._stage, stage => [STAGE_START, STAGE_WISDOM].includes(stage)),
+        h2: {
           color: this.wealth.suit.color,
-          text: this.wealth._number.as(v => v - 2)
+          fontSize: "2em",
+          text: this.wealth._number.as(number => number - 2),
         },
-        img: {
-          marginLeft: "0.1em",
-          height: "1.5em",
-          src: root + Card.SUIT.D.image,
+        h3: {
+          fontSize: "1em",
+          color: this.wealth.suit.color,
+          fontFamily: "body",
+          text: TEXT.POINTS_LEFT[LANG],
         },
-        p: TEXT.POINTS_LEFT[LANG],
       }, {
         //additional instructions
-        color: "darkgreen",
-        model: HIDE_MODEL(this._stage, v => v > 1 && v < 4),
+        marginTop: "0.5em",
+        model: HIDE_MODEL(this._stage, stage => [STAGE_START, STAGE_WEALTH, STAGE_WEALTH].includes(stage)),
         p: {
-          content: this._stage.as(v => v === 3,
+          content: this._stage.as(stage => stage === STAGE_WEALTH,
             TEXT.WHEN_READY[LANG],
             TEXT.WHEN_DONE[LANG],
           ),
@@ -251,22 +265,22 @@ class SuitYourself extends HTMLElement {
       }, {
         // warnings/errors
         color: "crimson",
-        marginTop: "1em",
-        model: HIDE_MODEL(this._topCard, v => v.length > 1 && this.stage === 3),
-        text: this._topCard.as(vs => TEXT.TIE[LANG](vs.map(c => TEXT[c.suit.trait][LANG]))),
+        marginTop: "0.5em",
+        model: HIDE_MODEL(this._topCards, topCards => this.stage === STAGE_WEALTH && topCards.length > 1),
+        text: this._topCards.as(topCards => TEXT.TIE[LANG](topCards.map(c => TEXT[c.suit.trait][LANG]))),
       }, {
         // shows results
-        model: HIDE_MODEL(this._stage, v => v > 3),
+        model: HIDE_MODEL(this._stage, stage => stage === STAGE_DONE),
         content: this._stage.as(v => {
           if (v < 4) return;
           let suits = this.orderedCards.map(c => Object.assign({
             pct: Math.abs(100 * (c.number - 2) / 8),
           }, c.suit));
           return {
-            p: TEXT.DESCRIPTION[LANG](suits[0]),
+            p: TEXT.DESCRIPTION[LANG](suits[0], NAME),
             ul: {
               marginTop: "1em",
-              li: suits.map(s => this.getPct(s, root))
+              li: suits.map(suit => this.getPct(suit, root))
             },
           }
         })
@@ -280,10 +294,10 @@ class SuitYourself extends HTMLElement {
       button: {
         fontSize: "1.3em",
         transition: "0.5s",
-        style: this._topCard.as(
-          val => (this.stage === 1 &&
+        style: this._topCards.as(
+          topCards => ([STAGE_START, STAGE_WISDOM].includes(this.stage) &&
             this.wealth.number > 2) ||
-          (this.stage === 3 && val.length > 1),
+          (this.stage === STAGE_WEALTH && topCards.length > 1),
           BUTTON_STYLE.ENABLED(),
           BUTTON_STYLE.DISABLED,
         ),
@@ -293,11 +307,22 @@ class SuitYourself extends HTMLElement {
             TEXT.NEXT[LANG] + " ⮕",
             TEXT.NEXT[LANG] + " ⮕",
             TEXT.DONE[LANG],
-            TEXT.RESTART[LANG],
+            NAME ? TEXT.FIND_YOURS[LANG] : TEXT.RESTART[LANG],
           ),
         },
-        click: e => this.nextStage(),
+        click: e => {
+          if (this.stage == STAGE_DONE && NAME) {
+            let end = window.location.href.lastIndexOf("/");
+            window.location.href = window.location.href.substr(0, end);
+            return;
+          }
+          this.nextStage();
+        },
       },
+      section: {
+        model: HIDE_MODEL(this._stage, stage => stage === STAGE_DONE),
+        //p: "Share you results."
+      }
     };
 
     this.set({
@@ -316,18 +341,14 @@ class SuitYourself extends HTMLElement {
       aside: aside,
       footer: footer,
     });
-
-    this.updateCount();
   }
 
   nextStage() {
-    if (this.stage === 1 && this.wealth.number > 2) return;
-    if (this.stage === 3) {
-      if (this.topCard.length > 1) return;
+    this.stage = (STAGES.indexOf(this.stage) + 1) % STAGES.length;
+    if (this.stage === STAGE_DONE) {
       this.cards.forEach(c => c.enabled = false);
       window.location.href = '#suitYourself';
     }
-    this.stage = (this.stage + 1) % 5;
     this.updateCount();
   }
 
@@ -336,7 +357,7 @@ class SuitYourself extends HTMLElement {
     this.wealth.number = Card.MAX + 3 * Card.MIN - sum;
     this.cards.forEach(c => c.canAdd = this.wealth.number > Card.MIN);
     let top = this.cards.reduce((o, c) => c.number > o ? c.number : o, 0);
-    this.topCard = this.cards.filter(c => c.number >= top);
+    this.topCards = this.cards.filter(c => c.number >= top);
     this.orderedCards = [...this.cards].sort((a, b) => b.number - a.number);
   }
 
@@ -362,12 +383,12 @@ class SuitYourself extends HTMLElement {
     }
   }
 
-  get topCard() {
-    return this._topCard.value;
+  get topCards() {
+    return this._topCards.value;
   }
 
-  set topCard(v) {
-    this._topCard.value = v;
+  set topCards(v) {
+    this._topCards.value = v;
   }
 
   getPct(suit, root) {
@@ -378,7 +399,8 @@ class SuitYourself extends HTMLElement {
         height: "1em",
         src: root + suit.image
       },
-      b: {
+      strong: {
+        fontFamily: "title",
         textAlign: "left",
         display: "inline-block",
         width: "3em",

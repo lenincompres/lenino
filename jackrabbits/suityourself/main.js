@@ -1,6 +1,11 @@
-import SuitYourself from "./SuitYourself.js";
-import TEXT from "./TEXT.js";
 import TopMenu from "../TopMenu.js";
+import TEXT from "./TEXT.js";
+import SuitYourself from "./SuitYourself.js";
+
+const QS = DOM.querystring();
+const NAME = QS.name ? QS.name : undefined;
+const HAND = QS.hand ? QS.hand.split(",").map(n => parseInt(n)) : false;
+console.log(HAND, QS.name);
 
 DOM.set({
   meta: "utf-8",
@@ -26,5 +31,5 @@ DOM.set({
   textAlign: "center",
   padding: "1em",
   menu: new TopMenu(),
-  main: new SuitYourself(),
+  main: new SuitYourself(undefined, HAND, NAME),
 });

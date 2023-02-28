@@ -11,10 +11,6 @@ class TEXT {
     ENG: "This is your hand",
     ESP: "Esta es tu mano",
   }
-  static PAGE_DESCRIPTION = {
-    ENG: "Which one is <b>YOUR</b> suit? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (pips) to increase the cards bellow. Click <b>BEGIN</b> to start.",
-    ESP: "Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>COMENZAR</b>.",
-  }
   static YOUR = {
     ENG: "Your ",
     ESP: "Tu ",
@@ -32,7 +28,7 @@ class TEXT {
       ESP: "Reduce otra para incrementar esta.",
     },
     {
-      ENG: "Change others to affect this one.",
+      ENG: "Exchage others to increase this.",
       ESP: "Cambia esta usando las otras.",
     },
   ]
@@ -41,20 +37,16 @@ class TEXT {
     ESP: "Puntos disponibles",
   }
   static NEXT = {
-    ENG: "Next ",
-    ESP: "Continuar ",
+    ENG: "next",
+    ESP: "continuar",
   }
   static WHEN_READY = {
-    ENG: "Modify the cards at will and click <b>NEXT</b> when safistied.",
-    ESP: "Modifica las cartas a gusto y luego pincha <b>CONTINUAR</b>.",
-  }
-  static WHEN_DONE = {
-    ENG: "Modify and click <b>DONE</b> when safistied.",
-    ESP: "Modifica a gusto y luego pincha <b>LISTO</b>.",
+    ENG: `Increase the cards at will and click <b>${TEXT.NEXT.ENG}</b> when safistied.`,
+    ESP: `Incrementa las cartas a tu gusto y luego pincha <b>${TEXT.NEXT.ESP}</b>.`,
   }
   static BEGIN = {
-    ENG: "Begin",
-    ESP: "Comenzar",
+    ENG: "begin",
+    ESP: "comenzar",
   }
   static TIE = {
     ENG: suits => `To have a definite suit, you must break the tie between ${TEXT.concat(suits, "and")}.`,
@@ -65,16 +57,28 @@ class TEXT {
     ESP: "y",
   }
   static DONE = {
-    ENG: "Done",
-    ESP: "Listo",
+    ENG: "done",
+    ESP: "listo",
+  }
+  static WHEN_DONE = {
+    ENG: `Modify and click <b>${TEXT.DONE.ENG}</b> when safistied.`,
+    ESP: `Modifica a gusto y luego pincha <b>${TEXT.DONE.ESP}</b>.`,
   }
   static RESTART = {
     ENG: "Restart",
     ESP: "Reiniciar",
   }
+  static FIND_YOURS = {
+    ENG: "Find Yours",
+    ESP: "Encuentra el tuyo",
+  }
+  static PAGE_DESCRIPTION = {
+    ENG: `Which one is <b>your</b> suit? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (pips) to increase the cards bellow. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
+    ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>${TEXT.BEGIN.ENG}</b>.`,
+  }
   static DESCRIPTION = {
-    ENG: suit => `According to your valuation, the <b style="color:${suit.color}">${TEXT[suit.symbol].ENG}</b> (also called ${TEXT[suit.alt].ENG}) are your suit. This is the symbol for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
-    ESP: suit => `De acuerdo con tu valoración, tu símbolo es el de <b style="color:${suit.color}">${TEXT[suit.symbol].ESP}</b>. Este símbolo, también llamado <b style="color:${suit.color}">${TEXT[suit.alt].ESP}</b>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
+    ENG: (suit, name) => `According to ${name ? `<b>${name}</b>'s` : "your"} valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} suit. This symbol, also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>, is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
+    ESP: (suit, name) => `De acuerdo con tu valoración, tu símbolo es el de <strong style="color:${suit.color}">${TEXT[suit.symbol].ESP}</strong>. Este símbolo, también llamado <strong style="color:${suit.color}">${TEXT[suit.alt].ESP}</strong>, es el de ${TEXT[suit.cast].ESP} enfocandos en ${TEXT[suit.symbol].meaning.ESP}.`,
   }
   static diamonds = {
     ENG: "diamonds",

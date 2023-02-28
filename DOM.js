@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.38
+ * @version 1.0.39
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -259,7 +259,7 @@ class Binder {
     delete this._listeners[countIndex];
   }
   as(...args) {
-    if(args.length === 1) return this.bind(args[0]);
+    if (args.length === 1) return this.bind(args[0]);
     if (typeof args[0] === "function") return this.bind(args.shift(), args);
     return this.bind(args);
   }
@@ -464,7 +464,10 @@ class DOM {
   static querystring = () => {
     var qs = location.search.substring(1);
     if (!qs) return Object();
-    if (qs.includes("=")) return JSON.parse("{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "", "").replace(/=/g, "\":\"") + "\"}");
+    if (qs.includes("=")) {
+      qs = "{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "\",\"", "").replace(/=/g, "\":\"") + "\"}";
+      return JSON.parse(qs);
+    }
     return qs.split("/");
   }
   static addID = (id, elt) => {
