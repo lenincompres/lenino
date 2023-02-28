@@ -73,7 +73,7 @@ class TEXT {
     ESP: "Revela tu mano",
   }
   static PAGE_DESCRIPTION = {
-    ENG: `Which one is <b>your</b> suit order? The suits represent 4 mayor pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (or “pips”) to increase the cards bellow. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
+    ENG: `Which one is <b>your</b> suit order? The suits represent 4 major pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (or “pips”) to increase the cards bellow. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
     ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>${TEXT.BEGIN.ENG}</b>.`,
   }
   static DESCRIPTION = {
