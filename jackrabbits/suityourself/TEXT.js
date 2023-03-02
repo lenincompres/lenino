@@ -28,7 +28,7 @@ class TEXT {
       ESP: "Reduce otra para incrementar esta.",
     },
     {
-      ENG: "Exchage others to increase this.",
+      ENG: "Exchange others to increase this.",
       ESP: "Cambia esta usando las otras.",
     },
   ]
