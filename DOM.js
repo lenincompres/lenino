@@ -260,7 +260,10 @@ class Binder {
   }
   as(...args) {
     if (args.length === 1) return this.bind(args[0]);
-    if (typeof args[0] === "function") return this.bind(args.shift(), args);
+    if (typeof args[0] === "function") {
+      if (args.length === 2) return this.bind(...args);
+      return this.bind(args.shift(), args);
+    }
     return this.bind(args);
   }
   bind(...args) {
@@ -279,7 +282,11 @@ class Binder {
         return values[val];
       };
     } else if (model && model !== target) {
-      onvalue = val => [model[val], model.default, model.false].filter(v => v !== undefined)[0];
+      let test = onvalue;
+      onvalue = val => {
+        val = test(val);
+        return [model[val], model.default, model.false].filter(v => v !== undefined)[0];
+      }
     }
     if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, removes the listener

@@ -199,6 +199,7 @@ DOM.set({
   height: '100%',
   padding: '1.5em',
   margin: '0px',
+  overflowX: "hidden",
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
   fontFamily: "body",

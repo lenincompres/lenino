@@ -22,19 +22,15 @@ class Card extends HTMLElement {
     const DISABLED_COLOR = "#ddd";
 
     let img_center = {
-      opacity: this._number.as(v => v % 2,
-        0,
-        1,
-      ),
+      opacity: this._number.as(v => v % 2 ? 1 : 0),
       top: "50%",
       left: "50%",
     };
     let img_middle = getArray(2, i => new Object({
-      opacity: this._number.as(
-        v => [2, 3, 6, 7, 10, 11].includes(v),
-        0,
-        1,
-      ),
+      opacity: this._number.as(v => [2, 3, 6, 7, 10, 11].includes(v), {
+        true: 1,
+        false: 0,
+      }),
       top: ["34%", "66%"][i],
       left: "50%",
       transform: `rotate(${["0", "180"][i]}deg)`,
@@ -50,11 +46,10 @@ class Card extends HTMLElement {
       transform: `rotate(${["-20", "20", "200", "160"][i]}deg)`,
     }));
     let img_sides = getArray(4, i => new Object({
-      opacity: this._number.as(
-        v => [6, 7, 8, 9, 10, 11].includes(v),
-        0,
-        1,
-      ),
+      opacity: this._number.as(v => [6, 7, 8, 9, 10, 11].includes(v), {
+        true: 1,
+        false: 0,
+      }),
       top: ["42%", "42%", "58%", "58%"][i],
       left: ["28%", "72%", "28%", "72%"][i],
       transform: `rotate(${["-60", "60", "240", "120"][i]}deg)`,
@@ -106,7 +101,10 @@ class Card extends HTMLElement {
         textAlign: 0,
         width: "100%",
         height: "100%",
-        display: this._buttonEnabled.as("none", "flex"),
+        display: this._buttonEnabled.as({
+          true: "flex",
+          false: "none",
+        }),
         button: {
           fontSize: "1.05em",
           fontFamily: "title",
@@ -117,17 +115,17 @@ class Card extends HTMLElement {
           color: this.suit.color + "!important",
           borderColor: this.suit.color + "!important",
           content: [{
-            style: this._canAdd.as(
-              BUTTON_STYLE.DISABLED,
-              BUTTON_STYLE.ENABLED(this.suit.color),
-            ),
+            style: this._canAdd.as({
+              true: BUTTON_STYLE.ENABLED(this.suit.color),
+              false: BUTTON_STYLE.DISABLED,
+            }),
             text: "+1",
             click: e => this.canAdd ? this.number += 1 : null,
           }, {
-            style: this._number.as(v => v > Card.MIN,
-              BUTTON_STYLE.DISABLED,
-              BUTTON_STYLE.ENABLED(this.suit.color),
-            ),
+            style: this._number.as(v => v > Card.MIN, {
+              true: BUTTON_STYLE.ENABLED(this.suit.color),
+              false: BUTTON_STYLE.DISABLED,
+            }),
             text: "-1",
             click: e => this.number -= 1,
           }]

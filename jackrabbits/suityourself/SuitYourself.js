@@ -20,11 +20,14 @@ const HIDE_MODEL = (binder, test = v => v) => {
     transition: "0.5s",
     overflow: "hidden",
     style: binder.as(test, {
-      opacity: 0,
-      maxHeight: 0,
-    }, {
-      opacity: 1,
-      maxHeight: "100em",
+      true: {
+        opacity: 1,
+        maxHeight: "100em",
+      },
+      false: {
+        opacity: 0,
+        maxHeight: 0,
+      },
     }),
   }
 };
@@ -161,10 +164,10 @@ class SuitYourself extends HTMLElement {
       maxWidth: TEXT_WIDTH,
       marginBottom: "1em",
       h1: {
-        content: this._stage.as(stage => stage === STAGE_DONE,
-          TEXT.PAGE_TITLE[LANG],
-          TEXT.PAGE_TITLE_DONE[LANG](NAME),
-        ),
+        content: this._stage.as(stage => stage === STAGE_DONE, {
+          true: TEXT.PAGE_TITLE_DONE[LANG](NAME),
+          false: TEXT.PAGE_TITLE[LANG],
+        }),
       },
       section: {
         model: HIDE_MODEL(this._stage, stage => stage === STAGE_INTRO),
@@ -227,10 +230,10 @@ class SuitYourself extends HTMLElement {
           },
           main: card,
           footer: {
-            visibility: this._stage.as(stage => stage < 4,
-              "hidden",
-              "visible",
-            ),
+            visibility: this._stage.as(stage => stage < 4, {
+              false: "hidden",
+              true: "visible",
+            }),
             //label: TEXT.YOUR[LANG],
             h2: {
               textTransform: "Capitalize",
@@ -268,10 +271,10 @@ class SuitYourself extends HTMLElement {
         marginTop: "0.5em",
         model: HIDE_MODEL(this._stage, stage => [STAGE_START, STAGE_WEALTH, STAGE_WEALTH].includes(stage)),
         p: {
-          content: this._stage.as(stage => stage === STAGE_WEALTH,
-            TEXT.WHEN_READY[LANG],
-            TEXT.WHEN_DONE[LANG],
-          ),
+          content: this._stage.as(stage => stage === STAGE_WEALTH, {
+            true: TEXT.WHEN_DONE[LANG],
+            false: TEXT.WHEN_READY[LANG],
+          }),
         },
       }, {
         // warnings/errors
@@ -348,10 +351,10 @@ class SuitYourself extends HTMLElement {
         },
         button: {
           ready: elt => !navigator.share ? elt.set("none", "display") : null,
-          style: _canShare.as(
-            BUTTON_STYLE.DISABLED,
-            BUTTON_STYLE.ENABLED(),
-          ),
+          style: _canShare.as({
+            true: BUTTON_STYLE.ENABLED(),
+            false: BUTTON_STYLE.DISABLED,
+          }),
           text: TEXT.share[LANG],
           click: e => {
             this.storeData();
