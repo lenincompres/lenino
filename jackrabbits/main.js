@@ -144,7 +144,7 @@ const main = {
       backgroundColor: "ivory",
       src: "mailinglist.html",
       width: "615px",
-      height: "210px",
+      height: "260px",
     }
   },{
     h4: TEXT.SUBTITLE[LANG],
