@@ -123,16 +123,39 @@ const main = {
   maxWidth: '680px',
   margin: '0 auto',
   padding: '0 0 10px',
-  section: [{
+  section: [
+    {
+    img: {
+      src: "assets/banner.png",
+      width: "100%",
+    },
+    background: "darkgreen",
+    borderRadius: "0.5em",
+    boxShadow: "1px 1px 3px black",
+    overflow: "hidden",
+    p: {
+      padding: "0 2em",
+      content: TEXT.LAUNCH_DESCRIPTION[LANG]
+    },
+    h2: TEXT.SUBSCRIBE[LANG],
+    color: "ivory",
+    paddingBottom: "1em",
+    iframe: {
+      backgroundColor: "ivory",
+      src: "mailinglist.html",
+      width: "615px",
+      height: "210px",
+    }
+  },{
+    h4: TEXT.SUBTITLE[LANG],
+  }, {
+    p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
+  },  {
     margin: "0 -10em",
     div: CARD({
       background: 'url(images/splash.png) center center no-repeat',
       backgroundColor: 'lightgoldenrodyellow'
     }, {}, 490)
-  }, {
-    h4: TEXT.SUBTITLE[LANG],
-  }, {
-    p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
   }, {
     h2: TEXT.TABLETOPIA.TITLE[LANG],
     a: {
@@ -203,6 +226,7 @@ DOM.set({
   backgroundColor: '#EBEBD5',
   backgroundImage: 'url(images/bg.png)',
   fontFamily: "body",
+  fontSize: "16px",
   textAlign: "center",
   header: new TopMenu(),
   main: main,

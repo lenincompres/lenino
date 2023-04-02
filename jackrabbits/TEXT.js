@@ -4,6 +4,16 @@ class TEXT {
     ENG: "The board game for playing card</br>on a quest through wonderlands. "
   }
 
+  static SUBSCRIBE = {
+    ESP: "Suscríbete a nuestro listado de correo.",
+    ENG: "Subscribe to our mailing list."
+  }
+
+  static LAUNCH_DESCRIPTION = {
+    ESP: "El lanzamiento de la campaña de Kickstarter será el 24 de Abril 2023 en el Consulado Dominicano de Nueva York y en todo el mundo por medio de kickstarter.com. Mantente atento para las exclusivas de la campaña y el evento.",
+    ENG: "The Kickstarter launch event for the game will be on April 24th 2023 at the Dominican Consulate of New York and all over the world through kickstarter.com. Join our mailing for more exclusive information."
+  }
+
   static INTRO = {
     ENG: "is a clever board game based on classic playing cards. It is characterized by the management of resources, the exploration of a different board in each game, and the elements of adventure and fantasy. The art and concept evoke Alice's adventures in Wonderland, and the mission is for the messenger rabbits to visit palaces and get royal cards. It has different levels of difficulty that make it attractive for casual players as well as for experts.",
     ESP: "es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos."

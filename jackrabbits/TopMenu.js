@@ -27,7 +27,7 @@ class TopMenu extends HTMLElement {
               display: LANG !== "ESP" ? "block" : "none",
               a: {
                 text: "Español",
-                href: THIS_URL + "?lang=esp",
+                href: THIS_URL + "/index.html?lang=esp",
               }
             }, {
               a: {
