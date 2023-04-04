@@ -30,8 +30,8 @@ class TEXT {
       ENG: "Try the virtual version of the game in <b>Tabletopia</b>.",
     },
     INFO: {
-      ESP: "Muy pronto lanzaremos una campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juego. Mantente atento.",
-      ENG: "Very soon we will be launching a <b>Kickstarter</b> campaign to make the first official edition of the game. Stay tuned."
+      ESP: "En Abril 24 lanzaremos nuestra campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juegos.",
+      ENG: "This April 24th we will be launching a <b>Kickstarter</b> campaign to make the first official edition of the game."
     }
   }
 

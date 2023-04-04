@@ -119,77 +119,62 @@ const css = {
   },
 };
 
-const main = {
-  maxWidth: '680px',
-  margin: '0 auto',
-  padding: '0 0 10px',
-  section: [
-    {
+const MALING_LIST_FORM = {
+  img: {
+    src: "assets/banner.png",
+    width: "100%",
+  },
+  background: "darkgreen",
+  borderRadius: "0.5em",
+  boxShadow: "1px 1px 3px black",
+  overflow: "hidden",
+  p: {
+    padding: "0 2em",
+    content: TEXT.LAUNCH_DESCRIPTION[LANG]
+  },
+  h2: TEXT.SUBSCRIBE[LANG],
+  color: "ivory",
+  paddingBottom: "1em",
+  iframe: {
+    backgroundColor: "ivory",
+    src: "mailinglist.html",
+    width: "615px",
+    height: "260px",
+  }
+};
+
+const TABLETOPIA = {
+  h2: TEXT.TABLETOPIA.TITLE[LANG],
+  a: {
+    href: "https://tabletopia.com/games/jack-rabbits",
+    target: "_blank",
     img: {
-      src: "assets/banner.png",
       width: "100%",
-    },
-    background: "darkgreen",
-    borderRadius: "0.5em",
-    boxShadow: "1px 1px 3px black",
-    overflow: "hidden",
-    p: {
-      padding: "0 2em",
-      content: TEXT.LAUNCH_DESCRIPTION[LANG]
-    },
-    h2: TEXT.SUBSCRIBE[LANG],
-    color: "ivory",
-    paddingBottom: "1em",
-    iframe: {
-      backgroundColor: "ivory",
-      src: "mailinglist.html",
-      width: "615px",
-      height: "260px",
+      src: "images/tabletopia_link.png",
     }
-  },{
-    h4: TEXT.SUBTITLE[LANG],
-  }, {
-    p: [`Lenino's ${JRName} ` + TEXT.INTRO[LANG], TEXT.CONTAINS[LANG]],
-  },  {
-    margin: "0 -10em",
-    div: CARD({
-      background: 'url(images/splash.png) center center no-repeat',
-      backgroundColor: 'lightgoldenrodyellow'
-    }, {}, 490)
-  }, {
-    h2: TEXT.TABLETOPIA.TITLE[LANG],
+  },
+  p: TEXT.TABLETOPIA.INFO[LANG]
+};
+
+const GALLERY = {
+  img: {
+    src: "images/photo1.jpg",
+    width: "100%",
+    height: "auto",
+    alt: "game board",
+  },
+};
+
+const FOOTER = {
+  h2: {
     a: {
-      href: "https://tabletopia.com/games/jack-rabbits",
+      href: "assets/instructions.pdf",
       target: "_blank",
-      img: {
-        width: "100%",
-        src: "images/tabletopia_link.png",
-      }
-    },
-    p: TEXT.TABLETOPIA.INFO[LANG]
-  }, {
-    div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
-  }, {
-    h4: TEXT.CATCH_PRHASE[LANG],
-    section: new SuitYourself(THIS_URL + "/suityourself/"),
-  }, {
-    img: {
-      src: "images/photo1.jpg",
-      width: "100%",
-      height: "auto",
-      alt: "game board",
-    },
-  }, {
-    h2: {
-      a: {
-        href: "assets/instructions.pdf",
-        target: "_blank",
-        text: TEXT.INSTRUCTIONS[LANG],
-      }
+      text: TEXT.INSTRUCTIONS[LANG],
     }
-  }, {
-    p: TEXT.FOLLOW_US[LANG],
-  }, {
+  },
+  p: TEXT.FOLLOW_US[LANG],
+  section: {
     textAlign: "center",
     a: {
       display: "block",
@@ -202,7 +187,12 @@ const main = {
       },
       div: "Lenino.net",
     }
-  }]
+  }
+};
+
+const CARD_FLIP = {
+  div: [RANDOM_CARD(true), RANDOM_CARD(true, 1)],
+  h4: TEXT.CATCH_PRHASE[LANG],
 };
 
 DOM.set({
@@ -229,6 +219,30 @@ DOM.set({
   fontSize: "16px",
   textAlign: "center",
   header: new TopMenu(),
-  main: main,
+  main: {
+    maxWidth: '680px',
+    margin: '0 auto',
+    padding: '0 0 10px',
+    section: [
+      MALING_LIST_FORM, {
+        h4: TEXT.SUBTITLE[LANG],
+      }, {
+        p: `Lenino's ${JRName} ` + TEXT.INTRO[LANG],
+      }, {
+        margin: "0 -10em",
+        div: CARD({
+          background: 'url(images/splash.png) center center no-repeat',
+          backgroundColor: 'lightgoldenrodyellow'
+        }, {}, 490)
+      }, {
+        p: TEXT.CONTAINS[LANG],
+      },
+      TABLETOPIA, 
+      CARD_FLIP,
+      new SuitYourself(THIS_URL + "/suityourself/"),
+      GALLERY,
+      FOOTER
+    ]
+  },
   onload: e => $(".card").flip(),
 });
