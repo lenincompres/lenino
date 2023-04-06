@@ -4,11 +4,10 @@ class Bell {
   constructor(radius = 1, angle = random(0, 2 * PI), x = 0, y = 0) {
     this.Q = [];
     if (angle === []) return;
-    this.maxSpeed = MAXV ? MAXV : 0.5 * radius;
     if (typeof angle === 'number') {
       let phot = {
         pos: createVector(x, y),
-        vel: createVector(cos(angle), sin(angle)).mult(this.maxSpeed),
+        vel: createVector(cos(angle), sin(angle)).mult(MAXV),
         osc: new p5.Oscillator(),
         env: new p5.Envelope()
       };
@@ -21,7 +20,7 @@ class Bell {
       phot.env.setRange(1 / TOTAL, 0);
     } else if (typeof angle !== 'number') {
       angle.forEach(phot => {
-        phot.g = true;
+        phot.group = this;
         phot.Q.length > 1 ? this.Q.push(...phot.Q) : this.Q.push(phot);
       });
     }
@@ -42,31 +41,34 @@ class Bell {
     this.play(1);
   }
 
+  set vel(vect){
+    this._vel = vect.copy();
+    this.speed = this.vel.mag();
+    this.setAngle();
+  }
+
+  get vel(){
+    return this._vel;
+    this.setAngle();
+  }
+
   getVel() {
-    this.vel = createVector(0, 0);
+    let vel = createVector(0, 0);
     this.Q.forEach(q => {
-      let factor = 1 / this.Q.length;
-      this.vel.add(q.vel.copy().mult(factor));
+      vel.add(q.vel.copy().mult(1 / this.mass));
       if (!this.env) {
         this.osc = q.osc ? q.osc : null;
         this.env = q.env ? q.env : null;
       }
     });
-    this.speed = this.vel.mag(); //dist(0, 0, this.vel.x, this.vel.y);
-    this.power = this.speed / this.maxSpeed;
-    this.powerS = Bell.sCurve(this.power); //power on S pattern
-    this.powerC = pow(this.power, 0.5); //power on curved pattern
-    this.setAngle();
+    this.vel = vel;
   }
 
   setAngle() {
-    let oldAngle = this.angle;
-    this.angle = atan2(-this.vel.y, this.vel.x);
-    this.angle = (TWO_PI + this.angle) % TWO_PI;
-    let sat = map(this.mass, 0, TOTAL, 100, 0);
-    let light = map(this.speed, 0, this.maxSpeed, 10, 100);
+    this.angle = (TWO_PI + atan2(-this.vel.y, this.vel.x) % TWO_PI);
+    let light = map(this.speed, 0, MAXV, 10, 100);
+    let sat = 100; //map(this.mass, 0, TOTAL, 100, 0);
     this.color = Bell.getColour(this.angle, sat, light);
-    return this.angle - oldAngle;
   }
 
   shape(x, y, r, tip = false) {
@@ -109,11 +111,17 @@ class Bell {
     this.pos.add(this.vel);
 
     // bounds
-    let rand = random(this.maxSpeed * THRESH); //adds a bit of randomess
-    if (this.pos.x < 0 - rand) this.pos.x = width;
-    else if (this.pos.x > width + rand) this.pos.x = 0;
-    if (this.pos.y < 0 - rand) this.pos.y = height;
-    else if (this.pos.y > height + rand) this.pos.y = 0;
+    let rand = random(MAXV * THRESH); //adds a bit of randomess
+    if (this.pos.x < 0 - rand) {
+      this.pos.x = width;
+    } else if (this.pos.x > width + rand) {
+      this.pos.x = 0;
+    }
+    if (this.pos.y < 0 - rand) {
+      this.pos.y = height;
+    } else if (this.pos.y > height + rand) {
+      this.pos.y = 0;
+    }
 
     this.Q.forEach(q => {
       q.pos = this.pos.copy();
@@ -124,17 +132,13 @@ class Bell {
   }
 
   push(force) {
-    if (this.g) {
-      this.Q.forEach(phot => {
-        phot.push(force);
-        phot.setAngle();
-      });
+    if (this.group) {
+      this.Q.forEach(phot => phot.push(force));
       this.getVel();
     } else {
-      let vel = p5.Vector.add(this.vel, force);
-      vel.setMag(this.vel.mag());
-      this.vel = vel;
-      this.setAngle();
+      force.mult(MAXV * MAXV).add(this.vel);
+      force.setMag(this.vel.mag());
+      this.vel = force;
     }
   }
 
@@ -142,18 +146,14 @@ class Bell {
     if (strength <= 0) return;
     let pull = createVector(x, y).sub(this.pos);
     let distance = pull.mag();
-    if (distance < THRESH) return;
+    if (distance < 0.5 * THRESH) return;
     pull.setMag(strength / pow(distance, 2));
     this.push(pull)
   }
 
-  turn(force) {
-
-  }
-
   //music
   play() {
-    this.note = Bell.freqAngle(this.angle, this.speed / this.maxSpeed);
+    this.note = Bell.freqAngle(this.angle, this.speed / MAXV);
     this.Q.forEach(q => {
       let lifespan = this.livespan / (2 * frameRate());
       q.osc.freq(this.note);
@@ -164,6 +164,12 @@ class Bell {
 
   kill() {
     this.dead = true;
+    this.Q.forEach(b => {
+      b.group = false;
+      b.t = 0;
+      b.play();
+    });
+    return this.Q;
   }
 
   // gets the tone for that angle in a octave based off speed

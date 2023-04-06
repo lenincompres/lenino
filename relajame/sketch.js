@@ -1,9 +1,9 @@
 function setup() {
   //vars
   var [w, h] = [windowWidth, windowHeight]
-  TOTAL = 41;
-  THRESH = 0.86 * sqrt(w * h / (2 * PI * TOTAL));
-  MAXV = THRESH / 1.68;
+  TOTAL = 47;
+  THRESH = 0.68 * sqrt(w * h / (2 * PI * TOTAL));
+  MAXV = THRESH / 1.5;
   MINV = 0; //0.01 * MAXV;
   DELAY = 0.68 * (TOTAL * THRESH) / (PI * MAXV);
   LIFESPAN = 400;
@@ -34,7 +34,7 @@ function setup() {
 function draw() {
   if (freeze) return;
   if (playing) {
-    bells = bells.filter(q => !q.dead && !q.g);
+    bells = bells.filter(q => !q.dead && !q.group);
     let vel = bells.reduce((o, q) => o.add(q.vel), createVector());
     let light = map(vel.mag(), MINV, MAXV, 5, 50);
     let colour = Bell.getColour(atan2(-vel.y, vel.x), light, 0.1 * light);
@@ -44,7 +44,7 @@ function draw() {
       if (typeof q.update === 'function') q.update();
     });
     bells.forEach(q => fuse(q));
-    bells = bells.filter(q => !q.dead && !q.g);
+    bells = bells.filter(q => !q.dead && !q.group);
     explode(bells.filter(q =>
       q.vel.mag() < MINV ||
       q.t > q.livespan && q.mass > 1
@@ -52,36 +52,25 @@ function draw() {
 
     // external forces
     if (pulling) addPull(mouseX, mouseY);
-    bells.forEach(b => addPull(b.pos.x, b.pos.y, (b.mass - 1 ) * MAXV, b));
-
+    bells.forEach(b => addPull(b.pos.x, b.pos.y, b.mass - 1, b));
     t += 1;
   }
 }
 
 function fuse(bell) {
-  if (bell.dead || bell.g) return;
-  var g = bells.filter(Q =>
-    ((Q.mass > 1 && bell.id !== Q.id) ||
-      (bell.t > DELAY || Q.t > DELAY)) &&
-    !Q.g &&
-    p5.Vector.sub(Q.pos, bell.pos).mag() < THRESH);
-  if (g.length > 1) {
-    let q = new Bell(THRESH, g);
-    bells.push(q);
-  }
+  if (bell.dead || bell.group) return;
+  var g = bells.filter(b =>
+    ((b.mass > 1 && bell.id !== b.id) || (bell.t > DELAY || b.t > DELAY)) &&
+    !b.group &&
+    p5.Vector.sub(b.pos, bell.pos).mag() < 0.5 * THRESH);
+  if (g.length > 1) bells.push(new Bell(THRESH, g));
 }
 
 function explode(bell) {
   if (!bell) return;
   if (Array.isArray(bell)) return bell.forEach(n => explode(n));
-  if (bell.dead || bell.g) return;
-  bell.kill();
-  bell.Q.forEach(Q => {
-    Q.g = false;
-    Q.t = 0;
-    if (typeof Q.play === "function") Q.play();
-    bells.push(Q);
-  });
+  if (bell.dead || bell.group) return;
+  bells.push(...bell.kill());
 }
 
 function mouseClicked() {
@@ -114,11 +103,8 @@ function addBellsAt(x, y, a) {
   );
 }
 
-function addPull(x, y, force = TOTAL * MAXV, source) {
-  bells.forEach(b => {
-    if(b === source) return;
-    b.pull(x, y, 10 * force);
-  })
+function addPull(x, y, force = 1, source) {
+  bells.forEach(b => b !== source ? b.pull(x, y, force) : null)
 }
 
 function keyPressed() {
