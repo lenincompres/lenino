@@ -66,7 +66,7 @@ class Bell {
 
   setAngle() {
     this.angle = (TWO_PI + atan2(-this.vel.y, this.vel.x) % TWO_PI);
-    let light = map(this.speed, 0, MAXV, 10, 100);
+    let light = map(this.speed, 0, MAXV, 30, 100);
     let sat = 100; //map(this.mass, 0, TOTAL, 100, 0);
     this.color = Bell.getColour(this.angle, sat, light);
   }
@@ -136,7 +136,7 @@ class Bell {
       this.Q.forEach(phot => phot.push(force));
       this.getVel();
     } else {
-      force.mult(MAXV * MAXV).add(this.vel);
+      force.mult(pow(MAXV,1.5)).add(this.vel);
       force.setMag(this.vel.mag());
       this.vel = force;
     }
