@@ -29,7 +29,7 @@ class Spade extends Dot {
     push();
     translate(this.position.x, this.position.y);
     noStroke();
-    fill(this.hue, this.sat, this.bright);
+    fill(this.hue, this.sat, this.bright, 0.68);
     Suit.drawSpade(0, 0, this.size, this.angle);
     noFill();
     let tresh = 0.25;
@@ -37,40 +37,36 @@ class Spade extends Dot {
     let dis = map(abs(1 - pulse), 0, tresh, 1, 0);
     stroke(this.hue, 100, 100, dis, 0.86);
     strokeWeight(dis * 0.1 * this.size);
-    Suit.drawHeart(0, 0, this.size * pulse, this.angle + PI);
+    Suit.drawSpade(0, 0, this.size * pulse, this.angle);
     pop();
     this.update();
   }
 
   update() {
     if (this.dead) return;
-    //
     super.update();
     this.acceleration.mult(0.99);
     this.t += 1;
     // bounds
-    let [x, y] = [this.position.x, this.position.y];
-    let r = 0; //this.size / 4;
-    if (x < r || x > width - r || y < r || y > height - r) this.land();
+    let tip = this.velocity.copy().setMag(this.size / 3);
+    tip.add(this.position);
+    let [x, y] = [tip.x, tip.y];
+    if (x < 0 || x > width || y < 0 || y > height) this.seed(tip);
     // decay
     let decay = 0.99;
     this.velocity.mult(decay);
-    if (this.decay && !this.sustain) decay = 0.9;
+    if (this.decay && !this.sustain) decay = 0.8;
     this.mass *= decay;
     // die
     if (this.size <= 1) this.die();
   }
 
-  land(){
-    this.velocity.setMag(0.1);
-    let size = sqrt(this.size);
-    if(!this.landed) size += Spade.speed() * this.t;
-    Clover.addClover(
-      this.position.x,
-      this.position.y,
-      this.note,
-      size,
-    );
+  seed(tip) {
+    //this.velocity.setMag(0.1);
+    this.position.sub(this.velocity);
+    let size = 0.5 * sqrt(this.size);
+    if (!this.landed) size += 4 * Spade.speed() * sqrt(this.t);
+    Clover.addClover(tip.x, tip.y, this.note, 5 * size);
     this.landed = true;
   }
 

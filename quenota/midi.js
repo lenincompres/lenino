@@ -1,5 +1,7 @@
-let command, note, velocity;
+// read midi input and
+// Lenin compres
 
+let command, note, velocity;
 
 if (navigator.requestMIDIAccess) {
     console.log('This browser supports WebMIDI!');

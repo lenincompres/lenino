@@ -121,7 +121,7 @@ const css = {
 
 const MALING_LIST_FORM = {
   img: {
-    src: "assets/banner.png",
+    src: "assets/cover.png",
     width: "100%",
   },
   background: "darkgreen",

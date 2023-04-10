@@ -22,8 +22,8 @@ class Clover {
     translate(this.pos.x, this.pos.y);
     rotate(this.angle);
     stroke(this.hue, 100, 100);
-    fill(this.hue, 100, 100);
-    Suit.drawClover(0, 0, 0, sqrt(this.mass));
+    fill(this.hue, 100, 100, 0.68);
+    Suit.drawClover(0, 0, 0, sqrt(this.mass), Clover.trunk());
     pop();
     this.update();
   }
@@ -52,5 +52,9 @@ class Clover {
 
   static drawClovers() {
     clovers.forEach(clover => clover.draw());
+  }
+
+  static trunk() {
+    return min(width, height) / 30;
   }
 }
