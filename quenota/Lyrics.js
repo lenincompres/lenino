@@ -13,22 +13,14 @@ class Lyrics extends HTMLParagraphElement {
     // Always call super first in constructor
     super();
     this.highlight = highlight;
-    this.currentLine = 0;
-    this.currentIndex = 0;
+    this.lineIndex = 0;
+    this.charIndex = 0;
     this._lyrics = new Binder("");
+    this.lang = "ENG",
 
     // bind callback function to trigger when speech is recognized
     // speech recognition object (will prompt for mic access)
     // constructor can be passed the language
-    let lang = {
-      ESP: "es-US",
-      FRA: "fr",
-    };
-    var hear = new p5.SpeechRec("fr");
-    hear.continuous = true;
-    hear.interimResults = true;
-    hear.onResult = () => this.onHear(hear.resultString);
-    hear.start(); // start listening
 
     // Element functionality written in here
     this.set({
@@ -36,75 +28,120 @@ class Lyrics extends HTMLParagraphElement {
     });
   }
 
-  set lines(val){
+  set lines(val) {
     this.lyrics = "";
     this._lines = val;
-    this.currentLine = 0;
-    this.currentIndex = 0;
+    this.lineIndex = 0;
+    this.charIndex = 0;
+  }
+
+  set lang(l = "ENG"){
+    // This is only necesary is the language is different
+    let lang = {
+      ENG: "en",
+      ESP: "es-US",
+      FRA: "fr",
+    };
+    this.hear = new p5.SpeechRec(lang[l]);
+    this.hear.continuous = true;
+    this.hear.interimResults = true;
+    this.hear.onResult = () => {
+      let results = this.hear.resultJSON.results;
+      if (results[results.length - 1].isFinal) {
+        //this.nextLine();
+      } else {
+        this.onHear(this.hear.resultString);
+      }
+    }
+    this.hear.start(); // start listening
+  }
+
+  get line() {
+    return this._lines[this.lineIndex];
   }
 
   set lyrics(val) {
     this._lyrics.value = val;
+    if(!val) this.hear.stop();
   }
 
   get lyrics() {
     return this._lyrics.value;
   }
 
-  onHear(words) {
-    if(!this._lines.length) return;
-    let [lineC, index] = this.findLyrics(words);
-    if (lineC < this.currentLine) return;
-    if (lineC > this.currentLine) this.currentIndex = 0;
-    else if (index > this.currentIndex) this.currentIndex = index;
-    this.currentLine = lineC;
-    this.lyrics = this.formatLyrics(this._lines[this.currentLine], this.currentIndex);
+  onHear(input) {
+    let len = this._lines.length;
+    if (!len) return;
+    let [lineC, index] = this.find(input);
+    if (lineC < this.lineIndex) return;
+    if (lineC > this.lineIndex) this.charIndex = 0;
+    else if (index > this.charIndex) this.charIndex = index;
+    this.lineIndex = lineC;
+    this.update(this.charIndex);
   }
 
-  findLyrics(words, count = 0) {
-    if(!this._lines.length) return;
-    const BUFF = 4;
+  find(word, count = 0) {
+    console.log(word);
+    word = Lyrics.clean(word);
+    if (!this._lines.length) return [0, 0];
+    const BUFF = 8;
     // only took two lines ahead
-    if (count > 2 || words.length < BUFF / 2) return [this.currentLine, count ? 0 : this.currentIndex];
-
-    // get the two last words
-    if (words.length > BUFF) {
-      words = words.substr(words.length - BUFF);
+    if (count > 2 || word.length < BUFF / 2) return [this.lineIndex, count ? 0 : this.charIndex];
+    // get the two last BUFF
+    if (word.length > BUFF) {
+      word = word.substr(word.length - BUFF);
     }
-
     // find the words in the line
-    let index = this.currentLine + count;
-    let line = this._lines[index].toLowerCase();
-    let i = this.currentIndex;
-    i = line.indexOf(words);
-    if (i >= 0) return [index, i + words.length];
-    else return this.findLyrics(words, count + 1);
+    let index = this.lineIndex + count;
+    let theLine = Lyrics.clean(this._lines[index]);
+    if (theLine === undefined) return [0, 0];
+    theLine = theLine.toLowerCase();
+    let i = theLine.indexOf(word);
+    if (i >= 0) return [index, i + word.length];
+    else return this.find(word, count + 1);
   }
 
-  formatLyrics(line, index) {
-    line += " ";
-    if (index < 0) return line;
+  nextLine() {
+    this.lineIndex += 1;
+    this.charIndex = 0;
+    this.update();
+  }
+
+  update(index = 0) {
+    let line = this.line + " ";
+    if (index <= 0) return this.lyrics = Lyrics.nice(line);
     let newIndex = line.indexOf(" ", index);
     if (newIndex > index) index = newIndex;
-    let words = line.substr(0, index).split(" ").map(word => {
-      return {
-        color: this.highlight,
-        text: word + " ",
-      }
-    });
-    let sWords = line.substr(index).split(" ").map((word, i) => {
-      return {
-        color: i < 3 ? this.highlight : undefined,
-        text: word + " ",
-      }
-    });
-    return {
-      b: words,
-      span: sWords,
+    let said = line.substr(0, index);
+    let rest = line.substr(index).trim();
+    this.charIndex = index;
+    if (!rest.length) {
+      let i = this.lineIndex;
+      setTimeout(() => {
+        if (this.lineIndex <= i) this.nextLine();
+      }, 500);
     }
+    this.lyrics = {
+      b: {
+        color: this.highlight,
+        text: Lyrics.nice(said) + " ",
+      },
+      span: Lyrics.nice(rest),
+    }
+  }
+
+  static clean(str){
+    if (!str) return "";
+    return str.replace("  ", " ").replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u");
+  }
+
+  static nice(str){
+    if(!settings.value.showEmojis) return str;
+    return str.replace("perro", "🐶").replace("dog", "🐶")
+      .replace("rabbit", "🐰").replace("conejo", "🐰");
   }
 }
 
-customElements.define("lyrics-section", Lyrics,{
+customElements.define("lyrics-section", Lyrics, {
   extends: "p"
 });

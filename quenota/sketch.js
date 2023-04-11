@@ -3,7 +3,16 @@ const bodyFontURL = 'assets/markerfeltnormal.ttf';
 const _song = new Binder();
 let songs = [];
 let lyrics = {};
-let isCommand = false;
+let settings = new Binder({});
+let isCommand = new Binder(false);
+settings.value.showKeys = false;
+settings.value.showClubs = false;
+settings.value.showEmojis = false;
+
+function onSpadeLanded(spade) {
+  if (!settings.value.showClubs) return;
+  Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
+}
 
 function preload() {
   titleFont = loadFont(titleFontURL);
@@ -20,6 +29,7 @@ function loadSong(n = 0) {
   }
   _song.value = song;
   lyrics.lines = song.lines;
+  lyrics.lang = song.lang;
 }
 
 function setup() {
@@ -60,13 +70,16 @@ function setup() {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
-      fontSize: "3em",
+      fontSize: "2.5em",
       textAlign: "center",
       color: "gray",
       main: {
+        background: "rgba(0,0,0,0.68)",
         height: "fit-content",
         margin: "0 auto",
-        maxWidth: "50vh",
+        lineHeight: "1.5em",
+
+        maxWidth: "18em",
         content: lyrics,
       },
     },
@@ -89,12 +102,26 @@ function setup() {
         content: _song.as(s => s ? s.title : ""),
       }
     },
+    aside: {
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      padding: "1em 4em",
+      visibility: isCommand.as("hidden", "visible"),
+      content: settings.as(s => {
+        let text = "";
+        if(s.showKeys) text += "🎹";
+        if(s.showClubs) text += "🌷";
+        if(s.showEmojis) text += "🐰";
+        return text;
+      }),
+    },
     footer: {
-      color: "teal",
+      color: "forestgreen",
       position: "fixed",
       bottom: 0,
       right: 0,
-      padding: "2em 3em",
+      padding: "1em 4em",
       p: "Lenino's",
       h2: "Visualizer",
     }
@@ -110,11 +137,14 @@ function draw() {
   noStroke();
 
   Spade.drawSpades();
-  Clover.drawClovers();
 
-  textFont(titleFont);
-  let radius = min(width, height) / 3;
-  //Note.drawClock(width / 2, height / 2, radius, radius / 5, Spade.getCounter());
+  if (settings.value.showClubs) Clover.drawClovers();
+
+  if (settings.value.showKeys) {
+    textFont(titleFont);
+    let radius = min(width, height) / 3;
+    Note.drawClock(width / 2, height / 2, radius, radius / 5, Spade.getCounter());
+  }
 
   // frame
   stroke("forestGreen");
@@ -124,14 +154,20 @@ function draw() {
 }
 
 function commandKey(num, isBlack) {
-  console.log(num, isBlack);
   if (!isBlack) return loadSong(num);
-
+  let newSet = Object.assign({}, settings.value);
+  if (num === 0) newSet.showKeys = !newSet.showKeys;
+  else if (num === 1) {
+    clovers = [];
+    newSet.showClubs = !newSet.showClubs;
+  }
+  else if (num == 2) newSet.showEmojis = !newSet.showEmojis;
+  settings.value = newSet;
 }
 
 function playNote(id, vel) {
-  if (id <= Note.MIN) isCommand = true;
-  else if (isCommand) {
+  if (id <= Note.MIN) isCommand.value = true;
+  else if (isCommand.value) {
     let note = new Note(id);
     let indexes = Note.names.filter(n => note.isBlack ? n.includes("#") : !n.includes("#")).reverse();
     commandKey(indexes.indexOf(note.name), note.isBlack);
@@ -140,7 +176,7 @@ function playNote(id, vel) {
 }
 
 function stopNote(id) {
-  if (id <= Note.MIN) isCommand = false;
+  if (id <= Note.MIN) isCommand.value = false;
   Spade.endSpade(id);
 }
 

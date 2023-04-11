@@ -48,10 +48,10 @@ class Spade extends Dot {
     this.acceleration.mult(0.99);
     this.t += 1;
     // bounds
-    let tip = this.velocity.copy().setMag(this.size / 3);
-    tip.add(this.position);
-    let [x, y] = [tip.x, tip.y];
-    if (x < 0 || x > width || y < 0 || y > height) this.seed(tip);
+    this.tip = this.velocity.copy().setMag(this.size / 3);
+    this.tip.add(this.position);
+    let [x, y] = [this.tip.x, this.tip.y];
+    if (x < 0 || x > width || y < 0 || y > height) this.land();
     // decay
     let decay = 0.99;
     this.velocity.mult(decay);
@@ -61,12 +61,12 @@ class Spade extends Dot {
     if (this.size <= 1) this.die();
   }
 
-  seed(tip) {
+  land() {
     //this.velocity.setMag(0.1);
     this.position.sub(this.velocity);
     let size = 0.5 * sqrt(this.size);
     if (!this.landed) size += 4 * Spade.speed() * sqrt(this.t);
-    Clover.addClover(tip.x, tip.y, this.note, 5 * size);
+    if(onSpadeLanded) onSpadeLanded(this);
     this.landed = true;
   }
 
