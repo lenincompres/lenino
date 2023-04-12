@@ -1,40 +1,41 @@
 const titleFontURL = 'assets/IrishGrover-Regular.ttf';
 const bodyFontURL = 'assets/markerfeltnormal.ttf';
-const _song = new Binder();
-let songs = [];
-let lyrics = {};
-let settings = new Binder({});
-let isCommand = new Binder(false);
-settings.value.showKeys = false;
-settings.value.showClubs = false;
-settings.value.showEmojis = false;
+const _CAPTION_FILE = new Binder();
+let captionFiles = [];
+let caption = {};
+let _SETTINGS = new Binder({});
+let _IS_COMMAND = new Binder(false);
+_SETTINGS.value.showKeys = false;
+_SETTINGS.value.showClubs = false;
+_SETTINGS.value.showEmojis = false;
 
 function onSpadeLanded(spade) {
-  if (!settings.value.showClubs) return;
+  if (!_SETTINGS.value.showClubs) return;
   Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
 }
 
 function preload() {
   titleFont = loadFont(titleFontURL);
   bodyFont = loadFont(bodyFontURL);
-  songs.push(loadJSON("songs/cicatrices.json"));
+  captionFiles.push(loadJSON("songs/cicatrices.json"));
+  captionFiles.push(loadJSON("songs/thisisherstory.json"));
 }
 
 function loadSong(n = 0) {
-  let song = songs[n];
-  if (!song) {
-    _song.value = false;
-    lyrics.lines = false;
+  let file = captionFiles[n];
+  if (!file) {
+    _CAPTION_FILE.value = false;
+    caption.lines = false;
     return;
   }
-  _song.value = song;
-  lyrics.lines = song.lines;
-  lyrics.lang = song.lang;
+  _CAPTION_FILE.value = file;
+  caption.lines = file.lines;
+  caption.lang = file.lang;
 }
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-  lyrics = new Lyrics();
+  caption = new Caption();
   //loadSong(0);
 
   DOM.set({
@@ -61,7 +62,7 @@ function setup() {
     background: "black",
     canvas: canvas,
     fontFamily: "body",
-    fontSize: "20px",
+    fontSize: "2.2vh",
     section: {
       position: "fixed",
       top: 0,
@@ -80,7 +81,7 @@ function setup() {
         lineHeight: "1.5em",
 
         maxWidth: "18em",
-        content: lyrics,
+        content: caption,
       },
     },
     header: {
@@ -90,7 +91,7 @@ function setup() {
       left: 0,
       padding: "2em 3em",
       p: {
-        text: _song.as(s => {
+        text: _CAPTION_FILE.as(s => {
           if (!s) return "";
           let lang = {
             ESP: "Título",
@@ -99,7 +100,7 @@ function setup() {
         })
       },
       h1: {
-        content: _song.as(s => s ? s.title : ""),
+        content: _CAPTION_FILE.as(s => s ? s.title : ""),
       }
     },
     aside: {
@@ -107,8 +108,8 @@ function setup() {
       bottom: 0,
       left: 0,
       padding: "1em 4em",
-      visibility: isCommand.as("hidden", "visible"),
-      content: settings.as(s => {
+      visibility: _IS_COMMAND.as("hidden", "visible"),
+      content: _SETTINGS.as(s => {
         let text = "";
         if(s.showKeys) text += "🎹";
         if(s.showClubs) text += "🌷";
@@ -138,9 +139,9 @@ function draw() {
 
   Spade.drawSpades();
 
-  if (settings.value.showClubs) Clover.drawClovers();
+  if (_SETTINGS.value.showClubs) Clover.drawClovers();
 
-  if (settings.value.showKeys) {
+  if (_SETTINGS.value.showKeys) {
     textFont(titleFont);
     let radius = min(width, height) / 3;
     Note.drawClock(width / 2, height / 2, radius, radius / 5, Spade.getCounter());
@@ -155,19 +156,19 @@ function draw() {
 
 function commandKey(num, isBlack) {
   if (!isBlack) return loadSong(num);
-  let newSet = Object.assign({}, settings.value);
+  let newSet = Object.assign({}, _SETTINGS.value);
   if (num === 0) newSet.showKeys = !newSet.showKeys;
   else if (num === 1) {
     clovers = [];
     newSet.showClubs = !newSet.showClubs;
   }
-  else if (num == 2) newSet.showEmojis = !newSet.showEmojis;
-  settings.value = newSet;
+  else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
+  _SETTINGS.value = newSet;
 }
 
 function playNote(id, vel) {
-  if (id <= Note.MIN) isCommand.value = true;
-  else if (isCommand.value) {
+  if (id <= Note.MIN) _IS_COMMAND.value = true;
+  else if (_IS_COMMAND.value) {
     let note = new Note(id);
     let indexes = Note.names.filter(n => note.isBlack ? n.includes("#") : !n.includes("#")).reverse();
     commandKey(indexes.indexOf(note.name), note.isBlack);
@@ -176,7 +177,7 @@ function playNote(id, vel) {
 }
 
 function stopNote(id) {
-  if (id <= Note.MIN) isCommand.value = false;
+  if (id <= Note.MIN) _IS_COMMAND.value = false;
   Spade.endSpade(id);
 }
 
