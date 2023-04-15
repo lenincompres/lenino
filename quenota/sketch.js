@@ -184,3 +184,17 @@ function stopNote(id) {
 function sustain(bool) {
   Spade.sustain(bool);
 }
+
+
+function keyPressed() {
+  /*
+  let newSet = Object.assign({}, _SETTINGS.value);
+  if (num === 0) newSet.showKeys = !newSet.showKeys;
+  else if (num === 1) {
+    clovers = [];
+    newSet.showClubs = !newSet.showClubs;
+  }
+  else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
+  _SETTINGS.value = newSet;
+  */
+}

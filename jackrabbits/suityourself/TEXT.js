@@ -42,7 +42,7 @@ class TEXT {
   }
   static WHEN_READY = {
     ENG: `Increase the cards at will and click <b>${TEXT.NEXT.ENG}</b> when safistied.`,
-    ESP: `Incrementa las cartas a tu gusto y luego pincha <b>${TEXT.NEXT.ESP}</b>.`,
+    ESP: `Incrementa las cartas a tu gusto y luego presiona <b>${TEXT.NEXT.ESP}</b>.`,
   }
   static BEGIN = {
     ENG: "begin",
@@ -62,7 +62,7 @@ class TEXT {
   }
   static WHEN_DONE = {
     ENG: `Click <b>${TEXT.DONE.ENG}</b> when safistied.`,
-    ESP: `Pincha <b>${TEXT.DONE.ESP}</b> cuando estés satisfecho.`,
+    ESP: `Presiona <b>${TEXT.DONE.ESP}</b> cuando estés satisfecho.`,
   }
   static RESTART = {
     ENG: "Restart",
@@ -73,8 +73,12 @@ class TEXT {
     ESP: "Revela tu mano",
   }
   static PAGE_DESCRIPTION = {
-    ENG: `Which one is <b>your</b> suit order? The suits represent 4 major pesonality traits. This short interaction will reveal which is the one you value the most. You'll be given 8 extra points (or “pips”) to increase the cards below. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
-    ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más. Tendrás 8 puntos extra parar repartir entre las cartas después de presionar <b>${TEXT.BEGIN.ENG}</b>.`,
+    ENG: `Which one is <b>your</b> suit order? The suits represent 4 major pesonality traits. This short interaction will reveal which is the one you value the most.`,
+    ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más.`,
+  }
+  static PLAY_DESCRIPTION = {
+    ENG: `You'll be given 8 extra points (or “pips”) to increase the cards below. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
+    ESP: `Después de presionar <b>${TEXT.BEGIN.ESP}</b>, tendrás 8 puntos extra parar repartir entre las cartas.`,
   }
   static DESCRIPTION = {
     ENG: (suit, name) => `This is how ${name ? `<b>${name}</b> values` : "you value"} the 4 main personality traits shown in the cards. According to this valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} main suit. This symbol—also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>—is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
@@ -87,6 +91,10 @@ class TEXT {
   static SHARE_MESSAGE ={
     ENG: "This is my hand, how I value the 4 main personality traits shown in the cards. Get to know me.",
     ESP: "Esta es mi mano, como valoro los 4 principales rasgos de la personalidad en las cartas. Ven a conocerme."
+  }
+  static MAILING_LIST_TEXT ={
+    ENG: "Join Lenino's JACK RABBITS mailing list.",
+    ESP: "Mantente al tanto de Lenino y sus JACK RABBITS."
   }
   static name = {
     ENG: "name",

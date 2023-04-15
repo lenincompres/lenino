@@ -10,8 +10,8 @@ class TEXT {
   }
 
   static LAUNCH_DESCRIPTION = {
-    ESP: "El lanzamiento de la campaña de Kickstarter será el 24 de Abril 2023 en el Consulado Dominicano de Nueva York y en todo el mundo por medio de kickstarter.com. Mantente atento para las exclusivas de la campaña y el evento.",
-    ENG: "The Kickstarter launch event for the game will be on April 24th 2023 at the Dominican Consulate of New York and all over the world through kickstarter.com. Join our mailing for more exclusive information."
+    ESP: 'El lanzamiento del juego será el 24 de Abril 2023 en el Consulado Dominicano de Nueva York a partir de las 4:30pm. <a style="color:yellow" src="https://www.eventbrite.com/e/jack-rabbits-launch-event-tickets-599686116317">Confirma aquí tu participación</a>. Mantente atento para las exclusivas de la campaña y el evento.',
+    ENG: 'The launch for the game will be on April 24th 2023 at the Dominican Consulate of New York at 4:30pm. <a style="color:yellow" src="https://www.eventbrite.com/e/jack-rabbits-launch-event-tickets-599686116317">RSVP here</a>. Join our mailing for more exclusive information.'
   }
 
   static INTRO = {

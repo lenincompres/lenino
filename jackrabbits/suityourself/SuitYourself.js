@@ -230,6 +230,7 @@ class SuitYourself extends HTMLElement {
           },
           main: card,
           footer: {
+            marginTop: "0.5em",
             visibility: this._stage.as(stage => stage < 4, {
               false: "hidden",
               true: "visible",
@@ -239,7 +240,12 @@ class SuitYourself extends HTMLElement {
               textTransform: "Capitalize",
               fontSize: "1.25em",
               color: card.suit.color,
-              text: TEXT[card.suit.trait][LANG]
+              img:{
+                height: "1em",
+                src: card.suit.image,
+                verticalAlign: "middle",
+              },
+              span: TEXT[card.suit.trait][LANG]
             },
           },
         })),
@@ -304,6 +310,14 @@ class SuitYourself extends HTMLElement {
     const controls = {
       overflow: "hidden",
       width: "100%",
+      main: {
+        margin: "1em 0",
+        maxWidth: TEXT_WIDTH,
+        model: HIDE_MODEL(this._stage, stage => stage === STAGE_INTRO),
+        p: {
+          content: TEXT.PLAY_DESCRIPTION[LANG],
+        },
+      },
       button: {
         fontSize: "1.3em",
         transition: "0.5s",
@@ -335,19 +349,35 @@ class SuitYourself extends HTMLElement {
     const sharing = {
       margin: "1em 0",
       model: HIDE_MODEL(this._stage, stage => stage === STAGE_DONE && !NAME),
-      h6: TEXT.SHARE_HAND[LANG],
       form: {
         marginTop: "0.5em",
-        label: {
-          textTransform: "capitalize",
-          text: `${TEXT.name[LANG]}: `,
+        h6: TEXT.SHARE_HAND[LANG],
+        menu: {
+          marginTop: "0.5em",
+          a: {
+            margin: "0 1em",
+            target: "_blank",
+            click: e => this.storeData(),
+            content: [{
+              text: "Facebook➚",
+              href: this._shareURL.as(url => `https://www.facebook.com/sharer.php?u=${url}`),
+            }, {
+              text: "Twitter➚",
+              href: this._shareURL.as(url => `https://twitter.com/intent/tweet?url=${url}` + `&text=${TEXT.SHARE_MESSAGE[LANG]}&hashtags=lenino,leninosjackrabbits,jackrabbits,boardgames,personalitytypes`),
+            }, {
+              text: "LinkedIn➚",
+              href: this._shareURL.as(url => `https://www.linkedin.com/sharing/share-offsite/&url=${url}&title=${TEXT.PAGE_TITLE[LANG]}&summary=${TEXT.SHARE_MESSAGE[LANG]}`),
+            }]
+          }
         },
-        input: {
-          width: "8em",
-          oninput: e => {
-            _canShare.value = e.target.value.length > 2;
-            this.updateShare(e.target.value);
-          },
+        p: {
+          marginTop: "2em",
+          content: TEXT.MAILING_LIST_TEXT[LANG],
+        },
+        iframe: {
+          src: "../mailinglist.html",
+          width: "100%",
+          height: "300px",
         },
         button: {
           ready: elt => !navigator.share ? elt.set("none", "display") : null,
@@ -370,24 +400,6 @@ class SuitYourself extends HTMLElement {
           },
         }
       },
-      menu: {
-        marginTop: "0.5em",
-        a: {
-          margin: "0 1em",
-          target: "_blank",
-          click: e => this.storeData(),
-          content: [{
-            text: "Facebook➚",
-            href: this._shareURL.as(url => `https://www.facebook.com/sharer.php?u=${url}`),
-          }, {
-            text: "Twitter➚",
-            href: this._shareURL.as(url => `https://twitter.com/intent/tweet?url=${url}` + `&text=${TEXT.SHARE_MESSAGE[LANG]}&hashtags=lenino,leninosjackrabbits,jackrabbits,boardgames,personalitytypes`),
-          }, {
-            text: "LinkedIn➚",
-            href: this._shareURL.as(url => `https://www.linkedin.com/sharing/share-offsite/&url=${url}&title=${TEXT.PAGE_TITLE[LANG]}&summary=${TEXT.SHARE_MESSAGE[LANG]}`),
-          }]
-        }
-      }
     };
 
     this.set({
