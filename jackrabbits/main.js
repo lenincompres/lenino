@@ -119,29 +119,42 @@ const css = {
   },
 };
 
-const MALING_LIST_FORM = {
-  img: {
-    src: "assets/cover.png",
-    width: "100%",
-  },
+const LAUNCH_EVENT = {
   background: "darkgreen",
   borderRadius: "0.5em",
   boxShadow: "1px 1px 3px black",
+  color: "ivory",
+  a: {
+    src: "https://www.eventbrite.com/e/jack-rabbits-launch-event-tickets-599686116317",
+    img: {
+      src: "assets/cover.png",
+      width: "100%",
+    }
+  },
   overflow: "hidden",
   p: {
     padding: "0 2em",
     content: TEXT.LAUNCH_DESCRIPTION[LANG]
-  },
-  h2: TEXT.SUBSCRIBE[LANG],
-  color: "ivory",
-  paddingBottom: "1em",
-  iframe: {
-    backgroundColor: "ivory",
-    src: "mailinglist.html",
-    width: "615px",
-    height: "260px",
   }
 };
+
+const MAILING_LIST = {
+  padding: "0 1em",
+  background: "darkgreen",
+  borderRadius: "0.5em",
+  boxShadow: "1px 1px 3px black",
+  h2: {
+  padding: "0.25em",
+    text: TEXT.SUBSCRIBE[LANG],
+  },
+  backgroundColor: "ivory",
+  paddingBottom: "1em",
+  iframe: {
+    src: "mailinglist.html",
+    width: "100%",
+    height: "auto",
+  }
+}
 
 const TABLETOPIA = {
   h2: TEXT.TABLETOPIA.TITLE[LANG],
@@ -224,7 +237,9 @@ DOM.set({
     margin: '0 auto',
     padding: '0 0 10px',
     section: [
-      MALING_LIST_FORM, {
+      LAUNCH_EVENT,
+      MAILING_LIST,
+      {
         h4: TEXT.SUBTITLE[LANG],
       }, {
         p: `Lenino's ${JRName} ` + TEXT.INTRO[LANG],
@@ -237,7 +252,7 @@ DOM.set({
       }, {
         p: TEXT.CONTAINS[LANG],
       },
-      TABLETOPIA, 
+      TABLETOPIA,
       CARD_FLIP,
       new SuitYourself(THIS_URL + "/suityourself/"),
       GALLERY,
