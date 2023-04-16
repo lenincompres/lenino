@@ -3,6 +3,7 @@ import TopMenu from "./TopMenu.js";
 import TEXT from "./TEXT.js";
 
 const THIS_URL = window.location.href.split('#')[0].split('?')[0];
+const ROOT = THIS_URL.substr(0, THIS_URL.lastIndexOf("/"));
 
 const CARD = (front, back, width = 240, height = 340) => {
   const IMG_STYLE = {
@@ -254,7 +255,7 @@ DOM.set({
       },
       TABLETOPIA,
       CARD_FLIP,
-      new SuitYourself(THIS_URL + "/suityourself/"),
+      new SuitYourself(ROOT + "/suityourself/"),
       GALLERY,
       FOOTER
     ]

@@ -1,5 +1,5 @@
 
-window.THIS_URL = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+window.ROOT = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 
 const QS = DOM.querystring();
 window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
@@ -21,18 +21,13 @@ class TopMenu extends HTMLElement {
               display: LANG !== "ENG" ? "block" : "none",
               a: {
                 text: "English",
-                href: THIS_URL,
+                href: ROOT,
               }
             }, {
               display: LANG !== "ESP" ? "block" : "none",
               a: {
                 text: "Español",
-                href: THIS_URL + "/index.html?lang=esp",
-              }
-            }, {
-              a: {
-                text: TopMenu.TEXT.JK[LANG],
-                href: "http://jackrabbits.lenino.net",
+                href: ROOT + "/index.html?lang=esp",
               }
             }, {
               a: {
