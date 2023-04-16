@@ -242,7 +242,7 @@ class SuitYourself extends HTMLElement {
               color: card.suit.color,
               img:{
                 height: "1em",
-                src: card.suit.image,
+                src: root + "/" + card.suit.image,
                 verticalAlign: "middle",
               },
               span: TEXT[card.suit.trait][LANG]
@@ -375,7 +375,7 @@ class SuitYourself extends HTMLElement {
           content: TEXT.MAILING_LIST_TEXT[LANG],
         },
         iframe: {
-          src: "../mailinglist.html",
+          src: "mailinglist.html",
           width: "100%",
           height: "300px",
         },
