@@ -77,8 +77,8 @@ class TEXT {
     ESP: `Los símbolos de las cartas representan 4 grandes rasgos de la personalidad. Con esta breve interacción podrás revelar cuál de ellos valoras más.`,
   }
   static PLAY_DESCRIPTION = {
-    ENG: `You'll be given 8 extra points (or “pips”) to increase the cards below. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
-    ESP: `Después de presionar <b>${TEXT.BEGIN.ESP}</b>, tendrás 8 puntos extra parar repartir entre las cartas.`,
+    ENG: `You'll be given 8 extra points (or “pips”) to increase the cards above. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
+    ESP: `Después de presionar <b>${TEXT.BEGIN.ESP}</b>, tendrás 8 puntos extra parar repartir entre estas cartas.`,
   }
   static DESCRIPTION = {
     ENG: (suit, name) => `This is how ${name ? `<b>${name}</b> values` : "you value"} the 4 main personality traits shown in the cards. According to this valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} main suit. This symbol—also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>—is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,
