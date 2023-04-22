@@ -116,6 +116,7 @@ class Caption extends HTMLParagraphElement {
   }
 
   onSpeech(input) {
+    if(!this.lines) return;
     let len = this.lines.length;
     if (!len) return;
     let [lineIndex, charIndex] = this.find(input);

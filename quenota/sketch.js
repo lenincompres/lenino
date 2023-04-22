@@ -19,6 +19,7 @@ function preload() {
   bodyFont = loadFont(bodyFontURL);
   captionFiles.push(loadJSON("songs/cicatrices.json"));
   captionFiles.push(loadJSON("songs/thisisherstory.json"));
+  Card.load("assets");
 }
 
 function loadSong(n = 0) {
@@ -60,7 +61,10 @@ function setup() {
     color: "white",
     textShadow: "0.2em 0.2em 0 black",
     background: "black",
-    canvas: canvas,
+    canvas: {
+      position: "fixed",
+      content: canvas,
+    },
     fontFamily: "body",
     fontSize: "2.2vh",
     section: {
@@ -130,12 +134,24 @@ function setup() {
 
   colorMode(HSB);
   //blendMode(ADD);
+
+  let GRID = min(width, height) / 10;
+  Card.setup();
+  cards = [];
+  SUITS.forEach(suit => {
+    cards.push(new Card(width/2, height/2, GRID, 1, suit));
+  })
+  cards.forEach(card => {
+    card.velocity = createVector(random(4) - 2, random(4) - 2);
+  });
 }
 
 function draw() {
   clear();
   noFill();
   noStroke();
+
+  cards.forEach(card => card.draw());
 
   Spade.drawSpades();
 
