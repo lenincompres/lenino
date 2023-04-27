@@ -8,7 +8,7 @@ let _IS_COMMAND = new Binder(false);
 _SETTINGS.value.showKeys = true;
 _SETTINGS.value.showClubs = true;
 _SETTINGS.value.showEmojis = false;
-let isPlayingCounter = 0;
+let isPlayingCounter = 500;
 
 function onSpadeLanded(spade) {
   if (!_SETTINGS.value.showClubs) return;
