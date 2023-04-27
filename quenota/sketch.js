@@ -8,6 +8,7 @@ let _IS_COMMAND = new Binder(false);
 _SETTINGS.value.showKeys = false;
 _SETTINGS.value.showClubs = false;
 _SETTINGS.value.showEmojis = false;
+let isPlayingCounter = 0;
 
 function onSpadeLanded(spade) {
   if (!_SETTINGS.value.showClubs) return;
@@ -151,7 +152,7 @@ function draw() {
   noFill();
   noStroke();
 
-  cards.forEach(card => card.draw());
+  if(isPlayingCounter > 6 * frameRate()) cards.forEach(card => card.draw());
 
   Spade.drawSpades();
 
@@ -168,6 +169,9 @@ function draw() {
   let earth = constrain(clovers.reduce((o, clover) => o + clover.mass, 0), 0, 10000);
   strokeWeight(map(earth, 0, 10000, 0, 10));
   rect(0, 0, width, height);
+
+  //counter
+  isPlayingCounter += 1;
 }
 
 function commandKey(num, isBlack) {
@@ -183,6 +187,7 @@ function commandKey(num, isBlack) {
 }
 
 function playNote(id, vel) {
+  isPlayingCounter = 0;
   if (id <= Note.MIN) _IS_COMMAND.value = true;
   else if (_IS_COMMAND.value) {
     let note = new Note(id);
@@ -201,8 +206,8 @@ function sustain(bool) {
   Spade.sustain(bool);
 }
 
-
 function keyPressed() {
+  isPlayingCounter = 0;
   /*
   let newSet = Object.assign({}, _SETTINGS.value);
   if (num === 0) newSet.showKeys = !newSet.showKeys;
