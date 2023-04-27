@@ -117,8 +117,8 @@ class Card extends Dot{
     let lastVel = this.velocity.copy();
     super.update();
     let [x, y] = [this.position.x, this.position.y];
-    if (x - this.w2 < 0 || x + this.w2 > width) this.velocity.x = -1;
-    if (y - this.h2 < 0 || y + this.h2 > height) this.velocity.y *= -1;
+    if (x < this.w2 || x > width - this.w2) this.velocity.x = -1;
+    if (y < this.h2 || y > height - this.h2) this.velocity.y *= -1;
     this.angVelocity += this.velocity.angleBetween(lastVel);
     this.rot += this.angVelocity;
     this.angVelocity *= 0.999;
@@ -127,7 +127,6 @@ class Card extends Dot{
   drawNum(d) {
     textSize(d);
     textFont(myFont);
-    //scale(-1, 1); mirror
     let num = this.number === 1 ? "A" : this.number;
     fill(this.suit.color);
     text(num, -this.w2 + d, -this.h2 + d);

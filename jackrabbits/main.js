@@ -145,7 +145,7 @@ const MAILING_LIST = {
   borderRadius: "0.5em",
   boxShadow: "1px 1px 3px black",
   h2: {
-  padding: "0.25em",
+    padding: "0.25em",
     text: TEXT.SUBSCRIBE[LANG],
   },
   backgroundColor: "ivory",
@@ -237,12 +237,13 @@ DOM.set({
     maxWidth: '680px',
     margin: '0 auto',
     padding: '0 0 10px',
-    section: [
-      LAUNCH_EVENT,
-      MAILING_LIST,
-      {
+    section: [{
+        h1: {
+          marginTop: 0,
+          fontSize: "4em",
+          content: JRName
+        },
         h4: TEXT.SUBTITLE[LANG],
-      }, {
         p: `Lenino's ${JRName} ` + TEXT.INTRO[LANG],
       }, {
         margin: "0 -10em",
@@ -251,8 +252,25 @@ DOM.set({
           backgroundColor: 'lightgoldenrodyellow'
         }, {}, 490)
       }, {
+        a: {
+          color: "black",
+          textShadow: "1px 1px 3px lightgoldenrodyellow",
+          fontSize: "1.5em",
+          display: "inline-block",
+          background: "goldenrod",
+          border: "solid 0.1em darkgoldenrod",
+          boxShadow: "1px 1px 3px black",
+          margin: "0 0.5em",
+          padding: "0.5em 1em",
+          borderRadius: "2em",
+          span: TEXT.CONTACT[LANG],
+          href: "https://py.pl/26TSag",
+          target: "_blank",
+        }
+      }, {
         p: TEXT.CONTAINS[LANG],
       },
+      MAILING_LIST,
       TABLETOPIA,
       CARD_FLIP,
       new SuitYourself(ROOT + "/suityourself/"),

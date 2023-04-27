@@ -15,13 +15,18 @@ class TEXT {
   }
 
   static INTRO = {
-    ENG: "is a clever board game based on classic playing cards. It is characterized by the management of resources, the exploration of a different board in each game, and the elements of adventure and fantasy. The art and concept evoke Alice's adventures in Wonderland, and the mission is for the messenger rabbits to visit palaces and get royal cards. It has different levels of difficulty that make it attractive for casual players as well as for experts.",
+    ENG: "is a clever board game based on classic playing cards. It is characterized by the management of resources, the exploration of a different board in each game, and the elements of adventure and fantasy. The art and concept evoke <i>Alice's Adventures in Wonderland</i>, and the mission is for the messenger rabbits to visit palaces and get royal cards. It has different levels of difficulty that make it attractive for casual players as well as for experts.",
     ESP: "es un juego de mesa ingeniado en base a las cartas de naipes clásicos. Lo caracterizan el manejo de recursos, la exploración de un tablero distinto en cada partida, y los elementos de aventura y fantasía.  El arte y concepto evoca a <i>Alicia en el País de las Maravillas</i>, y la misión es que los conejos mensajeros visiten palacios y consigan cartas reales. Tiene diferente niveles de dificultad que lo hacen atractivo para jugadores casuales como para expertos."
   }
 
+  static CONTACT = {
+    ENG: "Get a limited copy now!",
+    ESP: "Adquiere tu copia limitada ya!",
+  }
+
   static CONTAINS = {
-    ENG: "The game includes 38 wooden pieces, 4 rabbits, 2 dice, 12 carrots and a set of 54 cards designed to accompany the board. All made in biodegradable materials by an independent company, and with a culture of inclusion and social, ecological and global awareness.",
-    ESP: "El juego incluye 38 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global."
+    ENG: "The game includes 40 wooden pieces, 4 rabbits, 2 dice, 12 carrots and a set of 54 cards designed to accompany the board. All made in biodegradable materials by an independent company, and with a culture of inclusion and social, ecological and global awareness.",
+    ESP: "El juego incluye 40 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global."
   }
 
   static TABLETOPIA ={
