@@ -17,7 +17,7 @@ class Card extends Dot {
     this._rot = this.rot = 0;
     this.scale = 1.0;
     this.time = frameCount;
-    this.angVelocity = random(4) - 2;
+    this.angVelocity = (random(2) - 1) / 10;
   }
 
   static ratio = 1.43;
@@ -29,7 +29,7 @@ class Card extends Dot {
     if (abs(d) < 1) return;
     this._newNumber = val;
     d *= this.w2;
-    this.rot = this._rot + (d > 0 ? 1 : -1);
+    //this.rot = this._rot + (d > 0 ? 1 : -1);
     this.time = frameCount;
   }
 
@@ -70,7 +70,7 @@ class Card extends Dot {
     translate(this.position.x, this.position.y);
 
     if (this.number !== this._newNumber) {
-      this.rot += 0.1;
+     // this.rot += 0.1;
       if (this.flip <= 0) {
         this._number = this._newNumber;
       } else {
@@ -83,7 +83,7 @@ class Card extends Dot {
       this.flip = FLIP_SPEED;
     }
 
-    this.rot = lerp(this._rot, this.rot, 0.8);
+    //this.rot = lerp(this._rot, this.rot, 0.8);
     rotate(this.rot);
     scale(this.scale, this.scale * this.flip / FLIP_SPEED, );
 
@@ -125,11 +125,11 @@ class Card extends Dot {
       this.velocity.y *= -1;
       this.number = this.number + 1;
     }
+    this.angVelocity += map(this.velocity.angleBetween(lastVel), -PI, PI, -0.1, 0.1);
     this.position.x = constrain(x, this.w2, width - this.w2);
     this.position.y = constrain(y, this.h2, height - this.h2);
-    this.angVelocity += this.velocity.angleBetween(lastVel);
     this.rot += this.angVelocity;
-    this.angVelocity *= 0.999;
+    this.angVelocity *= 0.99;
   }
 
   drawNum(d) {
