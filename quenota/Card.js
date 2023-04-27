@@ -1,7 +1,6 @@
-
 const FLIP_SPEED = 3;
 
-class Card extends Dot{
+class Card extends Dot {
   constructor(x = 0, y = 0, size = 100, number = 1, suit) {
     super(x, y, size);
     this.width = size;
@@ -18,15 +17,16 @@ class Card extends Dot{
     this._rot = this.rot = 0;
     this.scale = 1.0;
     this.time = frameCount;
-    this.angVelocity = 0;
+    this.angVelocity = random(4) - 2;
   }
 
   static ratio = 1.43;
 
   set number(val) {
+    if(val > 10) val -= 10;
     if (this.flip < FLIP_SPEED) return;
     let d = val - this._number;
-    if (abs(d) < 2) return;
+    if (abs(d) < 1) return;
     this._newNumber = val;
     d *= this.w2;
     this.rot = this._rot + (d > 0 ? 1 : -1);
@@ -113,12 +113,20 @@ class Card extends Dot{
     this.update();
   }
 
-  update(){
+  update() {
     let lastVel = this.velocity.copy();
     super.update();
     let [x, y] = [this.position.x, this.position.y];
-    if (x < this.w2 || x > width - this.w2) this.velocity.x = -1;
-    if (y < this.h2 || y > height - this.h2) this.velocity.y *= -1;
+    if (x < this.w2 || x > width - this.w2) {
+      this.velocity.x *= -1;
+      this.number = this.number + 1;
+    }
+    if (y < this.h2 || y > height - this.h2) {
+      this.velocity.y *= -1;
+      this.number = this.number + 1;
+    }
+    this.position.x = constrain(x, this.w2, width - this.w2);
+    this.position.y = constrain(y, this.h2, height - this.h2);
     this.angVelocity += this.velocity.angleBetween(lastVel);
     this.rot += this.angVelocity;
     this.angVelocity *= 0.999;
@@ -171,8 +179,8 @@ class Card extends Dot{
     image(this._newSuit.image, -t / 2, dist - t / 2, t, t);
   }
 
-  static load(assetsRoot = ""){
-    if(assetsRoot.length) assetsRoot += "/";
+  static load(assetsRoot = "") {
+    if (assetsRoot.length) assetsRoot += "/";
     window.diamondsImg = loadImage(assetsRoot + "suit-diamonds.png");
     window.clubsImg = loadImage(assetsRoot + "suit-clovers.png");
     window.spadesImg = loadImage(assetsRoot + "suit-spades.png");

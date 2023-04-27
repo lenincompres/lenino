@@ -45,7 +45,8 @@ class Spade extends Dot {
   update() {
     if (this.dead) return;
     super.update();
-    this.acceleration.mult(0.99);
+    let decay = map(this.velocity.mag(), 0, Spade.speed(), 1, 0.99);
+    this.acceleration.mult(decay);
     this.t += 1;
     // bounds
     this.tip = this.velocity.copy().setMag(this.size / 3);
@@ -53,10 +54,9 @@ class Spade extends Dot {
     let [x, y] = [this.tip.x, this.tip.y];
     if (x < 0 || x > width || y < 0 || y > height) this.land();
     // decay
-    let decay = 0.99;
     this.velocity.mult(decay);
-    if (this.decay && !this.sustain) decay = 0.8;
-    this.mass *= decay;
+    if (this.decay && !this.sustain) decay *= 0.8;
+    this.mass *= decay ;
     // die
     if (this.size <= 1) this.die();
   }
@@ -97,9 +97,9 @@ class Spade extends Dot {
     let trunk = 10 * Spade.speed();
     let spade = new Spade(
       width / 2, height / 2,
-      map(vel, 0, 200, 0, 80 * Spade.speed()),
+      map(vel, 0, 200, 0, 100 * Spade.speed()),
       note.angle,
-      map(note.id, Note.MIN - 24, Note.MAX, 0, len, trunk),
+      map(note.id, Note.MIN - 24, Note.MAX, 0, 2 * len),
     );
     spade.hue = note.hue;
     spade.sat = note.sat;

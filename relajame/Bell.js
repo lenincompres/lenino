@@ -125,7 +125,7 @@ class Bell {
 
     this.Q.forEach(q => {
       q.pos = this.pos.copy();
-      q.osc.pan((q.pos.x / width, 0, 1, -1, 1));
+      q.osc.pan(map(q.pos.x / width, 0, 1, -1, 1));
     });
 
     this.t++;
