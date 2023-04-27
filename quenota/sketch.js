@@ -5,8 +5,8 @@ let captionFiles = [];
 let caption = {};
 let _SETTINGS = new Binder({});
 let _IS_COMMAND = new Binder(false);
-_SETTINGS.value.showKeys = false;
-_SETTINGS.value.showClubs = false;
+_SETTINGS.value.showKeys = true;
+_SETTINGS.value.showClubs = true;
 _SETTINGS.value.showEmojis = false;
 let isPlayingCounter = 0;
 
@@ -18,7 +18,8 @@ function onSpadeLanded(spade) {
 function preload() {
   titleFont = loadFont(titleFontURL);
   bodyFont = loadFont(bodyFontURL);
-  captionFiles.push(loadJSON("songs/cicatrices.json"));
+  captionFiles.push(loadJSON("songs/rabbitcandyjar.json"));
+  captionFiles.push(loadJSON("songs/mysteryscars.json"));
   captionFiles.push(loadJSON("songs/thisisherstory.json"));
   Card.load("assets");
 }
