@@ -144,12 +144,15 @@ const MAILING_LIST = {
   background: "darkgreen",
   borderRadius: "0.5em",
   boxShadow: "1px 1px 3px black",
-  h2: {
-    padding: "0.25em",
-    text: TEXT.SUBSCRIBE[LANG],
-  },
   backgroundColor: "ivory",
   paddingBottom: "1em",
+  h2: {
+    padding: "0.25em",
+    text: TEXT.MAILINGLIST.TITLE[LANG],
+  },
+  p: {
+    content: TEXT.MAILINGLIST.INFO[LANG],
+  },
   iframe: {
     src: "mailinglist.html",
     width: "100%",

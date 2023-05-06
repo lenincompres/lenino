@@ -4,9 +4,15 @@ class TEXT {
     ENG: "The board game for playing card</br>on a quest through wonderlands. "
   }
 
-  static SUBSCRIBE = {
-    ESP: "Suscríbete a nuestro listado de correo.",
-    ENG: "Subscribe to our mailing list."
+  static MAILINGLIST = {
+    TITLE: {
+      ESP: "Suscríbete a nuestro listado de correo",
+      ENG: "Subscribe to our mailing list",
+    },
+    INFO: {
+      ESP: "Pronto lanzaremos nuestra campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juegos y nos gustaría contar con tu apoyo. Con tu correo te avísaremos cuando la campaña esté lista.",
+      ENG: "We will launch a <b>Kickstarter</b> campaign to make the first official edition of the game and would love to have you support. With this email address we will notify you know when the campaign is ready."
+    }
   }
 
   static LAUNCH_DESCRIPTION = {
@@ -29,14 +35,14 @@ class TEXT {
     ESP: "El juego incluye 40 piezas de madera, 4 conejos, 2 dados, 12 zanahorias y un juego de 54 naipes diseñados para acompañar el tablero. Todo hecho en materiales biodegradables por una compañía independiente, y con una cultura de inclusión y conciencia social, ecológica y global."
   }
 
-  static TABLETOPIA ={
+  static TABLETOPIA = {
     TITLE: {
       ESP: "Intenta la versión virtual del juego en <b>Tabletopia</b>.",
       ENG: "Try the virtual version of the game in <b>Tabletopia</b>.",
     },
     INFO: {
-      ESP: "En Abril 24 lanzaremos nuestra campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juegos.",
-      ENG: "This April 24th we will be launching a <b>Kickstarter</b> campaign to make the first official edition of the game."
+      ESP: "",
+      ENG: ""
     }
   }
 

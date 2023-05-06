@@ -28,8 +28,8 @@ class TEXT {
       ESP: "Reduce otra para incrementar esta.",
     },
     {
-      ENG: "Exchange others to increase this.",
-      ESP: "Cambia esta usando las otras.",
+      ENG: "Reduce others to increase this one.",
+      ESP: "Reduce otra para incrementar esta.",
     },
   ]
   static POINTS_LEFT = {
@@ -78,7 +78,7 @@ class TEXT {
   }
   static PLAY_DESCRIPTION = {
     ENG: `You'll be given 8 extra points (or “pips”) to increase the cards above. Click <b>${TEXT.BEGIN.ENG}</b> to start.`,
-    ESP: `Después de presionar <b>${TEXT.BEGIN.ESP}</b>, tendrás 8 puntos extra parar repartir entre las cartas.`,
+    ESP: `Tendrás 8 puntos extra parar incrementar el valor de estas cartas. Presiona <b>${TEXT.BEGIN.ESP}</b>.`,
   }
   static DESCRIPTION = {
     ENG: (suit, name) => `This is how ${name ? `<b>${name}</b> values` : "you value"} the 4 main personality traits shown in the cards. According to this valuation, the <strong style="color:${suit.color}">${TEXT[suit.symbol].ENG}</strong> are ${name ? `<b>${name}</b>'s` : "your"} main suit. This symbol—also called <strong style="color:${suit.color}">${TEXT[suit.alt].ENG}</strong>—is the one for ${TEXT[suit.cast].ENG} who focus on ${TEXT[suit.symbol].meaning.ENG}.`,

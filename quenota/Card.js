@@ -23,7 +23,7 @@ class Card extends Dot {
   static ratio = 1.43;
 
   set number(val) {
-    if(val > 10) val -= 10;
+    if (val > 10) val -= 10;
     if (this.flip < FLIP_SPEED) return;
     let d = val - this._number;
     if (abs(d) < 1) return;
@@ -70,7 +70,7 @@ class Card extends Dot {
     translate(this.position.x, this.position.y);
 
     if (this.number !== this._newNumber) {
-     // this.rot += 0.1;
+      // this.rot += 0.1;
       if (this.flip <= 0) {
         this._number = this._newNumber;
       } else {
@@ -114,9 +114,11 @@ class Card extends Dot {
   }
 
   update() {
-    let lastVel = this.velocity.copy();
     super.update();
+    let lastVel = this.velocity.copy();
+    let frix = createVector(0, 0);
     let [x, y] = [this.position.x, this.position.y];
+    let rot = 0;
     if (x < this.w2 || x > width - this.w2) {
       this.velocity.x *= -1;
       this.number = this.number + 1;
@@ -125,9 +127,11 @@ class Card extends Dot {
       this.velocity.y *= -1;
       this.number = this.number + 1;
     }
-    this.angVelocity += map(this.velocity.angleBetween(lastVel), -PI, PI, -0.1, 0.1);
+    this.velocity.sub(frix.mult(0.5));
     this.position.x = constrain(x, this.w2, width - this.w2);
     this.position.y = constrain(y, this.h2, height - this.h2);
+    let angle = atan2(lastVel.y - this.velocity.y, lastVel.x - this.velocity.x);
+    this.angVelocity += map(angle, -PI, PI, -0.1, 0.1);
     this.rot += this.angVelocity;
     this.angVelocity *= 0.99;
   }
@@ -153,28 +157,36 @@ class Card extends Dot {
 
   drawHalf(d, t, all) {
     let dist = -0.19 * this.height;
+    let alpha = false;
+    if (this.number === 1) {
+      all = true;
+      alpha = true;
+    }
     if (all || [2, 3, 6, 7, 10, 11].includes(this.number)) {
-      this.drawPip(dist, t);
+      this.drawPip(dist, t, alpha);
     }
     if (all || this.number > 5) {
       rotate(-PI / 3);
-      this.drawPip(dist, t);
+      this.drawPip(dist, t, alpha);
       rotate(2 * PI / 3);
-      this.drawPip(dist, t);
+      this.drawPip(dist, t, alpha);
       rotate(-PI / 3);
     }
     if (all || [4, 5, 8, 9, 10, 11].includes(this.number)) {
       let dist = -this.height / 3;
       rotate(-PI / 6);
-      this.drawPip(dist, t);
+      this.drawPip(dist, t, alpha);
       rotate(PI / 3);
-      this.drawPip(dist, t);
+      this.drawPip(dist, t, alpha);
       rotate(-PI / 6);
     }
   }
 
-  drawPip(dist, t) {
+  drawPip(dist, t, alpha = false) {
     dist *= map(this.blend / FLIP_SPEED, 0, 1, 0.85, 1);
+    if (alpha) {
+      tint(this.suit.color);
+    }
     image(this.suit.image, -t / 2, dist - t / 2, t, t);
     image(this._newSuit.image, -t / 2, dist - t / 2, t, t);
   }
