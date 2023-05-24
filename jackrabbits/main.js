@@ -235,7 +235,7 @@ DOM.set({
   fontFamily: "body",
   fontSize: "16px",
   textAlign: "center",
-  header: new TopMenu(),
+  header: new TopMenu(ROOT),
   main: {
     maxWidth: '680px',
     margin: '0 auto',

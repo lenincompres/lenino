@@ -7,11 +7,11 @@ class TEXT {
   static MAILINGLIST = {
     TITLE: {
       ESP: "Suscríbete a nuestro listado de correo",
-      ENG: "Subscribe to our mailing list",
+      ENG: "Join our mailing list",
     },
     INFO: {
       ESP: "Pronto lanzaremos nuestra campaña de <b>Kickstarter</b> para fabricar la primera edición oficial del juegos y nos gustaría contar con tu apoyo. Con tu correo te avísaremos cuando la campaña esté lista.",
-      ENG: "We will launch a <b>Kickstarter</b> campaign to make the first official edition of the game and would love to have your support. We will notify you know when the campaign is ready."
+      ENG: "We will launch a <b>Kickstarter</b> campaign to make the first official edition of the game and would love to have your support. We will notify you when the campaign is ready."
     }
   }
 

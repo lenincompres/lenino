@@ -5,7 +5,7 @@ const QS = DOM.querystring();
 window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
 
 class TopMenu extends HTMLElement {
-  constructor() {
+  constructor(root) {
     super();
 
     this.set({
@@ -36,7 +36,7 @@ class TopMenu extends HTMLElement {
                 img: {
                   verticalAlign: "top",
                   height: "2em",
-                  src: "../../assets/leninoLogo.png",
+                  src: root + "/../assets/leninoLogo.png",
                   alt: "Lenino.net logo"
                 },
               }
