@@ -22,6 +22,20 @@ export const projects = [{
     "code",
   ]
 }, {
+  title: "Lenino & La Hermanastra",
+  folder: "hermanastra",
+  img: "assets/hermanastra.png",
+  desc: {
+    ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella stole her prince.",
+    ESP: "Monólogo músical de estilo cabaret que cuenta lo que pasó con la hermanastra de la Cenicienta después después de perder al príncipe.",
+  },
+  tags: [
+    "music",
+    "writing",
+    "theatre",
+    "performance",
+  ]
+}, {
   title: "Animalcules | Animalucos",
   link: "https://lenincompres.github.io/animacules/",
   img: "assets/animacules.png",

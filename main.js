@@ -1,10 +1,10 @@
-import * as STYLE from "./style.js";
-import PAGES from "./pages.js";
-import INSTAGRAM from "./widgets/instagram.js";
-import TWITTER from "./widgets/twitter.js";
-import MUSICPLAYER from "./widgets/musicplayer.js";
-import SOCIAL_LINKS from "./widgets/social.js";
-import slideDown from "./animations/slideDown.js";
+import * as STYLE from "./lenino/style.js";
+import PAGES from "./lenino/pages.js";
+import INSTAGRAM from "./lenino/widgets/instagram.js";
+import TWITTER from "./lenino/widgets/twitter.js";
+import MUSICPLAYER from "./lenino/widgets/musicplayer.js";
+import SOCIAL_LINKS from "./lenino/widgets/social.js";
+import slideDown from "./lenino/animations/slideDown.js";
 
 window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
 const QS = DOM.querystring();
