@@ -1,13 +1,16 @@
 export const projects = [{
-  title: "DOM.js (DOM.set)",
-  link: "https://github.com/lenincompres/DOM.js",
-  img: "assets/dom.png",
+  title: "Lenino & La Hermanastra",
+  folder: "hermanastra",
+  img: "assets/hermanastra.png",
   desc: {
-    ENG: "JavaScript library that creates DOM structures using a JS structural object as a model",
-    ESP: "Librería de JavaScript que crea estructuras de WOM utilizando objetos estructurales de JS como modelo.",
+    ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
+    ESP: "Monólogo músical de estilo cabaret que cuenta lo que pasó con la hermanastra de la Cenicienta después después de perder al príncipe.",
   },
   tags: [
-    "code",
+    "music",
+    "writing",
+    "theatre",
+    "performance",
   ]
 }, {
   title: "Jack Rabbits",
@@ -22,18 +25,15 @@ export const projects = [{
     "code",
   ]
 }, {
-  title: "Lenino & La Hermanastra",
-  folder: "hermanastra",
-  img: "assets/hermanastra.png",
+  title: "DOM.js (DOM.set)",
+  link: "https://github.com/lenincompres/DOM.js",
+  img: "assets/dom.png",
   desc: {
-    ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    ESP: "Monólogo músical de estilo cabaret que cuenta lo que pasó con la hermanastra de la Cenicienta después después de perder al príncipe.",
+    ENG: "JavaScript library that creates DOM structures using a JS structural object as a model",
+    ESP: "Librería de JavaScript que crea estructuras de WOM utilizando objetos estructurales de JS como modelo.",
   },
   tags: [
-    "music",
-    "writing",
-    "theatre",
-    "performance",
+    "code",
   ]
 }, {
   title: "Animalcules | Animalucos",
