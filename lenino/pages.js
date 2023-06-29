@@ -84,7 +84,7 @@ export const PAGES = {
           h6: {
             marginBottom: "0.25em",
             fontWeight: "bold",
-            text: project.title
+            text: typeof project.title === "string"? project.title : project.title[lang],
           },
           p: project.desc[lang],
         },

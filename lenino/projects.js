@@ -26,7 +26,7 @@ export const projects = [{
   folder: "hermanastra",
   img: "assets/hermanastra.png",
   desc: {
-    ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella stole her prince.",
+    ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
     ESP: "Monólogo músical de estilo cabaret que cuenta lo que pasó con la hermanastra de la Cenicienta después después de perder al príncipe.",
   },
   tags: [
@@ -121,7 +121,7 @@ export const projects = [{
   ]
 }, {
   title: "Eloping Is Fun",
-  link: "https://elopingisfun.com/lenin/",
+  link: "https://elopingisfun.com//about-us/#leninbio",
   img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
   desc: {
     ENG: "Lenino may officiate the wedding of your wildest dreams stress-free, easy and fun.",

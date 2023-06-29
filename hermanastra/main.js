@@ -6,29 +6,29 @@ let sinopsisElement = {
       src: "cover.png",
       maxWidth: "30em",
       minWidth: "15em",
-      width: "80%",
+      width: "100%",
     }
   },
   main: {
     align: "left",
     width: "26em",
     minWidth: "15em",
-    margin: "2em 0 0 -6em",
+    margin: "1em 0 0 -6em",
     borderRadius: "1em",
     padding: "1em 1.5em",
     tag: "section",
     background: "#fec",
-    text: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “El Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó a su príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega allí y sus encantos caribeños revelan el hechizo bajo el cual se encuentra la joven.",
+    text: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “El Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó al príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega allí y sus encantos caribeños revelan el hechizo bajo el cual se encuentra la joven.",
     height: "fit-content",
   }
 };
 
 let bioElement = {
   align: "left",
-  maxWidth: "40em",
-  margin: "2em auto",
+  maxWidth: "50em",
+  margin: "2em 0",
   tag: "section",
-  content: `<b>Lenin Comprés</b> es un artista dominicano residente en la ciudad de Nueva York; un profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas; un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes TISCH de la Universidad de Nueva York y es egresado del Teacher’s College de la Universidad de Columbia. Ha escrito obras premiadas en la República Dominicana y escribió junto a Waddys Jáquez el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a> que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`,
+  content: `<b>Lenin Comprés</b> es un artista dominicano residente en la ciudad de Nueva York; un profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas; un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes <a href="https://tisch.nyu.edu/itp">TISCH de la Universidad de Nueva York</a> y es egresado del <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Teacher’s College de la Universidad de Columbia</a>. Ha escrito obras premiadas en la República Dominicana y escribió junto a Waddys Jáquez el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a> que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`,
   figure: {
     margin: "0.5em 0",
     img: {
@@ -55,65 +55,109 @@ let creditosElement = {
   li: {
     margin: "1em 0",
     content: [{
-        h6: "Autoría e interpretación:",
-        p: "Lenin Comprés"
+        h6: "Autoría e interpretación",
+        a: {
+          text: "Lenin Comprés",
+          href: "http://lenino.net",
+          target: "_blank",
+        },
       },
       {
-        h6: "Asesoría escénica:",
-        p: ["Bethania Rivera", "Waddys Jáquez"]
+        h6: "Asesoría escénica",
+        p: "Bethania Rivera",
+        a: {
+          text: "Waddys Jáquez",
+          href: "https://www.instagram.com/waddysjaquez",
+          target: "_blank",
+        },
       },
       {
-        h6: "Asesoría musical:",
-        p: "Mariana Cabot",
+        h6: "Asesoría musical",
+        a: {
+          text: "Mariana Cabot",
+          href: "https://marianacabot.com/",
+          target: "_blank",
+        },
       },
       {
-        h6: "Equipo técnico:",
-        p: ["Julián Duque", "Rossy Torres", "Félix Guzmán" ]
+        h6: "Equipo técnico",
+        p: ["Julián Duque", "Rossy Torres", "Félix Guzmán"]
       },
       {
-        h6: "Fotografía:",
-        p: "Mariliana Arvelo",
+        h6: "Fotografía",
+        a: {
+          text: "Mariliana Arvelo",
+          href: "https://www.stylishhipkids.com/",
+          target: "_blank",
+        },
       },
     ]
   }
 }
 
 let musicalElement = {
+  css: {
+    h5: {
+      marginTop: "1em",
+      before: {
+        content: '"«"',
+      },
+      after: {
+        content: '"»"',
+      },
+    }
+  },
   marginTop: "3em",
   h1: "Números musicales",
-  p: "Letra y música por Lenin Comprés",
+  p: "Letra y música de Lenin Comprés",
   ul: {
     marginTop: "1em",
-    css: {
-      h5: {
-        marginTop: "1em",
-        before: {
-          content: '"«"',
-        },
-        after: {
-          content: '"»"',
-        },
-      }
-    },
     li: [{
       h5: "Este es su cuento",
     }, {
       h5: "Cuentas nuevas",
     }, {
       h5: "Mujer Vieja",
-      p: "Inspiración: «Äijö» de Värtinä"
+      a: {
+        text: "Inspiración: «Äijö» de Värtinä",
+        href: "https://open.spotify.com/track/2lLZotRXsQL3k2xX8rhl7q",
+        target: "_blank",
+      },
     }, {
       h5: "Cantaletas",
+      a: {
+        text: "Original: «Tedious Ramblings» de Lenino",
+        href: "https://open.spotify.com/track/2XIjXfcQdRCJhKDq9LSfO5",
+        target: "_blank",
+      },
     }, {
       h5: "Mala imagen",
     }, {
       h5: "Casa noble",
-      p: ["Arreglo: Ambiorix Francisco", "Mezcla: Jarxiel"],
+      a: [{
+        text: "Arreglo: Ambiorix Francisco",
+        href: "https://open.spotify.com/artist/1IgORqBInIYlaipClp2Ma8",
+        target: "_blank",
+      }, {
+        display: "block",
+        text: "Mezcla: Jarxiel",
+        href: "https://open.spotify.com/artist/7vdRAvViSvP53CiwaCauS5",
+        target: "_blank",
+      }],
     }, {
       h5: "Entrevista sin malicia",
+      a: {
+        text: "Original: «The Coy and the Candid» de Lenino",
+        href: "https://open.spotify.com/track/3VPhykSY1ShrzcwyK9bYUS",
+        target: "_blank",
+      },
     }, {
       h5: "La ve",
-      p: "Original: «That Time» de Regina Spektor"
+      a: {
+        text: "Original: «That Time» de Regina Spektor",
+        href: "https://open.spotify.com/track/2lLZotRXsQL3k2xX8rhl7q",
+        target: "_blank",
+      },
     }]
   }
 }
@@ -133,14 +177,20 @@ DOM.set({
   icon: "icon.png",
   font: [{
     fontFamily: 'title',
-    src: 'url("./CinzelDecorative-Regular.ttf")'
+    src: 'url("./CinzelDecorative-Regular.ttf")',
   }, {
     fontFamily: 'body',
-    src: 'url("./Skia Regular.ttf")'
+    src: 'url("./Skia Regular.ttf")',
+  }, {
+    fontFamily: 'fancy',
+    src: 'url("./Party LET Plain.ttf")',
   }],
   css: {
     h: {
       fontFamily: "title",
+    },
+    i: {
+      fontFamily: "fancy",
     },
     b: {
       fontFamily: "title",
@@ -153,9 +203,6 @@ DOM.set({
     },
     body: {
       fontFamily: "body",
-    },
-    i: {
-      fontFamily: "fantasy",
     },
   },
   fontSize: "12pt",
@@ -199,7 +246,7 @@ DOM.set({
         width: "2em",
         src: "../assets/leninoLogoW.png",
       },
-      href: "https://lenino.net",
+      href: "http://lenino.net",
       p: "lenino.net",
     }
   }
