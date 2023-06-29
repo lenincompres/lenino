@@ -11,14 +11,14 @@ let sinopsisElement = {
   },
   main: {
     align: "left",
-    width: "25em",
+    width: "26em",
     minWidth: "15em",
     margin: "2em 0 0 -6em",
     borderRadius: "1em",
     padding: "1em 1.5em",
     tag: "section",
     background: "#fec",
-    text: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “El Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó a su príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega allí y sus encantos caribeños revelan el hechizo del cual la joven era víctima.",
+    text: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “El Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó a su príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega allí y sus encantos caribeños revelan el hechizo bajo el cual se encuentra la joven.",
     height: "fit-content",
   }
 };
@@ -51,28 +51,28 @@ let funcionesElement = {
 let creditosElement = {
   marginTop: "3em",
   tag: "ul",
-  h2: "Créditos & equipo",
+  h1: "Créditos & equipo",
   li: {
     margin: "1em 0",
     content: [{
         h6: "Autoría e interpretación:",
-        span: "Lenin Comprés"
+        p: "Lenin Comprés"
       },
       {
         h6: "Asesoría escénica:",
-        span: "Waddys Jáquez</br>Bethania Rivera"
+        p: ["Bethania Rivera", "Waddys Jáquez"]
       },
       {
         h6: "Asesoría musical:",
-        span: "Mariana Cabot</br>Ambiorix Francisco"
+        p: "Mariana Cabot",
       },
       {
         h6: "Equipo técnico:",
-        span: "Julián Duque</br>Rossy Torres</br>Félix Guzmán"
+        p: ["Julián Duque", "Rossy Torres", "Félix Guzmán" ]
       },
       {
         h6: "Fotografía:",
-        span: "Mariliana Arvelo",
+        p: "Mariliana Arvelo",
       },
     ]
   }
@@ -80,19 +80,41 @@ let creditosElement = {
 
 let musicalElement = {
   marginTop: "3em",
-  h2: "Números musicales",
-  h5: {
+  h1: "Números musicales",
+  p: "Letra y música por Lenin Comprés",
+  ul: {
     marginTop: "1em",
-    class: "quote",
-    content: [
-      "Este es su cuento",
-      "Nuevas cuentas",
-      "Cantaletas",
-      "Mala imagen",
-      "Casa noble",
-      "Entrevista sin malicia",
-      "La ve",
-    ]
+    css: {
+      h5: {
+        marginTop: "1em",
+        before: {
+          content: '"«"',
+        },
+        after: {
+          content: '"»"',
+        },
+      }
+    },
+    li: [{
+      h5: "Este es su cuento",
+    }, {
+      h5: "Cuentas nuevas",
+    }, {
+      h5: "Mujer Vieja",
+      p: "Inspiración: «Äijö» de Värtinä"
+    }, {
+      h5: "Cantaletas",
+    }, {
+      h5: "Mala imagen",
+    }, {
+      h5: "Casa noble",
+      p: ["Arreglo: Ambiorix Francisco", "Mezcla: Jarxiel"],
+    }, {
+      h5: "Entrevista sin malicia",
+    }, {
+      h5: "La ve",
+      p: "Original: «That Time» de Regina Spektor"
+    }]
   }
 }
 
@@ -135,14 +157,6 @@ DOM.set({
     i: {
       fontFamily: "fantasy",
     },
-    _quote: {
-      before: {
-        content: '"“"',
-      },
-      after: {
-        content: '"”"',
-      },
-    }
   },
   fontSize: "12pt",
   lineHeight: "1.4em",

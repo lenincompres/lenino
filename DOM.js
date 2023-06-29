@@ -621,7 +621,7 @@ class DOM {
       fontSize: "2em",
     },
     h2: {
-      fontSize: "1.82em",
+      fontSize: "1.85em",
     },
     h3: {
       fontSize: "1.67em",
@@ -633,7 +633,7 @@ class DOM {
       fontSize: "1.33em",
     },
     h6: {
-      fontSize: "1.17em",
+      fontSize: "1.15em",
     }
   }
 }
