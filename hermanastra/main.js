@@ -253,7 +253,7 @@ DOM.set({
     maxWidth: "800px",
     align: "center",
     section: [
-      funcionesElement,
+      //funcionesElement,
       sinopsisElement,
       bioElement,
       creditosElement,
