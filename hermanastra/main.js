@@ -1,3 +1,11 @@
+
+
+const COLOR = {
+  LIGHT: "antiqueWhite",
+  DARK: "#012",
+  HIGHLIGHT: " teal",
+};
+
 let sinopsisModel = {
   display: "flex",
   marginTop: "1em",
@@ -17,7 +25,7 @@ let sinopsisModel = {
     borderRadius: "1em",
     padding: "1em 1.5em",
     tag: "section",
-    background: "#fec",
+    background: COLOR.LIGHT,
     text: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “El Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó al príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega con sus encantos caribeños a descubrir el hechizo bajo el cual se encuentra.",
     height: "fit-content",
   }
@@ -187,11 +195,6 @@ let songsModel = {
   }
 }
 
-const COLOR = {
-  LIGHT: "#fec",
-  DARK: "#012",
-};
-
 let videoPlayingBinder = new Binder(false);
 let videoBinder = new Binder();
 function toggleVideo(){
@@ -209,6 +212,16 @@ let galleryModel = {
   textAlign: "center",
   padding: "180px 0",
   position: "relative",
+  header:{
+    lineHeight: "1.3em",
+    paddingTop: "0.25em",
+    h1: "Galería",
+    position: "absolute",
+    top: "80px",
+    width: "100%",
+    fontSize: "25px",
+    background: COLOR.LIGHT,
+  },
   figure: {
     display: "inline-block",
     background: "black",
@@ -225,19 +238,25 @@ let galleryModel = {
   },
   footer: {
     position: "absolute",
-    bottom: "80px",
+    bottom: "50px",
     left: 0,
     width: "100%",
     fontSize: "20px",
-    b: {
+    section: {
+      fontFamily: "title",
+      margin: "0 auto",
+      display: "inline-block",
+      width: "6em",
+      padding: "1em 0",
       fontSize: "24px",
       cursor: "pointer",
       color: "black",
       borderRadius: "50%",
-      padding: "0.5em",
       display: videoBinder.as(["none", "inline-block"]),
       background: COLOR.LIGHT,
-      text: videoPlayingBinder.as(["Play", "Pause"]),
+      h6: {
+      text: videoPlayingBinder.as(["Play ▶", "Pause"]),
+      },
       border: "8px solid black",
       click: toggleVideo,
     },
@@ -297,12 +316,18 @@ DOM.set({
     background: COLOR.DARK,
     color: "white",
     padding: "2em 0.5em 0.5em",
-    fontSize: "1.5em",
+    fontSize: "1.7em",
     lineHeight: "1.4em",
     align: "center",
-    h1: "Lenino <i>& la hermanastra</i>",
+    h1:[ "Lenino", {
+      color: COLOR.HIGHLIGHT,
+      marginBottom: "-0.3em",
+      i: "&",
+    }, {
+      i: "la hermanastra"
+    }],
     p: {
-      fontSize: "0.8em",
+      fontSize: "0.7em",
       marginTop: "0.5em",
       text: "Un monólogo musical rococómico"
     }
