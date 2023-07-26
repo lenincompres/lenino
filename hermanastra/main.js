@@ -1,9 +1,9 @@
-let sinopsisElement = {
+let sinopsisModel = {
   display: "flex",
   marginTop: "1em",
   figure: {
     img: {
-      src: "cover.png",
+      src: "media/cover.png",
       maxWidth: "30em",
       minWidth: "15em",
       width: "100%",
@@ -23,16 +23,16 @@ let sinopsisElement = {
   }
 };
 
-let bioElement = {
+let bioModel = {
   align: "left",
   maxWidth: "50em",
   margin: "2em 0",
   tag: "section",
-  content: `<b>Lenin Comprés</b> es un artista dominicano residente en la ciudad de Nueva York; un profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas; un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes <a href="https://tisch.nyu.edu/itp">TISCH de la Universidad de Nueva York</a> y es egresado del <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Teacher’s College de la Universidad de Columbia</a>. Ha escrito obras premiadas en la República Dominicana y escribió junto a Waddys Jáquez el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a> que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`,
+  content: `<b>Lenin Comprés</b> es un artista dominicano residente en la ciudad de Nueva York; un profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas; un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes <a href="https://itp.nyu.edu/itp/people/?tab=staff">TISCH de la Universidad de Nueva York</a> y es egresado del <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Teacher’s College de la Universidad de Columbia</a>. Ha escrito obras premiadas en la República Dominicana y escribió junto a Waddys Jáquez el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a> que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`,
   figure: {
     margin: "0.5em 0",
     img: {
-      src: "spread.png",
+      src: "media/spread.png",
       width: "100%",
     }
   },
@@ -73,7 +73,7 @@ let funcionesElement = {
   }
 }
 
-let creditosElement = {
+let creditosModel = {
   marginTop: "3em",
   tag: "ul",
   h1: "Créditos & equipo",
@@ -120,7 +120,7 @@ let creditosElement = {
   }
 }
 
-let musicalElement = {
+let songsModel = {
   css: {
     h5: {
       marginTop: "1em",
@@ -187,7 +187,67 @@ let musicalElement = {
   }
 }
 
+const COLOR = {
+  LIGHT: "#fec",
+  DARK: "#012",
+};
+
+let videoPlayingBinder = new Binder(false);
+let videoBinder = new Binder();
+function toggleVideo(){
+  videoPlayingBinder.value ? videoBinder.value.pause() : videoBinder.value.play();
+  videoPlayingBinder.value = !videoPlayingBinder.value;
+}
+
+let galleryModel = {
+  backgroundImage: "url(media/icon.png)",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  width: "100%",
+  height: "800px",
+  textAlign: "center",
+  padding: "180px 0",
+  position: "relative",
+  figure: {
+    display: "inline-block",
+    background: "black",
+    borderRadius: "50%",
+    width: "380px",
+    height: "525px",
+    overflow: "hidden",
+    video: {
+      src: "media/20230708-reviews.mp4",
+      height: "100%",
+      width: "100%",
+      done: elt => videoBinder.value = elt,
+    },
+  },
+  footer: {
+    position: "absolute",
+    bottom: "80px",
+    left: 0,
+    width: "100%",
+    fontSize: "20px",
+    b: {
+      fontSize: "24px",
+      cursor: "pointer",
+      color: "black",
+      borderRadius: "50%",
+      padding: "0.5em",
+      display: videoBinder.as(["none", "inline-block"]),
+      background: COLOR.LIGHT,
+      text: videoPlayingBinder.as(["Play", "Pause"]),
+      border: "8px solid black",
+      click: toggleVideo,
+    },
+  }
+}
+
+
+
 DOM.set({
+
   title: "Lenino & La Hermanastra",
   charset: "UTF-8",
   viewport: {
@@ -199,17 +259,22 @@ DOM.set({
   keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
   description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
   link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-  icon: "icon.png",
+  icon: "media/icon.png",
   font: [{
     fontFamily: 'title',
-    src: 'url("./CinzelDecorative-Regular.ttf")',
+    src: 'url("./fonts/CinzelDecorative-Regular.ttf")',
   }, {
     fontFamily: 'body',
-    src: 'url("./Skia Regular.ttf")',
+    src: 'url("./fonts/Skia Regular.ttf")',
   }, {
     fontFamily: 'fancy',
-    src: 'url("./Party LET Plain.ttf")',
+    src: 'url("./fonts/Party LET Plain.ttf")',
   }],
+
+  fontFamily: "body",
+  fontSize: "11pt",
+  lineHeight: "1.4em",
+  background: COLOR.LIGHT,
   css: {
     h: {
       fontFamily: "title",
@@ -226,15 +291,10 @@ DOM.set({
         textDecoration: "underline",
       },
     },
-    body: {
-      fontFamily: "body",
-    },
   },
-  fontSize: "12pt",
-  lineHeight: "1.4em",
-  background: "#fec",
+
   header: {
-    background: "#012",
+    background: COLOR.DARK,
     color: "white",
     padding: "2em 0.5em 0.5em",
     fontSize: "1.5em",
@@ -247,6 +307,7 @@ DOM.set({
       text: "Un monólogo musical rococómico"
     }
   },
+
   main: {
     padding: "1em",
     margin: "0.5em auto",
@@ -254,12 +315,14 @@ DOM.set({
     align: "center",
     section: [
       //funcionesElement,
-      sinopsisElement,
-      bioElement,
-      creditosElement,
-      musicalElement,
+      sinopsisModel,
+      bioModel,
+      creditosModel,
+      galleryModel,
+      songsModel,
     ],
   },
+
   footer: {
     align: "center",
     background: "#012",
@@ -275,4 +338,5 @@ DOM.set({
       p: "lenino.net",
     }
   }
+
 });
