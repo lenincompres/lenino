@@ -1,0 +1,73 @@
+
+
+import { COLOR } from "../settings.js";
+
+let videoPlayingBinder = new Binder(false);
+let videoBinder = new Binder();
+function toggleVideo(){
+  videoPlayingBinder.value ? videoBinder.value.pause() : videoBinder.value.play();
+  videoPlayingBinder.value = !videoPlayingBinder.value;
+}
+
+export const galleryModel = {
+    backgroundImage: "url(media/icon.png)",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    width: "100%",
+    height: "800px",
+    textAlign: "center",
+    padding: "180px 0",
+    position: "relative",
+    header:{
+      lineHeight: "1.3em",
+      paddingTop: "0.25em",
+      h1: "Galería",
+      position: "absolute",
+      top: "80px",
+      width: "100%",
+      fontSize: "25px",
+      background: COLOR.LIGHT,
+    },
+    figure: {
+      display: "inline-block",
+      background: "black",
+      borderRadius: "50%",
+      width: "380px",
+      height: "525px",
+      overflow: "hidden",
+      video: {
+        src: "media/20230708-reviews.mp4",
+        height: "100%",
+        width: "100%",
+        done: elt => videoBinder.value = elt,
+      },
+    },
+    footer: {
+      position: "absolute",
+      bottom: "50px",
+      left: 0,
+      width: "100%",
+      fontSize: "20px",
+      section: {
+        fontFamily: "title",
+        margin: "0 auto",
+        display: "inline-block",
+        width: "6em",
+        padding: "1em 0",
+        fontSize: "24px",
+        cursor: "pointer",
+        color: "black",
+        borderRadius: "50%",
+        display: videoBinder.as(["none", "inline-block"]),
+        background: COLOR.LIGHT,
+        h6: {
+        text: videoPlayingBinder.as(["Play ▶", "Pause"]),
+        },
+        border: "8px solid black",
+        click: toggleVideo,
+      },
+    }
+  };
+
+  export default galleryModel;

@@ -4,7 +4,7 @@ export const projects = [{
   img: "assets/hermanastra.png",
   desc: {
     ENG: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    ESP: "Monólogo músical de estilo cabaret que cuenta lo que pasó con la hermanastra de la Cenicienta después después de perder al príncipe.",
+    ESP: "Monólogo músical que revela lo que pasó con la hermanastra de la Cenicienta tras perder al príncipe.",
   },
   tags: [
     "music",
@@ -18,7 +18,7 @@ export const projects = [{
   img: "assets/jackrabbits.jpg",
   desc: {
     ENG: "The board game for playing cards on a quest through wonderlands",
-    ESP: "Descubre maravillas mientras viajas al reino de conejos y barajas",
+    ESP: "Descubre maravillas mientras viajas al reino de conejos y barajas con este juego de mesa.",
   },
   tags: [
     "game",

@@ -1,10 +1,9 @@
 
-
-const COLOR = {
-  LIGHT: "antiqueWhite",
-  DARK: "#012",
-  HIGHLIGHT: " teal",
-};
+import creditosModel from "./modules/credits.js";
+import songsModel from "./modules/songs.js";
+import funcionesModel from "./modules/funciones.js";
+import galleryModel from "./modules/gallery.js";
+import { COLOR } from "./settings.js";
 
 let sinopsisModel = {
   display: "flex",
@@ -46,224 +45,6 @@ let bioModel = {
   },
 };
 
-let blinking = (elt, t = 0.3) => {
-  let isOn = true;
-  elt.set({
-    opacity: "1",
-    transition: t + "s",
-  });
-  setInterval(() => {
-    elt.set({
-      opacity: isOn ? "0.3" : "1",
-    });
-    isOn = !isOn;
-  }, t * 1000)
-}
-
-let funcionesElement = {
-  fontSize: "1.25em",
-  h6: "Próxima función:",
-  a: {
-    href: "https://tix.do/event/lenino-y-la-hermanastra/",
-    target: "_blank",
-    span: "<b>2023, 07/08</b>: Casa de Teatro, Santo Domingo.",
-    i: {
-      border: "0.5px dotted black",
-      borderBottomStyle: "none",
-      borderTopStyle: "none",
-      boxShadow: "1px 1px 2px black",
-      margin: "0.5em",
-      padding: "0.2em 0.7em",
-      background: "#fe6",
-      text: "Tickets",
-      ready: blinking
-    }
-  }
-}
-
-let creditosModel = {
-  marginTop: "3em",
-  tag: "ul",
-  h1: "Créditos & equipo",
-  li: {
-    margin: "1em 0",
-    content: [{
-        h6: "Autoría e interpretación",
-        a: {
-          text: "Lenin Comprés",
-          href: "http://lenino.net",
-          target: "_blank",
-        },
-      },
-      {
-        h6: "Asesoría escénica",
-        p: "Bethania Rivera",
-        a: {
-          text: "Waddys Jáquez",
-          href: "https://www.instagram.com/waddysjaquez",
-          target: "_blank",
-        },
-      },
-      {
-        h6: "Asesoría musical",
-        a: {
-          text: "Mariana Cabot",
-          href: "https://marianacabot.com/",
-          target: "_blank",
-        },
-      },
-      {
-        h6: "Equipo técnico",
-        p: ["Julián Duque", "Rossy Torres", "Félix Guzmán"]
-      },
-      {
-        h6: "Fotografía",
-        a: {
-          text: "Mariliana Arvelo",
-          href: "https://www.stylishhipkids.com/",
-          target: "_blank",
-        },
-      },
-    ]
-  }
-}
-
-let songsModel = {
-  css: {
-    h5: {
-      marginTop: "1em",
-      before: {
-        content: '"«"',
-      },
-      after: {
-        content: '"»"',
-      },
-    }
-  },
-  marginTop: "3em",
-  h1: "Números musicales",
-  p: "Letra y música de Lenin Comprés",
-  ul: {
-    marginTop: "1em",
-    li: [{
-      h5: "Este es su cuento",
-    }, {
-      h5: "Cuentas nuevas",
-    }, {
-      h5: "Mujer Vieja",
-      a: {
-        text: "Inspiración: «Äijö» de Värtinä",
-        href: "https://open.spotify.com/track/35m2JguMQJA0h7uHSsnBuL",
-        target: "_blank",
-      },
-    }, {
-      h5: "Cantaletas",
-      a: {
-        text: "Original: «Tedious Ramblings» de Lenino",
-        href: "https://open.spotify.com/track/2XIjXfcQdRCJhKDq9LSfO5",
-        target: "_blank",
-      },
-    }, {
-      h5: "Mala imagen",
-    }, {
-      h5: "Casa noble",
-      a: [{
-        text: "Arreglo: Ambiorix Francisco",
-        href: "https://open.spotify.com/artist/1IgORqBInIYlaipClp2Ma8",
-        target: "_blank",
-      }, {
-        display: "block",
-        text: "Mezcla: Jarxiel",
-        href: "https://open.spotify.com/artist/7vdRAvViSvP53CiwaCauS5",
-        target: "_blank",
-      }],
-    }, {
-      h5: "Entrevista sin malicia",
-      a: {
-        text: "Original: «The Coy and the Candid» de Lenino",
-        href: "https://open.spotify.com/track/3VPhykSY1ShrzcwyK9bYUS",
-        target: "_blank",
-      },
-    }, {
-      h5: "La ve",
-      a: {
-        text: "Original: «That Time» de Regina Spektor",
-        href: "https://open.spotify.com/track/2lLZotRXsQL3k2xX8rhl7q",
-        target: "_blank",
-      },
-    }]
-  }
-}
-
-let videoPlayingBinder = new Binder(false);
-let videoBinder = new Binder();
-function toggleVideo(){
-  videoPlayingBinder.value ? videoBinder.value.pause() : videoBinder.value.play();
-  videoPlayingBinder.value = !videoPlayingBinder.value;
-}
-
-let galleryModel = {
-  backgroundImage: "url(media/icon.png)",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  width: "100%",
-  height: "800px",
-  textAlign: "center",
-  padding: "180px 0",
-  position: "relative",
-  header:{
-    lineHeight: "1.3em",
-    paddingTop: "0.25em",
-    h1: "Galería",
-    position: "absolute",
-    top: "80px",
-    width: "100%",
-    fontSize: "25px",
-    background: COLOR.LIGHT,
-  },
-  figure: {
-    display: "inline-block",
-    background: "black",
-    borderRadius: "50%",
-    width: "380px",
-    height: "525px",
-    overflow: "hidden",
-    video: {
-      src: "media/20230708-reviews.mp4",
-      height: "100%",
-      width: "100%",
-      done: elt => videoBinder.value = elt,
-    },
-  },
-  footer: {
-    position: "absolute",
-    bottom: "50px",
-    left: 0,
-    width: "100%",
-    fontSize: "20px",
-    section: {
-      fontFamily: "title",
-      margin: "0 auto",
-      display: "inline-block",
-      width: "6em",
-      padding: "1em 0",
-      fontSize: "24px",
-      cursor: "pointer",
-      color: "black",
-      borderRadius: "50%",
-      display: videoBinder.as(["none", "inline-block"]),
-      background: COLOR.LIGHT,
-      h6: {
-      text: videoPlayingBinder.as(["Play ▶", "Pause"]),
-      },
-      border: "8px solid black",
-      click: toggleVideo,
-    },
-  }
-}
-
-
 
 DOM.set({
 
@@ -289,11 +70,6 @@ DOM.set({
     fontFamily: 'fancy',
     src: 'url("./fonts/Party LET Plain.ttf")',
   }],
-
-  fontFamily: "body",
-  fontSize: "11pt",
-  lineHeight: "1.4em",
-  background: COLOR.LIGHT,
   css: {
     h: {
       fontFamily: "title",
@@ -311,6 +87,11 @@ DOM.set({
       },
     },
   },
+
+  fontFamily: "body",
+  fontSize: "11pt",
+  lineHeight: "1.4em",
+  background: COLOR.LIGHT,
 
   header: {
     background: COLOR.DARK,
