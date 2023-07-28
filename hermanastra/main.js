@@ -81,7 +81,7 @@ DOM.set({
 
   main: {
     padding: "1em",
-    margin: "0.5em auto",
+    margin: "0 auto",
     maxWidth: "800px",
     align: "center",
     section: [

@@ -19,16 +19,6 @@ export const galleryModel = {
     textAlign: "center",
     padding: "185px 0",
     position: "relative",
-    header:{
-      lineHeight: "1.3em",
-      paddingTop: "0.25em",
-      h1: "Galería",
-      position: "absolute",
-      top: "80px",
-      width: "100%",
-      fontSize: "25px",
-      background: COLOR.LIGHT,
-    },
     figure: {
       display: "inline-block",
       background: COLOR.ACCENT,
