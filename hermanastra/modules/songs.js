@@ -1,4 +1,4 @@
-export const songsModel = {
+export const songlistModel = {
   css: {
     h5: {
       marginTop: "1em",
@@ -20,7 +20,7 @@ export const songsModel = {
     }, {
       h5: "Cuentas nuevas",
     }, {
-      h5: "Mujer Vieja",
+      h5: "Mujer vieja",
       a: {
         text: "Inspiración: «Äijö» de Värtinä",
         href: "https://open.spotify.com/track/35m2JguMQJA0h7uHSsnBuL",
@@ -65,4 +65,4 @@ export const songsModel = {
   }
 };
 
-export default songsModel;
+export default songlistModel;

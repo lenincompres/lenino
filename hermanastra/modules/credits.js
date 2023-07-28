@@ -1,5 +1,5 @@
 
-export const creditosModel = {
+export const creditsModel = {
     marginTop: "3em",
     tag: "ul",
     h1: "Créditos & equipo",
@@ -44,6 +44,6 @@ export const creditosModel = {
         },
       ]
     }
-  }
+  };
 
-  export default creditosModel;
+  export default creditsModel;

@@ -17,7 +17,7 @@ export const galleryModel = {
     width: "100%",
     height: "800px",
     textAlign: "center",
-    padding: "180px 0",
+    padding: "185px 0",
     position: "relative",
     header:{
       lineHeight: "1.3em",
@@ -31,10 +31,10 @@ export const galleryModel = {
     },
     figure: {
       display: "inline-block",
-      background: "black",
+      background: COLOR.ACCENT,
       borderRadius: "50%",
-      width: "380px",
-      height: "525px",
+      width: "410px",
+      height: "520px",
       overflow: "hidden",
       video: {
         src: "media/20230708-reviews.mp4",

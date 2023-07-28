@@ -1,16 +1,16 @@
 {
   "questions": [{
-      "question": "When appreciating art, how much do you value ____?",
+      "question": "When appreciating art, how much do you value the ____?",
       "options": [{
-          "choice": "the execution",
+          "choice": "execution",
           "hint": "magnitude, elaboration, dexterity"
         },
         {
-          "choice": "the concept",
+          "choice": "concept",
           "hint": "meaning, idea, message"
         },
         {
-          "choice": "the feeling",
+          "choice": "feeling",
           "hint": "sentiment, emotion, nostalgia"
         }
       ]
@@ -26,8 +26,8 @@
           "hint": "records, stats, strategies"
         },
         {
-          "choice": "being a fan",
-          "hint": "cheering, environment, your team"
+          "choice": "cheering",
+          "hint": "fans, environment, team"
         }
       ]
     },
