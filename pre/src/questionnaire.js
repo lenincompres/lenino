@@ -124,23 +124,23 @@ export const model = {
   style: style.section,
   header: {
     style: style.floatingSign,
-    h4: 'Instructions:',
+    h4: 'Questionnaire Instructions',
     p: [
-      'Rate options individually, but mind how they compare to others in the same group.',
+      'Rate options individually, but mind how they compare to others in the same section.',
     ]
   },
   article: {
     color: '#fff',
     margin: '4em 0 0',
     content: [{
-      h1: 'Practice Questions',
+      h1: 'Practice Section',
       div: modelQuestion(sampleQuestion).model
     }, {
       marginTop: '1em',
       a: {
         fontSize: '1.14em',
         target: '_blank',
-        text: favorite.bind(v => 'Resulting RGB color code: ' + v),
+        text: favorite.bind(v => 'Resulting average RGB color code: ' + v),
         href: favorite.bind(v => './?rgb=' + v.substr(1)),
       }
     }, {

@@ -26,7 +26,7 @@ feature.bind(featureInfo, v => {
         text: ['Physically', 'Rationally', 'Emotionally'][d] + ' '
       },
       {
-        text: ['relaxed', 'neutral', 'intense'][i],
+        text: ['relaxed', 'flexible', 'intense'][i],
       }
     ]
   });

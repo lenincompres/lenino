@@ -1,17 +1,17 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.33
+ * @version 1.0.40
  * @repository https://github.com/lenincompres/DOM.js
  */
 
- Element.prototype.get = function (station) {
+Element.prototype.get = function (station) {
   let output;
   if (!station && this.tagName.toLocaleLowerCase() === "input") output = this.value;
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
   else if (["text"].includes(station)) output = this.innerText;
   else if (["outer", "self"].includes(station)) output = this.outerHTML;
-  else if (DOM.attributes.includes(station)) output = this.getAttribute(station);
+  else if (DOM.attributes.includes(station) || station.startsWith("data")) output = this.getAttribute(station);
   else if (DOM.isStyle(station, this)) output = this.style[station];
   else output = station ? this[station] : this.value;
   if (output !== undefined && output !== null) return isNaN(output) ? output : parseFloat(output);
@@ -45,6 +45,21 @@ Element.prototype.set = function (model, ...args) {
   if ([undefined, "create", "assign", "model", "inner", "set"].includes(station)) station = "content";
   const STATION = station;
   station = station.toLowerCase(); // station lowercase
+  // css exceptions
+  if (STATION === "fontFace") return document.body.set({
+    css: {
+      [station]: model
+    }
+  });
+  let uncamel = DOM.unCamelize(STATION);
+  // needs dissambiguation for head link and pseaudoclass
+  if (!["link", "target"].includes(station) && (DOM.pseudoClasses.includes(uncamel) || DOM.pseudoElements.includes(uncamel))) return this.set({
+    css: {
+      [uncamel]: model
+    }
+  });
+  // element exceptions
+  if (station === "id") return DOM.addID(model, this);
   if (station === "content" && TAG === "meta") station = "*content"; // disambiguate
   if (DOM.reserveStations.includes(station)) return;
   const IS_CONTENT = station === "content";
@@ -56,7 +71,7 @@ Element.prototype.set = function (model, ...args) {
     else return this[STATION] = e => model(e, this);
   }
   if (model._bonds) model = model.bind();
-  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener));
+  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener, ["attribute", "style", "attributes"].includes(station) ? station : undefined));
   if (station === "css") {
     const getID = elt => {
       if (elt.id) return elt.id;
@@ -73,6 +88,10 @@ Element.prototype.set = function (model, ...args) {
   }
   if (["text", "innertext"].includes(station)) return this.innerText = model;
   if (["html", "innerhtml"].includes(station)) return this.innerHTML = model;
+  if(["attribute", "attributes"].includes(station)) return Object.entries(model).map(([key, value]) => {
+    if (value && value.binders) return value.binders.forEach(binder => binder.bind(this, key, value.onvalue, value.listener, "attribute"));
+    this.setAttribute(key, value);
+  });
   if (IS_HEAD) {
     if (station === "font" && modelType.object) return DOM.set({
       fontFace: model
@@ -171,7 +190,7 @@ Element.prototype.set = function (model, ...args) {
       }, station);
     }
     let done = DOM.isStyle(STATION, this) ? this.style[STATION] = model : undefined;
-    if (DOM.typify(STATION).attribute || station.includes("*")) done = !this.setAttribute(station.replace("*", ""), model);
+    if (DOM.typify(STATION).attribute || station.includes("*") || STATION.startsWith("data")) done = !this.setAttribute(station.replace("*", ""), model);
     if (station === "id") DOM.addID(model, this);
     if (done !== undefined) return;
   }
@@ -230,7 +249,14 @@ class Binder {
     this.update = bond => {
       if (!bond.target) return;
       let theirValue = bond.onvalue(this._value);
-      if (bond.target.tagName) return bond.target.set(theirValue, bond.station);
+      if (bond.target.tagName) {
+        if(!bond.type) return bond.target.set(theirValue, bond.station);
+        return bond.target.set({
+          [bond.type]: {
+            [bond.station]: theirValue,
+          }
+        });
+      }
       if (bond.target._bonds) bond.target.setter = this; // knowing the setter prevents co-binder"s loop
       bond.target[bond.station] = theirValue;
     }
@@ -243,6 +269,14 @@ class Binder {
   removeListener(countIndex) {
     delete this._listeners[countIndex];
   }
+  as(...args) {
+    if (args.length === 1) return this.bind(args[0]);
+    if (typeof args[0] === "function") {
+      if (args.length === 2) return this.bind(...args);
+      return this.bind(args.shift(), args);
+    }
+    return this.bind(args);
+  }
   bind(...args) {
     let argsType = DOM.typify(...args);
     let target = argsType.element ? argsType.element : argsType.binder;
@@ -251,10 +285,21 @@ class Binder {
     let listener = argsType.number;
     let values = argsType.array;
     let model = argsType.object;
+    let type = argsType.strings ? argsType.strings[1] : undefined;
     if (values && values.length) {
-      if (values.length === 2) onvalue = v => v ? values[1] : values[0];
-      else onvalue = v => values[v] !== undefined ? values[v] : "";
-    } else if (model && model !== target) onvalue = v => model[v] !== undefined ? model[v] : model.default !== undefined ? model.default : model.false;
+      let test = onvalue;
+      onvalue = val => {
+        val = test(val);
+        if (typeof test(val) === "boolean") val = val ? 1 : 0;
+        return values[val];
+      };
+    } else if (model && model !== target) {
+      let test = onvalue;
+      onvalue = val => {
+        val = test(val);
+        return [model[val], model.default, model.false].filter(v => v !== undefined)[0];
+      }
+    }
     if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, removes the listener
     let bond = {
@@ -262,11 +307,13 @@ class Binder {
       target: target,
       station: station,
       onvalue: onvalue,
+      type: type,
     }
     this._bonds.push(bond);
     this.update(bond);
   }
-  flash(values, delay = 1000, revert, callback) { //Iterates through values. Reverts to the intital
+  //Iterates through values. Reverts to the intital
+  flash(values, delay = 1000, revert, callback) {
     if (!Array.isArray(values)) values = [values];
     if (!Array.isArray(delay)) delay = new Array(values.length).fill(delay);
     let oldValue = this.value;
@@ -281,6 +328,7 @@ class Binder {
       if (callback) callback();
     }, delay.shift());
   }
+  //Iterates through values in a loop
   loop(values, delay) {
     if (!Array.isArray(values)) return;
     this.value = values.shift();
@@ -302,6 +350,10 @@ class Binder {
   get value() {
     return this._value;
   }
+}
+
+function bind(...args) {
+  return DOM.bind(...args);
 }
 
 // global static methods to handle the DOM
@@ -331,11 +383,15 @@ class DOM {
       DOM.set(model.css, "css");
       delete model.css;
       if (document.body) {
-        model.visibility = "hidden";
-        setTimeout(() => DOM.set("visible", "visibility"), 600);
+        DOM.set("none", "display");
+        setTimeout(() => DOM.set("block", "display"), 50);
       }
     }
     // checks if the model is meant for the head
+    if (model.head) {
+      document.head.set(model.head);
+      delete model.head;
+    }
     let headModel = {};
     Object.keys(model).forEach(key => {
       if (!DOM.headTags.includes(key.toLowerCase())) return;
@@ -388,9 +444,9 @@ class DOM {
     let extra = [];
     let cls = sel.split("_");
     sel = cls.shift();
-    if (sel === "h") {
+    if (sel === "h" || sel.endsWith(" h")) {
       cls = cls.length ? ("." + cls.join(".")) : "";
-      sel = Array(6).fill().map((_, i) => "h" + (i + 1) + cls).join(", ");
+      sel = Array(6).fill().map((_, i) => sel + (i + 1) + cls).join(", ");
       cls = [];
     }
     if (sel.toLowerCase() === "fontface") sel = "@font-face";
@@ -428,10 +484,14 @@ class DOM {
   static querystring = () => {
     var qs = location.search.substring(1);
     if (!qs) return Object();
-    if (qs.includes("=")) return JSON.parse("{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "", "").replace(/=/g, "\":\"") + "\"}");
+    if (qs.includes("=")) {
+      qs = "{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "\",\"", "").replace(/=/g, "\":\"") + "\"}";
+      return JSON.parse(qs);
+    }
     return qs.split("/");
   }
   static addID = (id, elt) => {
+    if (elt.tagName) elt.setAttribute("id", id);
     if (Array.isArray(elt)) return elt.forEach(e => DOM.addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) return window[id].push(elt);
@@ -574,7 +634,7 @@ class DOM {
       fontSize: "2em",
     },
     h2: {
-      fontSize: "1.82em",
+      fontSize: "1.85em",
     },
     h3: {
       fontSize: "1.67em",
@@ -586,7 +646,7 @@ class DOM {
       fontSize: "1.33em",
     },
     h6: {
-      fontSize: "1.17em",
+      fontSize: "1.15em",
     }
   }
 }

@@ -47,7 +47,7 @@ const CSS = {
 };
 
 DOM.set({
-  title: "Pyshical/Rational/Emotional Spectrum",
+  title: "PRE Spectrum",
   charset: "UTF-8",
   viewport: "width=device-width, initial-scale=1, minimum-scale=1",
   keywords: "3dpsyche, psychology, test, psychology test, personality types, personality, temperament, tendencies, states of mind, emotional state, MBTI, Myers-Briggs, ENTP, ENTJ, INTP, INTJ, ENFP, ENFJ, INFP, INFJ, ESTP, ESTJ, ISTP, ISTJ, ISFP, ISFJ, ESFP, ESFJ, jung, carl jung, freud, sigmund freud, rational, emotional, physical, mind body and soul, abstraction, lenino, lenin compres",
@@ -62,12 +62,19 @@ DOM.set({
     paddingTop: "2em",
     
     main: {
+      maxWidth: "40em",
       cursor: "pointer",
       lineHeight: "2.34em",
-      margin: "0 0 1em",
+      margin: "0 auto 1em",
       onclick: e => window.location.href = "./",
-      h4: "Physical/Rational/Emotional",
+      h4: "Physical • Rational • Emotional",
       h1: "Spectrum",
+      span: " by Lenino",
+      p: {
+        textAlign: "left",
+        lineHeight: "1.2em",
+        text:"This is a psychometric tool to visualize physical, rational & emotional focus, values or tendencies. The questionaire below will help you average your focus and map it to one of the following discrete archetypes in the three-dimensional cube."
+      },
     },
     section: {
       id: "cubeContainer",
@@ -87,7 +94,7 @@ DOM.set({
       textAlignLast: "center",
       option: [{
         value: "none",
-        text: "Animated"
+        text: "Animated view"
       }, {
         value: 1,
         text: "Physical Plains"
@@ -99,7 +106,7 @@ DOM.set({
         text: "Emotional Plains"
       }, {
         value: 4,
-        text: "Base|Top"
+        text: "Base vs. Top"
       }, {
         value: 0,
         text: "Top View"
