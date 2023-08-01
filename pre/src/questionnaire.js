@@ -68,7 +68,6 @@ const modelQuestion = q => {
             h3: {
               fontSize: '1.5em',
               marginTop: '0.5em',
-              fontWeight: 'bold',
               color: 'black',
               textShadow: 'none',
               text: option.choice

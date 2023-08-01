@@ -22,18 +22,15 @@ const CSS = {
   a: {
     color: "white",
     textDecoration: "none",
-    textShadow: "1px 1px 1px black",
+    textShadow: "1px 1px 2px black",
     hover: {
-      after: {
-        paddingLeft: "1em"
-      }
+      textDecoration: "underline",
     },
     after: {
       transition: "ease-in 0.1s",
       fontSize: "0.68em",
       verticalAlign: "top",
       paddingLeft: "0.25em",
-      content: "\"→\"",
     }
   },
   h: {
@@ -63,17 +60,21 @@ DOM.set({
     
     main: {
       maxWidth: "40em",
-      cursor: "pointer",
       lineHeight: "2.34em",
       margin: "0 auto 1em",
       onclick: e => window.location.href = "./",
       h4: "Physical • Rational • Emotional",
       h1: "Spectrum",
-      span: " by Lenino",
+      a: {
+        fontSize: "small",
+        marginTop: "3em",
+        href: "http://lenino.net",
+        text: "by Lenino"
+      },
       p: {
         textAlign: "left",
         lineHeight: "1.2em",
-        text:"This is a psychometric tool to visualize physical, rational & emotional focus, values or tendencies. The questionaire below will help you average your focus and map it to one of the following discrete archetypes in the three-dimensional cube."
+        text:"This is a psychometric tool to visualize physical, rational & emotional focus, values or tendencies. The questionaire below will average your focus and map it to one of the archetypes in this cube."
       },
     },
     section: {
