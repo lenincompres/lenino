@@ -29,6 +29,7 @@ DOM.set({
     fontFamily: 'fancy',
     src: 'url("./fonts/Party LET Plain.ttf")',
   }],
+  
   css: {
     h: {
       textAlign: "center",

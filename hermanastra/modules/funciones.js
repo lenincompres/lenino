@@ -3,7 +3,7 @@ const data = [
   {
     date: new Date("2023", "07", "30"),
     place: "Gran Teatro del Cibao, Santiago, RD.",
-    link: null,//"https://tix.do/event/lenino-y-la-hermanastra/",
+    link: "https://tix.do/event/lenino-y-la-hermanastra-2/",
   },
   {
     date: new Date("2023", "06", "08"),
