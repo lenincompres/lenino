@@ -14,7 +14,7 @@ if (rgb) results.feature.value = rgb;
 const CSS = {
   body: {
     fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-    fontSize: "15px",
+    fontSize: "16px",
   },
   b: {
     fontWeight: "bold"
@@ -66,7 +66,6 @@ DOM.set({
       h4: "Physical • Rational • Emotional",
       h1: "Spectrum",
       a: {
-        fontSize: "small",
         marginTop: "3em",
         href: "http://lenino.net",
         text: "by Lenino"
