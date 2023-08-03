@@ -1,7 +1,10 @@
-import { COLOR } from "../settings.js";
+import {
+  COLOR
+} from "../settings.js";
 
 export const aboutModel = {
-  main:{
+  margin: "0 -1em",
+  main: {
     display: "flex",
     marginTop: "1em",
     figure: {
@@ -29,16 +32,9 @@ export const aboutModel = {
   footer: {
     align: "left",
     maxWidth: "50em",
-    margin: "1em 0",
+    margin: "1em",
     tag: "section",
     html: `<b>Lenin Comprés</b> es un dominicano profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas. Es un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes <a href="https://itp.nyu.edu/itp/people/?tab=staff">TISCH de la Universidad de Nueva York</a> y es egresado del <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Teacher’s College de la Universidad de Columbia</a>. Ha escrito obras premiadas en la República Dominicana como el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a>, co-escrita junto a Waddys Jáquez y que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`,
-    figure: {
-      margin: "0.5em 0",
-      img: {
-        src: "media/spread.png",
-        width: "100%",
-      }
-    }
   }
 };
 

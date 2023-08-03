@@ -71,7 +71,7 @@ DOM.set({
       margin: "-0.3em 0 -0.8em",
       i: "&",
     }, {
-      i: "La hermanastra"
+      i: "La Hermanastra"
     }],
     p: {
       color: COLOR.ACCENT,
@@ -88,8 +88,18 @@ DOM.set({
     section: [
       funcionesModel,
       aboutModel,
-      creditsModel,
       galleryModel,
+      creditsModel,
+      {
+        margin: "0 -1em",
+        figure: {
+          margin: "0.5em 0",
+          img: {
+            src: "media/spread.png",
+            width: "100%",
+          }
+        }
+      },
       songlistModel,
     ],
   },

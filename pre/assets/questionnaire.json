@@ -16,7 +16,7 @@
       ]
     },
     {
-      "question": "In sports, how much are you into ____?",
+      "question": "In sports, how much do you get into ____?",
       "options": [{
           "choice": "playing",
           "hint": "challenge, practice, competition"
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "question": "When eating, how much are your meals a ____?",
+      "question": "For your meals, how ideal is it to have a ____?",
       "options": [{
           "choice": "feast",
           "hint": "gorge, indulge, fill up"
@@ -188,7 +188,7 @@
         },
         {
           "choice": "inquisitive",
-          "hint": "Look to understand and debate"
+          "hint": "Look to understand and clarify"
         },
         {
           "choice": "softhearted",
