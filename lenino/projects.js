@@ -36,21 +36,6 @@ export const projects = [{
     "code",
   ]
 }, {
-  title: "Animalcules | Animalucos",
-  link: "https://lenincompres.github.io/animacules/",
-  img: "assets/animacules.png",
-  desc: {
-    ENG: "A digital story of life. Use movement and voice to survive as an unicellular organism.",
-    ESP: "Una historia digital de la vida. Utiliza tu movimiento y voz para sobrevivir como un organismo unicelular",
-  },
-  tags: [
-    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
-  ],
-  tags: [
-    "game",
-    "code",
-  ]
-}, {
   title: "Mis 500 Locos",
   link: "https://www.imdb.com/title/tt7552938/",
   img: "assets/mis500locos.jpg",
@@ -110,6 +95,22 @@ export const projects = [{
     "writing",
   ]
 }, {
+  title: "Animalcules | Animalucos",
+  link: "https://lenincompres.github.io/animacules/",
+  img: "assets/animacules.png",
+  desc: {
+    ENG: "A digital story of life. Use movement and voice to survive as an unicellular organism.",
+    ESP: "Una historia digital de la vida. Utiliza tu movimiento y voz para sobrevivir como un organismo unicelular",
+  },
+  tags: [
+    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
+  ],
+  tags: [
+    "game",
+    "code",
+  ]
+}, {
+  hidden: true,
   title: "Photonic Chimes",
   folder: "relajame",
   desc: {

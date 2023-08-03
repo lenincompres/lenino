@@ -59,11 +59,16 @@ export const songlistModel = {
       },
     }, {
       h5: "La ve",
-      a: {
+      a: [{
         text: "Original: «That Time» de Regina Spektor",
         href: "https://open.spotify.com/track/2lLZotRXsQL3k2xX8rhl7q",
         target: "_blank",
-      },
+      },{
+        display: "block",
+        text: "Cover de Lenino",
+        href: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
+        target: "_blank",
+      }],
     }]
   },
   
