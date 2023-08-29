@@ -5,15 +5,7 @@ import funcionesModel from "./modules/funciones.js";
 import galleryModel from "./modules/gallery.js";
 import aboutModel from "./modules/about.js";
 import { COLOR, INC } from "./settings.js";
-
-const sponsors = [
-  "coopcovi.png",
-  "arte2.png",
-  "andamioscibao.png",
-  "espejo.png",
-  "la37.png",
-  "popular.png",
-];
+import sponsorsModel from "./modules/sponsors.js";
 
 DOM.set({
   title: "Lenino & La Hermanastra",
@@ -88,24 +80,7 @@ DOM.set({
       text: "Un monólogo musical rococómico"
     },
   },
-  aside:{
-    overflowY: "hidden",
-    ul: {
-      id: "eltSponsors",
-      width: "100%",
-      display: "flex",
-      li: [...sponsors, ...sponsors, ...sponsors].map(u => new Object({
-        img: {
-          height: "7em",
-          src: "media/sponsors/" + u,
-        }
-      })),
-      marginLeft: INC.as(i => {
-        let w = eltSponsors.getBoundingClientRect().width;
-        return `-${w*i/100}px`;
-      }),
-    },
-  },
+  aside: sponsorsModel,
 
   main: {
     padding: "1em",
