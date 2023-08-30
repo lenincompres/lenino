@@ -3,7 +3,6 @@ const data = [
   {
     date: new Date("2023", "07", "30"),
     place: "Gran Teatro del Cibao, Santiago, RD.",
-    link: "https://tix.do/event/lenino-y-la-hermanastra-2/",
   },
   {
     date: new Date("2023", "06", "08"),
@@ -16,14 +15,14 @@ const data = [
 ];
 
 const date = new Date();
-const now  = (new Date()).getTime();
+const today  = new Date((new Date()).valueOf() - 1000*60*60*24);
 
 function printDate(d) {
   const thisTime  = d.date.getTime();
   const monthNames = ["Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sept.", "Oct.", "Nov.", "Dic."];
   let text = `<b>${d.date.getFullYear()}, ${monthNames[d.date.getMonth()]} ${d.date.getDate()}</b>: ${d.place}`;
-  console.log(thisTime, now, d.place, `${date.getFullYear()}, ${monthNames[date.getMonth()]} ${date.getDate()}` );
-  if(!d.link || thisTime < now) return text;
+  console.log(thisTime, today, d.place, `${date.getFullYear()}, ${monthNames[date.getMonth()]} ${date.getDate()}` );
+  if(!d.link || thisTime < today) return text;
   return {
     a:{ 
       href: d.link,
@@ -39,7 +38,7 @@ function printDate(d) {
         background: "#fe6",
         text: "Tickets",
         ready: blinking
-      }
+      },
     }
   };
 };
@@ -58,10 +57,11 @@ let blinking = (elt, t = 0.3) => {
   }, t * 1000)
 };
 
-const upcoming = data.filter(d => d.date.getTime() > now);
+const upcoming = data.filter(d => d.date.getTime() > today);
 
 export const funcionesModel = {
   main: !upcoming ? undefined : {
+    display: upcoming.length ? "block" : "none",
     fontSize: "1.25em",
     marginBottom: "1.5em",
     h6: "Próximas funciónes",
