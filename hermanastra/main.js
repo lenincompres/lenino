@@ -59,8 +59,8 @@ DOM.set({
   header: {
     background: COLOR.DARK,
     backgroundImage: "url(media/leaves.jpg)",
-    backgroundPositionX: INC.as(i => `-${3*i}px`),
-    backgroundPositionY: INC.as(i => `${3*i}px`),
+    backgroundPositionX: INC.as(i => `-${4*i}px`),
+    backgroundPositionY: INC.as(i => `${4*i}px`),
     color: COLOR.LIGHT,
     padding: "0.5em",
     fontSize: "1.8em",

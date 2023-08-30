@@ -17,19 +17,19 @@ export const sponsorsModel = {
   background: "white",
   ul: {
     id: "eltSponsors",
-    width: "100%",
+    width: "fit-content",
     display: "flex",
     //pointerEvents: "none",
     li: [...sponsors, ...sponsors, ...sponsors].map(u => new Object({
-        margin: "0 2em",
+      margin: "0 2em",
       img: {
-        height: "7em",
+        height: "6em",
         src: "media/sponsors/" + u,
       }
     })),
     marginLeft: INC.as(i => {
-      let w = eltSponsors.getBoundingClientRect().width;
-      return `-${w*i/100}px`;
+      let w = eltSponsors.offsetWidth  / 3;
+      return `-${w * i / 100}px`;
     }),
   },
 }
