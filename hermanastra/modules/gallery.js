@@ -9,6 +9,9 @@ function toggleVideo(){
   videoPlayingBinder.value = !videoPlayingBinder.value;
 }
 
+const videoURL = "https://www.youtube.com/embed/b85cTByApjM";
+const isYoutube = videoURL.includes("youtube");
+
 export const galleryModel = {
     backgroundImage: "url(media/icon.png)",
     backgroundSize: "cover",
@@ -29,13 +32,16 @@ export const galleryModel = {
       height: "520px",
       overflow: "hidden",
       video: {
-        src: "media/20230708-reviews.mp4",
+        tag: isYoutube ? "iframe" : "video",
+        src: videoURL, 
         height: "100%",
-        width: "100%",
+        marginLeft: "-66%",
+        width: "225%",
         done: elt => videoBinder.value = elt,
       },
     },
     footer: {
+      display: isYoutube ? "none" : "block",
       position: "absolute",
       bottom: "50px",
       left: 0,

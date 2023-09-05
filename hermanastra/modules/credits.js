@@ -32,7 +32,7 @@ export const creditsModel = {
         },
         {
           h6: "Equipo técnico",
-          p: ["Julián Duque", "Rossy Torres", "Félix Guzmán"]
+          p: ["Rossy Torres", "Félix Guzmán"]
         },
         {
           h6: "Fotografía",

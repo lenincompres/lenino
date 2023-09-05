@@ -13,7 +13,7 @@ const sponsors = [
 ];
 
 export const sponsorsModel = {
-  overflowY: "hidden",
+  overflow: "hidden",
   background: "white",
   ul: {
     id: "eltSponsors",
