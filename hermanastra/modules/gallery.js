@@ -25,7 +25,7 @@ export const galleryModel = {
     margin: "0 -1em",
     figure: {
       display: "inline-block",
-      background: COLOR.ACCENT,
+      background: "black",
       borderRadius: "50%",
       maxWidth: "100%",
       width: "410px",
