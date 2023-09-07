@@ -1,10 +1,12 @@
-
 import creditsModel from "./modules/credits.js";
 import songlistModel from "./modules/songs.js";
 import funcionesModel from "./modules/funciones.js";
 import galleryModel from "./modules/gallery.js";
 import aboutModel from "./modules/about.js";
-import { COLOR, INC } from "./settings.js";
+import {
+  COLOR,
+  INC
+} from "./settings.js";
 import sponsorsModel from "./modules/sponsors.js";
 
 DOM.set({
@@ -30,7 +32,7 @@ DOM.set({
     fontFamily: 'fancy',
     src: 'url("./fonts/Party LET Plain.ttf")',
   }],
-  
+
   css: {
     h: {
       textAlign: "center",
@@ -67,7 +69,7 @@ DOM.set({
     lineHeight: "1.4em",
     align: "center",
     textDecoration: "0 0.1em 0.3em black",
-    h1:[ "Lenino", {
+    h1: ["Lenino", {
       color: COLOR.HIGHLIGHT,
       margin: "-0.3em 0 -0.8em",
       i: "&",
@@ -83,27 +85,37 @@ DOM.set({
   aside: sponsorsModel,
 
   main: {
-    padding: "1em",
-    margin: "0 auto",
-    maxWidth: "800px",
     align: "center",
+    margin: "0 auto",
+    css: {
+      section: {
+        margin: "0 auto",
+        padding: "1em",
+        maxWidth: "800px",
+      }
+    },
     section: [
       funcionesModel,
       aboutModel,
       galleryModel,
       creditsModel,
       {
-        margin: "0 -1em",
-        figure: {
-          margin: "0.5em 0",
-          img: {
-            src: "media/spread.png",
-            width: "100%",
-          }
-        }
+        border: "2px solid rgba(0,0,0,30)",
+        boxShadow: "inset 2px 2px 5px black",
+        borderRadius: "5px",
+        maxWidth: "900vw",
+        width: "86vw",
+        height: "230px",
+        backgroundImage: "url(media/spread.png)",
+        backgroundPosition: "center center",
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
       },
       songlistModel,
     ],
+    onscroll: e => {
+      lastKnownScrollPosition = window.scrollY;
+    }
   },
 
   footer: {

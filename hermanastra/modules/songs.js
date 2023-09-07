@@ -12,7 +12,7 @@ export const songlistModel = {
     }
   },
 
-  marginTop: "3em",
+  marginTop: "1em",
 
   h1: "Números musicales",
   p: "Letra y música de Lenin Comprés",

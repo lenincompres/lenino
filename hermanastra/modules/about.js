@@ -3,7 +3,6 @@ import {
 } from "../settings.js";
 
 export const aboutModel = {
-  margin: "0 -1em",
   main: {
     display: "flex",
     marginTop: "1em",

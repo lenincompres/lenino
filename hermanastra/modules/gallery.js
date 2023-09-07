@@ -22,8 +22,8 @@ export const galleryModel = {
     textAlign: "center",
     padding: "185px 0",
     position: "relative",
-    margin: "0 -1em",
     figure: {
+      boxShadow: "0 0 50px" + COLOR.ACCENT,
       display: "inline-block",
       background: "black",
       borderRadius: "50%",
