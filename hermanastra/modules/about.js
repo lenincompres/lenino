@@ -25,7 +25,7 @@ export const aboutModel = {
       tag: "section",
       background: COLOR.LIGHT,
       h5: "Sinopsis",
-      p: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “el Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó al príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega con sus encantos caribeños a revelar el hechizo bajo el cual se encuentra la joven.",
+      p: "En uno de sus viajes por el espacio, el tiempo y los hongos, Lenino “el Cantacuentos” conoce a una doncella desencantada cuya hermanastra cenicienta le robó al príncipe azul. Su difunto padrastro arruinó la fortuna de su madre y un joven panadero deshonró a su hermana menor. Según el pueblo, su casa se convirtió en un hostal de brujas y reinas malvadas. Lenino llega con sus encantos caribeños a descubrir el hechizo bajo el cual se encuentra la joven.",
     },
   },
   footer: {
