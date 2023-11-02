@@ -52,13 +52,6 @@ const TEXT = {
 DOM.set({
   head: {
     title: "Lenino.net",
-    charset: "UTF-8",
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-      maximumScale: 1.0,
-      userScalable: "no",
-    },
     keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
     description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
     link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",

@@ -10,18 +10,24 @@ import {
 import sponsorsModel from "./modules/sponsors.js";
 
 DOM.set({
-  title: "Lenino & La Hermanastra",
-  charset: "UTF-8",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1.0,
-    userScalable: "no",
+  head: {
+    icon: "media/icon.png",
+    title: "Lenino & La Hermanastra",
+    charset: "UTF-8",
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+      maximumScale: 1.0,
+      userScalable: "no",
+    },
+    keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
+    description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+    author: "Lenin Compres",
+    image: "media/cover.png",
+    "og:type": "website",
+    link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
   },
-  keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
-  description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
-  link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-  icon: "media/icon.png",
+
   font: [{
     fontFamily: 'title',
     src: 'url("./fonts/CinzelDecorative-Regular.ttf")',
@@ -39,17 +45,17 @@ DOM.set({
       margin: "0.5em 0 0.1em",
       fontFamily: "title",
     },
-    i: {
-      fontFamily: "fancy",
-    },
-    b: {
-      fontFamily: "title",
-    },
     a: {
       color: COLOR.BRIGHT,
       hover: {
         textDecoration: "underline",
       },
+    },
+    b: {
+      fontFamily: "title",
+    },
+    i: {
+      fontFamily: "fancy",
     },
   },
 
@@ -82,6 +88,7 @@ DOM.set({
       text: "Un monólogo musical rococómico"
     },
   },
+
   aside: sponsorsModel,
 
   main: {
