@@ -228,3 +228,4 @@ DOM.set({
   },
   onresize: setSize,
 });
+}
