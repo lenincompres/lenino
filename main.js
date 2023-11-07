@@ -8,15 +8,14 @@ import slideDown from "./modules/animations/slideDown.js";
 
 window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
 const QS = DOM.querystring();
-window.LANG = QS.lang ? QS.lang.toUpperCase() : "ENG";
+window.LANG = QS.lang ? QS.lang : "en";
 
 const _isMobile = new Binder();
 const _isWide = new Binder();
-
 const _currentPage = new Binder(0);
 const _hoverPage = new Binder();
+
 const pageNames = Object.keys(PAGES);
-window.tags = new Binder([]);
 
 function setSize(e) {
   _isMobile.value = window.innerWidth < 780;
@@ -28,35 +27,29 @@ if (window.location.hash) _currentPage.value = window.location.hash.split("#")[1
 
 const TEXT = {
   bio: {
-    ENG: "bio",
-    ESP: "bio",
+    en: "bio",
+    es: "bio…",
   },
   projects: {
-    ENG: "projects",
-    ESP: "proyectos",
-  },
-  bio: {
-    ENG: "bio",
-    ESP: "bio",
+    en: "projects",
+    es: "proyectos",
   },
   storyteller: {
-    ENG: "storyteller",
-    ESP: "cantacuentos",
+    en: "storyteller",
+    es: "cantacuentos",
   },
   educator: {
-    ENG: "educator",
-    ESP: "educador",
+    en: "educator",
+    es: "educador",
   },
 };
 
 DOM.set({
-  head: {
-    title: "Lenino.net",
-    keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
-    description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
-    link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-    icon: "assets/icon.png",
-  },
+  title: "Lenino.net",
+  keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
+  description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+  link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+  icon: "assets/icon.png",
   css: {
     a: {
       color: STYLE.COLOR.LINK,
@@ -109,13 +102,13 @@ DOM.set({
           },
           color: _isMobile.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
           content: [{
-            display: window.LANG !== "ENG" ? "block" : "none",
+            display: window.LANG !== "en" ? "block" : "none",
             text: "English »",
             href: THIS_URL,
           }, {
-            display: window.LANG !== "ESP" ? "block" : "none",
+            display: window.LANG !== "es" ? "block" : "none",
             text: "Español »",
-            href: THIS_URL + "?lang=esp",
+            href: THIS_URL + "?lang=es",
           }]
         }
       },
@@ -228,4 +221,3 @@ DOM.set({
   },
   onresize: setSize,
 });
-}

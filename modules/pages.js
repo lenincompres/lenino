@@ -12,14 +12,14 @@ const showTag = (tag = ALL) => activeTag.value = activeTag.value === tag ? ALL :
 const sortWords = (a, b) => a < b ? -1 : 1;
 
 export const PAGES = {
-  HOME: (lang = "ENG") => new Object({}),
+  HOME: (lang = "en") => new Object({}),
 
-  BIO: (lang = "ENG") => new Object({
+  BIO: (lang = "en") => new Object({
     section: {
       style: STYLE.PAGE,
       lineHeight: "1.5em",
       content: [{
-          p: lang === "ESP" ? [
+          p: lang === "es" ? [
             `<b>Lenin Comprés</b> es un dominicano profesional de los medios interactivos, las ciencias del aprendizaje y las artes escénicas. Es un pianista autodidacta y renacentista post-moderno. Ejerce como profesor y tecnólogo creativo en la Escuela de Artes <a href="https://itp.nyu.edu/itp/people/?tab=staff">TISCH de la Universidad de Nueva York</a> y es egresado del <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Teacher’s College de la Universidad de Columbia</a>. Ha escrito obras premiadas en la República Dominicana como el guión de la película <a href="https://www.imdb.com/title/tt7552938/">Mis 500 locos</a>, co-escrita junto a Waddys Jáquez y que representó al país en los premios Oscars del 2021. También es el creador del primer juego de mesa original de autoría dominicana, <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`
           ] : [
             `<b>Lenin Comprés</b> is a Dominican professional in interactive media, education sciences, and performing arts. He is a self-taught pianist and post-modern renaissance man. He is a professor and creative technologist at <a href="https://itp.nyu.edu/itp/people/?tab=staff">New York University's TISCH School of the Arts</a> and a graduate of <a href="https://www.tc.columbia.edu/human-development/cognitive-studies-in-education/">Columbia University's Teacher's College</a>. He has written award-winning works in the Dominican Republic such as the script for the movie <a href="https://www.imdb.com/title/tt7552938/">A State of Madness</a>—co-written with Waddys Jáquez—which represented the country at the 2021 Oscars. He is also the creator of the first original Dominican-authored board game <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>.`
@@ -30,7 +30,7 @@ export const PAGES = {
     }
   }),
 
-  PROJECTS: (lang = "ENG") => new Object({
+  PROJECTS: (lang = "en") => new Object({
     menu: {
       maxWidth: "50em",
       margin: "0 0.5em 0.5em",
@@ -128,7 +128,7 @@ export const PAGES = {
     }
   }),
 
-  CONTACT: (lang = "ENG") => new Object({
+  CONTACT: (lang = "en") => new Object({
     menu: {
       fontSize: "3.43em",
       marginTop: "1em",

@@ -49,12 +49,12 @@ class Caption extends HTMLParagraphElement {
     en: "en-US",
     es: "es-US",
     fr: "fr",
-    ENG: "en-US",
-    ESP: "es-US",
+    en: "en-US",
+    es: "es-US",
     FRA: "fr",
   };
 
-  set lang(l = "ENG") {
+  set lang(l = "en") {
     l = Caption.langSet[l];
     if (!!this.lines && this._lang === l) return;
     this._lang = l;

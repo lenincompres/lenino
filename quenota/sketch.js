@@ -100,7 +100,7 @@ function setup() {
         text: _CAPTION_FILE.as(s => {
           if (!s) return "";
           let lang = {
-            ESP: "Título",
+            es: "Título",
           };
           return lang[s.lang] ? lang[s.lang] : "Title";
         })
