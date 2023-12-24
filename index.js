@@ -4,7 +4,7 @@ import INSTAGRAM from "./modules/widgets/instagram.js";
 import TWITTER from "./modules/widgets/twitter.js";
 import MUSICPLAYER from "./modules/widgets/musicplayer.js";
 import SOCIAL_LINKS from "./modules/widgets/social.js";
-import slideDown from "./modules/animations/slideDown.js";
+import slideDown from "./modules/animations.js";
 
 window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
 const QS = DOM.querystring();

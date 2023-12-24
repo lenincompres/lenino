@@ -1,4 +1,4 @@
-import slideDown from "./animations/slideDown.js"
+import slideDown from "./animations.js"
 import allProjects from "./projects.js"
 import * as STYLE from "./style.js";
 import SOCIAL_LINKS from "./widgets/social.js"

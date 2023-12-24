@@ -126,7 +126,7 @@ export const projects = [{
 }, {
   title: "Eloping Is Fun",
   link: "https://elopingisfun.com//about-us/#leninbio",
-  img: "https://elopingisfun.com/wp-content/uploads/2021/11/Lenin-44.jpg",
+  img: "https://elopingisfun.com/wp-content/uploads/2023/10/Jenny_2.gif",
   desc: {
     en: "Lenino may officiate the wedding of your wildest dreams stress-free, easy and fun.",
     es: "Lenino podría oficiar la boda de tus fantasías sin estrés, con facilidad y diversión.",
@@ -137,6 +137,7 @@ export const projects = [{
 }, {
   title: "Las 12 Piezas Cortas",
   folder: "las12piezascortas",
+  img: "assets/12piezascortas.png",
   desc: {
     en: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <b>Desayuno en Rojo Chino</b>.",
     es: "First theatre plays by Lenino, aimed at training theater talents. Includes <b>Desayuno en Rojo Chino</b>.",
