@@ -1,0 +1,5 @@
+# ignore all logs
+*.log
+assets/sounds/say
+node_modules
+dist

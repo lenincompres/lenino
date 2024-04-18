@@ -1,0 +1,5002 @@
+[
+	{
+		"kanji": "的",
+		"desc": "possessive p.",
+		"pinyin": "de"
+	},
+	{
+		"kanji": "一",
+		"desc": "one; a",
+		"pinyin": "yī"
+	},
+	{
+		"kanji": "是",
+		"desc": "to be; is",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "你",
+		"desc": "you",
+		"pinyin": "nǐ"
+	},
+	{
+		"kanji": "不",
+		"desc": "no; not",
+		"pinyin": "bù"
+	},
+	{
+		"kanji": "了",
+		"desc": "completed action p.",
+		"pinyin": "le"
+	},
+	{
+		"kanji": "在",
+		"desc": "at",
+		"pinyin": "zài"
+	},
+	{
+		"kanji": "人",
+		"desc": "man; person",
+		"pinyin": "rén"
+	},
+	{
+		"kanji": "有",
+		"desc": "to have; there is",
+		"pinyin": "yǒu"
+	},
+	{
+		"kanji": "我",
+		"desc": "I ; me",
+		"pinyin": "wǒ"
+	},
+	{
+		"kanji": "们",
+		"desc": "plural p.",
+		"pinyin": "men"
+	},
+	{
+		"kanji": "这",
+		"desc": "this",
+		"pinyin": "zhè"
+	},
+	{
+		"kanji": "他",
+		"desc": "he; him",
+		"pinyin": "tā"
+	},
+	{
+		"kanji": "么",
+		"desc": "interrogative p.",
+		"pinyin": "me"
+	},
+	{
+		"kanji": "个",
+		"desc": "general measure word",
+		"pinyin": "gè"
+	},
+	{
+		"kanji": "好",
+		"desc": "good; well",
+		"pinyin": "hǎo"
+	},
+	{
+		"kanji": "来",
+		"desc": "to come",
+		"pinyin": "lái"
+	},
+	{
+		"kanji": "那",
+		"desc": "that",
+		"pinyin": "nà"
+	},
+	{
+		"kanji": "要",
+		"desc": "to want; important",
+		"pinyin": "yào"
+	},
+	{
+		"kanji": "会",
+		"desc": "can; will; to know",
+		"pinyin": "huì"
+	},
+	{
+		"kanji": "就",
+		"desc": "then; just (emp.)",
+		"pinyin": "jiù"
+	},
+	{
+		"kanji": "什",
+		"desc": "what",
+		"pinyin": "shén"
+	},
+	{
+		"kanji": "没",
+		"desc": "not",
+		"pinyin": "méi"
+	},
+	{
+		"kanji": "到",
+		"desc": "to arrive; until (time)",
+		"pinyin": "dào"
+	},
+	{
+		"kanji": "说",
+		"desc": "to speak",
+		"pinyin": "shuō"
+	},
+	{
+		"kanji": "吗",
+		"desc": "question p.",
+		"pinyin": "ma"
+	},
+	{
+		"kanji": "为",
+		"desc": "because of; for",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "想",
+		"desc": "to think; to want",
+		"pinyin": "xiǎng"
+	},
+	{
+		"kanji": "能",
+		"desc": "to be able to",
+		"pinyin": "néng"
+	},
+	{
+		"kanji": "上",
+		"desc": "above; top",
+		"pinyin": "shàng"
+	},
+	{
+		"kanji": "去",
+		"desc": "to go",
+		"pinyin": "qù"
+	},
+	{
+		"kanji": "道",
+		"desc": "way; method",
+		"pinyin": "dào"
+	},
+	{
+		"kanji": "她",
+		"desc": "she",
+		"pinyin": "tā"
+	},
+	{
+		"kanji": "很",
+		"desc": "very",
+		"pinyin": "hěn"
+	},
+	{
+		"kanji": "看",
+		"desc": "to see; to look at",
+		"pinyin": "kàn"
+	},
+	{
+		"kanji": "可",
+		"desc": "can; able to",
+		"pinyin": "kě"
+	},
+	{
+		"kanji": "知",
+		"desc": "to know",
+		"pinyin": "zhī"
+	},
+	{
+		"kanji": "得",
+		"desc": "complement p. (V + 得 + Adverb)",
+		"pinyin": "de"
+	},
+	{
+		"kanji": "过",
+		"desc": "experienced action p.",
+		"pinyin": "guo"
+	},
+	{
+		"kanji": "吧",
+		"desc": "…right?",
+		"pinyin": "ba"
+	},
+	{
+		"kanji": "还",
+		"desc": "still; yet; to return",
+		"pinyin": "hái"
+	},
+	{
+		"kanji": "对",
+		"desc": "correct; opposite",
+		"pinyin": "duì"
+	},
+	{
+		"kanji": "里",
+		"desc": "inside",
+		"pinyin": "lǐ"
+	},
+	{
+		"kanji": "以",
+		"desc": "according to; by",
+		"pinyin": "yǐ"
+	},
+	{
+		"kanji": "都",
+		"desc": "all; both",
+		"pinyin": "dōu"
+	},
+	{
+		"kanji": "事",
+		"desc": "thing; item",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "子",
+		"desc": "child",
+		"pinyin": "zǐ"
+	},
+	{
+		"kanji": "生",
+		"desc": "life; raw",
+		"pinyin": "shēng"
+	},
+	{
+		"kanji": "时",
+		"desc": "time",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "样",
+		"desc": "manner",
+		"pinyin": "yàng"
+	},
+	{
+		"kanji": "也",
+		"desc": "also; too",
+		"pinyin": "yě"
+	},
+	{
+		"kanji": "和",
+		"desc": "and",
+		"pinyin": "hé"
+	},
+	{
+		"kanji": "下",
+		"desc": "below; down",
+		"pinyin": "xià"
+	},
+	{
+		"kanji": "真",
+		"desc": "really; truly",
+		"pinyin": "zhēn"
+	},
+	{
+		"kanji": "现",
+		"desc": "present",
+		"pinyin": "xiàn"
+	},
+	{
+		"kanji": "做",
+		"desc": "to do",
+		"pinyin": "zuò"
+	},
+	{
+		"kanji": "大",
+		"desc": "big",
+		"pinyin": "dà"
+	},
+	{
+		"kanji": "啊",
+		"desc": "ah!",
+		"pinyin": "a"
+	},
+	{
+		"kanji": "怎",
+		"desc": "how",
+		"pinyin": "zěn"
+	},
+	{
+		"kanji": "出",
+		"desc": "to go out",
+		"pinyin": "chū"
+	},
+	{
+		"kanji": "点",
+		"desc": "a dot; o'clock",
+		"pinyin": "diǎn"
+	},
+	{
+		"kanji": "起",
+		"desc": "to rise",
+		"pinyin": "qǐ"
+	},
+	{
+		"kanji": "天",
+		"desc": "day; heaven",
+		"pinyin": "tiān"
+	},
+	{
+		"kanji": "把",
+		"desc": "direct object p.; to hold",
+		"pinyin": "bǎ"
+	},
+	{
+		"kanji": "开",
+		"desc": "to open; to start",
+		"pinyin": "kāi"
+	},
+	{
+		"kanji": "让",
+		"desc": "to allow; passive p.",
+		"pinyin": "ràng"
+	},
+	{
+		"kanji": "给",
+		"desc": "to give; for; passive p.",
+		"pinyin": "gěi"
+	},
+	{
+		"kanji": "但",
+		"desc": "but; yet",
+		"pinyin": "dàn"
+	},
+	{
+		"kanji": "谢",
+		"desc": "to thank",
+		"pinyin": "xiè"
+	},
+	{
+		"kanji": "着",
+		"desc": "action in progress p.",
+		"pinyin": "zhe"
+	},
+	{
+		"kanji": "只",
+		"desc": "only",
+		"pinyin": "zhǐ"
+	},
+	{
+		"kanji": "些",
+		"desc": "some; few",
+		"pinyin": "xiē"
+	},
+	{
+		"kanji": "如",
+		"desc": "as; as if",
+		"pinyin": "rú"
+	},
+	{
+		"kanji": "家",
+		"desc": "home; family",
+		"pinyin": "jiā"
+	},
+	{
+		"kanji": "后",
+		"desc": "behind; after",
+		"pinyin": "hòu"
+	},
+	{
+		"kanji": "儿",
+		"desc": "son",
+		"pinyin": "ér"
+	},
+	{
+		"kanji": "多",
+		"desc": "many; much",
+		"pinyin": "duō"
+	},
+	{
+		"kanji": "意",
+		"desc": "idea; meaning",
+		"pinyin": "yì"
+	},
+	{
+		"kanji": "别",
+		"desc": "must not; other",
+		"pinyin": "bié"
+	},
+	{
+		"kanji": "所",
+		"desc": "actually; place",
+		"pinyin": "suǒ"
+	},
+	{
+		"kanji": "话",
+		"desc": "language; talk",
+		"pinyin": "huà"
+	},
+	{
+		"kanji": "小",
+		"desc": "small",
+		"pinyin": "xiǎo"
+	},
+	{
+		"kanji": "自",
+		"desc": "self",
+		"pinyin": "zì"
+	},
+	{
+		"kanji": "回",
+		"desc": "to answer; to return",
+		"pinyin": "huí"
+	},
+	{
+		"kanji": "然",
+		"desc": "correct",
+		"pinyin": "rán"
+	},
+	{
+		"kanji": "果",
+		"desc": "fruit",
+		"pinyin": "guǒ"
+	},
+	{
+		"kanji": "发",
+		"desc": "to send; to develop",
+		"pinyin": "fā"
+	},
+	{
+		"kanji": "见",
+		"desc": "to see; to meet",
+		"pinyin": "jiàn"
+	},
+	{
+		"kanji": "心",
+		"desc": "heart",
+		"pinyin": "xīn"
+	},
+	{
+		"kanji": "走",
+		"desc": "to walk; away",
+		"pinyin": "zǒu"
+	},
+	{
+		"kanji": "定",
+		"desc": "to set",
+		"pinyin": "dìng"
+	},
+	{
+		"kanji": "听",
+		"desc": "to listen",
+		"pinyin": "tīng"
+	},
+	{
+		"kanji": "觉",
+		"desc": "to feel",
+		"pinyin": "jué"
+	},
+	{
+		"kanji": "太",
+		"desc": "too (much)",
+		"pinyin": "tài"
+	},
+	{
+		"kanji": "该",
+		"desc": "should",
+		"pinyin": "gāi"
+	},
+	{
+		"kanji": "当",
+		"desc": "to be; just at",
+		"pinyin": "dāng"
+	},
+	{
+		"kanji": "经",
+		"desc": "pass through",
+		"pinyin": "jīng"
+	},
+	{
+		"kanji": "妈",
+		"desc": "mum",
+		"pinyin": "mā"
+	},
+	{
+		"kanji": "用",
+		"desc": "to use",
+		"pinyin": "yòng"
+	},
+	{
+		"kanji": "打",
+		"desc": "to hit",
+		"pinyin": "dǎ"
+	},
+	{
+		"kanji": "地",
+		"desc": "-ly structural p.",
+		"pinyin": "de"
+	},
+	{
+		"kanji": "再",
+		"desc": "again; then",
+		"pinyin": "zài"
+	},
+	{
+		"kanji": "因",
+		"desc": "reason",
+		"pinyin": "yīn"
+	},
+	{
+		"kanji": "呢",
+		"desc": "how about…?; continuing p.",
+		"pinyin": "ne"
+	},
+	{
+		"kanji": "女",
+		"desc": "female",
+		"pinyin": "nǚ"
+	},
+	{
+		"kanji": "告",
+		"desc": "to tell",
+		"pinyin": "gào"
+	},
+	{
+		"kanji": "最",
+		"desc": "most; -est",
+		"pinyin": "zuì"
+	},
+	{
+		"kanji": "手",
+		"desc": "hand",
+		"pinyin": "shǒu"
+	},
+	{
+		"kanji": "前",
+		"desc": "front",
+		"pinyin": "qián"
+	},
+	{
+		"kanji": "找",
+		"desc": "to look for",
+		"pinyin": "zhǎo"
+	},
+	{
+		"kanji": "行",
+		"desc": "to travel; OK!",
+		"pinyin": "xíng"
+	},
+	{
+		"kanji": "快",
+		"desc": "rapid; almost",
+		"pinyin": "kuài"
+	},
+	{
+		"kanji": "而",
+		"desc": "and; as well as",
+		"pinyin": "ér"
+	},
+	{
+		"kanji": "死",
+		"desc": "to die",
+		"pinyin": "sǐ"
+	},
+	{
+		"kanji": "先",
+		"desc": "first; former",
+		"pinyin": "xiān"
+	},
+	{
+		"kanji": "像",
+		"desc": "to be like; image",
+		"pinyin": "xiàng"
+	},
+	{
+		"kanji": "等",
+		"desc": "rank; to wait for",
+		"pinyin": "děng"
+	},
+	{
+		"kanji": "被",
+		"desc": "passive p.",
+		"pinyin": "bèi"
+	},
+	{
+		"kanji": "从",
+		"desc": "from; to follow",
+		"pinyin": "cóng"
+	},
+	{
+		"kanji": "明",
+		"desc": "bright",
+		"pinyin": "míng"
+	},
+	{
+		"kanji": "中",
+		"desc": "middle",
+		"pinyin": "zhōng"
+	},
+	{
+		"kanji": "哦",
+		"desc": "oh",
+		"pinyin": "ó"
+	},
+	{
+		"kanji": "情",
+		"desc": "emotion",
+		"pinyin": "qíng"
+	},
+	{
+		"kanji": "作",
+		"desc": "to do",
+		"pinyin": "zuò"
+	},
+	{
+		"kanji": "跟",
+		"desc": "with; to follow",
+		"pinyin": "gēn"
+	},
+	{
+		"kanji": "面",
+		"desc": "side; aspect",
+		"pinyin": "miàn"
+	},
+	{
+		"kanji": "诉",
+		"desc": "to tell; to complain",
+		"pinyin": "sù"
+	},
+	{
+		"kanji": "爱",
+		"desc": "to love",
+		"pinyin": "ài"
+	},
+	{
+		"kanji": "已",
+		"desc": "already",
+		"pinyin": "yǐ"
+	},
+	{
+		"kanji": "之",
+		"desc": "possessive p.",
+		"pinyin": "zhī"
+	},
+	{
+		"kanji": "问",
+		"desc": "to ask",
+		"pinyin": "wèn"
+	},
+	{
+		"kanji": "错",
+		"desc": "mistake; bad",
+		"pinyin": "cuò"
+	},
+	{
+		"kanji": "孩",
+		"desc": "child",
+		"pinyin": "hái"
+	},
+	{
+		"kanji": "斯",
+		"desc": "this",
+		"pinyin": "sī"
+	},
+	{
+		"kanji": "成",
+		"desc": "to become",
+		"pinyin": "chéng"
+	},
+	{
+		"kanji": "它",
+		"desc": "it",
+		"pinyin": "tā"
+	},
+	{
+		"kanji": "感",
+		"desc": "to feel; emotion",
+		"pinyin": "gǎn"
+	},
+	{
+		"kanji": "干",
+		"desc": "to do",
+		"pinyin": "gàn"
+	},
+	{
+		"kanji": "法",
+		"desc": "law",
+		"pinyin": "fǎ"
+	},
+	{
+		"kanji": "电",
+		"desc": "electric",
+		"pinyin": "diàn"
+	},
+	{
+		"kanji": "间",
+		"desc": "between; room",
+		"pinyin": "jiān"
+	},
+	{
+		"kanji": "哪",
+		"desc": "which",
+		"pinyin": "nǎ"
+	},
+	{
+		"kanji": "西",
+		"desc": "West",
+		"pinyin": "xī"
+	},
+	{
+		"kanji": "己",
+		"desc": "oneself",
+		"pinyin": "jǐ"
+	},
+	{
+		"kanji": "候",
+		"desc": "to wait; season",
+		"pinyin": "hòu"
+	},
+	{
+		"kanji": "次",
+		"desc": "mw. for time",
+		"pinyin": "cì"
+	},
+	{
+		"kanji": "信",
+		"desc": "letter; to trust",
+		"pinyin": "xìn"
+	},
+	{
+		"kanji": "欢",
+		"desc": "joyous",
+		"pinyin": "huān"
+	},
+	{
+		"kanji": "正",
+		"desc": "just (right); correct",
+		"pinyin": "zhèng"
+	},
+	{
+		"kanji": "实",
+		"desc": "real; honest",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "关",
+		"desc": "to shut",
+		"pinyin": "guān"
+	},
+	{
+		"kanji": "进",
+		"desc": "to enter",
+		"pinyin": "jìn"
+	},
+	{
+		"kanji": "车",
+		"desc": "vehicle",
+		"pinyin": "chē"
+	},
+	{
+		"kanji": "年",
+		"desc": "year",
+		"pinyin": "nián"
+	},
+	{
+		"kanji": "喜",
+		"desc": "to like",
+		"pinyin": "xǐ"
+	},
+	{
+		"kanji": "认",
+		"desc": "to recognize",
+		"pinyin": "rèn"
+	},
+	{
+		"kanji": "克",
+		"desc": "gram; to overcome",
+		"pinyin": "kè"
+	},
+	{
+		"kanji": "爸",
+		"desc": "father",
+		"pinyin": "bà"
+	},
+	{
+		"kanji": "谁",
+		"desc": "who",
+		"pinyin": "shuí"
+	},
+	{
+		"kanji": "方",
+		"desc": "place; square",
+		"pinyin": "fāng"
+	},
+	{
+		"kanji": "老",
+		"desc": "old prefix",
+		"pinyin": "lǎo"
+	},
+	{
+		"kanji": "应",
+		"desc": "should; ought to",
+		"pinyin": "yīng"
+	},
+	{
+		"kanji": "比",
+		"desc": "comparison p.",
+		"pinyin": "bǐ"
+	},
+	{
+		"kanji": "帮",
+		"desc": "to help",
+		"pinyin": "bāng"
+	},
+	{
+		"kanji": "无",
+		"desc": "not to have; -less",
+		"pinyin": "wú"
+	},
+	{
+		"kanji": "晚",
+		"desc": "evening; late",
+		"pinyin": "wǎn"
+	},
+	{
+		"kanji": "动",
+		"desc": "to move",
+		"pinyin": "dòng"
+	},
+	{
+		"kanji": "头",
+		"desc": "head",
+		"pinyin": "tóu"
+	},
+	{
+		"kanji": "机",
+		"desc": "machine",
+		"pinyin": "jī"
+	},
+	{
+		"kanji": "分",
+		"desc": "to divide; fraction",
+		"pinyin": "fēn"
+	},
+	{
+		"kanji": "特",
+		"desc": "special; unique",
+		"pinyin": "tè"
+	},
+	{
+		"kanji": "相",
+		"desc": "mutual; each other",
+		"pinyin": "xiāng"
+	},
+	{
+		"kanji": "全",
+		"desc": "all; whole",
+		"pinyin": "quán"
+	},
+	{
+		"kanji": "杀",
+		"desc": "to kill",
+		"pinyin": "shā"
+	},
+	{
+		"kanji": "需",
+		"desc": "to need; to want",
+		"pinyin": "xū"
+	},
+	{
+		"kanji": "放",
+		"desc": "to put",
+		"pinyin": "fàng"
+	},
+	{
+		"kanji": "常",
+		"desc": "always; general",
+		"pinyin": "cháng"
+	},
+	{
+		"kanji": "直",
+		"desc": "straight",
+		"pinyin": "zhí"
+	},
+	{
+		"kanji": "才",
+		"desc": "just now; ability",
+		"pinyin": "cái"
+	},
+	{
+		"kanji": "美",
+		"desc": "beautiful",
+		"pinyin": "měi"
+	},
+	{
+		"kanji": "于",
+		"desc": "in; at; on",
+		"pinyin": "yú"
+	},
+	{
+		"kanji": "带",
+		"desc": "to bring; belt",
+		"pinyin": "dài"
+	},
+	{
+		"kanji": "今",
+		"desc": "today; now",
+		"pinyin": "jīn"
+	},
+	{
+		"kanji": "力",
+		"desc": "power",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "工",
+		"desc": "work",
+		"pinyin": "gōng"
+	},
+	{
+		"kanji": "许",
+		"desc": "to permit",
+		"pinyin": "xǔ"
+	},
+	{
+		"kanji": "东",
+		"desc": "East",
+		"pinyin": "dōng"
+	},
+	{
+		"kanji": "名",
+		"desc": "name",
+		"pinyin": "míng"
+	},
+	{
+		"kanji": "同",
+		"desc": "same; similar",
+		"pinyin": "tóng"
+	},
+	{
+		"kanji": "长",
+		"desc": "long; length",
+		"pinyin": "cháng"
+	},
+	{
+		"kanji": "亲",
+		"desc": "parent; relative",
+		"pinyin": "qīn"
+	},
+	{
+		"kanji": "种",
+		"desc": "kind",
+		"pinyin": "zhǒng"
+	},
+	{
+		"kanji": "者",
+		"desc": "one who (is)",
+		"pinyin": "zhě"
+	},
+	{
+		"kanji": "嘿",
+		"desc": "hey",
+		"pinyin": "hēi"
+	},
+	{
+		"kanji": "白",
+		"desc": "white; pure",
+		"pinyin": "bái"
+	},
+	{
+		"kanji": "学",
+		"desc": "to learn",
+		"pinyin": "xué"
+	},
+	{
+		"kanji": "安",
+		"desc": "safe; calm",
+		"pinyin": "ān"
+	},
+	{
+		"kanji": "尔",
+		"desc": "thus; thou",
+		"pinyin": "ěr"
+	},
+	{
+		"kanji": "叫",
+		"desc": "to call",
+		"pinyin": "jiào"
+	},
+	{
+		"kanji": "理",
+		"desc": "essence; truth",
+		"pinyin": "lǐ"
+	},
+	{
+		"kanji": "本",
+		"desc": "mw. for books; origin",
+		"pinyin": "běn"
+	},
+	{
+		"kanji": "国",
+		"desc": "country",
+		"pinyin": "guó"
+	},
+	{
+		"kanji": "第",
+		"desc": "ordinal #",
+		"pinyin": "dì"
+	},
+	{
+		"kanji": "友",
+		"desc": "friend",
+		"pinyin": "yǒu"
+	},
+	{
+		"kanji": "高",
+		"desc": "high; tall",
+		"pinyin": "gāo"
+	},
+	{
+		"kanji": "两",
+		"desc": "two (used with mw.)",
+		"pinyin": "liǎng"
+	},
+	{
+		"kanji": "保",
+		"desc": "to defend",
+		"pinyin": "bǎo"
+	},
+	{
+		"kanji": "请",
+		"desc": "to invite",
+		"pinyin": "qǐng"
+	},
+	{
+		"kanji": "非",
+		"desc": "not",
+		"pinyin": "fēi"
+	},
+	{
+		"kanji": "重",
+		"desc": "heavy; serious",
+		"pinyin": "zhòng"
+	},
+	{
+		"kanji": "公",
+		"desc": "public",
+		"pinyin": "gōng"
+	},
+	{
+		"kanji": "记",
+		"desc": "to record",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "身",
+		"desc": "body",
+		"pinyin": "shēn"
+	},
+	{
+		"kanji": "受",
+		"desc": "to receive",
+		"pinyin": "shòu"
+	},
+	{
+		"kanji": "住",
+		"desc": "to live; to reside",
+		"pinyin": "zhù"
+	},
+	{
+		"kanji": "活",
+		"desc": "to live",
+		"pinyin": "huó"
+	},
+	{
+		"kanji": "加",
+		"desc": "to add; plus",
+		"pinyin": "jiā"
+	},
+	{
+		"kanji": "何",
+		"desc": "question word",
+		"pinyin": "hé"
+	},
+	{
+		"kanji": "伙",
+		"desc": "companion; buddy",
+		"pinyin": "huǒ"
+	},
+	{
+		"kanji": "题",
+		"desc": "topic; subject",
+		"pinyin": "tí"
+	},
+	{
+		"kanji": "完",
+		"desc": "to finish; complete",
+		"pinyin": "wán"
+	},
+	{
+		"kanji": "接",
+		"desc": "to receive; to join",
+		"pinyin": "jiē"
+	},
+	{
+		"kanji": "拿",
+		"desc": "to take",
+		"pinyin": "ná"
+	},
+	{
+		"kanji": "望",
+		"desc": "to gaze; to hope",
+		"pinyin": "wàng"
+	},
+	{
+		"kanji": "解",
+		"desc": "to divide; to explain",
+		"pinyin": "jiě"
+	},
+	{
+		"kanji": "其",
+		"desc": "his; hers; its",
+		"pinyin": "qí"
+	},
+	{
+		"kanji": "离",
+		"desc": "to leave; (distance) from",
+		"pinyin": "lí"
+	},
+	{
+		"kanji": "谈",
+		"desc": "to chat",
+		"pinyin": "tán"
+	},
+	{
+		"kanji": "又",
+		"desc": "again; also",
+		"pinyin": "yòu"
+	},
+	{
+		"kanji": "新",
+		"desc": "new",
+		"pinyin": "xīn"
+	},
+	{
+		"kanji": "更",
+		"desc": "more",
+		"pinyin": "gèng"
+	},
+	{
+		"kanji": "钱",
+		"desc": "money",
+		"pinyin": "qián"
+	},
+	{
+		"kanji": "马",
+		"desc": "horse",
+		"pinyin": "mǎ"
+	},
+	{
+		"kanji": "思",
+		"desc": "to think; to consider",
+		"pinyin": "sī"
+	},
+	{
+		"kanji": "部",
+		"desc": "section; part",
+		"pinyin": "bù"
+	},
+	{
+		"kanji": "场",
+		"desc": "open area",
+		"pinyin": "cháng"
+	},
+	{
+		"kanji": "嗯",
+		"desc": "approval interjection",
+		"pinyin": "en"
+	},
+	{
+		"kanji": "计",
+		"desc": "to plan",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "任",
+		"desc": "to appoint; office",
+		"pinyin": "rèn"
+	},
+	{
+		"kanji": "确",
+		"desc": "solid; real",
+		"pinyin": "què"
+	},
+	{
+		"kanji": "吃",
+		"desc": "to eat",
+		"pinyin": "chī"
+	},
+	{
+		"kanji": "始",
+		"desc": "to begin",
+		"pinyin": "shǐ"
+	},
+	{
+		"kanji": "结",
+		"desc": "to produce",
+		"pinyin": "jiē"
+	},
+	{
+		"kanji": "利",
+		"desc": "sharp; benefit",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "朋",
+		"desc": "friend",
+		"pinyin": "péng"
+	},
+	{
+		"kanji": "警",
+		"desc": "police; to warn",
+		"pinyin": "jǐng"
+	},
+	{
+		"kanji": "士",
+		"desc": "scholar; soldier",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "外",
+		"desc": "outside; foreign",
+		"pinyin": "wài"
+	},
+	{
+		"kanji": "件",
+		"desc": "mw. for items",
+		"pinyin": "jiàn"
+	},
+	{
+		"kanji": "难",
+		"desc": "difficult",
+		"pinyin": "nán"
+	},
+	{
+		"kanji": "位",
+		"desc": "mw. for people",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "表",
+		"desc": "exterior surface",
+		"pinyin": "biǎo"
+	},
+	{
+		"kanji": "刚",
+		"desc": "just (now); hard",
+		"pinyin": "gāng"
+	},
+	{
+		"kanji": "希",
+		"desc": "rare: hope",
+		"pinyin": "xī"
+	},
+	{
+		"kanji": "查",
+		"desc": "to research",
+		"pinyin": "chá"
+	},
+	{
+		"kanji": "拉",
+		"desc": "to pull",
+		"pinyin": "lā"
+	},
+	{
+		"kanji": "边",
+		"desc": "side; edge",
+		"pinyin": "biān"
+	},
+	{
+		"kanji": "或",
+		"desc": "maybe; perhaps",
+		"pinyin": "huò"
+	},
+	{
+		"kanji": "将",
+		"desc": "will; shall",
+		"pinyin": "jiāng"
+	},
+	{
+		"kanji": "男",
+		"desc": "male",
+		"pinyin": "nán"
+	},
+	{
+		"kanji": "准",
+		"desc": "to allow",
+		"pinyin": "zhǔn"
+	},
+	{
+		"kanji": "变",
+		"desc": "to change",
+		"pinyin": "biàn"
+	},
+	{
+		"kanji": "证",
+		"desc": "proof",
+		"pinyin": "zhèng"
+	},
+	{
+		"kanji": "物",
+		"desc": "thing; object",
+		"pinyin": "wù"
+	},
+	{
+		"kanji": "员",
+		"desc": "employee; member",
+		"pinyin": "yuán"
+	},
+	{
+		"kanji": "总",
+		"desc": "always",
+		"pinyin": "zǒng"
+	},
+	{
+		"kanji": "噢",
+		"desc": "moan sound",
+		"pinyin": "ō"
+	},
+	{
+		"kanji": "系",
+		"desc": "system; to connect",
+		"pinyin": "xì"
+	},
+	{
+		"kanji": "几",
+		"desc": "how many",
+		"pinyin": "jǐ"
+	},
+	{
+		"kanji": "管",
+		"desc": "to control",
+		"pinyin": "guǎn"
+	},
+	{
+		"kanji": "玩",
+		"desc": "to play",
+		"pinyin": "wán"
+	},
+	{
+		"kanji": "处",
+		"desc": "place; location",
+		"pinyin": "chù"
+	},
+	{
+		"kanji": "办",
+		"desc": "to do; to manage",
+		"pinyin": "bàn"
+	},
+	{
+		"kanji": "主",
+		"desc": "master; main",
+		"pinyin": "zhǔ"
+	},
+	{
+		"kanji": "气",
+		"desc": "air",
+		"pinyin": "qì"
+	},
+	{
+		"kanji": "每",
+		"desc": "each; every",
+		"pinyin": "měi"
+	},
+	{
+		"kanji": "少",
+		"desc": "few; little",
+		"pinyin": "shǎo"
+	},
+	{
+		"kanji": "切",
+		"desc": "to cut; to slice",
+		"pinyin": "qiē"
+	},
+	{
+		"kanji": "失",
+		"desc": "to lose",
+		"pinyin": "shī"
+	},
+	{
+		"kanji": "算",
+		"desc": "to calculate",
+		"pinyin": "suàn"
+	},
+	{
+		"kanji": "性",
+		"desc": "nature; gender",
+		"pinyin": "xìng"
+	},
+	{
+		"kanji": "此",
+		"desc": "this; these",
+		"pinyin": "cǐ"
+	},
+	{
+		"kanji": "必",
+		"desc": "must; will",
+		"pinyin": "bì"
+	},
+	{
+		"kanji": "备",
+		"desc": "get ready",
+		"pinyin": "bèi"
+	},
+	{
+		"kanji": "合",
+		"desc": "to close; together",
+		"pinyin": "hé"
+	},
+	{
+		"kanji": "德",
+		"desc": "virtue; ethics",
+		"pinyin": "dé"
+	},
+	{
+		"kanji": "队",
+		"desc": "team; group",
+		"pinyin": "duì"
+	},
+	{
+		"kanji": "试",
+		"desc": "to test; to try",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "抱",
+		"desc": "to carry in arms",
+		"pinyin": "bào"
+	},
+	{
+		"kanji": "医",
+		"desc": "medical",
+		"pinyin": "yī"
+	},
+	{
+		"kanji": "通",
+		"desc": "to connect; open",
+		"pinyin": "tōng"
+	},
+	{
+		"kanji": "体",
+		"desc": "body; form",
+		"pinyin": "tǐ"
+	},
+	{
+		"kanji": "乐",
+		"desc": "happy",
+		"pinyin": "lè"
+	},
+	{
+		"kanji": "并",
+		"desc": "(not) at all",
+		"pinyin": "bìng"
+	},
+	{
+		"kanji": "三",
+		"desc": "three",
+		"pinyin": "sān"
+	},
+	{
+		"kanji": "早",
+		"desc": "early; morning",
+		"pinyin": "zǎo"
+	},
+	{
+		"kanji": "门",
+		"desc": "door; gate",
+		"pinyin": "mén"
+	},
+	{
+		"kanji": "害",
+		"desc": "harm",
+		"pinyin": "hài"
+	},
+	{
+		"kanji": "歉",
+		"desc": "to apologize",
+		"pinyin": "qiàn"
+	},
+	{
+		"kanji": "选",
+		"desc": "to choose",
+		"pinyin": "xuǎn"
+	},
+	{
+		"kanji": "嗨",
+		"desc": "an exclamation",
+		"pinyin": "hāi"
+	},
+	{
+		"kanji": "房",
+		"desc": "house; room",
+		"pinyin": "fáng"
+	},
+	{
+		"kanji": "命",
+		"desc": "life; fate",
+		"pinyin": "mìng"
+	},
+	{
+		"kanji": "且",
+		"desc": "moreover; both",
+		"pinyin": "qiě"
+	},
+	{
+		"kanji": "向",
+		"desc": "towards; direction",
+		"pinyin": "xiàng"
+	},
+	{
+		"kanji": "兴",
+		"desc": "to rise; to flourish",
+		"pinyin": "xīng"
+	},
+	{
+		"kanji": "球",
+		"desc": "ball; sphere",
+		"pinyin": "qiú"
+	},
+	{
+		"kanji": "服",
+		"desc": "clothes; to serve",
+		"pinyin": "fú"
+	},
+	{
+		"kanji": "入",
+		"desc": "to enter",
+		"pinyin": "rù"
+	},
+	{
+		"kanji": "照",
+		"desc": "according to; to shine",
+		"pinyin": "zhào"
+	},
+	{
+		"kanji": "提",
+		"desc": "to lift",
+		"pinyin": "tí"
+	},
+	{
+		"kanji": "掉",
+		"desc": "to fall; to lose",
+		"pinyin": "diào"
+	},
+	{
+		"kanji": "夫",
+		"desc": "husband",
+		"pinyin": "fū"
+	},
+	{
+		"kanji": "路",
+		"desc": "road",
+		"pinyin": "lù"
+	},
+	{
+		"kanji": "演",
+		"desc": "to act; to develop",
+		"pinyin": "yǎn"
+	},
+	{
+		"kanji": "够",
+		"desc": "to be enough",
+		"pinyin": "gòu"
+	},
+	{
+		"kanji": "日",
+		"desc": "sun; day",
+		"pinyin": "rì"
+	},
+	{
+		"kanji": "案",
+		"desc": "legal case; record",
+		"pinyin": "àn"
+	},
+	{
+		"kanji": "舞",
+		"desc": "to dance",
+		"pinyin": "wǔ"
+	},
+	{
+		"kanji": "决",
+		"desc": "to decide",
+		"pinyin": "jué"
+	},
+	{
+		"kanji": "求",
+		"desc": "to look for; to request",
+		"pinyin": "qiú"
+	},
+	{
+		"kanji": "约",
+		"desc": "appointment; to invite",
+		"pinyin": "yuē"
+	},
+	{
+		"kanji": "字",
+		"desc": "word; character",
+		"pinyin": "zì"
+	},
+	{
+		"kanji": "呃",
+		"desc": "belch; hiccup",
+		"pinyin": "è"
+	},
+	{
+		"kanji": "肯",
+		"desc": "to agree",
+		"pinyin": "kěn"
+	},
+	{
+		"kanji": "目",
+		"desc": "eye",
+		"pinyin": "mù"
+	},
+	{
+		"kanji": "笑",
+		"desc": "to laugh",
+		"pinyin": "xiào"
+	},
+	{
+		"kanji": "伤",
+		"desc": "wound",
+		"pinyin": "shāng"
+	},
+	{
+		"kanji": "神",
+		"desc": "deity; spirit",
+		"pinyin": "shén"
+	},
+	{
+		"kanji": "父",
+		"desc": "father",
+		"pinyin": "fù"
+	},
+	{
+		"kanji": "指",
+		"desc": "finger; refer to",
+		"pinyin": "zhǐ"
+	},
+	{
+		"kanji": "报",
+		"desc": "to announce",
+		"pinyin": "bào"
+	},
+	{
+		"kanji": "留",
+		"desc": "to stay; to remain",
+		"pinyin": "liú"
+	},
+	{
+		"kanji": "水",
+		"desc": "water; liquid",
+		"pinyin": "shuǐ"
+	},
+	{
+		"kanji": "教",
+		"desc": "to teach",
+		"pinyin": "jiào"
+	},
+	{
+		"kanji": "枪",
+		"desc": "gun",
+		"pinyin": "qiāng"
+	},
+	{
+		"kanji": "清",
+		"desc": "clear",
+		"pinyin": "qīng"
+	},
+	{
+		"kanji": "色",
+		"desc": "color",
+		"pinyin": "sè"
+	},
+	{
+		"kanji": "号",
+		"desc": "number",
+		"pinyin": "hào"
+	},
+	{
+		"kanji": "世",
+		"desc": "life; age; world",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "远",
+		"desc": "far; distant",
+		"pinyin": "yuǎn"
+	},
+	{
+		"kanji": "片",
+		"desc": "thin piece; slice",
+		"pinyin": "piàn"
+	},
+	{
+		"kanji": "官",
+		"desc": "official",
+		"pinyin": "guān"
+	},
+	{
+		"kanji": "口",
+		"desc": "mouth",
+		"pinyin": "kǒu"
+	},
+	{
+		"kanji": "师",
+		"desc": "teacher; master",
+		"pinyin": "shī"
+	},
+	{
+		"kanji": "原",
+		"desc": "original",
+		"pinyin": "yuán"
+	},
+	{
+		"kanji": "酒",
+		"desc": "wine",
+		"pinyin": "jiǔ"
+	},
+	{
+		"kanji": "周",
+		"desc": "circle; week",
+		"pinyin": "zhōu"
+	},
+	{
+		"kanji": "星",
+		"desc": "star",
+		"pinyin": "xīng"
+	},
+	{
+		"kanji": "识",
+		"desc": "to know",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "赛",
+		"desc": "competition",
+		"pinyin": "sài"
+	},
+	{
+		"kanji": "救",
+		"desc": "to save",
+		"pinyin": "jiù"
+	},
+	{
+		"kanji": "底",
+		"desc": "bottom; end",
+		"pinyin": "dǐ"
+	},
+	{
+		"kanji": "棒",
+		"desc": "wonderful; stick",
+		"pinyin": "bàng"
+	},
+	{
+		"kanji": "须",
+		"desc": "must; beard",
+		"pinyin": "xū"
+	},
+	{
+		"kanji": "收",
+		"desc": "to receive",
+		"pinyin": "shōu"
+	},
+	{
+		"kanji": "交",
+		"desc": "to deliver; to pay",
+		"pinyin": "jiāo"
+	},
+	{
+		"kanji": "坐",
+		"desc": "to sit",
+		"pinyin": "zuò"
+	},
+	{
+		"kanji": "停",
+		"desc": "to stop",
+		"pinyin": "tíng"
+	},
+	{
+		"kanji": "卡",
+		"desc": "card; to block",
+		"pinyin": "kǎ"
+	},
+	{
+		"kanji": "尼",
+		"desc": "Buddhist nun",
+		"pinyin": "ní"
+	},
+	{
+		"kanji": "婚",
+		"desc": "to marry",
+		"pinyin": "hūn"
+	},
+	{
+		"kanji": "格",
+		"desc": "grid; pattern",
+		"pinyin": "gé"
+	},
+	{
+		"kanji": "眼",
+		"desc": "eye",
+		"pinyin": "yǎn"
+	},
+	{
+		"kanji": "金",
+		"desc": "gold",
+		"pinyin": "jīn"
+	},
+	{
+		"kanji": "蛋",
+		"desc": "egg",
+		"pinyin": "dàn"
+	},
+	{
+		"kanji": "息",
+		"desc": "breath; to rest",
+		"pinyin": "xī"
+	},
+	{
+		"kanji": "室",
+		"desc": "room",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "内",
+		"desc": "inside; inner",
+		"pinyin": "nèi"
+	},
+	{
+		"kanji": "运",
+		"desc": "to move; fortune",
+		"pinyin": "yùn"
+	},
+	{
+		"kanji": "根",
+		"desc": "root; basis",
+		"pinyin": "gēn"
+	},
+	{
+		"kanji": "单",
+		"desc": "single; list",
+		"pinyin": "dān"
+	},
+	{
+		"kanji": "宝",
+		"desc": "jewel; treasure",
+		"pinyin": "bǎo"
+	},
+	{
+		"kanji": "哥",
+		"desc": "elder brother",
+		"pinyin": "gē"
+	},
+	{
+		"kanji": "张",
+		"desc": "mw. for flat obj.",
+		"pinyin": "zhāng"
+	},
+	{
+		"kanji": "搞",
+		"desc": "to make; to set up",
+		"pinyin": "gǎo"
+	},
+	{
+		"kanji": "战",
+		"desc": "to fight; war",
+		"pinyin": "zhàn"
+	},
+	{
+		"kanji": "火",
+		"desc": "fire",
+		"pinyin": "huǒ"
+	},
+	{
+		"kanji": "罗",
+		"desc": "gauze; to gather",
+		"pinyin": "luó"
+	},
+	{
+		"kanji": "至",
+		"desc": "to arrive",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "万",
+		"desc": "ten thousand",
+		"pinyin": "wàn"
+	},
+	{
+		"kanji": "声",
+		"desc": "sound; voice",
+		"pinyin": "shēng"
+	},
+	{
+		"kanji": "布",
+		"desc": "cloth; to spread",
+		"pinyin": "bù"
+	},
+	{
+		"kanji": "音",
+		"desc": "sound; noise",
+		"pinyin": "yīn"
+	},
+	{
+		"kanji": "期",
+		"desc": "period of time",
+		"pinyin": "qī"
+	},
+	{
+		"kanji": "条",
+		"desc": "mw. long thing obj.",
+		"pinyin": "tiáo"
+	},
+	{
+		"kanji": "消",
+		"desc": "to vanish; need",
+		"pinyin": "xiāo"
+	},
+	{
+		"kanji": "买",
+		"desc": "to buy",
+		"pinyin": "mǎi"
+	},
+	{
+		"kanji": "病",
+		"desc": "illness; disease",
+		"pinyin": "bìng"
+	},
+	{
+		"kanji": "整",
+		"desc": "ordered",
+		"pinyin": "zhěng"
+	},
+	{
+		"kanji": "奇",
+		"desc": "strange",
+		"pinyin": "qí"
+	},
+	{
+		"kanji": "弟",
+		"desc": "young brother",
+		"pinyin": "dì"
+	},
+	{
+		"kanji": "犯",
+		"desc": "to violate; to offend",
+		"pinyin": "fàn"
+	},
+	{
+		"kanji": "装",
+		"desc": "clothing; to pretend",
+		"pinyin": "zhuāng"
+	},
+	{
+		"kanji": "贝",
+		"desc": "shell",
+		"pinyin": "bèi"
+	},
+	{
+		"kanji": "您",
+		"desc": "you (polite)",
+		"pinyin": "nín"
+	},
+	{
+		"kanji": "送",
+		"desc": "to give; to deliver",
+		"pinyin": "sòng"
+	},
+	{
+		"kanji": "怕",
+		"desc": "to fear",
+		"pinyin": "pà"
+	},
+	{
+		"kanji": "护",
+		"desc": "to protect",
+		"pinyin": "hù"
+	},
+	{
+		"kanji": "度",
+		"desc": "degree; measure",
+		"pinyin": "dù"
+	},
+	{
+		"kanji": "花",
+		"desc": "flower; to spend",
+		"pinyin": "huā"
+	},
+	{
+		"kanji": "节",
+		"desc": "festival",
+		"pinyin": "jié"
+	},
+	{
+		"kanji": "近",
+		"desc": "near",
+		"pinyin": "jìn"
+	},
+	{
+		"kanji": "怪",
+		"desc": "odd; monster",
+		"pinyin": "guài"
+	},
+	{
+		"kanji": "持",
+		"desc": "to maintain; to manage",
+		"pinyin": "chí"
+	},
+	{
+		"kanji": "光",
+		"desc": "bright; only",
+		"pinyin": "guāng"
+	},
+	{
+		"kanji": "与",
+		"desc": "and; with",
+		"pinyin": "yǔ"
+	},
+	{
+		"kanji": "穿",
+		"desc": "to wear",
+		"pinyin": "chuān"
+	},
+	{
+		"kanji": "愿",
+		"desc": "to hope; willing",
+		"pinyin": "yuàn"
+	},
+	{
+		"kanji": "象",
+		"desc": "elephant; form",
+		"pinyin": "xiàng"
+	},
+	{
+		"kanji": "影",
+		"desc": "image",
+		"pinyin": "yǐng"
+	},
+	{
+		"kanji": "击",
+		"desc": "to hit",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "使",
+		"desc": "to cause",
+		"pinyin": "shǐ"
+	},
+	{
+		"kanji": "二",
+		"desc": "two",
+		"pinyin": "èr"
+	},
+	{
+		"kanji": "喝",
+		"desc": "to drink",
+		"pinyin": "hē"
+	},
+	{
+		"kanji": "月",
+		"desc": "moon; month",
+		"pinyin": "yuè"
+	},
+	{
+		"kanji": "器",
+		"desc": "device; tool",
+		"pinyin": "qì"
+	},
+	{
+		"kanji": "察",
+		"desc": "to examine; to observe",
+		"pinyin": "chá"
+	},
+	{
+		"kanji": "制",
+		"desc": "to manufacture",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "嘛",
+		"desc": "obvious p.; pause p.",
+		"pinyin": "ma"
+	},
+	{
+		"kanji": "哈",
+		"desc": "laughter",
+		"pinyin": "hā"
+	},
+	{
+		"kanji": "助",
+		"desc": "to help",
+		"pinyin": "zhù"
+	},
+	{
+		"kanji": "达",
+		"desc": "to reach",
+		"pinyin": "dá"
+	},
+	{
+		"kanji": "海",
+		"desc": "ocean; sea",
+		"pinyin": "hǎi"
+	},
+	{
+		"kanji": "待",
+		"desc": "to wait; about to",
+		"pinyin": "dài"
+	},
+	{
+		"kanji": "托",
+		"desc": "support; to entrust",
+		"pinyin": "tuō"
+	},
+	{
+		"kanji": "除",
+		"desc": "to remove",
+		"pinyin": "chú"
+	},
+	{
+		"kanji": "写",
+		"desc": "to write",
+		"pinyin": "xiě"
+	},
+	{
+		"kanji": "绝",
+		"desc": "sever; absolutely",
+		"pinyin": "jué"
+	},
+	{
+		"kanji": "界",
+		"desc": "boundary; scope",
+		"pinyin": "jiè"
+	},
+	{
+		"kanji": "帝",
+		"desc": "emperor",
+		"pinyin": "dì"
+	},
+	{
+		"kanji": "姐",
+		"desc": "older sister",
+		"pinyin": "jiě"
+	},
+	{
+		"kanji": "反",
+		"desc": "contrary; opposite",
+		"pinyin": "fǎn"
+	},
+	{
+		"kanji": "担",
+		"desc": "to undertake",
+		"pinyin": "dān"
+	},
+	{
+		"kanji": "司",
+		"desc": "to manage; department",
+		"pinyin": "sī"
+	},
+	{
+		"kanji": "强",
+		"desc": "strong; powerful",
+		"pinyin": "qiáng"
+	},
+	{
+		"kanji": "由",
+		"desc": "from; by",
+		"pinyin": "yóu"
+	},
+	{
+		"kanji": "论",
+		"desc": "opinion; theory",
+		"pinyin": "lùn"
+	},
+	{
+		"kanji": "飞",
+		"desc": "to fly",
+		"pinyin": "fēi"
+	},
+	{
+		"kanji": "亚",
+		"desc": "Asia",
+		"pinyin": "yà"
+	},
+	{
+		"kanji": "续",
+		"desc": "to continue",
+		"pinyin": "xù"
+	},
+	{
+		"kanji": "视",
+		"desc": "to look at",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "母",
+		"desc": "mother",
+		"pinyin": "mǔ"
+	},
+	{
+		"kanji": "空",
+		"desc": "empty; air",
+		"pinyin": "kōng"
+	},
+	{
+		"kanji": "军",
+		"desc": "army",
+		"pinyin": "jūn"
+	},
+	{
+		"kanji": "跑",
+		"desc": "to run",
+		"pinyin": "pǎo"
+	},
+	{
+		"kanji": "阿",
+		"desc": "prefix for names",
+		"pinyin": "ā"
+	},
+	{
+		"kanji": "尽",
+		"desc": "to greatest extent",
+		"pinyin": "jìn"
+	},
+	{
+		"kanji": "注",
+		"desc": "pay attention; to register",
+		"pinyin": "zhù"
+	},
+	{
+		"kanji": "弄",
+		"desc": "to do",
+		"pinyin": "nòng"
+	},
+	{
+		"kanji": "密",
+		"desc": "secret",
+		"pinyin": "mì"
+	},
+	{
+		"kanji": "线",
+		"desc": "thread",
+		"pinyin": "xiàn"
+	},
+	{
+		"kanji": "代",
+		"desc": "to substitute; era",
+		"pinyin": "dài"
+	},
+	{
+		"kanji": "忙",
+		"desc": "busy",
+		"pinyin": "máng"
+	},
+	{
+		"kanji": "坏",
+		"desc": "bad; broken",
+		"pinyin": "huài"
+	},
+	{
+		"kanji": "久",
+		"desc": "long (time)",
+		"pinyin": "jiǔ"
+	},
+	{
+		"kanji": "议",
+		"desc": "to discuss",
+		"pinyin": "yì"
+	},
+	{
+		"kanji": "衣",
+		"desc": "clothes",
+		"pinyin": "yī"
+	},
+	{
+		"kanji": "血",
+		"desc": "blood",
+		"pinyin": "xiě"
+	},
+	{
+		"kanji": "钟",
+		"desc": "clock; o'clock",
+		"pinyin": "zhōng"
+	},
+	{
+		"kanji": "继",
+		"desc": "to carry on",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "礼",
+		"desc": "gift; ceremony",
+		"pinyin": "lǐ"
+	},
+	{
+		"kanji": "数",
+		"desc": "number; figure",
+		"pinyin": "shù"
+	},
+	{
+		"kanji": "份",
+		"desc": "mw. for papers, sets",
+		"pinyin": "fèn"
+	},
+	{
+		"kanji": "疯",
+		"desc": "insane",
+		"pinyin": "fēng"
+	},
+	{
+		"kanji": "平",
+		"desc": "flat; equal",
+		"pinyin": "píng"
+	},
+	{
+		"kanji": "止",
+		"desc": "to prohibit",
+		"pinyin": "zhǐ"
+	},
+	{
+		"kanji": "十",
+		"desc": "ten",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "拜",
+		"desc": "to pay respect",
+		"pinyin": "bài"
+	},
+	{
+		"kanji": "鬼",
+		"desc": "ghost",
+		"pinyin": "guǐ"
+	},
+	{
+		"kanji": "睡",
+		"desc": "to sleep",
+		"pinyin": "shuì"
+	},
+	{
+		"kanji": "啦",
+		"desc": "exclamation p.",
+		"pinyin": "la"
+	},
+	{
+		"kanji": "调",
+		"desc": "to transfer; tone",
+		"pinyin": "diào"
+	},
+	{
+		"kanji": "巴",
+		"desc": "to stick to; close to",
+		"pinyin": "bā"
+	},
+	{
+		"kanji": "兄",
+		"desc": "elder brother",
+		"pinyin": "xiōng"
+	},
+	{
+		"kanji": "紧",
+		"desc": "strict; tight",
+		"pinyin": "jǐn"
+	},
+	{
+		"kanji": "站",
+		"desc": "to stop; station",
+		"pinyin": "zhàn"
+	},
+	{
+		"kanji": "品",
+		"desc": "goods; product",
+		"pinyin": "pǐn"
+	},
+	{
+		"kanji": "英",
+		"desc": "brave",
+		"pinyin": "yīng"
+	},
+	{
+		"kanji": "罪",
+		"desc": "guilt; crime",
+		"pinyin": "zuì"
+	},
+	{
+		"kanji": "文",
+		"desc": "language; culture",
+		"pinyin": "wén"
+	},
+	{
+		"kanji": "亮",
+		"desc": "bright; clear",
+		"pinyin": "liàng"
+	},
+	{
+		"kanji": "抓",
+		"desc": "to grab",
+		"pinyin": "zhuā"
+	},
+	{
+		"kanji": "跳",
+		"desc": "to jump",
+		"pinyin": "tiào"
+	},
+	{
+		"kanji": "联",
+		"desc": "to unite; to join",
+		"pinyin": "lián"
+	},
+	{
+		"kanji": "混",
+		"desc": "to mix",
+		"pinyin": "hùn"
+	},
+	{
+		"kanji": "便",
+		"desc": "ordinary; convenient",
+		"pinyin": "biàn"
+	},
+	{
+		"kanji": "狗",
+		"desc": "dog",
+		"pinyin": "gǒu"
+	},
+	{
+		"kanji": "脑",
+		"desc": "brain; mind",
+		"pinyin": "nǎo"
+	},
+	{
+		"kanji": "业",
+		"desc": "occupation",
+		"pinyin": "yè"
+	},
+	{
+		"kanji": "歌",
+		"desc": "song",
+		"pinyin": "gē"
+	},
+	{
+		"kanji": "精",
+		"desc": "essence; vitality",
+		"pinyin": "jīng"
+	},
+	{
+		"kanji": "包",
+		"desc": "to wrap; bag",
+		"pinyin": "bāo"
+	},
+	{
+		"kanji": "转",
+		"desc": "to revolve; to turn",
+		"pinyin": "zhuǎn"
+	},
+	{
+		"kanji": "却",
+		"desc": "but; however",
+		"pinyin": "què"
+	},
+	{
+		"kanji": "参",
+		"desc": "to participate",
+		"pinyin": "cān"
+	},
+	{
+		"kanji": "院",
+		"desc": "courtyard; institution",
+		"pinyin": "yuàn"
+	},
+	{
+		"kanji": "务",
+		"desc": "affair; business",
+		"pinyin": "wù"
+	},
+	{
+		"kanji": "基",
+		"desc": "base; foundation",
+		"pinyin": "jī"
+	},
+	{
+		"kanji": "台",
+		"desc": "platform",
+		"pinyin": "tái"
+	},
+	{
+		"kanji": "另",
+		"desc": "other; another",
+		"pinyin": "lìng"
+	},
+	{
+		"kanji": "恩",
+		"desc": "grace",
+		"pinyin": "ēn"
+	},
+	{
+		"kanji": "书",
+		"desc": "book",
+		"pinyin": "shū"
+	},
+	{
+		"kanji": "统",
+		"desc": "to unite",
+		"pinyin": "tǒng"
+	},
+	{
+		"kanji": "风",
+		"desc": "wind",
+		"pinyin": "fēng"
+	},
+	{
+		"kanji": "况",
+		"desc": "situation; moreover",
+		"pinyin": "kuàng"
+	},
+	{
+		"kanji": "四",
+		"desc": "four",
+		"pinyin": "sì"
+	},
+	{
+		"kanji": "黑",
+		"desc": "black",
+		"pinyin": "hēi"
+	},
+	{
+		"kanji": "否",
+		"desc": "to deny",
+		"pinyin": "fǒu"
+	},
+	{
+		"kanji": "险",
+		"desc": "danger",
+		"pinyin": "xiǎn"
+	},
+	{
+		"kanji": "言",
+		"desc": "words; speech",
+		"pinyin": "yán"
+	},
+	{
+		"kanji": "米",
+		"desc": "rice",
+		"pinyin": "mǐ"
+	},
+	{
+		"kanji": "杰",
+		"desc": "distinguished",
+		"pinyin": "jié"
+	},
+	{
+		"kanji": "校",
+		"desc": "school",
+		"pinyin": "xiào"
+	},
+	{
+		"kanji": "幸",
+		"desc": "fortunate",
+		"pinyin": "xìng"
+	},
+	{
+		"kanji": "传",
+		"desc": "to transfer; send",
+		"pinyin": "chuán"
+	},
+	{
+		"kanji": "复",
+		"desc": "to return; to repeat",
+		"pinyin": "fù"
+	},
+	{
+		"kanji": "量",
+		"desc": "quantity; amount",
+		"pinyin": "liàng"
+	},
+	{
+		"kanji": "首",
+		"desc": "head; chief",
+		"pinyin": "shǒu"
+	},
+	{
+		"kanji": "改",
+		"desc": "to change",
+		"pinyin": "gǎi"
+	},
+	{
+		"kanji": "忘",
+		"desc": "to forget",
+		"pinyin": "wàng"
+	},
+	{
+		"kanji": "术",
+		"desc": "method; technique",
+		"pinyin": "shù"
+	},
+	{
+		"kanji": "局",
+		"desc": "office; narrow",
+		"pinyin": "jú"
+	},
+	{
+		"kanji": "客",
+		"desc": "customer; guest",
+		"pinyin": "kè"
+	},
+	{
+		"kanji": "假",
+		"desc": "fake; to borrow",
+		"pinyin": "jiǎ"
+	},
+	{
+		"kanji": "永",
+		"desc": "forever",
+		"pinyin": "yǒng"
+	},
+	{
+		"kanji": "维",
+		"desc": "to maintain",
+		"pinyin": "wéi"
+	},
+	{
+		"kanji": "岁",
+		"desc": "years (of age)",
+		"pinyin": "suì"
+	},
+	{
+		"kanji": "据",
+		"desc": "according to; to seize",
+		"pinyin": "jù"
+	},
+	{
+		"kanji": "派",
+		"desc": "school of though",
+		"pinyin": "pài"
+	},
+	{
+		"kanji": "票",
+		"desc": "ticket",
+		"pinyin": "piào"
+	},
+	{
+		"kanji": "兰",
+		"desc": "orchid",
+		"pinyin": "lán"
+	},
+	{
+		"kanji": "恶",
+		"desc": "evil; ugly",
+		"pinyin": "è"
+	},
+	{
+		"kanji": "烦",
+		"desc": "to trouble",
+		"pinyin": "fán"
+	},
+	{
+		"kanji": "取",
+		"desc": "to take",
+		"pinyin": "qǔ"
+	},
+	{
+		"kanji": "游",
+		"desc": "to swim; to travel",
+		"pinyin": "yóu"
+	},
+	{
+		"kanji": "糟",
+		"desc": "dregs",
+		"pinyin": "zāo"
+	},
+	{
+		"kanji": "令",
+		"desc": "command; to order",
+		"pinyin": "lìng"
+	},
+	{
+		"kanji": "随",
+		"desc": "to follow; comply",
+		"pinyin": "suí"
+	},
+	{
+		"kanji": "五",
+		"desc": "five",
+		"pinyin": "wǔ"
+	},
+	{
+		"kanji": "圣",
+		"desc": "holy",
+		"pinyin": "shèng"
+	},
+	{
+		"kanji": "式",
+		"desc": "type; style",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "探",
+		"desc": "to explore",
+		"pinyin": "tàn"
+	},
+	{
+		"kanji": "嘴",
+		"desc": "mouth",
+		"pinyin": "zuǐ"
+	},
+	{
+		"kanji": "毒",
+		"desc": "poison",
+		"pinyin": "dú"
+	},
+	{
+		"kanji": "越",
+		"desc": "to climb over",
+		"pinyin": "yuè"
+	},
+	{
+		"kanji": "律",
+		"desc": "law",
+		"pinyin": "lǜ"
+	},
+	{
+		"kanji": "费",
+		"desc": "expense",
+		"pinyin": "fèi"
+	},
+	{
+		"kanji": "科",
+		"desc": "division",
+		"pinyin": "kē"
+	},
+	{
+		"kanji": "麻",
+		"desc": "hemp; rough",
+		"pinyin": "má"
+	},
+	{
+		"kanji": "简",
+		"desc": "simple",
+		"pinyin": "jiǎn"
+	},
+	{
+		"kanji": "易",
+		"desc": "easy",
+		"pinyin": "yì"
+	},
+	{
+		"kanji": "流",
+		"desc": "to flow",
+		"pinyin": "liú"
+	},
+	{
+		"kanji": "治",
+		"desc": "to govern; solve",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "唱",
+		"desc": "to sing",
+		"pinyin": "chàng"
+	},
+	{
+		"kanji": "答",
+		"desc": "to reply; answer",
+		"pinyin": "dá"
+	},
+	{
+		"kanji": "倒",
+		"desc": "to invert; actually",
+		"pinyin": "dǎo"
+	},
+	{
+		"kanji": "划",
+		"desc": "to plan; row",
+		"pinyin": "huà"
+	},
+	{
+		"kanji": "控",
+		"desc": "to accuse; manage",
+		"pinyin": "kòng"
+	},
+	{
+		"kanji": "味",
+		"desc": "taste; smell",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "区",
+		"desc": "area",
+		"pinyin": "qū"
+	},
+	{
+		"kanji": "漂",
+		"desc": "to float",
+		"pinyin": "piāo"
+	},
+	{
+		"kanji": "支",
+		"desc": "to support",
+		"pinyin": "zhī"
+	},
+	{
+		"kanji": "乎",
+		"desc": "in; at; from",
+		"pinyin": "hū"
+	},
+	{
+		"kanji": "录",
+		"desc": "diary; record",
+		"pinyin": "lù"
+	},
+	{
+		"kanji": "考",
+		"desc": "to test",
+		"pinyin": "kǎo"
+	},
+	{
+		"kanji": "超",
+		"desc": "to exceed; super-",
+		"pinyin": "chāo"
+	},
+	{
+		"kanji": "拍",
+		"desc": "to clap; to take (photo)",
+		"pinyin": "pāi"
+	},
+	{
+		"kanji": "轻",
+		"desc": "light; gentle",
+		"pinyin": "qīng"
+	},
+	{
+		"kanji": "连",
+		"desc": "to link; even…",
+		"pinyin": "lián"
+	},
+	{
+		"kanji": "往",
+		"desc": "towards",
+		"pinyin": "wǎng"
+	},
+	{
+		"kanji": "组",
+		"desc": "to organize; group",
+		"pinyin": "zǔ"
+	},
+	{
+		"kanji": "满",
+		"desc": "to fill; satisfied",
+		"pinyin": "mǎn"
+	},
+	{
+		"kanji": "造",
+		"desc": "to build; to make",
+		"pinyin": "zào"
+	},
+	{
+		"kanji": "弹",
+		"desc": "bullet",
+		"pinyin": "dàn"
+	},
+	{
+		"kanji": "静",
+		"desc": "still; calm",
+		"pinyin": "jìng"
+	},
+	{
+		"kanji": "故",
+		"desc": "old; happening",
+		"pinyin": "gù"
+	},
+	{
+		"kanji": "吸",
+		"desc": "to breathe; inhale",
+		"pinyin": "xī"
+	},
+	{
+		"kanji": "喂",
+		"desc": "call attention",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "集",
+		"desc": "to gather; to collect",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "极",
+		"desc": "extremely",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "讲",
+		"desc": "to speak; lecture",
+		"pinyin": "jiǎng"
+	},
+	{
+		"kanji": "块",
+		"desc": "colloq. money; lump",
+		"pinyin": "kuài"
+	},
+	{
+		"kanji": "趣",
+		"desc": "interesting",
+		"pinyin": "qù"
+	},
+	{
+		"kanji": "类",
+		"desc": "kind; category",
+		"pinyin": "lèi"
+	},
+	{
+		"kanji": "呀",
+		"desc": "surprise p.",
+		"pinyin": "yā"
+	},
+	{
+		"kanji": "戏",
+		"desc": "drama; trick",
+		"pinyin": "xì"
+	},
+	{
+		"kanji": "曾",
+		"desc": "once; already",
+		"pinyin": "céng"
+	},
+	{
+		"kanji": "容",
+		"desc": "to contain; appearance",
+		"pinyin": "róng"
+	},
+	{
+		"kanji": "步",
+		"desc": "a step",
+		"pinyin": "bù"
+	},
+	{
+		"kanji": "投",
+		"desc": "to cast",
+		"pinyin": "tóu"
+	},
+	{
+		"kanji": "化",
+		"desc": "to change into",
+		"pinyin": "huà"
+	},
+	{
+		"kanji": "未",
+		"desc": "not; have not",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "束",
+		"desc": "to bind; bundle",
+		"pinyin": "shù"
+	},
+	{
+		"kanji": "醒",
+		"desc": "to wake up",
+		"pinyin": "xǐng"
+	},
+	{
+		"kanji": "威",
+		"desc": "power",
+		"pinyin": "wēi"
+	},
+	{
+		"kanji": "班",
+		"desc": "team; class",
+		"pinyin": "bān"
+	},
+	{
+		"kanji": "终",
+		"desc": "end; finish",
+		"pinyin": "zhōng"
+	},
+	{
+		"kanji": "差",
+		"desc": "inferior; bad",
+		"pinyin": "chà"
+	},
+	{
+		"kanji": "梦",
+		"desc": "dream",
+		"pinyin": "mèng"
+	},
+	{
+		"kanji": "赢",
+		"desc": "to win",
+		"pinyin": "yíng"
+	},
+	{
+		"kanji": "药",
+		"desc": "medicine",
+		"pinyin": "yào"
+	},
+	{
+		"kanji": "迪",
+		"desc": "to enlighten",
+		"pinyin": "dí"
+	},
+	{
+		"kanji": "店",
+		"desc": "inn; shop",
+		"pinyin": "diàn"
+	},
+	{
+		"kanji": "丽",
+		"desc": "beautiful",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "卖",
+		"desc": "to sell",
+		"pinyin": "mài"
+	},
+	{
+		"kanji": "显",
+		"desc": "prominent; to show",
+		"pinyin": "xiǎn"
+	},
+	{
+		"kanji": "监",
+		"desc": "to supervise",
+		"pinyin": "jiān"
+	},
+	{
+		"kanji": "图",
+		"desc": "diagram; map",
+		"pinyin": "tú"
+	},
+	{
+		"kanji": "半",
+		"desc": "half",
+		"pinyin": "bàn"
+	},
+	{
+		"kanji": "语",
+		"desc": "language; speech",
+		"pinyin": "yǔ"
+	},
+	{
+		"kanji": "付",
+		"desc": "to pay; hand over",
+		"pinyin": "fù"
+	},
+	{
+		"kanji": "热",
+		"desc": "hot",
+		"pinyin": "rè"
+	},
+	{
+		"kanji": "排",
+		"desc": "a row; to arrange",
+		"pinyin": "pái"
+	},
+	{
+		"kanji": "楚",
+		"desc": "distinct; clear",
+		"pinyin": "chǔ"
+	},
+	{
+		"kanji": "偷",
+		"desc": "to steal",
+		"pinyin": "tōu"
+	},
+	{
+		"kanji": "敢",
+		"desc": "to dare",
+		"pinyin": "gǎn"
+	},
+	{
+		"kanji": "油",
+		"desc": "oil",
+		"pinyin": "yóu"
+	},
+	{
+		"kanji": "餐",
+		"desc": "meal",
+		"pinyin": "cān"
+	},
+	{
+		"kanji": "破",
+		"desc": "broken; to destroy",
+		"pinyin": "pò"
+	},
+	{
+		"kanji": "杯",
+		"desc": "cup",
+		"pinyin": "bēi"
+	},
+	{
+		"kanji": "市",
+		"desc": "market; city",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "城",
+		"desc": "city; town",
+		"pinyin": "chéng"
+	},
+	{
+		"kanji": "哇",
+		"desc": "child cry sound",
+		"pinyin": "wā"
+	},
+	{
+		"kanji": "权",
+		"desc": "authority; power",
+		"pinyin": "quán"
+	},
+	{
+		"kanji": "某",
+		"desc": "some; a certain",
+		"pinyin": "mǒu"
+	},
+	{
+		"kanji": "激",
+		"desc": "to excite; fierce",
+		"pinyin": "jī"
+	},
+	{
+		"kanji": "立",
+		"desc": "to stand",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "程",
+		"desc": "rule; order",
+		"pinyin": "chéng"
+	},
+	{
+		"kanji": "伊",
+		"desc": "he; she",
+		"pinyin": "yī"
+	},
+	{
+		"kanji": "讨",
+		"desc": "to invite; to discuss",
+		"pinyin": "tǎo"
+	},
+	{
+		"kanji": "责",
+		"desc": "duty",
+		"pinyin": "zé"
+	},
+	{
+		"kanji": "昨",
+		"desc": "yesterday",
+		"pinyin": "zuó"
+	},
+	{
+		"kanji": "闭",
+		"desc": "to close; to shut",
+		"pinyin": "bì"
+	},
+	{
+		"kanji": "庭",
+		"desc": "main hall; courtyard",
+		"pinyin": "tíng"
+	},
+	{
+		"kanji": "落",
+		"desc": "to set; to decline",
+		"pinyin": "luò"
+	},
+	{
+		"kanji": "饭",
+		"desc": "food; meal",
+		"pinyin": "fàn"
+	},
+	{
+		"kanji": "林",
+		"desc": "forest",
+		"pinyin": "lín"
+	},
+	{
+		"kanji": "换",
+		"desc": "to change",
+		"pinyin": "huàn"
+	},
+	{
+		"kanji": "及",
+		"desc": "to reach; up to",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "船",
+		"desc": "boat",
+		"pinyin": "chuán"
+	},
+	{
+		"kanji": "争",
+		"desc": "to strive for",
+		"pinyin": "zhēng"
+	},
+	{
+		"kanji": "猜",
+		"desc": "to guess",
+		"pinyin": "cāi"
+	},
+	{
+		"kanji": "级",
+		"desc": "level; rank",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "姆",
+		"desc": "matron",
+		"pinyin": "mǔ"
+	},
+	{
+		"kanji": "雷",
+		"desc": "thunder",
+		"pinyin": "léi"
+	},
+	{
+		"kanji": "刻",
+		"desc": "quarter (hour); to cut",
+		"pinyin": "kè"
+	},
+	{
+		"kanji": "建",
+		"desc": "to establish",
+		"pinyin": "jiàn"
+	},
+	{
+		"kanji": "团",
+		"desc": "round",
+		"pinyin": "tuán"
+	},
+	{
+		"kanji": "王",
+		"desc": "king",
+		"pinyin": "wáng"
+	},
+	{
+		"kanji": "惊",
+		"desc": "frightened",
+		"pinyin": "jīng"
+	},
+	{
+		"kanji": "迎",
+		"desc": "to welcome",
+		"pinyin": "yíng"
+	},
+	{
+		"kanji": "段",
+		"desc": "section",
+		"pinyin": "duàn"
+	},
+	{
+		"kanji": "标",
+		"desc": "sign; prize",
+		"pinyin": "biāo"
+	},
+	{
+		"kanji": "检",
+		"desc": "to check",
+		"pinyin": "jiǎn"
+	},
+	{
+		"kanji": "各",
+		"desc": "each; every",
+		"pinyin": "gè"
+	},
+	{
+		"kanji": "义",
+		"desc": "justice",
+		"pinyin": "yì"
+	},
+	{
+		"kanji": "百",
+		"desc": "hundred",
+		"pinyin": "bǎi"
+	},
+	{
+		"kanji": "民",
+		"desc": "the people",
+		"pinyin": "mín"
+	},
+	{
+		"kanji": "功",
+		"desc": "result; achievement",
+		"pinyin": "gōng"
+	},
+	{
+		"kanji": "唯",
+		"desc": "yes",
+		"pinyin": "wěi"
+	},
+	{
+		"kanji": "夜",
+		"desc": "night",
+		"pinyin": "yè"
+	},
+	{
+		"kanji": "示",
+		"desc": "to show",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "靠",
+		"desc": "to lean on",
+		"pinyin": "kào"
+	},
+	{
+		"kanji": "释",
+		"desc": "to explain",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "脸",
+		"desc": "face",
+		"pinyin": "liǎn"
+	},
+	{
+		"kanji": "引",
+		"desc": "to pull; to guide",
+		"pinyin": "yǐn"
+	},
+	{
+		"kanji": "择",
+		"desc": "to select",
+		"pinyin": "zé"
+	},
+	{
+		"kanji": "疑",
+		"desc": "to doubt",
+		"pinyin": "yí"
+	},
+	{
+		"kanji": "赶",
+		"desc": "to hurry",
+		"pinyin": "gǎn"
+	},
+	{
+		"kanji": "俩",
+		"desc": "two (coll. 两）",
+		"pinyin": "liǎ"
+	},
+	{
+		"kanji": "独",
+		"desc": "alone",
+		"pinyin": "dú"
+	},
+	{
+		"kanji": "冷",
+		"desc": "cold",
+		"pinyin": "lěng"
+	},
+	{
+		"kanji": "妹",
+		"desc": "younger sister",
+		"pinyin": "mèi"
+	},
+	{
+		"kanji": "楼",
+		"desc": "building; floor",
+		"pinyin": "lóu"
+	},
+	{
+		"kanji": "皮",
+		"desc": "leather; skin",
+		"pinyin": "pí"
+	},
+	{
+		"kanji": "存",
+		"desc": "to exist; to deposit",
+		"pinyin": "cún"
+	},
+	{
+		"kanji": "练",
+		"desc": "to practice",
+		"pinyin": "liàn"
+	},
+	{
+		"kanji": "娘",
+		"desc": "mother; young lady",
+		"pinyin": "niáng"
+	},
+	{
+		"kanji": "顿",
+		"desc": "to pause; mw. for meals",
+		"pinyin": "dùn"
+	},
+	{
+		"kanji": "断",
+		"desc": "to break; defiitely",
+		"pinyin": "duàn"
+	},
+	{
+		"kanji": "设",
+		"desc": "to set up",
+		"pinyin": "shè"
+	},
+	{
+		"kanji": "松",
+		"desc": "loose; to relax",
+		"pinyin": "sōng"
+	},
+	{
+		"kanji": "博",
+		"desc": "rich; extensive",
+		"pinyin": "bó"
+	},
+	{
+		"kanji": "置",
+		"desc": "to install",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "逃",
+		"desc": "to escape",
+		"pinyin": "táo"
+	},
+	{
+		"kanji": "观",
+		"desc": "to watch",
+		"pinyin": "guān"
+	},
+	{
+		"kanji": "痛",
+		"desc": "ache; pain",
+		"pinyin": "tòng"
+	},
+	{
+		"kanji": "狂",
+		"desc": "mad; wild",
+		"pinyin": "kuáng"
+	},
+	{
+		"kanji": "足",
+		"desc": "foot",
+		"pinyin": "zú"
+	},
+	{
+		"kanji": "码",
+		"desc": "number; code",
+		"pinyin": "mǎ"
+	},
+	{
+		"kanji": "恐",
+		"desc": "afraid",
+		"pinyin": "kǒng"
+	},
+	{
+		"kanji": "吉",
+		"desc": "lucky",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "历",
+		"desc": "calendar; to experience",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "慢",
+		"desc": "slow",
+		"pinyin": "màn"
+	},
+	{
+		"kanji": "妻",
+		"desc": "wife",
+		"pinyin": "qī"
+	},
+	{
+		"kanji": "山",
+		"desc": "mountain",
+		"pinyin": "shān"
+	},
+	{
+		"kanji": "普",
+		"desc": "general; popular",
+		"pinyin": "pǔ"
+	},
+	{
+		"kanji": "价",
+		"desc": "price; value",
+		"pinyin": "jià"
+	},
+	{
+		"kanji": "元",
+		"desc": "unit of money",
+		"pinyin": "yuán"
+	},
+	{
+		"kanji": "角",
+		"desc": "angle; 0.1元",
+		"pinyin": "jiǎo"
+	},
+	{
+		"kanji": "怀",
+		"desc": "bosom; heart",
+		"pinyin": "huái"
+	},
+	{
+		"kanji": "床",
+		"desc": "bed",
+		"pinyin": "chuáng"
+	},
+	{
+		"kanji": "奥",
+		"desc": "obscure",
+		"pinyin": "ào"
+	},
+	{
+		"kanji": "模",
+		"desc": "to imitate",
+		"pinyin": "mó"
+	},
+	{
+		"kanji": "验",
+		"desc": "to examine",
+		"pinyin": "yàn"
+	},
+	{
+		"kanji": "索",
+		"desc": "to search; to ask",
+		"pinyin": "suǒ"
+	},
+	{
+		"kanji": "街",
+		"desc": "street",
+		"pinyin": "jiē"
+	},
+	{
+		"kanji": "呼",
+		"desc": "to call",
+		"pinyin": "hū"
+	},
+	{
+		"kanji": "祝",
+		"desc": "to wish; to pray",
+		"pinyin": "zhù"
+	},
+	{
+		"kanji": "料",
+		"desc": "material; stuff",
+		"pinyin": "liào"
+	},
+	{
+		"kanji": "休",
+		"desc": "to rest",
+		"pinyin": "xiū"
+	},
+	{
+		"kanji": "灵",
+		"desc": "quick; effective",
+		"pinyin": "líng"
+	},
+	{
+		"kanji": "狱",
+		"desc": "prison; lawsuit",
+		"pinyin": "yù"
+	},
+	{
+		"kanji": "剧",
+		"desc": "drama; play",
+		"pinyin": "jù"
+	},
+	{
+		"kanji": "乱",
+		"desc": "messy; disorder",
+		"pinyin": "luàn"
+	},
+	{
+		"kanji": "展",
+		"desc": "to spread out",
+		"pinyin": "zhǎn"
+	},
+	{
+		"kanji": "板",
+		"desc": "board; plank",
+		"pinyin": "bǎn"
+	},
+	{
+		"kanji": "承",
+		"desc": "to bear; to carry",
+		"pinyin": "chéng"
+	},
+	{
+		"kanji": "则",
+		"desc": "in contrast; norm",
+		"pinyin": "zé"
+	},
+	{
+		"kanji": "顾",
+		"desc": "to look after",
+		"pinyin": "gù"
+	},
+	{
+		"kanji": "深",
+		"desc": "deep; profound",
+		"pinyin": "shēn"
+	},
+	{
+		"kanji": "产",
+		"desc": "give birth; to produce",
+		"pinyin": "chǎn"
+	},
+	{
+		"kanji": "洗",
+		"desc": "to wash",
+		"pinyin": "xǐ"
+	},
+	{
+		"kanji": "政",
+		"desc": "political",
+		"pinyin": "zhèng"
+	},
+	{
+		"kanji": "迷",
+		"desc": "fan (of)",
+		"pinyin": "mí"
+	},
+	{
+		"kanji": "领",
+		"desc": "neck",
+		"pinyin": "lǐng"
+	},
+	{
+		"kanji": "午",
+		"desc": "noon",
+		"pinyin": "wǔ"
+	},
+	{
+		"kanji": "纳",
+		"desc": "to receive; to bring in",
+		"pinyin": "nà"
+	},
+	{
+		"kanji": "谎",
+		"desc": "lie",
+		"pinyin": "huǎng"
+	},
+	{
+		"kanji": "具",
+		"desc": "tool; ability",
+		"pinyin": "jù"
+	},
+	{
+		"kanji": "退",
+		"desc": "to retreat; to decline",
+		"pinyin": "tuì"
+	},
+	{
+		"kanji": "福",
+		"desc": "luck; fortune",
+		"pinyin": "fú"
+	},
+	{
+		"kanji": "习",
+		"desc": "to study; habit",
+		"pinyin": "xí"
+	},
+	{
+		"kanji": "秘",
+		"desc": "secret",
+		"pinyin": "mì"
+	},
+	{
+		"kanji": "奶",
+		"desc": "milk; breast",
+		"pinyin": "nǎi"
+	},
+	{
+		"kanji": "遇",
+		"desc": "to meet; to encounter",
+		"pinyin": "yù"
+	},
+	{
+		"kanji": "职",
+		"desc": "office; duty",
+		"pinyin": "zhí"
+	},
+	{
+		"kanji": "架",
+		"desc": "to support; framework",
+		"pinyin": "jià"
+	},
+	{
+		"kanji": "即",
+		"desc": "namely; at once",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "挺",
+		"desc": "to stand upright",
+		"pinyin": "tǐng"
+	},
+	{
+		"kanji": "史",
+		"desc": "history",
+		"pinyin": "shǐ"
+	},
+	{
+		"kanji": "负",
+		"desc": "to bear",
+		"pinyin": "fù"
+	},
+	{
+		"kanji": "千",
+		"desc": "thousand",
+		"pinyin": "qiān"
+	},
+	{
+		"kanji": "脱",
+		"desc": "to take off",
+		"pinyin": "tuō"
+	},
+	{
+		"kanji": "瑞",
+		"desc": "auspicious",
+		"pinyin": "ruì"
+	},
+	{
+		"kanji": "背",
+		"desc": "back of object",
+		"pinyin": "bèi"
+	},
+	{
+		"kanji": "仅",
+		"desc": "barely; merely",
+		"pinyin": "jǐn"
+	},
+	{
+		"kanji": "追",
+		"desc": "to chase",
+		"pinyin": "zhuī"
+	},
+	{
+		"kanji": "伦",
+		"desc": "relationship",
+		"pinyin": "lún"
+	},
+	{
+		"kanji": "炸",
+		"desc": "to fry in oil",
+		"pinyin": "zhá"
+	},
+	{
+		"kanji": "资",
+		"desc": "property; wealth",
+		"pinyin": "zī"
+	},
+	{
+		"kanji": "画",
+		"desc": "to draw; picture",
+		"pinyin": "huà"
+	},
+	{
+		"kanji": "踪",
+		"desc": "footprints; traces",
+		"pinyin": "zōng"
+	},
+	{
+		"kanji": "射",
+		"desc": "to shoot",
+		"pinyin": "shè"
+	},
+	{
+		"kanji": "弃",
+		"desc": "to abandon",
+		"pinyin": "qì"
+	},
+	{
+		"kanji": "傻",
+		"desc": "foolish",
+		"pinyin": "shǎ"
+	},
+	{
+		"kanji": "藏",
+		"desc": "to conceal; to store",
+		"pinyin": "cáng"
+	},
+	{
+		"kanji": "屁",
+		"desc": "fart; nonsense",
+		"pinyin": "pì"
+	},
+	{
+		"kanji": "瞧",
+		"desc": "to glance at",
+		"pinyin": "qiáo"
+	},
+	{
+		"kanji": "修",
+		"desc": "to repair",
+		"pinyin": "xiū"
+	},
+	{
+		"kanji": "尸",
+		"desc": "corpse",
+		"pinyin": "shī"
+	},
+	{
+		"kanji": "闻",
+		"desc": "to hear; news",
+		"pinyin": "wén"
+	},
+	{
+		"kanji": "共",
+		"desc": "common; general",
+		"pinyin": "gòng"
+	},
+	{
+		"kanji": "懂",
+		"desc": "to understand",
+		"pinyin": "dǒng"
+	},
+	{
+		"kanji": "蒂",
+		"desc": "stem of plant",
+		"pinyin": "dì"
+	},
+	{
+		"kanji": "危",
+		"desc": "danger",
+		"pinyin": "wēi"
+	},
+	{
+		"kanji": "专",
+		"desc": "specialized",
+		"pinyin": "zhuān"
+	},
+	{
+		"kanji": "呆",
+		"desc": "stupid",
+		"pinyin": "ái"
+	},
+	{
+		"kanji": "介",
+		"desc": "to introduce",
+		"pinyin": "jiè"
+	},
+	{
+		"kanji": "萨",
+		"desc": "Bodhissatva",
+		"pinyin": "sà"
+	},
+	{
+		"kanji": "魔",
+		"desc": "devil; magic",
+		"pinyin": "mó"
+	},
+	{
+		"kanji": "急",
+		"desc": "urgent; worried",
+		"pinyin": "jí"
+	},
+	{
+		"kanji": "碰",
+		"desc": "to bump",
+		"pinyin": "pèng"
+	},
+	{
+		"kanji": "甚",
+		"desc": "variant of 什",
+		"pinyin": "shén"
+	},
+	{
+		"kanji": "糕",
+		"desc": "cake",
+		"pinyin": "gāo"
+	},
+	{
+		"kanji": "苦",
+		"desc": "bitter; pain",
+		"pinyin": "kǔ"
+	},
+	{
+		"kanji": "念",
+		"desc": "to miss (sb); thought",
+		"pinyin": "niàn"
+	},
+	{
+		"kanji": "适",
+		"desc": "to fit; suitable",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "华",
+		"desc": "splendid",
+		"pinyin": "huá"
+	},
+	{
+		"kanji": "冲",
+		"desc": "to clash; to rinse",
+		"pinyin": "chōng"
+	},
+	{
+		"kanji": "骗",
+		"desc": "to cheat",
+		"pinyin": "piàn"
+	},
+	{
+		"kanji": "厌",
+		"desc": "to loathe",
+		"pinyin": "yàn"
+	},
+	{
+		"kanji": "型",
+		"desc": "model; type",
+		"pinyin": "xíng"
+	},
+	{
+		"kanji": "麦",
+		"desc": "wheat; oats",
+		"pinyin": "mài"
+	},
+	{
+		"kanji": "似",
+		"desc": "-like",
+		"pinyin": "sì"
+	},
+	{
+		"kanji": "红",
+		"desc": "red",
+		"pinyin": "hóng"
+	},
+	{
+		"kanji": "值",
+		"desc": "value",
+		"pinyin": "zhí"
+	},
+	{
+		"kanji": "脚",
+		"desc": "foot",
+		"pinyin": "jiǎo"
+	},
+	{
+		"kanji": "六",
+		"desc": "six",
+		"pinyin": "liù"
+	},
+	{
+		"kanji": "谋",
+		"desc": "plan; scheme",
+		"pinyin": "móu"
+	},
+	{
+		"kanji": "套",
+		"desc": "cover; mw. for sets",
+		"pinyin": "tào"
+	},
+	{
+		"kanji": "凯",
+		"desc": "triumphant",
+		"pinyin": "kǎi"
+	},
+	{
+		"kanji": "众",
+		"desc": "many; crowd",
+		"pinyin": "zhòng"
+	},
+	{
+		"kanji": "预",
+		"desc": "to advance; prepare",
+		"pinyin": "yù"
+	},
+	{
+		"kanji": "际",
+		"desc": "border; between",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "咱",
+		"desc": "we; us",
+		"pinyin": "zá/zán"
+	},
+	{
+		"kanji": "波",
+		"desc": "wave",
+		"pinyin": "bō"
+	},
+	{
+		"kanji": "卫",
+		"desc": "to guard",
+		"pinyin": "wèi"
+	},
+	{
+		"kanji": "聊",
+		"desc": "to chat",
+		"pinyin": "liáo"
+	},
+	{
+		"kanji": "养",
+		"desc": "to raise; to bring up",
+		"pinyin": "yǎng"
+	},
+	{
+		"kanji": "导",
+		"desc": "to guide",
+		"pinyin": "dǎo"
+	},
+	{
+		"kanji": "虑",
+		"desc": "to think over",
+		"pinyin": "lǜ"
+	},
+	{
+		"kanji": "私",
+		"desc": "private",
+		"pinyin": "sī"
+	},
+	{
+		"kanji": "戴",
+		"desc": "to put on",
+		"pinyin": "dài"
+	},
+	{
+		"kanji": "毁",
+		"desc": "to destroy",
+		"pinyin": "huǐ"
+	},
+	{
+		"kanji": "鱼",
+		"desc": "fish",
+		"pinyin": "yú"
+	},
+	{
+		"kanji": "滚",
+		"desc": "to boil",
+		"pinyin": "gǔn"
+	},
+	{
+		"kanji": "志",
+		"desc": "sign; ambition",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "杂",
+		"desc": "mixed",
+		"pinyin": "zá"
+	},
+	{
+		"kanji": "居",
+		"desc": "to reside; residence",
+		"pinyin": "jū"
+	},
+	{
+		"kanji": "词",
+		"desc": "word",
+		"pinyin": "cí"
+	},
+	{
+		"kanji": "食",
+		"desc": "food",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "诺",
+		"desc": "promise",
+		"pinyin": "nuò"
+	},
+	{
+		"kanji": "读",
+		"desc": "to read",
+		"pinyin": "dú"
+	},
+	{
+		"kanji": "误",
+		"desc": "mistake",
+		"pinyin": "wù"
+	},
+	{
+		"kanji": "撒",
+		"desc": "to release",
+		"pinyin": "sā"
+	},
+	{
+		"kanji": "突",
+		"desc": "to dash; sudden",
+		"pinyin": "tū"
+	},
+	{
+		"kanji": "牛",
+		"desc": "cow",
+		"pinyin": "niú"
+	},
+	{
+		"kanji": "馆",
+		"desc": "building; shop",
+		"pinyin": "guǎn"
+	},
+	{
+		"kanji": "规",
+		"desc": "a rule; compass",
+		"pinyin": "guī"
+	},
+	{
+		"kanji": "陪",
+		"desc": "to accompany",
+		"pinyin": "péi"
+	},
+	{
+		"kanji": "州",
+		"desc": "a state",
+		"pinyin": "zhōu"
+	},
+	{
+		"kanji": "肉",
+		"desc": "flesh; meat",
+		"pinyin": "ròu"
+	},
+	{
+		"kanji": "形",
+		"desc": "form; appear",
+		"pinyin": "xíng"
+	},
+	{
+		"kanji": "凶",
+		"desc": "culprit; scary",
+		"pinyin": "xiōng"
+	},
+	{
+		"kanji": "森",
+		"desc": "forest",
+		"pinyin": "sēn"
+	},
+	{
+		"kanji": "商",
+		"desc": "commernce",
+		"pinyin": "shāng"
+	},
+	{
+		"kanji": "纪",
+		"desc": "order; to discipline",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "浪",
+		"desc": "wave",
+		"pinyin": "làng"
+	},
+	{
+		"kanji": "石",
+		"desc": "stone",
+		"pinyin": "shí"
+	},
+	{
+		"kanji": "顺",
+		"desc": "to obey; along",
+		"pinyin": "shùn"
+	},
+	{
+		"kanji": "举",
+		"desc": "to lift",
+		"pinyin": "jǔ"
+	},
+	{
+		"kanji": "按",
+		"desc": "to press; to restrain",
+		"pinyin": "àn"
+	},
+	{
+		"kanji": "旅",
+		"desc": "journey",
+		"pinyin": "lǚ"
+	},
+	{
+		"kanji": "努",
+		"desc": "to exert",
+		"pinyin": "nǔ"
+	},
+	{
+		"kanji": "坚",
+		"desc": "strong",
+		"pinyin": "jiān"
+	},
+	{
+		"kanji": "测",
+		"desc": "to measure",
+		"pinyin": "cè"
+	},
+	{
+		"kanji": "免",
+		"desc": "to exempt; to avoid",
+		"pinyin": "miǎn"
+	},
+	{
+		"kanji": "喔",
+		"desc": "I see; oh",
+		"pinyin": "ō"
+	},
+	{
+		"kanji": "丝",
+		"desc": "silk",
+		"pinyin": "sī"
+	},
+	{
+		"kanji": "辆",
+		"desc": "mw. for vehicles",
+		"pinyin": "liàng"
+	},
+	{
+		"kanji": "乔",
+		"desc": "tall; lofty",
+		"pinyin": "qiáo"
+	},
+	{
+		"kanji": "防",
+		"desc": "to protect",
+		"pinyin": "fáng"
+	},
+	{
+		"kanji": "句",
+		"desc": "sentence",
+		"pinyin": "jù"
+	},
+	{
+		"kanji": "印",
+		"desc": "to print; image",
+		"pinyin": "yìn"
+	},
+	{
+		"kanji": "恋",
+		"desc": "to feel attached to",
+		"pinyin": "liàn"
+	},
+	{
+		"kanji": "弗",
+		"desc": "not, negative",
+		"pinyin": "fú"
+	},
+	{
+		"kanji": "季",
+		"desc": "season",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "严",
+		"desc": "strict; tight",
+		"pinyin": "yán"
+	},
+	{
+		"kanji": "推",
+		"desc": "to push",
+		"pinyin": "tuī"
+	},
+	{
+		"kanji": "伯",
+		"desc": "eldest uncle",
+		"pinyin": "bó"
+	},
+	{
+		"kanji": "莉",
+		"desc": "white jasmine",
+		"pinyin": "lì"
+	},
+	{
+		"kanji": "武",
+		"desc": "martial",
+		"pinyin": "wǔ"
+	},
+	{
+		"kanji": "胜",
+		"desc": "victory; better",
+		"pinyin": "shèng"
+	},
+	{
+		"kanji": "毛",
+		"desc": "hair; coarse",
+		"pinyin": "máo"
+	},
+	{
+		"kanji": "压",
+		"desc": "to push down",
+		"pinyin": "yā"
+	},
+	{
+		"kanji": "败",
+		"desc": "to defeat",
+		"pinyin": "bài"
+	},
+	{
+		"kanji": "究",
+		"desc": "after all; to investigate",
+		"pinyin": "jiū"
+	},
+	{
+		"kanji": "评",
+		"desc": "to comment; criticize",
+		"pinyin": "píng"
+	},
+	{
+		"kanji": "屋",
+		"desc": "house; room",
+		"pinyin": "wū"
+	},
+	{
+		"kanji": "双",
+		"desc": "pair; double",
+		"pinyin": "shuāng"
+	},
+	{
+		"kanji": "牙",
+		"desc": "tooth",
+		"pinyin": "yá"
+	},
+	{
+		"kanji": "斗",
+		"desc": "to fight",
+		"pinyin": "dòu"
+	},
+	{
+		"kanji": "鸡",
+		"desc": "chicken",
+		"pinyin": "jī"
+	},
+	{
+		"kanji": "审",
+		"desc": "to examine",
+		"pinyin": "shěn"
+	},
+	{
+		"kanji": "南",
+		"desc": "South",
+		"pinyin": "nán"
+	},
+	{
+		"kanji": "速",
+		"desc": "fast; rapid",
+		"pinyin": "sù"
+	},
+	{
+		"kanji": "蠢",
+		"desc": "stupid",
+		"pinyin": "chǔn"
+	},
+	{
+		"kanji": "丈",
+		"desc": "husband",
+		"pinyin": "zhàng"
+	},
+	{
+		"kanji": "守",
+		"desc": "to guard",
+		"pinyin": "shǒu"
+	},
+	{
+		"kanji": "获",
+		"desc": "to capture; to reap",
+		"pinyin": "huò"
+	},
+	{
+		"kanji": "八",
+		"desc": "eight",
+		"pinyin": "bā"
+	},
+	{
+		"kanji": "致",
+		"desc": "fine; delicate",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "细",
+		"desc": "thin; fine",
+		"pinyin": "xì"
+	},
+	{
+		"kanji": "勒",
+		"desc": "to rein in; to compel",
+		"pinyin": "lè"
+	},
+	{
+		"kanji": "称",
+		"desc": "to weigh; name",
+		"pinyin": "chēng"
+	},
+	{
+		"kanji": "塔",
+		"desc": "pagoda; tower",
+		"pinyin": "tǎ"
+	},
+	{
+		"kanji": "丢",
+		"desc": "to lose",
+		"pinyin": "diū"
+	},
+	{
+		"kanji": "冰",
+		"desc": "ice",
+		"pinyin": "bīng"
+	},
+	{
+		"kanji": "态",
+		"desc": "attitude",
+		"pinyin": "tài"
+	},
+	{
+		"kanji": "吓",
+		"desc": "to scare",
+		"pinyin": "xià"
+	},
+	{
+		"kanji": "古",
+		"desc": "ancient",
+		"pinyin": "gǔ"
+	},
+	{
+		"kanji": "亡",
+		"desc": "to die",
+		"pinyin": "wáng"
+	},
+	{
+		"kanji": "状",
+		"desc": "suit; strong",
+		"pinyin": "zhuàng"
+	},
+	{
+		"kanji": "鲁",
+		"desc": "foolish, Shandong",
+		"pinyin": "lǔ"
+	},
+	{
+		"kanji": "疗",
+		"desc": "to be healed",
+		"pinyin": "liáo"
+	},
+	{
+		"kanji": "操",
+		"desc": "to operate",
+		"pinyin": "cāo"
+	},
+	{
+		"kanji": "遗",
+		"desc": "to lose; to omit",
+		"pinyin": "yí"
+	},
+	{
+		"kanji": "判",
+		"desc": "to judge",
+		"pinyin": "pàn"
+	},
+	{
+		"kanji": "响",
+		"desc": "sound; noise",
+		"pinyin": "xiǎng"
+	},
+	{
+		"kanji": "网",
+		"desc": "net; network",
+		"pinyin": "wǎng"
+	},
+	{
+		"kanji": "箱",
+		"desc": "box; chest",
+		"pinyin": "xiāng"
+	},
+	{
+		"kanji": "货",
+		"desc": "goods",
+		"pinyin": "huò"
+	},
+	{
+		"kanji": "围",
+		"desc": "to encircle",
+		"pinyin": "wéi"
+	},
+	{
+		"kanji": "签",
+		"desc": "to sign; label",
+		"pinyin": "qiān"
+	},
+	{
+		"kanji": "牌",
+		"desc": "card; tablet",
+		"pinyin": "pái"
+	},
+	{
+		"kanji": "户",
+		"desc": "door; household",
+		"pinyin": "hù"
+	},
+	{
+		"kanji": "寻",
+		"desc": "to search",
+		"pinyin": "xún"
+	},
+	{
+		"kanji": "质",
+		"desc": "character; quality",
+		"pinyin": "zhì"
+	},
+	{
+		"kanji": "供",
+		"desc": "to supply",
+		"pinyin": "gōng"
+	},
+	{
+		"kanji": "奖",
+		"desc": "prize",
+		"pinyin": "jiǎng"
+	},
+	{
+		"kanji": "袋",
+		"desc": "pocket",
+		"pinyin": "dài"
+	},
+	{
+		"kanji": "胡",
+		"desc": "beard; mustache",
+		"pinyin": "hú"
+	},
+	{
+		"kanji": "脏",
+		"desc": "dirty",
+		"pinyin": "zāng"
+	},
+	{
+		"kanji": "堂",
+		"desc": "hall; mw. for furniture sets",
+		"pinyin": "táng"
+	},
+	{
+		"kanji": "曼",
+		"desc": "extended",
+		"pinyin": "màn"
+	},
+	{
+		"kanji": "效",
+		"desc": "effect",
+		"pinyin": "xiào"
+	},
+	{
+		"kanji": "露",
+		"desc": "dew; to reveal",
+		"pinyin": "lù"
+	},
+	{
+		"kanji": "替",
+		"desc": "on behalf",
+		"pinyin": "tì"
+	},
+	{
+		"kanji": "娜",
+		"desc": "elegant; delicate",
+		"pinyin": "nuó"
+	},
+	{
+		"kanji": "座",
+		"desc": "seat",
+		"pinyin": "zuò"
+	},
+	{
+		"kanji": "园",
+		"desc": "park",
+		"pinyin": "yuán"
+	},
+	{
+		"kanji": "拥",
+		"desc": "to embrace",
+		"pinyin": "yǒng"
+	},
+	{
+		"kanji": "睛",
+		"desc": "eye; eyeball",
+		"pinyin": "jīng"
+	},
+	{
+		"kanji": "冒",
+		"desc": "to emit",
+		"pinyin": "mào"
+	},
+	{
+		"kanji": "甜",
+		"desc": "sweet",
+		"pinyin": "tián"
+	},
+	{
+		"kanji": "股",
+		"desc": "portion; thigh",
+		"pinyin": "gǔ"
+	},
+	{
+		"kanji": "香",
+		"desc": "fragrant",
+		"pinyin": "xiāng"
+	},
+	{
+		"kanji": "笔",
+		"desc": "pen; brush",
+		"pinyin": "bǐ"
+	},
+	{
+		"kanji": "沙",
+		"desc": "sand",
+		"pinyin": "shā"
+	},
+	{
+		"kanji": "扰",
+		"desc": "to disturb",
+		"pinyin": "rǎo"
+	},
+	{
+		"kanji": "挑",
+		"desc": "to choose",
+		"pinyin": "tiāo"
+	},
+	{
+		"kanji": "姑",
+		"desc": "aunt",
+		"pinyin": "gū"
+	},
+	{
+		"kanji": "爆",
+		"desc": "to explode",
+		"pinyin": "bào"
+	},
+	{
+		"kanji": "镇",
+		"desc": "suppress; small town",
+		"pinyin": "zhèn"
+	},
+	{
+		"kanji": "暴",
+		"desc": "violent; cruel",
+		"pinyin": "bào"
+	},
+	{
+		"kanji": "困",
+		"desc": "sleepy; difficult",
+		"pinyin": "kùn"
+	},
+	{
+		"kanji": "项",
+		"desc": "item; back of neck",
+		"pinyin": "xiàng"
+	},
+	{
+		"kanji": "概",
+		"desc": "approximate",
+		"pinyin": "gài"
+	},
+	{
+		"kanji": "摩",
+		"desc": "to rub",
+		"pinyin": "mó"
+	},
+	{
+		"kanji": "虽",
+		"desc": "although",
+		"pinyin": "suī"
+	},
+	{
+		"kanji": "纽",
+		"desc": "knot; button; knob",
+		"pinyin": "niǔ"
+	},
+	{
+		"kanji": "享",
+		"desc": "to enjoy",
+		"pinyin": "xiǎng"
+	},
+	{
+		"kanji": "配",
+		"desc": "to join; to match",
+		"pinyin": "pèi"
+	},
+	{
+		"kanji": "迹",
+		"desc": "traces",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "登",
+		"desc": "to ascend",
+		"pinyin": "dēng"
+	},
+	{
+		"kanji": "诞",
+		"desc": "give birth",
+		"pinyin": "dàn"
+	},
+	{
+		"kanji": "竟",
+		"desc": "unexpectedly",
+		"pinyin": "jìng"
+	},
+	{
+		"kanji": "叔",
+		"desc": "father's younger brother",
+		"pinyin": "shū"
+	},
+	{
+		"kanji": "捕",
+		"desc": "to arrest",
+		"pinyin": "bǔ"
+	},
+	{
+		"kanji": "赌",
+		"desc": "to gamble",
+		"pinyin": "dǔ"
+	},
+	{
+		"kanji": "阻",
+		"desc": "to obstruct",
+		"pinyin": "zǔ"
+	},
+	{
+		"kanji": "彩",
+		"desc": "color; variety",
+		"pinyin": "cǎi"
+	},
+	{
+		"kanji": "搬",
+		"desc": "to move (house)",
+		"pinyin": "bān"
+	},
+	{
+		"kanji": "属",
+		"desc": "category; affiliation",
+		"pinyin": "shǔ"
+	},
+	{
+		"kanji": "招",
+		"desc": "to recruit",
+		"pinyin": "zhāo"
+	},
+	{
+		"kanji": "婆",
+		"desc": "grandmother",
+		"pinyin": "pó"
+	},
+	{
+		"kanji": "巧",
+		"desc": "opportunely; timely",
+		"pinyin": "qiǎo"
+	},
+	{
+		"kanji": "骨",
+		"desc": "bone",
+		"pinyin": "gǔ"
+	},
+	{
+		"kanji": "塞",
+		"desc": "to stop up",
+		"pinyin": "sāi"
+	},
+	{
+		"kanji": "剩",
+		"desc": "to remain",
+		"pinyin": "shèng"
+	},
+	{
+		"kanji": "酷",
+		"desc": "ruthless; cool",
+		"pinyin": "kù"
+	},
+	{
+		"kanji": "啡",
+		"desc": "coffee; morphine",
+		"pinyin": "fēi"
+	},
+	{
+		"kanji": "课",
+		"desc": "subject; lesson",
+		"pinyin": "kè"
+	},
+	{
+		"kanji": "烟",
+		"desc": "cigarette; to smoke",
+		"pinyin": "yān"
+	},
+	{
+		"kanji": "摄",
+		"desc": "to absorb",
+		"pinyin": "shè"
+	},
+	{
+		"kanji": "封",
+		"desc": "to grant; title",
+		"pinyin": "fēng"
+	},
+	{
+		"kanji": "咖",
+		"desc": "coffee (phonetic)",
+		"pinyin": "kā"
+	},
+	{
+		"kanji": "低",
+		"desc": "low; beneath",
+		"pinyin": "dī"
+	},
+	{
+		"kanji": "技",
+		"desc": "skill",
+		"pinyin": "jì"
+	},
+	{
+		"kanji": "迟",
+		"desc": "late; slow",
+		"pinyin": "chí"
+	},
+	{
+		"kanji": "纸",
+		"desc": "paper",
+		"pinyin": "zhǐ"
+	},
+	{
+		"kanji": "烧",
+		"desc": "to cook; roast/bake",
+		"pinyin": "shāo"
+	},
+	{
+		"kanji": "委",
+		"desc": "to entrust",
+		"pinyin": "wěi"
+	},
+	{
+		"kanji": "暗",
+		"desc": "dark; gloomy",
+		"pinyin": "àn"
+	},
+	{
+		"kanji": "左",
+		"desc": "left",
+		"pinyin": "zuǒ"
+	},
+	{
+		"kanji": "输",
+		"desc": "to lose",
+		"pinyin": "shū"
+	},
+	{
+		"kanji": "曲",
+		"desc": "song; tune",
+		"pinyin": "qǔ"
+	},
+	{
+		"kanji": "仍",
+		"desc": "still; yet",
+		"pinyin": "réng"
+	},
+	{
+		"kanji": "训",
+		"desc": "to tell; to teach",
+		"pinyin": "xùn"
+	},
+	{
+		"kanji": "借",
+		"desc": "to lend; to borrow",
+		"pinyin": "jiè"
+	},
+	{
+		"kanji": "扔",
+		"desc": "to throw",
+		"pinyin": "rēng"
+	},
+	{
+		"kanji": "善",
+		"desc": "virtuous; kind",
+		"pinyin": "shàn"
+	},
+	{
+		"kanji": "社",
+		"desc": "society",
+		"pinyin": "shè"
+	},
+	{
+		"kanji": "轮",
+		"desc": "wheel; by turns",
+		"pinyin": "lún"
+	},
+	{
+		"kanji": "顶",
+		"desc": "apex; to replace",
+		"pinyin": "dǐng"
+	},
+	{
+		"kanji": "聪",
+		"desc": "intelligent",
+		"pinyin": "cōng"
+	},
+	{
+		"kanji": "秀",
+		"desc": "handsome; elegant",
+		"pinyin": "xiù"
+	},
+	{
+		"kanji": "刀",
+		"desc": "knife",
+		"pinyin": "dāo"
+	},
+	{
+		"kanji": "莫",
+		"desc": "do not",
+		"pinyin": "mò"
+	},
+	{
+		"kanji": "腿",
+		"desc": "legs; thighs",
+		"pinyin": "tuǐ"
+	},
+	{
+		"kanji": "族",
+		"desc": "race; nationality",
+		"pinyin": "zú"
+	},
+	{
+		"kanji": "鞋",
+		"desc": "shoes",
+		"pinyin": "xié"
+	},
+	{
+		"kanji": "兵",
+		"desc": "soldiers",
+		"pinyin": "bīng"
+	},
+	{
+		"kanji": "锁",
+		"desc": "lock",
+		"pinyin": "suǒ"
+	},
+	{
+		"kanji": "妮",
+		"desc": "girl",
+		"pinyin": "nī"
+	},
+	{
+		"kanji": "异",
+		"desc": "different; other",
+		"pinyin": "yì"
+	},
+	{
+		"kanji": "誓",
+		"desc": "swear; oath",
+		"pinyin": "shì"
+	},
+	{
+		"kanji": "树",
+		"desc": "tree",
+		"pinyin": "shù"
+	},
+	{
+		"kanji": "木",
+		"desc": "tree; wood",
+		"pinyin": "mù"
+	},
+	{
+		"kanji": "抢",
+		"desc": "to plunder",
+		"pinyin": "qiǎng"
+	},
+	{
+		"kanji": "档",
+		"desc": "grade (of goods); shelves",
+		"pinyin": "dǎng"
+	},
+	{
+		"kanji": "雇",
+		"desc": "to employ",
+		"pinyin": "gù"
+	},
+	{
+		"kanji": "广",
+		"desc": "wide",
+		"pinyin": "guǎng"
+	},
+	{
+		"kanji": "丹",
+		"desc": "cinnabar",
+		"pinyin": "dān"
+	},
+	{
+		"kanji": "银",
+		"desc": "silver",
+		"pinyin": "yín"
+	},
+	{
+		"kanji": "镜",
+		"desc": "mirror",
+		"pinyin": "jìng"
+	},
+	{
+		"kanji": "群",
+		"desc": "group",
+		"pinyin": "qún"
+	},
+	{
+		"kanji": "坦",
+		"desc": "flat; smooth",
+		"pinyin": "tǎn"
+	}
+]
