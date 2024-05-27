@@ -1,5 +1,6 @@
 export const collide = {
   name: "collide",
+  sort: 0,
   setup: me => {
     me.hits = [];
     me.neighbors = [];

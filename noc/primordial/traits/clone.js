@@ -22,7 +22,6 @@ export const clone = {
     }
 
     let d = map(me.mass, 0, 1.5 * me.cloningMass, 0, 1);
-    if (d < 0) return;
     push();
     translate(me.x, me.y);
     rotate(me.velocity.heading());

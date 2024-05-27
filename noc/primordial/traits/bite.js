@@ -1,6 +1,7 @@
 export const bite = {
+  sort: 1,
   name: "bite",
-  args: [1, 0.1],
+  args: [1, 0.2],
   action: (me, MAX, RATIO) => {
     if(!me.radius) return;
     if (!me.traits.includes("think") || typeof me.biteLevel !== "number") me.biteLevel = 0.5;

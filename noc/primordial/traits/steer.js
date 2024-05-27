@@ -1,15 +1,9 @@
 export const steer = {
   name: "steer",
   arg: Math.PI / 4,
-  setup: me => {
-    me.steerOffset = random(1000);
-
-  },
+  setup: me => me.steerOffset = 0.3 + random(0.4),
   action: (me, MAX) => {
-    if (!me.traits.includes("think") || typeof me.steerLevel !== "number") {
-      me.steerLevel = (1 + sin(2 * (me.steerOffset + frameCount) / me.world.frameRate)) / 2; // oscillating
-      me.steerLevel = map(me.steerOffset, 0, 1000, 0.3, 0.7); // fixed angle
-    }
+    if (!me.traits.includes("think") || typeof me.steerLevel !== "number") me.steerLevel = me.steerOffset; // fixed angle
     let steer = map(me.steerLevel, 0, 1, -1, 1) * MAX;
     me.velocity.rotate(steer);
 

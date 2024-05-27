@@ -15,8 +15,9 @@ class Mass {
     if (!world.masses) world.masses = [];
     this.world.masses.push(this);
 
-    this.actions = [];
-    this.updates = [];
+    this.traits = [];
+    this.actions = {};
+    this.updates = {};
     this.addTrait("show", "move");
   }
 
@@ -45,30 +46,30 @@ class Mass {
 
   run() {
     if (this.mass <= 0) return;
-    this.actions.forEach(action => action(this));
+    this.traits.forEach(t => this.actions[t] ? this.actions[t]() : null);
     return this;
   }
 
   update() {
     if (this.mass <= 0) return;
-    this.updates.forEach(uptade => uptade(this));
+    this.traits.forEach(t => this.updates[t] ? this.updates[t]() : null);
     if (this.mass > 0) return this;
     this.world.masses = this.world.masses.filter(m => m !== this);
   }
 
   addTrait(...traits) {
-    traits.forEach(trait => {
-      if (!Mass.TRAITS[trait]) return;
+    traits.forEach(t => {
+      if (!Mass.TRAITS[t]) return;
       if (!this.traits) this.traits = [];
-      if (!this.traits.includes(trait)) {
-        this.traits.push(trait);
-        this.traits.sort((a, b) => (b.sort ? b.sort : 0) - (a.sort ? a.sort : 0)).reverse();
-        trait = Mass.TRAITS[trait];
+      if (!this.traits.includes(t)) {
+        this.traits.push(t);
+        let trait = Mass.TRAITS[t];
         if (trait.setup) trait.setup(this);
         let args = trait.args ? trait.args : trait.arg ? [trait.arg] : [];
-        if (trait.update) this.updates.push(() => trait.update(this, ...args));
-        if (trait.action) this.actions.push(() => trait.action(this, ...args));
+        if (trait.update) this.updates[t] = () => trait.update(this, ...args);
+        if (trait.action) this.actions[t] = () => trait.action(this, ...args);
       }
+      //this.traits.sort((a, b) => (b.sort ? b.sort : 0) - (a.sort ? a.sort : 0)).reverse();
     });
   }
 
@@ -95,7 +96,7 @@ class Mass {
         a -= me.velocity.heading();
         let burn = sqrt(me.mass * distance.mag() * me.world.friction);
         burn += sqrt(PI * abs(a) * me.mass * me.world.friction);
-        burn = max(0.3 * burn, 4 / me.world.frameRate);
+        burn = max(0.3 * burn, PI / me.world.frameRate);
         me.mass -= burn;
       }
     },
