@@ -16,7 +16,7 @@ export const projects = [{
   title: "Jack Rabbits",
   folder: "jackrabbits",
   link: "http://jackrabbits.lenino.net",
-  img: "assets/jackrabbits.jpg",
+  img: "assets/jackrabbits.png",
   desc: {
     en: "The board game for playing cards on a quest through wonderlands",
     es: "Descubre maravillas mientras viajas al reino de conejos y barajas con este juego de mesa.",

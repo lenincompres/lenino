@@ -19,7 +19,7 @@ export const think = {
     me.inputs = () => [
       me.velocity.mag() / me.diam,
       ...me.sensors.map(s => s.value),
-      ...me.output.map(o => o.value),
+      //...me.output.map(o => o.value),
     ];
     me.brain = me.brain ? me.brain : ml5.neuralNetwork({
       inputs: me.inputs().length,
