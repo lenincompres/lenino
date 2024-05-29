@@ -12,7 +12,7 @@ import sponsorsModel from "./modules/sponsors.js";
 DOM.set({
   head: {
     icon: "media/icon.png",
-    title: "Lenino & La Hermanastra",
+    title: "La Hermanastra",
     charset: "UTF-8",
     viewport: {
       width: "device-width",

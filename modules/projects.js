@@ -18,8 +18,8 @@ export const projects = [{
   link: "http://jackrabbits.lenino.net",
   img: "assets/jackrabbits.png",
   desc: {
-    en: "The board game for playing cards on a quest through wonderlands",
-    es: "Descubre maravillas mientras viajas al reino de conejos y barajas con este juego de mesa.",
+    en: "The board game for playing cards on a land of wooden shards",
+    es: "El juego de tablero en el que viajas al reino de conejos y barajas.",
   },
   tags: [
     "game",
@@ -30,8 +30,8 @@ export const projects = [{
   link: "https://github.com/lenincompres/DOM.js",
   img: "assets/dom.png",
   desc: {
-    en: "JavaScript library that creates DOM structures using a JS structural object as a model",
-    es: "Librería de JavaScript que crea estructuras de WOM utilizando objetos estructurales de JS como modelo.",
+    en: "JavaScript library that creates and handles DOM structures using a JS structural objects as a model",
+    es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando objetos estructurales de JS como modelo.",
   },
   tags: [
     "code",
@@ -80,7 +80,7 @@ export const projects = [{
   img: "assets/mnuel.png",
   desc: {
     en: "<b>Journey of the Exiled Prince</b><br/>adventure fantasy novel for young adults and curious eternal children.",
-    es: "<b>Más allá de Terrafirma: La travesía del Príncipe Exiliado</b><br/>novela de aventura y fantasía para adultos jóvenes y niños esternos curiosos y eternos.",
+    es: "<b>Más allá de Terrafirma: La travesía del Príncipe Exiliado</b><br/>novela de aventura y fantasía para adultos jóvenes y niños curiosos y eternos.",
   },
   tags: [
     "book",
@@ -113,15 +113,19 @@ export const projects = [{
     "code",
   ]
 }, {
-  hidden: true,
-  title: "Photonic Chimes",
-  folder: "relajame",
+  title: "Photonic Chimes | Fotones Musicales",
+  link: "chimes/",
+  img: "assets/chimes.png",
   desc: {
-    en: "Musical and visual algorithm with particles that may not travel as fast as their individual speed once they are fused together.",
-    es: "Algoritmo musical y visual con partículas que no pueden viajar más rápido que sus velocidades individuales una vez se funden.",
+    en: "A refreshing and relaxing piece of creative code.",
+    es: "Una pieza de código creativo y relajante.",
   },
   tags: [
+    'ITP', 'NYU|TISCH', 'P5.js', 'Ml5', 'Machine Learning for the Web'
+  ],
+  tags: [
     "code",
+    "music",
   ]
 }, {
   title: "Eloping Is Fun",
@@ -152,8 +156,8 @@ export const projects = [{
   link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
   img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
   desc: {
-    en: "Cover of Reginar Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
-    es: "Cover de “That Time” de Reginar Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
+    en: "Cover of Regina Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
+    es: "Cover de “That Time” de Regina Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
   },
   tags: [
     "music",

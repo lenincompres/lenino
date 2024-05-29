@@ -12,7 +12,7 @@ function setup() {
   playing = false;
   //signature
   document.body.style.fontSize = (0.6 * fontSize) + 'px';
-  let signature = createDiv(`<h1>Photonic Bells</h1><p>by Lenino (ITP/IMA TISCH NYU)</p>`);
+  let signature = createDiv(`<h1>Photonic Chimes</h1><p>by Lenino (ITP/IMA TISCH NYU)</p>`);
   signature.id('signature');
   createCanvas(w, h);
   clear();
