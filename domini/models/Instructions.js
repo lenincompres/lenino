@@ -27,11 +27,11 @@ const instructions = {
     section: {
       width: "25em",
       padding: "0 2em 2em",
-      h1: "DOMiNíES",
+      h1: "DOMiNi",
       i: "by Lenino",
       h2: "Instructions",
       section: [{
-        p: "<b>DOMiNíES</b> has 24 square tiles and a 6x6 board. The tiles contain every combination of a 2x2 pattern with three colors (red, white, and blue). No two tiles are the same, no matter how you rotate them.",
+        p: "<b>DOMiNi</b> has 24 square tiles and a 6x6 board. The tiles contain every combination of a 2x2 pattern with three colors (red, white, and blue). No two tiles are the same, no matter how you rotate them.",
       }, {
         h5: "Setup",
         p: ["Similarly to dominos or mahjong, 4 players sit on each side of a square table. Each gets 6 random tiles, and conceals them from the others. The player who gets the white square starts by putting that tile anywhere on the board. After that, the turns go clockwise."],

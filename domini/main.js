@@ -74,7 +74,7 @@ function setup() {
       section: [instructions, {
         width: "100%",
         heading: {
-          h1: "DOMINÍES",
+          h1: "DOMiNi",
           p: `by <a target="_blank" href="http://lenino.net">Lenino</a>`,
         },
         main: {
