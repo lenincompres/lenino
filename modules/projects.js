@@ -49,7 +49,7 @@ export const projects = [{
     "writing",
   ]
 }, {
-  title: "P.R.E. Spectrum",
+  title: "3DPsyche",
   folder: "pre",
   link: "http://pre.lenino.net",
   img: "assets/pre.png",
