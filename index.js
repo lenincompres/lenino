@@ -10,20 +10,20 @@ window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
 const QS = DOM.querystring();
 window.LANG = QS.lang ? QS.lang : "en";
 
-const _isMobile = new Binder();
-const _isWide = new Binder();
-const _currentPage = new Binder(0);
-const _hoverPage = new Binder();
+const _IS_MOBILE = new Binder();
+const _IS_WIDE = new Binder();
+const _CURRENT_PAGE = new Binder(0);
+const _HOVER_PAGE = new Binder();
 
 const pageNames = Object.keys(PAGES);
 
 function setSize(e) {
-  _isMobile.value = window.innerWidth < 780;
-  _isWide.value = window.innerWidth > 1050;
+  _IS_MOBILE.value = window.innerWidth < 780;
+  _IS_WIDE.value = window.innerWidth > 1050;
 };
 setSize();
 
-if (window.location.hash) _currentPage.value = window.location.hash.split("#")[1].toUpperCase();
+if (window.location.hash) _CURRENT_PAGE.value = window.location.hash.split("#")[1].toUpperCase();
 
 const TEXT = {
   bio: {
@@ -56,20 +56,20 @@ DOM.set({
       hover: {
         color: STYLE.COLOR.HIGHLIGHT,
       },
-    },
-    a_fa: {
-      color: "white",
-      width: "2em",
-      height: "2em",
-      padding: "0.5em",
-      margin: "0 0.25em",
-      textAlign: "center",
-      borderRadius: "0.25em",
-      verticalAlign: "text-bottom",
-      boxShadow: STYLE.SHADOW.NORMAL,
-      hover: {
-        boxShadow: STYLE.SHADOW.HIGHLIGHT,
-      }
+      __fa: {
+        color: "white",
+        width: "2em",
+        height: "2em",
+        padding: "0.5em",
+        margin: "0 0.25em",
+        textAlign: "center",
+        borderRadius: "0.25em",
+        verticalAlign: "text-bottom",
+        boxShadow: STYLE.SHADOW.NORMAL,
+        hover: {
+          boxShadow: STYLE.SHADOW.HIGHLIGHT,
+        }
+      },
     },
   },
   font: {
@@ -84,12 +84,12 @@ DOM.set({
     maxWidth: "800px",
     main: {
       position: "relative",
-      maxWidth: _isWide.as("100%", "800px"),
+      maxWidth: _IS_WIDE.as("100%", "800px"),
       width: "100%",
       boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: _isMobile.as("100%", "initial"),
+      backgroundSize: _IS_MOBILE.as("100%", "initial"),
       backgroundPosition: "center top",
       menu: {
         position: "absolute",
@@ -100,7 +100,7 @@ DOM.set({
           hover: {
             textShadow: "0 0 2px white",
           },
-          color: _isMobile.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
+          color: _IS_MOBILE.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
           content: [{
             display: window.LANG !== "en" ? "block" : "none",
             text: "English »",
@@ -119,11 +119,11 @@ DOM.set({
         padding: "0.5em",
         zIndex: 10,
         height: "auto",
-        position: _isMobile.as("absolute", "relative"),
-        width: _isMobile.as("fit-content", "100%"),
-        margin: _isMobile.as("1em", 0),
-        flexDirection: _isMobile.as("row", "column"),
-        borderRadius: _isMobile.as(".5em", 0),
+        position: _IS_MOBILE.as("absolute", "relative"),
+        width: _IS_MOBILE.as("fit-content", "100%"),
+        margin: _IS_MOBILE.as("1em", 0),
+        flexDirection: _IS_MOBILE.as("row", "column"),
+        borderRadius: _IS_MOBILE.as(".5em", 0),
         a: {
           fontSize: "2.3em",
           href: "#home",
@@ -135,14 +135,14 @@ DOM.set({
             fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
             text: "Lenino",
           },
-          click: e => _currentPage.value = pageNames[0],
+          click: e => _CURRENT_PAGE.value = pageNames[0],
         },
         tagline: {
           margin: "0 .6em",
           text: `${TEXT.storyteller[LANG]} · inventor · ${TEXT.educator[LANG]}`,
         },
         menu: {
-          display: _isMobile.as("block", "none"),
+          display: _IS_MOBILE.as("block", "none"),
           a: SOCIAL_LINKS,
         },
         onready: slideDown,
@@ -152,20 +152,17 @@ DOM.set({
         flexDirection: "column",
         color: "rgb(245, 220, 154)",
         zIndex: 5,
-        alignContent: _isMobile.as("left", "center"),
-        height: _isMobile.as("fit-content", "3.5em"),
-        width: _isMobile.as("fit-content", "100%"),
-        backgroundColor: _isMobile.as(
+        alignContent: _IS_MOBILE.as("left", "center"),
+        height: _IS_MOBILE.as("fit-content", "3.5em"),
+        width: _IS_MOBILE.as("fit-content", "100%"),
+        backgroundColor: _IS_MOBILE.as(
           "rgba(255,255,255,0.5)",
           "black",
         ),
-        padding: _isMobile.as(
-          "4.5em 0.5em 0.5em",
-          "0.5em 0"
-        ),
-        borderRadius: _isMobile.as("0.5em", 0),
-        margin: _isMobile.as("2em 0 0 2em", 0),
-        position: _isMobile.as("absolute", "relative"),
+        padding: _IS_MOBILE.as("4.5em 0.5em 0.5em", "0.5em 0"),
+        borderRadius: _IS_MOBILE.as("0.5em", 0),
+        margin: _IS_MOBILE.as("2em 0 0 2em", 0),
+        position: _IS_MOBILE.as("absolute", "relative"),
         a: {
           color: STYLE.COLOR.PAGE,
           width: "4em",
@@ -176,18 +173,12 @@ DOM.set({
           borderRadius: "0.25em",
           fontWeight: "normal",
           content: pageNames.map(name => new Object({
-            backgroundColor: _currentPage.as({
+            backgroundColor: _CURRENT_PAGE.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
             }),
-            display: _isMobile.as(
-              val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0],
-              "none",
-              "block",
-            ),
-            boxShadow: bind(
-              [_hoverPage, _currentPage],
-              (over, current) =>
+            display: _IS_MOBILE.as(val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0], "none", "block"),
+            boxShadow: bind([_HOVER_PAGE, _CURRENT_PAGE], (over, current) =>
               current === name ?
               STYLE.SHADOW.INSET :
               over === name ?
@@ -196,20 +187,20 @@ DOM.set({
             ),
             href: "#" + name,
             text: name.toLowerCase(),
-            click: e => _currentPage.value = name,
-            mouseover: e => _hoverPage.value = name,
-            mouseout: e => _hoverPage.value = false,
+            click: e => _CURRENT_PAGE.value = name,
+            mouseover: e => _HOVER_PAGE.value = name,
+            mouseout: e => _HOVER_PAGE.value = false,
           }))
         },
         onready: slideDown
       },
       article: {
         model: STYLE.FLEX,
-        justifyContent: _isMobile.as("flex-start", "center"),
+        justifyContent: _IS_MOBILE.as("flex-start", "center"),
         minHeight: "607px",
-        width: _isMobile.as("47em", "100%"),
-        margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
-        content: _currentPage.as(p => PAGES[p] ? PAGES[p](LANG) : undefined),
+        width: _IS_MOBILE.as("47em", "100%"),
+        margin: _IS_MOBILE.as("6em 0 1.5em 9em", "0 0 1em 0"),
+        content: _CURRENT_PAGE.as(p => PAGES[p] ? PAGES[p](LANG) : undefined),
       },
       footer: {
         padding: "1em",
