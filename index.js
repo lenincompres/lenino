@@ -21,7 +21,6 @@ function setSize(e) {
   _IS_MOBILE.value = window.innerWidth < 780;
   _IS_WIDE.value = window.innerWidth > 1050;
 };
-setSize();
 
 if (window.location.hash) _CURRENT_PAGE.value = window.location.hash.split("#")[1].toUpperCase();
 
@@ -210,5 +209,6 @@ DOM.set({
       },
     },
   },
+  onload: setSize,
   onresize: setSize,
 });
