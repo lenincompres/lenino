@@ -46,7 +46,7 @@ const TEXT = {
 DOM.set({
   title: "Lenino.net",
   keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
-  description: "Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+  description: "Prof. Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
   link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css",
   icon: "assets/icon.png",
   css: {
@@ -123,18 +123,23 @@ DOM.set({
         margin: _IS_MOBILE.as("1em", 0),
         flexDirection: _IS_MOBILE.as("row", "column"),
         borderRadius: _IS_MOBILE.as(".5em", 0),
-        a: {
-          fontSize: "2.3em",
-          href: "#home",
-          img: {
-            src: "assets/leninoLogo.png",
-            height: "30",
-          },
-          span: {
-            fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
-            text: "Lenino",
-          },
-          click: e => _CURRENT_PAGE.value = pageNames[0],
+        img: {
+          src: "assets/leninoLogo.png",
+          height: "30",
+          marginRight: '0.5em'
+        },
+        span: {
+          span: 'Prof. ',
+          a: {
+            verticalAlign: 'middle',
+            fontSize: "2.3em",
+            href: "#home",
+            span: {
+              fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
+              text: "Lenino",
+            },
+            click: e => _CURRENT_PAGE.value = pageNames[0],
+          }
         },
         tagline: {
           margin: "0 .6em",
