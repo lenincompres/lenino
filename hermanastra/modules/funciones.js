@@ -1,6 +1,14 @@
 
 const data = [
   {
+    date: new Date("2024", "10", "3"),
+    place: "Cañave, New York, NY.",
+  },
+  {
+    date: new Date("2024", "09", "20"),
+    place: "Blackthorn Resort, Catskill, NY.",
+  },
+  {
     date: new Date("2023", "07", "30"),
     place: "Gran Teatro del Cibao, Santiago, RD.",
   },

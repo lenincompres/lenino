@@ -19,6 +19,8 @@ export const songlistModel = {
   ul: {
     marginTop: "1em",
     li: [{
+      h5: "Los 4 Trucos Mágicos",
+    },{
       h5: "Este es su cuento",
     }, {
       h5: "Cuentas nuevas",
