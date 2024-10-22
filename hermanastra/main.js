@@ -89,7 +89,7 @@ DOM.set({
     },
   },
 
-  aside: sponsorsModel,
+  //aside: sponsorsModel,
 
   main: {
     align: "center",

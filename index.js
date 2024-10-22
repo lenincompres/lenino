@@ -5,6 +5,7 @@ import TWITTER from "./modules/widgets/twitter.js";
 import MUSICPLAYER from "./modules/widgets/musicplayer.js";
 import SOCIAL_LINKS from "./modules/widgets/social.js";
 import slideDown from "./modules/animations.js";
+import Copy from "./classes/Copy.js";
 
 window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
 const QS = DOM.querystring();
@@ -22,17 +23,9 @@ function setSize(e) {
   _IS_WIDE.value = window.innerWidth > 1050;
 };
 
-if (window.location.hash) _CURRENT_PAGE.value = window.location.hash.split("#")[1].toUpperCase();
+if (window.location.hash) _CURRENT_PAGE.value = window.location.hash.split("#")[1];
 
-const TEXT = {
-  bio: {
-    en: "bio",
-    es: "bio…",
-  },
-  projects: {
-    en: "projects",
-    es: "proyectos",
-  },
+Copy.add({
   storyteller: {
     en: "storyteller",
     es: "cantacuentos",
@@ -41,7 +34,7 @@ const TEXT = {
     en: "educator",
     es: "educador",
   },
-};
+});
 
 DOM.set({
   title: "Lenino.net",
@@ -99,16 +92,11 @@ DOM.set({
           hover: {
             textShadow: "0 0 2px white",
           },
+          after: {
+            content: '" »"',
+          },
           color: _IS_MOBILE.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
-          content: [{
-            display: window.LANG !== "en" ? "block" : "none",
-            text: "English »",
-            href: THIS_URL,
-          }, {
-            display: window.LANG !== "es" ? "block" : "none",
-            text: "Español »",
-            href: THIS_URL + "?lang=es",
-          }]
+          content: Copy.getToggleLink(Copy.LANG.es, Copy.LANG.en),
         }
       },
       header: {
@@ -123,15 +111,16 @@ DOM.set({
         margin: _IS_MOBILE.as("1em", 0),
         flexDirection: _IS_MOBILE.as("row", "column"),
         borderRadius: _IS_MOBILE.as(".5em", 0),
-        img: {
-          src: "assets/leninoLogo.png",
-          height: "30",
-          marginRight: '0.5em'
-        },
         span: {
-          span: 'Prof. ',
+          //span: 'Prof. ',
+          img: {
+            src: "assets/leninoLogo.png",
+            alt: "Lenino's Logo",
+            height: "30",
+            marginRight: '0.5em'
+          },
           a: {
-            verticalAlign: 'middle',
+            //verticalAlign: 'middle',
             fontSize: "2.3em",
             href: "#home",
             span: {
@@ -143,7 +132,7 @@ DOM.set({
         },
         tagline: {
           margin: "0 .6em",
-          text: `${TEXT.storyteller[LANG]} · inventor · ${TEXT.educator[LANG]}`,
+          text: Copy.get('storyteller') + ' · inventor · ' + Copy.get('educator'),
         },
         menu: {
           display: _IS_MOBILE.as("block", "none"),
@@ -165,18 +154,21 @@ DOM.set({
         ),
         padding: _IS_MOBILE.as("4.5em 0.5em 0.5em", "0.5em 0"),
         borderRadius: _IS_MOBILE.as("0.5em", 0),
-        margin: _IS_MOBILE.as("2em 0 0 2em", 0),
+        margin: _IS_MOBILE.as("2em 0 0 1.1em", 0),
         position: _IS_MOBILE.as("absolute", "relative"),
         a: {
           color: STYLE.COLOR.PAGE,
-          width: "4em",
+          width: "5em",
           padding: ".25em",
-          margin: "0.25em",
+          margin: "0.2em",
           fontSize: "1.25em",
           textAlign: "center",
           borderRadius: "0.25em",
           fontWeight: "normal",
-          content: pageNames.map(name => new Object({
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          content: pageNames.map(name => ({
             backgroundColor: _CURRENT_PAGE.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
@@ -190,7 +182,7 @@ DOM.set({
               STYLE.SHADOW.NORMAL
             ),
             href: "#" + name,
-            text: name.toLowerCase(),
+            text: Copy.get(name),
             click: e => _CURRENT_PAGE.value = name,
             mouseover: e => _HOVER_PAGE.value = name,
             mouseout: e => _HOVER_PAGE.value = false,
@@ -204,7 +196,7 @@ DOM.set({
         minHeight: "607px",
         width: _IS_MOBILE.as("47em", "100%"),
         margin: _IS_MOBILE.as("6em 0 1.5em 9em", "0 0 1em 0"),
-        content: _CURRENT_PAGE.as(p => PAGES[p] ? PAGES[p](LANG) : undefined),
+        content: _CURRENT_PAGE.as(p => PAGES[p] ? PAGES[p] : undefined),
       },
       footer: {
         padding: "1em",

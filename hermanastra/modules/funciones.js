@@ -3,6 +3,8 @@ const data = [
   {
     date: new Date("2024", "10", "3"),
     place: "Cañave, New York, NY.",
+    link: "https://www.instagram.com/canavenyc/?hl=en",
+    free: true,
   },
   {
     date: new Date("2024", "09", "20"),
@@ -44,7 +46,7 @@ function printDate(d) {
         margin: "0.5em",
         padding: "0.2em 0.7em",
         background: "#fe6",
-        text: "Tickets",
+        text: d.free ? "Free" : "Tickets",
         ready: blinking
       },
     }

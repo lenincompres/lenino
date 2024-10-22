@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.32
+ * @version 1.1.2
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -11,7 +11,8 @@
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
   else if (["text"].includes(station)) output = this.innerText;
   else if (["outer", "self"].includes(station)) output = this.outerHTML;
-  else if (DOM.attributes.includes(station)) output = this.getAttribute(station);
+  else if (station === "classes") output = this.getAttribute(station).split(" ");
+  else if (DOM.attributes.includes(station) || station.startsWith("data")) output = this.getAttribute(station);
   else if (DOM.isStyle(station, this)) output = this.style[station];
   else output = station ? this[station] : this.value;
   if (output !== undefined && output !== null) return isNaN(output) ? output : parseFloat(output);
@@ -22,19 +23,23 @@
 }
 
 Element.prototype.set = function (model, ...args) {
-  if ([null, undefined].includes(model)) return;
+  if ([null, undefined].includes(model)) return this;
   let contentType = DOM.typify(model.content);
   if (contentType.p5Element || contentType.element) {
     let elt = contentType.element ? contentType.element : contentType.p5Element.elt;
     this.set(elt, ...args);
-    return Object.keys(model).filter(k => k !== "content").forEach(k => elt.set(model[k], k, ...args));
+    Object.keys(model).filter(k => k !== "content").forEach(k => elt.set(model[k], k, ...args));
+    return this;
   }
-  if (Array.isArray(model.content)) return model.content.forEach(item => {
-    if ([null, undefined].includes(item)) return;
-    let individual = Object.assign({}, model);
-    individual.content = item;
-    this.set(individual, ...args);
-  });
+  if (Array.isArray(model.content)) {
+    model.content.forEach(item => {
+      if ([null, undefined].includes(item)) return;
+      let individual = Object.assign({}, model);
+      individual.content = item;
+      this.set(individual, ...args);
+    });
+    return this;
+  }
   let modelType = DOM.typify(model);
   const TAG = this.tagName.toLowerCase();
   const IS_HEAD = TAG === "head";
@@ -45,18 +50,47 @@ Element.prototype.set = function (model, ...args) {
   if ([undefined, "create", "assign", "model", "inner", "set"].includes(station)) station = "content";
   const STATION = station;
   station = station.toLowerCase(); // station lowercase
-  if (station === "content" && TAG === "meta") station = "*content"; // disambiguate
-  if (DOM.reserveStations.includes(station)) return;
+  // SELECT and input exception
+  if (IS_PRIMITIVE && !model.binders && ["selectedIndex", "value"].includes(STATION)) return this[STATION] = model;
+  // css exceptions
+  if (STATION === "fontFace") {
+    document.body.set({
+      css: {
+        [station]: model
+      }
+    });
+    return this;
+  }
+  let uncamel = DOM.unCamelize(STATION);
+  // needs dissambiguation for head link and pseaudoclass
+  if (!["link", "target", "lang"].includes(station) && (DOM.pseudoClasses.includes(uncamel) || DOM.pseudoElements.includes(uncamel))) return this.set({
+    css: {
+      [uncamel]: model
+    }
+  });
+  // element exceptions
+  if (station === "id") {
+    DOM.addID(model, this);
+    return this;
+  }
+  if (DOM.reserveStations.includes(station)) return this;
   const IS_CONTENT = station === "content";
   const IS_LISTENER = DOM.listeners.includes(station);
   const p5Elem = argsType.p5Element;
   if (modelType.function) {
-    if (DOM.typify(STATION).event) return this.addEventListener(STATION, e => model(e, this));
-    else if (p5Elem && typeof p5Elem[STATION] === "function") return p5Elem[STATION](e => model(e, this));
-    else return this[STATION] = e => model(e, this);
+    if (DOM.typify(STATION).event) this.addEventListener(STATION, e => model(e, this));
+    else if (p5Elem && typeof p5Elem[STATION] === "function") p5Elem[STATION](e => model(e, this));
+    else this[STATION] = e => model(e, this);
+    return this;
   }
   if (model._bonds) model = model.bind();
-  if (model.binders) return model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener));
+  if (model.binders) {
+    if(DOM.tags.includes(STATION) && !DOM.attributes.includes(STATION)) return this.set({
+      content: model,
+    }, STATION);
+    model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener, ["attribute", "attributes"].includes(station) ? station : undefined));
+    return this;
+  }
   if (station === "css") {
     const getID = elt => {
       if (elt.id) return elt.id;
@@ -69,10 +103,39 @@ Element.prototype.set = function (model, ...args) {
     if (![document.head, document.body].includes(this)) model = {
       [`#${getID(this)}`]: model,
     };
-    return document.head.set(typeof model === "string" ? model : DOM.css(model), "style");
+    document.head.set(typeof model === "string" ? model : DOM.css(model), "style");
+    return this;
   }
-  if (["text", "innertext"].includes(station)) return this.innerText = model;
-  if (["html", "innerhtml"].includes(station)) return this.innerHTML = model;
+  if (["text", "innertext"].includes(station)) {
+    this.innerText = model;
+    return this;
+  }
+  if (["html", "innerhtml"].includes(station)) {
+    this.innerHTML = model;
+    return this;
+  }
+  if (TAG.toLocaleLowerCase() === "meta") {
+    Object.entries(model).map(([key, value]) => this.setAttribute(key, value));
+    return this;
+  }
+  const handleProps = (fallBack = () => null) => {
+    Object.entries(model).map(([key, value]) => {
+      if (value && value._bonds) value.bind(this, key, value.onvalue, station);
+      if (value && value.binders) return value.binders.forEach(binder => binder.bind(this, key, value.onvalue, value.listener, station));
+      fallBack(key, value);
+    });
+  };
+  if (["attribute", "attributes"].includes(station)) {
+    station = "attribute";
+    handleProps((key, value) => this.setAttribute(key, value));
+    return this;
+  }
+  if (station === "class") {
+    if (IS_PRIMITIVE) this.setAttribute(station, model);
+    else if (Array.isArray(model)) model.forEach(c => this.classList.add(c));
+    else handleProps((key, value) => value ? this.classList.add(key) : this.classList.remove(key));
+    return this;
+  };
   if (IS_HEAD) {
     if (station === "font" && modelType.object) return DOM.set({
       fontFace: model
@@ -115,17 +178,22 @@ Element.prototype.set = function (model, ...args) {
   if (TAG === "style" && !model.content && !IS_PRIMITIVE) model = DOM.css(model);
   if (IS_CONTENT && !model.binders) {
     if (CLEAR) this.innerHTML = "";
-    if (IS_PRIMITIVE) return TAG === "input" ? this.value = model : this.innerHTML += model;
-    if (Array.isArray(model)) return model.forEach(m => this.set(m));
+    if (IS_PRIMITIVE) {
+      TAG === "input" ? this.value = model : this.innerHTML += model;
+      return this;
+    }
+    if (Array.isArray(model)) {
+      model.forEach(m => this.set(m));
+      return this;
+    }
     Object.keys(model).forEach(key => this.set(model[key], key, p5Elem));
     return this;
   }
   if (modelType.array) {
-    if (station === "class") return model.forEach(c => {
-      if (!c) return;
-      this.classList.add(c);
-    });
-    if (IS_LISTENER) return this.addEventListener(...model);
+    if (IS_LISTENER) {
+      this.addEventListener(...model);
+      return this;
+    }
     let map = model.map(m => this.set(m, [tag, ...cls].join("."), p5Elem));
     if (id) DOM.addID(id, map);
     return map;
@@ -135,49 +203,58 @@ Element.prototype.set = function (model, ...args) {
     if (model.function) model.listener = model.function;
     if (model.method) model.listener = model.method;
     if (model.call) model.listener = model.call;
-    if (model.options) return this.addEventListener(model.type, model.listener, model.options);
-    return this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
+    if (model.options) {
+      this.addEventListener(model.type, model.listener, model.options);
+      return this;
+    }
+    this.addEventListener(model.type, model.listener, model.useCapture, model.wantsUntrusted);
+    return this;
   }
   if (station === "style") {
-    if (IS_PRIMITIVE && !IS_HEAD) return this.setAttribute(station, model);
+    if (IS_PRIMITIVE && !IS_HEAD) {
+      this.setAttribute(station, model);
+      return this;
+    }
     if (!model.content) {
       if (CLEAR) this.setAttribute(station, "");
-      return Object.entries(model).forEach(([key, value]) => this.set(value, key));
+      handleProps((key, value) => this.style[key] = value);
+      return this;
     }
     if (DOM.typify(model.content).object) model.content = DOM.css(model.content);
   }
   if (IS_PRIMITIVE) {
     if (IS_HEAD) {
-      if (station === "title") return this.innerHTML += `<title>${model}</title>`;
-      if (station === "icon") return this.innerHTML += `<link rel="icon" href="${model}">`;
-      if (station === "image") return this.innerHTML += `<meta property="og:image" content="${model}">`;
-      if (station === "charset") return this.innerHTML += `<meta charset="${model}">`;
-      if (DOM.metaNames.includes(station)) return this.innerHTML += `<meta name="${station}" content="${model}">`;
-      if (DOM.htmlEquivs.includes(STATION)) return this.innerHTML += `<meta http-equiv="${DOM.unCamelize(STATION)}" content="${model}">`;
-      if (station === "font") return DOM.set({
+      const type = DOM.getDocType(model);
+      if (station === "title") this.innerHTML += `<title>${model}</title>`;
+      else if (station === "icon") this.innerHTML += `<link rel="icon" href="${model}">`;
+      else if (station === "image") this.innerHTML += `<meta property="og:image" content="${model}">`;
+      else if (station === "charset") this.innerHTML += `<meta charset="${model}">`;
+      else if (station.startsWith("og:")) this.innerHTML += `<meta property="${station}" content="${model}">`;
+      else if (DOM.metaNames.includes(station)) this.innerHTML += `<meta name="${station}" content="${model}">`;
+      else if (DOM.htmlEquivs.includes(STATION)) this.innerHTML += `<meta http-equiv="${DOM.unCamelize(STATION)}" content="${model}">`;
+      else if (station === "font") DOM.set({
         fontFace: {
           fontFamily: model.split("/").pop().split(".")[0],
           src: model.startsWith("url") ? model : `url("${model}")`
         }
       }, "css");
-      const type = DOM.getDocType(model);
-      if (station === "link") return this.set({
+      else if (station === "link") this.set({
         rel: type,
         href: model
       }, station);
-      if (station === "script") return this.set({
+      else if (station === "script") this.set({
         type: type,
         src: model
       }, station);
+      return this;
     }
     let done = DOM.isStyle(STATION, this) ? this.style[STATION] = model : undefined;
-    if (DOM.typify(STATION).attribute || station.includes("*")) done = !this.setAttribute(station.replace("*", ""), model);
+    if (DOM.typify(STATION).attribute || STATION.startsWith("data")) done = !this.setAttribute(station, model);
     if (station === "id") DOM.addID(model, this);
-    if (done !== undefined) return;
+    if (done !== undefined) return this;
   }
   let elem = (model.tagName || model.elt) ? model : false;
   if (!elem) {
-    if (tag && tag.length) tag = tag.replace("*", "");
     if (!tag || !isNaN(tag) || !tag.length) tag = "section";
     elem = p5Elem ? createElement(tag) : document.createElement(tag);
     elem.set(model, p5Elem);
@@ -185,9 +262,9 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute("id", id);
-  if (!argsType.boolean) this.append(elt);
+  if (argsType.boolean === undefined) this.append(elt);
   ["ready", "onready", "done", "ondone"].forEach(f => {
-    if (!model[f]) return;
+    if (!model[f]) return this;
     model[f](elem);
   });
   if (argsType.functions) argsType.functions.forEach(f => f(elem));
@@ -230,7 +307,14 @@ class Binder {
     this.update = bond => {
       if (!bond.target) return;
       let theirValue = bond.onvalue(this._value);
-      if (bond.target.tagName) return bond.target.set(theirValue, bond.station);
+      if (bond.target.tagName) {
+        if (!bond.type) return bond.target.set(theirValue, bond.station);
+        return bond.target.set({
+          [bond.type]: {
+            [bond.station]: theirValue,
+          }
+        });
+      }
       if (bond.target._bonds) bond.target.setter = this; // knowing the setter prevents co-binder"s loop
       bond.target[bond.station] = theirValue;
     }
@@ -243,6 +327,14 @@ class Binder {
   removeListener(countIndex) {
     delete this._listeners[countIndex];
   }
+  as(...args) {
+    if (args.length === 1) return this.bind(args[0]);
+    if (typeof args[0] === "function") {
+      if (args.length === 2) return this.bind(...args);
+      return this.bind(args.shift(), args);
+    }
+    return this.bind(args);
+  }
   bind(...args) {
     let argsType = DOM.typify(...args);
     let target = argsType.element ? argsType.element : argsType.binder;
@@ -251,10 +343,21 @@ class Binder {
     let listener = argsType.number;
     let values = argsType.array;
     let model = argsType.object;
+    let type = argsType.strings ? argsType.strings[1] : undefined;
     if (values && values.length) {
-      if (values.length === 2) onvalue = v => v ? values[1] : values[0];
-      else onvalue = v => values[v] !== undefined ? values[v] : "";
-    } else if (model && model !== target) onvalue = v => model[v] !== undefined ? model[v] : model.default !== undefined ? model.default : model.false;
+      let test = onvalue;
+      onvalue = val => {
+        val = test(val);
+        if (typeof val === "boolean" || isNaN(val)) val = val ? 1 : 0;
+        return values[val];
+      };
+    } else if (model && model !== target) {
+      let test = onvalue;
+      onvalue = val => {
+        val = test(val);
+        return [model[val], model.default, model.false].filter(v => v !== undefined)[0];
+      }
+    }
     if (!target) return DOM.bind(this, onvalue, this.addListener(onvalue)); // bind() addListener if not in a model
     if (listener) this.removeListener(listener); // if in a model, removes the listener
     let bond = {
@@ -262,11 +365,13 @@ class Binder {
       target: target,
       station: station,
       onvalue: onvalue,
+      type: type,
     }
     this._bonds.push(bond);
     this.update(bond);
   }
-  flash(values, delay = 1000, revert, callback) { //Iterates through values. Reverts to the intital
+  //Iterates through values. Reverts to the intital
+  flash(values, delay = 1000, revert, callback) {
     if (!Array.isArray(values)) values = [values];
     if (!Array.isArray(delay)) delay = new Array(values.length).fill(delay);
     let oldValue = this.value;
@@ -281,10 +386,14 @@ class Binder {
       if (callback) callback();
     }, delay.shift());
   }
+  //Iterates through values in a loop
   loop(values, delay) {
     if (!Array.isArray(values)) return;
     this.value = values.shift();
     setTimeout(() => this.flash(values, delay, false), delay);
+  }
+  apply(val) {
+    this.value = val;
   }
   set value(val) {
     this._value = val;
@@ -301,6 +410,10 @@ class Binder {
   }
 }
 
+function bind(...args) {
+  return DOM.bind(...args);
+}
+
 // global static methods to handle the DOM
 class DOM {
   // returns value based on 
@@ -312,11 +425,18 @@ class DOM {
     // checks if the station belongs to the head
     DOM.headTags.includes(station.toLowerCase()) ? document.head.get(station) : document.body.get(station);
   }
-  static create = (...args) => DOM.set(...args);
   // create elements based on an object model
   static set(model = "", ...args) {
     if (!args.includes("css") && !window.DOM_RESETTED) {
       DOM.set(DOM.RESET, "css");
+      document.head.set({
+        charset: "UTF-8",
+        viewport: "width=device-width, initial-scale=1.0",
+        meta: {
+          "http-equiv": "X-UA-Compatible",
+          content: "IE=edge",
+        },
+      });
       window.DOM_RESETTED = true;
     }
     // checks if the model is meant for an element
@@ -328,11 +448,19 @@ class DOM {
       DOM.set(model.css, "css");
       delete model.css;
       if (document.body) {
-        model.visibility = "hidden";
-        setTimeout(() => DOM.set("visible", "visibility"), 600);
+        DOM.set("none", "display");
+        setTimeout(() => DOM.set("block", "display"), 50);
       }
     }
     // checks if the model is meant for the head
+    if (model.head) {
+      document.head.set(model.head);
+      delete model.head;
+    }
+    if (model.lang) {
+      document.documentElement.set(model.lang, "lang");
+      delete model.lang;
+    }
     let headModel = {};
     Object.keys(model).forEach(key => {
       if (!DOM.headTags.includes(key.toLowerCase())) return;
@@ -351,8 +479,9 @@ class DOM {
     // waits for the body to load
     window.addEventListener("load", _ => document.body.set(model, ...args));
   }
+  static create = (...args) => DOM.set(...args);
   // returns a new element without appending it to the DOM
-  static element = (model, tag = "section") => DOM.set(model, tag, true);
+  static element = (model, tag = "section") => DOM.set(model, tag, false);
   // returns a new binder
   static binder(value, ...args) {
     let binder = new Binder(value);
@@ -385,9 +514,9 @@ class DOM {
     let extra = [];
     let cls = sel.split("_");
     sel = cls.shift();
-    if (sel === "h") {
+    if (sel === "h" || sel.endsWith(" h")) {
       cls = cls.length ? ("." + cls.join(".")) : "";
-      sel = Array(6).fill().map((_, i) => "h" + (i + 1) + cls).join(", ");
+      sel = Array(6).fill().map((_, i) => sel + (i + 1) + cls).join(", ");
       cls = [];
     }
     if (sel.toLowerCase() === "fontface") sel = "@font-face";
@@ -422,13 +551,21 @@ class DOM {
   // returns html based on a model
   static html = (model, tag = "section") => !model ? null : (model.tagName ? model : DOM.element(model, tag)).outerHTML;
   // returns querystring as a structural object 
+  static get queryString() {
+    return DOM.querystring();
+  }
   static querystring = () => {
     var qs = location.search.substring(1);
     if (!qs) return Object();
-    if (qs.includes("=")) return JSON.parse("{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "", "").replace(/=/g, "\":\"") + "\"}");
+    if (qs.includes("=")) {
+      qs = "{\"" + decodeURI(location.search.substring(1)).replace(/"/g, "\\\"").replace(/&/g, "\",\"", "").replace(/=/g, "\":\"") + "\"}";
+      return JSON.parse(qs);
+    }
     return qs.split("/");
   }
   static addID = (id, elt) => {
+    if (!isNaN(id)) return console.error("ID's should not be numeric. id: " + id);
+    if (elt.tagName) elt.setAttribute("id", id);
     if (Array.isArray(elt)) return elt.forEach(e => DOM.addID(id, e));
     if (!window[id]) return window[id] = elt;
     if (Array.isArray(window[id])) return window[id].push(elt);
@@ -483,6 +620,7 @@ class DOM {
   }).replace(/\s+/g, '');
   static unCamelize = (str, char = "-") => str.replace(/([A-Z])/g, char + "$1").toLowerCase();
   static isStyle = (str, elt) => ((elt ? elt : document.body ? document.body : document.createElement("section")).style)[str] !== undefined;
+  static tags = ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "blockquote", "body", "br", "button", "canvas", "caption", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend", "li", "link", "main", "map", "mark", "meta", "meter", "nav", "noscript", "object", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "svg", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr"];
   static events = ["abort", "afterprint", "animationend", "animationiteration", "animationstart", "beforeprint", "beforeunload", "blur", "canplay", "canplaythrough", "change", "click", "contextmenu", "copy", "cut", "dblclick", "drag", "dragend", "dragenter", "dragleave", "dragover", "dragstart", "drop", "durationchange", "ended", "error", "focus", "focusin", "focusout", "fullscreenchange", "fullscreenerror", "hashchange", "input", "invalid", "keydown", "keypress", "keyup", "load", "loadeddata", "loadedmetadata", "loadstart", "message", "mousedown", "mouseenter", "mouseleave", "mousemove", "mouseover", "mouseout", "mouseup", "offline", "online", "open", "pagehide", "pageshow", "paste", "pause", "play", "playing", "progress", "ratechange", "resize", "reset", "scroll", "search", "seeked", "seeking", "select", "show", "stalled", "submit", "suspend", "timeupdate", "toggle", "touchcancel", "touchend", "touchmove", "touchstart", "transitionend", "unload", "volumechange", "waiting", "wheel"];
   static attributes = ["accept", "accept-charset", "accesskey", "action", "align", "alt", "async", "autocomplete", "autofocus", "autoplay", "bgcolor", "border", "charset", "checked", "cite", "class", "color", "cols", "colspan", "content", "contenteditable", "controls", "coords", "data", "datetime", "default", "defer", "dir", "dirname", "disabled", "download", "draggable", "enctype", "for", "form", "formaction", "headers", "height", "hidden", "high", "href", "hreflang", "http-equiv", "id", "ismap", "kind", "lang", "list", "loop", "low", "max", "maxlength", "media", "method", "min", "multiple", "muted", "name", "novalidate", "open", "optimum", "pattern", "placeholder", "poster", "preload", "readonly", "rel", "required", "reversed", "rows", "rowspan", "sandbox", "scope", "selected", "shape", "size", "sizes", "spellcheck", "src", "srcdoc", "srclang", "srcset", "start", "step", "style", "tabindex", "target", "title", "translate", "type", "usemap", "value", "wrap", "width"];
   static pseudoClasses = ["active", "checked", "disabled", "empty", "enabled", "first-child", "last-child", "first-of-type", "focus", "hover", "in-range", "invalid", "last-of-type", "link", "only-of-type", "only-child", "optional", "out-of-range", "read-only", "read-write", "required", "root", "target", "valid", "visited", "lang", "not", "nth-child", "nth-last-child", "nth-last-of-type", "nth-of-type"];
@@ -492,7 +630,7 @@ class DOM {
   static headTags = ["meta", "link", "title", "font", "icon", "image", ...DOM.metaNames, ...DOM.htmlEquivs];
   static reserveStations = ["tag", "id", "onready", "ready", "done", "ondone"];
   static listeners = ["addevent", "addeventlistener", "eventlistener", "listener", "on"];
-  static getDocType = str => typeof str === "string" ? new Object({
+  static getDocType = str => typeof str === "string" ? ({
     css: "stylesheet",
     sass: "stylesheet/sass",
     scss: "stylesheet/scss",
@@ -504,7 +642,7 @@ class DOM {
     "*": {
       boxSizing: "border-box",
       verticalAlign: "baseline",
-      lineHeight: "1.25em",
+      lineHeight: "inherit",
       margin: 0,
       padding: 0,
       border: 0,
@@ -514,8 +652,6 @@ class DOM {
       quotes: "none",
       content: "none",
       backgroundColor: "transparent",
-      //fontSize: "100%",
-      //font: "inherit"
     },
     "article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section": {
       display: "block",
@@ -571,7 +707,7 @@ class DOM {
       fontSize: "2em",
     },
     h2: {
-      fontSize: "1.82em",
+      fontSize: "1.85em",
     },
     h3: {
       fontSize: "1.67em",
@@ -583,7 +719,7 @@ class DOM {
       fontSize: "1.33em",
     },
     h6: {
-      fontSize: "1.17em",
+      fontSize: "1.15em",
     }
   }
 }

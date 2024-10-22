@@ -1,10 +1,10 @@
 export const COLOR = {
-  LINK: 'rgb(0, 102, 102)',
-  LINK_DARK: '#003333',
+  LINK: '#055',
+  LINK_DARK: '#033',
   BACKGROUND: 'rgb(68, 85, 51)',
   HIGHLIGHT: 'rgb(0, 180, 180)',
   PAGE: '#F5DC9A',
-  PALE: '#F5C888',
+  PALE: '#d6cec0',
   FADED:'rgba(255,225,200,0.75)'
 };
 
