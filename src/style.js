@@ -1,6 +1,6 @@
 export const COLOR = {
   LINK: '#055',
-  LINK_DARK: '#033',
+  LINK_DARK: '#003333',
   BACKGROUND: 'rgb(68, 85, 51)',
   HIGHLIGHT: 'rgb(0, 180, 180)',
   PAGE: '#F5DC9A',

@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.1.3
+ * @version 1.1.4
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -85,7 +85,7 @@ Element.prototype.set = function (model, ...args) {
   }
   if (model._bonds) model = model.bind();
   if (model.binders) {
-    if(DOM.tags.includes(STATION) && !DOM.attributes.includes(STATION)) return this.set({
+    if (DOM.tags.includes(STATION) && !DOM.attributes.includes(STATION)) return this.set({
       content: model,
     }, STATION);
     model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener, ["attribute", "attributes"].includes(station) ? station : undefined));
@@ -108,6 +108,10 @@ Element.prototype.set = function (model, ...args) {
   }
   if (["text", "innertext"].includes(station)) {
     this.innerText = model;
+    return this;
+  }
+  if (["markdown", "md"].includes(station)) {
+    this.innerHTML = model.replace(/^###### (.*$)/gim, '<h6>$1</h6>').replace(/^##### (.*$)/gim, '<h5>$1</h5>').replace(/^#### (.*$)/gim, '<h4>$1</h4>').replace(/^### (.*$)/gim, '<h3>$1</h3>').replace(/^## (.*$)/gim, '<h2>$1</h2>').replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/__(.*?)__/g, '<b>$1</b>').replace(/\*(.*?)\*/g, '<i>$1</i>').replace(/_(.*?)_/g, '<i>$1</i>').replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>').replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>').replace(/^\d+\. (.*$)/gim, '<ol><li>$1</li></ol>').replace(/^\s*([^\n]+)\s*$/gim, '<p>$1</p>').replace(/\n{2,}/g, '<br>').trim();
     return this;
   }
   if (["html", "innerhtml"].includes(station)) {

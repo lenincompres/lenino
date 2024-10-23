@@ -96,7 +96,7 @@ class Copy {
     return Copy.copy.next();
   }
 
-  static pick(map){
+  static text(map){
     return map[Copy.lang];
   }
 
