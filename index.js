@@ -1,29 +1,21 @@
-import * as STYLE from "./modules/style.js";
-import PAGES from "./modules/pages.js";
-import INSTAGRAM from "./modules/widgets/instagram.js";
-import TWITTER from "./modules/widgets/twitter.js";
-import MUSICPLAYER from "./modules/widgets/musicplayer.js";
-import SOCIAL_LINKS from "./modules/widgets/social.js";
-import slideDown from "./modules/animations.js";
-import Copy from "./classes/Copy.js";
-
-window.THIS_URL = window.location.href.split('#')[0].split('?')[0];
-const QS = DOM.querystring();
-window.LANG = QS.lang ? QS.lang : "en";
+import * as STYLE from "./src/style.js";
+import PAGES from "./src/pages.js";
+import SOCIAL_LINKS from "./src/social.js";
+import slideDown from "./src/animations.js";
+import Copy from "./src/Copy.js";
 
 const _IS_MOBILE = new Binder();
 const _IS_WIDE = new Binder();
-const _CURRENT_PAGE = new Binder(0);
+const _CURRENT_PAGE = new Binder(window.location.hash.split("#")[1]);
 const _HOVER_PAGE = new Binder();
-
-const pageNames = Object.keys(PAGES);
-
 function setSize(e) {
   _IS_MOBILE.value = window.innerWidth < 780;
   _IS_WIDE.value = window.innerWidth > 1050;
 };
 
-if (window.location.hash) _CURRENT_PAGE.value = window.location.hash.split("#")[1];
+const PAGE_NAMES = Object.keys(PAGES);
+
+if(!_CURRENT_PAGE.value) _CURRENT_PAGE.value = Copy.KEY.home;
 
 Copy.add({
   storyteller: {
@@ -127,7 +119,7 @@ DOM.set({
               fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
               text: "Lenino",
             },
-            click: e => _CURRENT_PAGE.value = pageNames[0],
+            click: e => _CURRENT_PAGE.value = PAGE_NAMES[0],
           }
         },
         tagline: {
@@ -168,12 +160,12 @@ DOM.set({
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          content: pageNames.map(name => ({
+          content: PAGE_NAMES.map(name => ({
             backgroundColor: _CURRENT_PAGE.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
             }),
-            display: _IS_MOBILE.as(val => (val || name !== pageNames.slice(-1)[0]) && name !== pageNames[0], "none", "block"),
+            display: _IS_MOBILE.as(val => (val || name !== PAGE_NAMES.slice(-1)[0]) && name !== PAGE_NAMES[0], "none", "block"),
             boxShadow: bind([_HOVER_PAGE, _CURRENT_PAGE], (over, current) =>
               current === name ?
               STYLE.SHADOW.INSET :

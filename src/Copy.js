@@ -25,6 +25,7 @@ class Copy {
     this.lang = Copy.lang;
     this.key = Object.keys(this.map)[0];
     this.counter = {};
+    this.KEY = {};
   }
 
   add(key, val) {
@@ -33,9 +34,10 @@ class Copy {
     }
     if (this.map[key]) {
       console.error(`Key "${key}" already exists in copy.`);
-      return "sd"; 
+      return "sd";
     }
     this.map[key] = val;
+    this.KEY[key] = key;
     return this.get(key);
   }
 
@@ -67,11 +69,11 @@ class Copy {
     return Copy.treat(val[Object.keys(val)[0]]);
   }
 
-  static treat(s){
-    if(!s) return s;
-    if(Array.isArray(s)) return s.map(i => Copy.treat(i));
-    //if(s.includes('\n')) return Copy.treat(s.split('\n'));
-    return s.replaceAll('—', '<em class="em-dash">--</em>');
+  static treat(s) {
+    if (!s) return s;
+    if (Array.isArray(s)) return s.map(i => Copy.treat(i));
+    //if(s.includes("\n")) return Copy.treat(s.split("\n"));
+    return s.replaceAll("—", '<em class="em-dash">--</em>');
   }
 
   next() {
@@ -84,7 +86,7 @@ class Copy {
 
   static add(...args) {
     return Copy.copy.add(...args);
-  } 
+  }
 
   static get(...args) {
     return Copy.copy.get(...args);
@@ -94,8 +96,12 @@ class Copy {
     return Copy.copy.next();
   }
 
+  static pick(map){
+    return map[Copy.lang];
+  }
+
   static set lang(val) {
-    localStorage.setItem('copy-lang', val);
+    localStorage.setItem("copy-lang", val);
     location.reload();
   }
 
@@ -110,19 +116,30 @@ class Copy {
     },
   }
 
+  static get KEY(){
+    return Copy.copy.KEY;
+  }
+
+  static addKey(...keys) {
+    keys.forEach(key => {
+      if(Copy.KEY[key]) console.error(`Copy KEY ${key} already exists.`);
+      else Copy.copy.KEY[key] = key;
+    });
+  }
+
   static get lang() {
-    let lang = "en";//Copy.LANG.EN.code;
+    let lang = "en"; //Copy.LANG.EN.code;
     if (navigator && navigator.language) {
       lang = navigator.language.split("-")[0];
     }
-    let savedLang = localStorage.getItem('copy-lang');;
+    let savedLang = localStorage.getItem("copy-lang");;
     if (savedLang) {
       lang = savedLang;
     }
     return lang;
   }
 
-  static getToggleLink(...langs){
+  static getToggleLink(...langs) {
     return langs.map(lang => ({
       display: Copy.lang !== lang.code ? "block" : "none",
       text: lang.name,
