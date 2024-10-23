@@ -13,7 +13,7 @@ class CardScroll extends HTMLElement {
         margin: "6em auto",
         position: "relative",
         width: "20em",
-        height: "30em",
+        minHeight: "30em",
         section: items.map((item, i) => {
           const diff = val => i - val;
           const dist = val => items.length - Math.abs(diff(val));
@@ -21,7 +21,6 @@ class CardScroll extends HTMLElement {
           return {
             position: 'absolute',
             width: "20em",
-            height: "30em",
             backgroundColor: "white",
             borderRadius: "2em",
             boxShadow: "1px 1px 3px black",
