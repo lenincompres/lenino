@@ -4,54 +4,58 @@ import {
 
 class CardScroll extends HTMLElement {
   constructor(items = [], SPEED = 500) {
-    if(!Array.isArray(items)) items = [items];
     super();
-    this._ITEMS = new Binder([]);
-    this._SELECTED = new Binder(-1);
+    // creates binders in the element and setters/getters for their values
+    this.SPEED = SPEED;
+    this.scrolling = 0;
+    this.binderSet({
+      items: [], // key as the prop to set/get, and the initial value
+      selected: -1, // the actual binder will be _selected
+    });
+    const diff = (val, i) => i - val;
+    const dist = (val, i) => Math.abs(diff(val, i));
+    const pct = (val, i) => dist(val, i) / items.length;
+    const approx = (val, i, goal) => goal * (1 - pct(val, i) / 2) * diff(val, i) / 2;
+    const approch = (val, i, goal) => Math.abs(approx(val, i, goal));
     this.set({
-      content: this._ITEMS.as(items => ({
+      content: this._items.as(items => ({
         margin: "6em auto",
         position: "relative",
         width: "20em",
         minHeight: "30em",
-        section: items.map((item, i) => {
-          const diff = val => i - val;
-          const dist = val => items.length - Math.abs(diff(val));
-          const shade = val => Math.abs(diff(val)) / (items.length + 2);
-          return {
+        section: items.map((item, i) => ({
+          position: 'absolute',
+          width: "20em",
+          backgroundColor: "white",
+          borderRadius: "2.5em",
+          boxShadow: "1px 1px 3px black",
+          overflow: "hidden",
+          border: "solid 1em white",
+          transition: `ease-out ${SPEED}ms`,
+          borderColor: this._selected.as(val => val === i ? 'white' : `rgba(34,64,64,${approch(val, i, 1)})`),
+          cursor: this._selected.as(val => val === i ? 'auto' : 'pointer'),
+          zIndex: this._selected.as(val => items.length - dist(val, i)),
+          transform: this._selected.as(val => `rotate(${approx(val, i, 30)}deg)`),
+          left: this._selected.as(val => val === i ? 0 : val > i ? '-20em' : '33.3em'),
+          top: this._selected.as(val => val === i ? 0 : '25%'),
+          fontSize: this._selected.as(val => val === i ? '1em' : `0.6em`),
+          main: {
+            pointerEvents: this._selected.as(val => val === i ? 'auto' : 'none'),
+            content: item,
+          },
+          div: {
+            top: 0,
+            left: 0,
             position: 'absolute',
-            width: "20em",
-            backgroundColor: "white",
-            borderRadius: "2em",
-            boxShadow: "1px 1px 3px black",
-            overflow: "hidden",
-            border: "solid 1em white",
+            opacity: this._selected.as(val => val === i ? 0 : approch(val, i, 1)),
+            backgroundColor: COLOR.LINK_DARK,
             transition: SPEED + "ms",
-            borderColor: this._SELECTED.as(val => val === i ? 'white' : `rgba(34,64,64,${shade(val)})`),
-            cursor: this._SELECTED.as(val => val === i ? 'auto' : 'pointer'),
-            zIndex: this._SELECTED.as(dist),
-            transform: this._SELECTED.as(val => `rotate(${ 30 * items.length * (1-shade(val)) * diff(val)/items.length}deg)`),
-            left: this._SELECTED.as(val => val === i ? 0 : val > i ? '-20em' : '33.3em'),
-            top: this._SELECTED.as(val => val === i ? 0 : '25%'),
-            fontSize: this._SELECTED.as(val => val === i ? '1em' : `0.6em`),
-            main: {
-              pointerEvents: this._SELECTED.as(val => val === i ? 'auto' : 'none'),
-              content: item,
-            },
-            div: {
-              top: 0,
-              left: 0,
-              position: 'absolute',
-              opacity: this._SELECTED.as(val => val === i ? 0 : shade(val)),
-              backgroundColor: COLOR.LINK_DARK,
-              transition: SPEED + "ms",
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-            },
-            onclick: e => this._SELECTED.value != i ? this.selected += i > this.selected ? 1 : -1 : null,
-          }
-        }),
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+          },
+          onclick: e => this.selected < i ? this.next() : this.prev(),
+        })),
         b: {
           color: "black",
           backgroundColor: "white",
@@ -69,38 +73,43 @@ class CardScroll extends HTMLElement {
           content: [{
             left: "-20%",
             text: "◀",
-            opacity: this._SELECTED.as(val => val > 0 ? 1 : 0),
+            opacity: this._selected.as(val => val > 0 ? 1 : 0),
           }, {
             text: "▶",
             right: "-20%",
-            opacity: this._SELECTED.as(val => val > -1 && items.length > 1 && val < items.length - 1 ? 1 : 0),
+            opacity: this._selected.as(val => val > -1 && items.length > 1 && val < items.length - 1 ? 1 : 0),
           }],
-          onready: me => setTimeout(() => this.selected = 0, 2 * SPEED),
         },
       }))
     });
-    this.items = items;
-  }
-
-  get selected() {
-    return this._SELECTED.value;
-  }
-
-  set selected(n) {
-    this._SELECTED.value = n;
-  }
-
-  get items() {
-    return this._ITEMS.value;
-  }
-
-  set items(items) {
-    if(!Array.isArray(items)) items = [items];
-    this._ITEMS.value = items;
+    this.items = Array.isArray(items) ? items : [items];
   }
 
   clear() {
     this.selected = -1;
+  }
+
+  start(delay = 4) {
+    clearInterval(this.interval);
+    this.scrolling = 1;
+    this.interval = setInterval(() => this.scroll(), delay * this.SPEED);
+  }
+
+  scroll() {
+    if (!this.scrolling) return clearInterval(this.interval);
+    this.selected += this.scrolling;
+    if (this.items.length <= 1) return clearInterval(this.interval);
+    if (this.selected < 0 || this.selected >= this.items.length - 1) this.scrolling *= -1;
+  }
+
+  next() {
+    clearInterval(this.interval);
+    if (this.selected <= this.items.length) this.selected += 1;
+  }
+
+  prev() {
+    clearInterval(this.interval);
+    if (this.selected > 0) this.selected -= 1;
   }
 
 }

@@ -5,7 +5,6 @@ export const COLOR = {
   HIGHLIGHT: 'rgb(0, 180, 180)',
   PAGE: '#F5DC9A',
   PALE: '#d6cec0',
-  FADED:'rgba(255,225,200,0.75)'
 };
 
 export const SHADOW = {

@@ -83,6 +83,10 @@ Element.prototype.set = function (model, ...args) {
     else this[STATION] = e => model(e, this);
     return this;
   }
+  if (station === "binder") {
+    this.binderSet(model);
+    return this;
+  }
   if (model._bonds) model = model.bind();
   if (model.binders) {
     if (DOM.tags.includes(STATION) && !DOM.attributes.includes(STATION)) return this.set({
@@ -416,6 +420,25 @@ class Binder {
 
 function bind(...args) {
   return DOM.bind(...args);
+}
+
+Element.prototype.binderSet = function (name, value) {
+  if (typeof name == 'string') {
+    let _name = '_' + name;
+    this[_name] = new Binder(value);
+    Object.defineProperty(this, name, {
+      get() {
+        return this[_name].value;
+      },
+      set(val) {
+        this[_name].value = val;
+      },
+    });
+    return;
+  }
+  for (const [key, value] of Object.entries(name)) {
+    this.binderSet(key, value);
+  }
 }
 
 // global static methods to handle the DOM

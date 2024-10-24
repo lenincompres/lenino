@@ -33,9 +33,16 @@ Copy.add({
   }
 });
 
+let newsScroll = new CardScroll(news);
+newsScroll.start();
+window.addEventListener('hashchange', () => {
+  newsScroll.clear();
+  newsScroll.start()
+})
+
 export const PAGES = {
   [Copy.KEY.home]: {
-    section: new CardScroll(news),
+    section: newsScroll,
   },
   [Copy.KEY.bio]: {
     section: {
@@ -63,7 +70,7 @@ export const PAGES = {
           a: [NONE, ...val].map(tag => ({
             backgroundColor: activeTag.bind({
               [tag]: STYLE.COLOR.LINK_DARK,
-              default: STYLE.COLOR.FADED
+              default: STYLE.COLOR.PALE
             }),
             color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
             boxShadow: STYLE.SHADOW.NORMAL,
@@ -77,71 +84,69 @@ export const PAGES = {
         }
       }),
       span: {
-        color: STYLE.COLOR.FADED,
+        color: STYLE.COLOR.PALE,
         textShadow: STYLE.SHADOW.TEXT,
         text: activeTag.bind(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
       onready: slideDown,
     },
-    section: projects.map((project, i) => {
-      return {
-        model: STYLE.PAGE,
-        fontSize: "1em",
-        width: "23em",
-        cursor: "pointer",
-        boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
-        display: activeTag.bind(val => val === NONE || project.tags.includes(val) ? "block" : "none"),
-        main: {
-          minHeight: "6.5em",
-          div: {
-            float: "left",
-            height: "6em",
-            width: "6em",
-            marginRight: "0.6em",
-            backgroundImage: `url(${project.img ? project.img : project.folder + "/thumbnail.jpg"})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          },
-          h6: {
-            marginBottom: "0.25em",
-            fontWeight: "bold",
-            text: project.title,
-          },
-          p: project.desc,
+    section: projects.map((project, i) => ({
+      model: STYLE.PAGE,
+      fontSize: "1em",
+      width: "23em",
+      cursor: "pointer",
+      boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
+      display: activeTag.bind(val => val === NONE || project.tags.includes(val) ? "block" : "none"),
+      main: {
+        minHeight: "6.5em",
+        div: {
+          float: "left",
+          height: "6em",
+          width: "6em",
+          marginRight: "0.6em",
+          backgroundImage: `url(${project.img ? project.img : project.folder + "/thumbnail.jpg"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center"
         },
-        ul: {
-          marginTop: "0.2em",
-          li: project.tags.sort(sortWords).map(tag => {
-            if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
-            return {
-              borderRadius: "0.25em",
-              padding: "0.2em 0.4em",
-              marginRight: "0.2em",
-              backgroundColor: STYLE.COLOR.PALE,
-              color: STYLE.COLOR.LINK,
-              border: "solid 1px",
-              borderColor: activeTag.bind({
-                [tag]: STYLE.COLOR.LINK,
-                default: STYLE.COLOR.PALE,
-              }),
-              display: "inline-block",
-              text: tag,
-              click: e => {
-                activeTag.value = activeTag.value === tag ? NONE : tag;
-                e.stopPropagation();
-              }
+        h6: {
+          marginBottom: "0.25em",
+          fontWeight: "bold",
+          text: project.title,
+        },
+        p: project.desc,
+      },
+      ul: {
+        marginTop: "0.2em",
+        li: project.tags.sort(sortWords).map(tag => {
+          if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
+          return {
+            borderRadius: "0.25em",
+            padding: "0.2em 0.4em",
+            marginRight: "0.2em",
+            backgroundColor: STYLE.COLOR.PALE,
+            color: STYLE.COLOR.LINK,
+            border: "solid 1px",
+            borderColor: activeTag.bind({
+              [tag]: STYLE.COLOR.LINK,
+              default: STYLE.COLOR.PALE,
+            }),
+            display: "inline-block",
+            text: tag,
+            click: e => {
+              activeTag.value = activeTag.value === tag ? NONE : tag;
+              e.stopPropagation();
             }
-          })
-        },
-        mouseover: e => activeProject.value = i,
-        mouseout: e => activeProject.value = false,
-        click: e => {
-          let link = project.link ? project.link : project.folder
-          window.open(link, "_blank")
-        },
-        onready: slideDown
-      }
-    }),
+          }
+        })
+      },
+      mouseover: e => activeProject.value = i,
+      mouseout: e => activeProject.value = false,
+      click: e => {
+        let link = project.link ? project.link : project.folder
+        window.open(link, "_blank")
+      },
+      onready: slideDown
+    })),
     onready: () => {
       showTag();
       activeTag.value = false;
