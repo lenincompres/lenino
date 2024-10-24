@@ -15,10 +15,10 @@ class CardScroll extends HTMLElement {
     const diff = (val, i) => i - val;
     const dist = (val, i) => Math.abs(diff(val, i));
     const pct = (val, i) => dist(val, i) / items.length;
-    const approx = (val, i, goal) => goal * (1 - pct(val, i) / 2) * diff(val, i) / 2;
-    const approch = (val, i, goal) => Math.abs(approx(val, i, goal));
+    const tang = (val, i, goal) => goal * (1 - pct(val, i) / 2) * diff(val, i) / 2;
     this.set({
       content: this._items.as(items => ({
+        display: "block",
         margin: "6em auto",
         position: "relative",
         width: "20em",
@@ -26,18 +26,19 @@ class CardScroll extends HTMLElement {
         section: items.map((item, i) => ({
           position: 'absolute',
           width: "20em",
+          minHeight: "30em",
           backgroundColor: "white",
           borderRadius: "2.5em",
           boxShadow: "1px 1px 3px black",
           overflow: "hidden",
           border: "solid 1em white",
           transition: `ease-out ${SPEED}ms`,
-          borderColor: this._selected.as(val => val === i ? 'white' : `rgba(34,64,64,${approch(val, i, 1)})`),
+          borderColor: this._selected.as(val => val === i ? 'white' : `rgba(34,64,64,${Math.abs(tang(val, i, 1))})`),
           cursor: this._selected.as(val => val === i ? 'auto' : 'pointer'),
           zIndex: this._selected.as(val => items.length - dist(val, i)),
-          transform: this._selected.as(val => `rotate(${approx(val, i, 30)}deg)`),
+          transform: this._selected.as(val => `rotate(${tang(val, i, 30)}deg)`),
           left: this._selected.as(val => val === i ? 0 : val > i ? '-20em' : '33.3em'),
-          top: this._selected.as(val => val === i ? 0 : '25%'),
+          top: this._selected.as(val => val === i ? 0 : '10em'),
           fontSize: this._selected.as(val => val === i ? '1em' : `0.6em`),
           main: {
             pointerEvents: this._selected.as(val => val === i ? 'auto' : 'none'),
@@ -47,7 +48,7 @@ class CardScroll extends HTMLElement {
             top: 0,
             left: 0,
             position: 'absolute',
-            opacity: this._selected.as(val => val === i ? 0 : approch(val, i, 1)),
+            opacity: this._selected.as(val => val === i ? 0 : Math.abs(tang(val, i, 1))),
             backgroundColor: COLOR.LINK_DARK,
             transition: SPEED + "ms",
             width: "100%",
@@ -66,17 +67,17 @@ class CardScroll extends HTMLElement {
           padding: "1em",
           textAlign: "center",
           position: "absolute",
-          top: "50%",
+          top: "14em",
           zIndex: items.length,
           pointerEvents: "none",
           transition: SPEED + "ms",
           content: [{
-            left: "-20%",
             text: "◀",
+            left: "-4em",
             opacity: this._selected.as(val => val > 0 ? 1 : 0),
           }, {
             text: "▶",
-            right: "-20%",
+            right: "-4em",
             opacity: this._selected.as(val => val > -1 && items.length > 1 && val < items.length - 1 ? 1 : 0),
           }],
         },
