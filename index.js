@@ -1,21 +1,30 @@
 import * as STYLE from "./src/style.js";
 import PAGES from "./src/pages.js";
 import SOCIAL_LINKS from "./src/social.js";
-import slideDown from "./src/animations.js";
+import queueDown from "./src/animations.js";
 import Copy from "./src/Copy.js";
 
-const _IS_MOBILE = new Binder();
-const _IS_WIDE = new Binder();
-const _CURRENT_PAGE = new Binder(window.location.hash.split("#")[1]);
-const _HOVER_PAGE = new Binder();
-function setSize(e) {
-  _IS_MOBILE.value = window.innerWidth < 780;
-  _IS_WIDE.value = window.innerWidth > 1050;
+const _currentPage = new Binder();
+function navigated(e){
+  let hash = window.location.hash.split("#")[1];
+  if(hash === _currentPage.value) return;
+  _currentPage.value = hash ? hash : 'home';
+}
+window.addEventListener('hashchange', navigated);
+navigated();
+
+const _hoverPage = new Binder();
+
+const _isMobile = new Binder();
+const _isWide = new Binder();
+function resized(e) {
+  _isMobile.value = window.innerWidth < 780;
+  _isWide.value = window.innerWidth > 1050;
 };
 
 const PAGE_NAMES = Object.keys(PAGES);
 
-if(!_CURRENT_PAGE.value) _CURRENT_PAGE.value = Copy.KEY.home;
+if(!_currentPage.value) _currentPage.value = Copy.KEY.home;
 
 Copy.add({
   storyteller: {
@@ -66,14 +75,15 @@ DOM.set({
     model: STYLE.FLEX,
     margin: "0 auto",
     maxWidth: "800px",
+    overflowX: "hidden",
     main: {
       position: "relative",
-      maxWidth: _IS_WIDE.as("100%", "800px"),
+      maxWidth: _isWide.as("100%", "800px"),
       width: "100%",
       boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: _IS_MOBILE.as("100%", "initial"),
+      backgroundSize: _isMobile.as("100%", "initial"),
       backgroundPosition: "center top",
       menu: {
         position: "absolute",
@@ -87,7 +97,7 @@ DOM.set({
           after: {
             content: '" »"',
           },
-          color: _IS_MOBILE.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
+          color: _isMobile.as(STYLE.COLOR.PALE, STYLE.COLOR.LINK_DARK),
           content: Copy.getToggleLink(Copy.LANG.es, Copy.LANG.en),
         }
       },
@@ -98,11 +108,11 @@ DOM.set({
         padding: "0.5em",
         zIndex: 10,
         height: "auto",
-        position: _IS_MOBILE.as("absolute", "relative"),
-        width: _IS_MOBILE.as("fit-content", "100%"),
-        margin: _IS_MOBILE.as("1em", 0),
-        flexDirection: _IS_MOBILE.as("row", "column"),
-        borderRadius: _IS_MOBILE.as(".5em", 0),
+        position: _isMobile.as("absolute", "relative"),
+        width: _isMobile.as("fit-content", "100%"),
+        margin: _isMobile.as("1em", 0),
+        flexDirection: _isMobile.as("row", "column"),
+        borderRadius: _isMobile.as(".5em", 0),
         span: {
           //span: 'Prof. ',
           img: {
@@ -119,7 +129,7 @@ DOM.set({
               fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
               text: "Lenino",
             },
-            click: e => _CURRENT_PAGE.value = PAGE_NAMES[0],
+            click: e => _currentPage.value = PAGE_NAMES[0],
           }
         },
         tagline: {
@@ -127,27 +137,27 @@ DOM.set({
           text: Copy.get('storyteller') + ' · inventor · ' + Copy.get('educator'),
         },
         menu: {
-          display: _IS_MOBILE.as("block", "none"),
+          display: _isMobile.as("block", "none"),
           a: SOCIAL_LINKS,
         },
-        onready: slideDown,
+        onready: queueDown,
       },
       nav: {
         style: STYLE.FLEX,
         flexDirection: "column",
         color: "rgb(245, 220, 154)",
         zIndex: 5,
-        alignContent: _IS_MOBILE.as("left", "center"),
-        height: _IS_MOBILE.as("fit-content", "3.5em"),
-        width: _IS_MOBILE.as("fit-content", "100%"),
-        backgroundColor: _IS_MOBILE.as(
+        alignContent: _isMobile.as("left", "center"),
+        height: _isMobile.as("fit-content", "3.5em"),
+        width: _isMobile.as("fit-content", "100%"),
+        backgroundColor: _isMobile.as(
           "rgba(255,255,255,0.5)",
           "black",
         ),
-        padding: _IS_MOBILE.as("4.5em 0.5em 0.5em", "0.5em 0"),
-        borderRadius: _IS_MOBILE.as("0.5em", 0),
-        margin: _IS_MOBILE.as("2em 0 0 1.1em", 0),
-        position: _IS_MOBILE.as("absolute", "relative"),
+        padding: _isMobile.as("4.5em 0.5em 0.5em", "0.5em 0"),
+        borderRadius: _isMobile.as("0.5em", 0),
+        margin: _isMobile.as("2em 0 0 1.1em", 0),
+        position: _isMobile.as("absolute", "relative"),
         a: {
           color: STYLE.COLOR.PAGE,
           width: "5em",
@@ -161,34 +171,34 @@ DOM.set({
           overflow: "hidden",
           textOverflow: "ellipsis",
           content: PAGE_NAMES.map(name => ({
-            backgroundColor: _CURRENT_PAGE.as({
+            backgroundColor: _currentPage.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
             }),
-            display: _IS_MOBILE.as(val => (val || name !== PAGE_NAMES.slice(-1)[0]) && name !== PAGE_NAMES[0], "none", "block"),
-            boxShadow: bind([_HOVER_PAGE, _CURRENT_PAGE], (over, current) =>
-              current === name ?
-              STYLE.SHADOW.INSET :
-              over === name ?
-              STYLE.SHADOW.HIGHLIGHT :
-              STYLE.SHADOW.NORMAL
-            ),
+            display: _isMobile.as(val => (val || name !== PAGE_NAMES.slice(-1)[0]) && name !== PAGE_NAMES[0], "none", "block"),
+            boxShadow: {
+              bind: [_hoverPage, _currentPage],
+              as: (over, current) =>
+              current === name ? STYLE.SHADOW.INSET :
+              over === name ? STYLE.SHADOW.HIGHLIGHT :
+              STYLE.SHADOW.NORMAL,
+            },
             href: "#" + name,
             text: Copy.get(name),
-            click: e => _CURRENT_PAGE.value = name,
-            mouseover: e => _HOVER_PAGE.value = name,
-            mouseout: e => _HOVER_PAGE.value = false,
+            click: e => _currentPage.value = name,
+            mouseover: e => _hoverPage.value = name,
+            mouseout: e => _hoverPage.value = false,
           }))
         },
-        onready: slideDown
+        onready: queueDown
       },
       article: {
         model: STYLE.FLEX,
-        justifyContent: _IS_MOBILE.as("flex-start", "center"),
+        justifyContent: _isMobile.as("flex-start", "center"),
         minHeight: "607px",
-        width: _IS_MOBILE.as("47em", "100%"),
-        margin: _IS_MOBILE.as("6em 0 1.5em 9em", "0 0 1em 0"),
-        content: _CURRENT_PAGE.as(p => PAGES[p] ? PAGES[p] : undefined),
+        width: _isMobile.as("47em", "100%"),
+        margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
+        content: _currentPage.as(p => PAGES[p] ? PAGES[p] : undefined),
       },
       footer: {
         padding: "1em",
@@ -198,6 +208,6 @@ DOM.set({
       },
     },
   },
-  onload: setSize,
-  onresize: setSize,
+  onload: resized,
+  onresize: resized,
 });

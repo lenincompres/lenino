@@ -60,7 +60,7 @@ class CardScroll extends HTMLElement {
         b: {
           color: "black",
           backgroundColor: "white",
-          borderRadius: "1.5em",
+          borderRadius: "3em",
           lineHeight: "1em",
           width: "3em",
           height: "3em",
@@ -73,11 +73,11 @@ class CardScroll extends HTMLElement {
           transition: SPEED + "ms",
           content: [{
             text: "◀",
-            left: "-4em",
+            left: "-3.3em",
             opacity: this._selected.as(val => val > 0 ? 1 : 0),
           }, {
             text: "▶",
-            right: "-4em",
+            right: "-3.3em",
             opacity: this._selected.as(val => val > -1 && items.length > 1 && val < items.length - 1 ? 1 : 0),
           }],
         },

@@ -1,4 +1,4 @@
-import slideDown from "./animations.js"
+import queueDown from "./animations.js"
 import allProjects from "./projects.js"
 import * as STYLE from "./style.js";
 import SOCIAL_LINKS from "./social.js";
@@ -54,7 +54,10 @@ export const PAGES = {
           en: `Lenin Comprés (also known as Prof. Lenino) is a professional in interactive media, educational sciences, and performing arts. He serves as a professor and creative technologist at <a href="https://itp.nyu.edu/itp/people/?tab=staff">New York University's TISCH School of the Arts</a>  and holds a degree from Columbia University's Teachers College. Lenin is the co-writer of the award-winning script for <a href="https://www.imdb.com/title/tt7552938/">A State of Madness</a>, which represented the Dominican Republic at the 2021 Oscars. He is also the creator of <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>, the first original Dominican-authored board game featuring an instructional booklet written entirely in verse and rhyme. As an artist, he performs as a quirky musical storyteller under his Lenino moniker.`
         }),
       },
-      onready: slideDown,
+      onready: elt => queueDown(elt, {
+        left: ['-20px', 0],
+        opacity: [0, 1],
+      }),
     }
   },
   [Copy.KEY.projects]: {
@@ -88,7 +91,7 @@ export const PAGES = {
         textShadow: STYLE.SHADOW.TEXT,
         text: activeTag.bind(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
-      onready: slideDown,
+      onready: queueDown,
     },
     section: projects.map((project, i) => ({
       model: STYLE.PAGE,
@@ -145,7 +148,7 @@ export const PAGES = {
         let link = project.link ? project.link : project.folder
         window.open(link, "_blank")
       },
-      onready: slideDown
+      onready: queueDown
     })),
     onready: () => {
       showTag();
@@ -159,7 +162,7 @@ export const PAGES = {
       textAlign: "center",
       a: SOCIAL_LINKS.map(a => Object.assign({
         margin: "0.25em",
-        onready: slideDown
+        onready: queueDown
       }, a))
     }
   },

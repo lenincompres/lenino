@@ -1,27 +1,33 @@
-const SPEED = 0.34;
+const SPEED = 200;
 
 let queue = [];
 
 let trigger = (s = SPEED) => setTimeout(_ => {
   if (!queue.length) return;
-  queue[0].set({
-    opacity: 1,
-    top: 0
-  })
-  queue.shift();
-  trigger();
-}, 333 * s);
+  let entry = queue.shift();
+  entry.elem.set(entry.model);
+  trigger(s);
+}, 0.3 * s);
 
-export const slideDown = (elem, s = SPEED, queueUp = true) => {
-  elem.set({
-    position: !['fixed', 'absolute'].includes(elem.style.position) ? 'relative' : undefined,
-    top: '-20px',
-    opacity: 0,
-    transition: s + 's'
+export const queueDown = (elem, model = {
+  top: ['-20px', 0],
+  opacity: [0, 1],
+}, s = SPEED, transition = 'ease-out') => {
+
+  if (!['fixed', 'absolute'].includes(elem.style.position)) elem.set('relative', 'position');
+
+  let properModel = {};
+  Object.entries(model).forEach(([key, val]) => properModel[key] = {
+    through: val,
+    duration: s,
+    transition: transition,
   });
-  if(!queueUp) return trigger(s);
-  queue.push(elem);
+
+  Object.entries(properModel).forEach(([key, val]) => val.through ? elem.set(val.through[0], key) : null);
+
+  queue.push({elem:elem, model:properModel});
   if (queue.length === 1) trigger(s);
+
 }
 
-export default slideDown;
+export default queueDown;
