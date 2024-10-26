@@ -22,11 +22,11 @@ class CardScroll extends HTMLElement {
         margin: "6em auto",
         position: "relative",
         width: "20em",
-        minHeight: "30em",
+        minHeight: "25em",
         section: items.map((item, i) => ({
           position: 'absolute',
           width: "20em",
-          minHeight: "30em",
+          minHeight: "25em",
           backgroundColor: "white",
           borderRadius: "2.5em",
           boxShadow: "1px 1px 3px black",

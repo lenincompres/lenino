@@ -1,11 +1,11 @@
-const SPEED = 500;
+const SPEED = 300;
 
 const queue = [];
 
 const trigger = (s = SPEED) => setTimeout(_ => {
-  if (!queue.length) return;
   let entry = queue.shift();
   entry.elem.set(entry.model);
+  if (!queue.length) return;
   trigger(s);
 }, 0.3 * s);
 
@@ -25,8 +25,11 @@ export const queueDown = (elem, model = {
 
   Object.entries(properModel).forEach(([key, val]) => val.through ? elem.set(val.through[0], key) : null);
 
-  queue.push({elem:elem, model:properModel});
-  if (queue.length === 1) trigger(0.5 * s);
+  queue.push({
+    elem: elem,
+    model: properModel
+  });
+  if (queue.length === 1) trigger(s);
 
 }
 

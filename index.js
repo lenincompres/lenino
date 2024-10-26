@@ -195,7 +195,8 @@ DOM.set({
       article: {
         model: STYLE.FLEX,
         justifyContent: _isMobile.as("flex-start", "center"),
-        minHeight: "607px",
+        minHeight: "calc(100vh - 10em)",
+        height: "fit-content",
         width: _isMobile.as("47em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
         content: _currentPage.as(p => PAGES[p] ? PAGES[p] : undefined),
