@@ -7,11 +7,12 @@ import CardScroll from "./CardScroll.js";
 import news from "./news.js";
 
 const projects = allProjects.filter(p => !p.hidden);
-const activeProject = new Binder();
-const allTags = new Binder([]);
 const NONE = "∅";
-const activeTag = new Binder(NONE);
-const showTag = (tag = NONE) => activeTag.value = activeTag.value === tag ? NONE : tag;
+const _activeProject = new Binder();
+const _allTags = new Binder([]);
+const _activeTag = new Binder(NONE);
+const showTag = (tag = NONE) => _activeTag.value = tag;
+const addTag = (tag) => !_allTags.value.includes(tag) ? (_allTags.value = [..._allTags.value, tag].sort(sortWords)) : null;
 const sortWords = (a, b) => a < b ? -1 : 1;
 
 Copy.add({
@@ -67,39 +68,39 @@ export const PAGES = {
       justifyContent: "center",
       display: "flex",
       flexWrap: "wrap",
-      content: allTags.bind(val => {
-        showTag();
-        return {
-          a: [NONE, ...val].map(tag => ({
-            backgroundColor: activeTag.bind({
-              [tag]: STYLE.COLOR.LINK_DARK,
-              default: STYLE.COLOR.PALE
-            }),
-            color: activeTag.bind(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
-            boxShadow: STYLE.SHADOW.NORMAL,
-            borderRadius: "0.25em",
-            padding: "0.2em 0.68em",
-            margin: "0.3em 0.3em 0 0",
-            display: "inline-block",
-            text: tag,
-            onclick: e => showTag(tag)
-          }))
-        }
-      }),
+      content: _allTags.as(val => ({
+        a: [NONE, ...val].map(tag => ({
+          backgroundColor: _activeTag.as({
+            [tag]: STYLE.COLOR.LINK_DARK,
+            default: STYLE.COLOR.PALE
+          }),
+          color: _activeTag.as(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
+          boxShadow: STYLE.SHADOW.NORMAL,
+          borderRadius: "0.25em",
+          padding: "0.2em 0.68em",
+          margin: "0.3em 0.3em 0 0",
+          display: "inline-block",
+          text: tag,
+          onclick: e => showTag(tag),
+        }))
+      })),
       span: {
         color: STYLE.COLOR.PALE,
         textShadow: STYLE.SHADOW.TEXT,
-        text: activeTag.bind(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
+        text: _activeTag.as(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
       },
-      onready: queueDown,
+      onready: elt => queueDown(elt, {
+        left: ['-30px', '10px', 0],
+        opacity: [0, 1],
+      }),
     },
     section: projects.map((project, i) => ({
       model: STYLE.PAGE,
       fontSize: "1em",
       width: "23em",
       cursor: "pointer",
-      boxShadow: DOM.bind(activeProject, val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
-      display: activeTag.bind(val => val === NONE || project.tags.includes(val) ? "block" : "none"),
+      boxShadow: _activeProject.as(val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
+      display: _activeTag.as(val => val === NONE || project.tags.includes(val) ? "block" : "none"),
       main: {
         minHeight: "6.5em",
         div: {
@@ -120,30 +121,28 @@ export const PAGES = {
       },
       ul: {
         marginTop: "0.2em",
-        li: project.tags.sort(sortWords).map(tag => {
-          if (!allTags.value.includes(tag)) allTags.value = [...allTags.value, tag].sort(sortWords);
-          return {
-            borderRadius: "0.25em",
-            padding: "0.2em 0.4em",
-            marginRight: "0.2em",
-            backgroundColor: STYLE.COLOR.PALE,
-            color: STYLE.COLOR.LINK,
-            border: "solid 1px",
-            borderColor: activeTag.bind({
-              [tag]: STYLE.COLOR.LINK,
-              default: STYLE.COLOR.PALE,
-            }),
-            display: "inline-block",
-            text: tag,
-            click: e => {
-              activeTag.value = activeTag.value === tag ? NONE : tag;
-              e.stopPropagation();
-            }
-          }
-        })
+        li: project.tags.sort(sortWords).map(tag => ({
+          borderRadius: "0.25em",
+          padding: "0.2em 0.4em",
+          marginRight: "0.2em",
+          backgroundColor: STYLE.COLOR.PALE,
+          color: STYLE.COLOR.LINK,
+          border: "solid 1px",
+          borderColor: _activeTag.as({
+            [tag]: STYLE.COLOR.LINK,
+            default: STYLE.COLOR.PALE,
+          }),
+          display: "inline-block",
+          text: tag,
+          click: e => {
+            _activeTag.value = _activeTag.value === tag ? NONE : tag;
+            e.stopPropagation();
+          },
+          ready: elt => addTag(tag),
+        }))
       },
-      mouseover: e => activeProject.value = i,
-      mouseout: e => activeProject.value = false,
+      mouseover: e => _activeProject.value = i,
+      mouseout: e => _activeProject.value = false,
       click: e => {
         let link = project.link ? project.link : project.folder
         window.open(link, "_blank")
@@ -152,7 +151,7 @@ export const PAGES = {
     })),
     onready: () => {
       showTag();
-      activeTag.value = false;
+      _activeTag.value = false;
     }
   },
   [Copy.KEY.contact]: {
