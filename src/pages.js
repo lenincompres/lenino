@@ -55,7 +55,7 @@ export const PAGES = {
         }),
       },
       onready: elt => queueDown(elt, {
-        left: ['-20px', 0],
+        left: ['-30px', '10px', 0],
         opacity: [0, 1],
       }),
     }

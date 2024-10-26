@@ -86,10 +86,9 @@ Element.prototype.set = function (model, ...args) {
   if (model.duration) {
     model.duration = parseInt(model.duration);
     if (model.to !== undefined && model.from !== undefined) model.through = [model.from, model.to];
-    let ms = model.duration / (model.through.length - 1);
     this.set(model.through[0], STATION);
-    model.through.forEach((val, i) => setTimeout(() => this.set(val, STATION), i * ms));
-    if (model.transition) this.set(`${this.get('transition')}, ${DOM.unCamelize(STATION)} ${ms}ms ${model.transition}`, 'transition');
+    model.through.forEach((val, i) => setTimeout(() => this.set(val, STATION), i * model.duration));
+    if (model.transition) this.set(`${this.get('transition')}, ${DOM.unCamelize(STATION)} ${model.duration}ms ${model.transition}`, 'transition');
     return this;
   }
   if (model._bonds) model = model.bind();
@@ -104,7 +103,7 @@ Element.prototype.set = function (model, ...args) {
     if (DOM.tags.includes(STATION) && !DOM.attributes.includes(STATION)) return this.set({
       content: model,
     }, STATION);
-    model.binders.forEach(binder => binder.bind(this, STATION, model.onvalue, model.listener, ["attribute", "attributes"].includes(station) ? station : undefined));
+    model.binders.forEach(binder => binder.bind(this, STATION, model.as, model.listener, ["attribute", "attributes"].includes(station) ? station : undefined));
     return this;
   }
   if (station === "css") {
@@ -140,8 +139,8 @@ Element.prototype.set = function (model, ...args) {
   }
   const handleProps = (fallBack = () => null) => {
     Object.entries(model).map(([key, value]) => {
-      if (value && value._bonds) value.bind(this, key, value.onvalue, station);
-      if (value && value.binders) return value.binders.forEach(binder => binder.bind(this, key, value.onvalue, value.listener, station));
+      if (value && value._bonds) value.bind(this, key, value.as, station);
+      if (value && value.binders) return value.binders.forEach(binder => binder.bind(this, key, value.as, value.listener, station));
       fallBack(key, value);
     });
   };
@@ -326,7 +325,7 @@ class Binder {
     this.onvalue = v => v;
     this.update = bond => {
       if (!bond.target) return;
-      let theirValue = bond.onvalue(this._value);
+      let theirValue = bond.as(this._value);
       if (bond.target.tagName) {
         if (!bond.type) return bond.target.set(theirValue, bond.station);
         return bond.target.set({
@@ -390,7 +389,7 @@ class Binder {
       binder: this,
       target: target,
       station: station,
-      onvalue: as,
+      as: as,
       type: type,
     }
     this._bonds.push(bond);
@@ -606,7 +605,7 @@ class DOM {
     return { // binding in a model
       listener: listener,
       binders: binders,
-      onvalue: () => as(...binders.map(b => b.value)),
+      as: () => as(...binders.map(b => b.value)),
     }
   }
   static with(...args) {
