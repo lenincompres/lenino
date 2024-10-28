@@ -39,7 +39,8 @@ newsScroll.start();
 window.addEventListener('hashchange', () => {
   newsScroll.clear();
   newsScroll.start()
-})
+});
+console.log(newsScroll)
 
 export const PAGES = {
   [Copy.KEY.home]: {
