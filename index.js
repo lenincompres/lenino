@@ -5,9 +5,10 @@ import queueDown from "./src/animations.js";
 import Copy from "./src/Copy.js";
 
 const _currentPage = new Binder();
-function navigated(e){
+
+function navigated(e) {
   let hash = window.location.hash.split("#")[1];
-  if(hash === _currentPage.value) return;
+  if (hash === _currentPage.value) return;
   _currentPage.value = hash ? hash : 'home';
 }
 window.addEventListener('hashchange', navigated);
@@ -17,6 +18,7 @@ const _hoverPage = new Binder();
 
 const _isMobile = new Binder();
 const _isWide = new Binder();
+
 function resized(e) {
   _isMobile.value = window.innerWidth < 780;
   _isWide.value = window.innerWidth > 1050;
@@ -24,7 +26,7 @@ function resized(e) {
 
 const PAGE_NAMES = Object.keys(PAGES);
 
-if(!_currentPage.value) _currentPage.value = Copy.KEY.home;
+if (!_currentPage.value) _currentPage.value = Copy.KEY.home;
 
 Copy.add({
   storyteller: {
@@ -83,8 +85,9 @@ DOM.set({
       boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: _isMobile.as("100%", "initial"),
+      backgroundSize: _isMobile.as("800px", "initial"),
       backgroundPosition: "center top",
+      backgroundAttachment: "fixed",
       menu: {
         position: "absolute",
         right: 0,
@@ -179,9 +182,7 @@ DOM.set({
             boxShadow: {
               bind: [_hoverPage, _currentPage],
               as: (over, current) =>
-              current === name ? STYLE.SHADOW.INSET :
-              over === name ? STYLE.SHADOW.HIGHLIGHT :
-              STYLE.SHADOW.NORMAL,
+                current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
             },
             href: "#" + name,
             text: Copy.get(name),
@@ -195,7 +196,7 @@ DOM.set({
       article: {
         model: STYLE.FLEX,
         justifyContent: _isMobile.as("flex-start", "center"),
-        minHeight: "calc(100vh - 10em)",
+        minHeight: _isMobile.as(["40em", "calc(100vh - 13em)"]),
         height: "fit-content",
         width: _isMobile.as("47em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),

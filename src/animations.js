@@ -19,7 +19,7 @@ export const queueDown = (elem, model = {
   let properModel = {};
   Object.entries(model).forEach(([key, val]) => properModel[key] = {
     through: val,
-    duration: s / Math.sqrt(val.length),
+    interval: s / Math.sqrt(val.length),
     transition: transition,
   });
 

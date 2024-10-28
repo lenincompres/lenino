@@ -91,22 +91,32 @@ Element.prototype.set = function (model, ...args) {
     DOM.transition(this, `${DOM.unCamelize(STATION)} 0s`);
     clearInterval(this.intervals[STATION]);
   }
-  if (model.duration) {
-    model.duration = parseInt(model.duration);
-    if (model.transition) DOM.transition(this, `${DOM.unCamelize(STATION)} ${model.duration}ms ${model.transition}`);
-    if (model.loop) {
+  if (model.interval || model.delay) {
+    model.interval = parseInt(model.interval);
+    if (!model.loop && !model.through) model.through = [];
+    if (model.from !== undefined) model.through.push(model.from);
+    if (model.to !== undefined) model.through.push(model.to);
+    if (model.through) {
+      model.loop = model.through;
+      model.repeat = 1;
+    }
+    if(model.delay === undefined) model.delay = 0;
+    if (model.delay !== undefined && model.interval === undefined) model.interval = model.delay;
+    if (model.transition) DOM.transition(this, `${DOM.unCamelize(STATION)} ${model.interval}ms ${model.transition}`);
+    if(model.repeat === undefined) model.repeat = -1;
+    if(!model.while) model.while =  typeof model.repeat === "function" ? model.repeat : () => model.repeat;
+    if (model.loop) setTimeout(() => {
       this.set(model.loop[0], STATION);
       let i = 1;
       DOM.interval(this, () => {
         this.set(model.loop[i], STATION);
         i += 1;
-        if (i >= model.loop.length) i = 0;
-      }, model.duration, model.end, STATION);
-      return this;
-    }
-    if (model.to !== undefined && model.from !== undefined) model.through = [model.from, model.to];
-    this.set(model.through[0], STATION);
-    model.through.forEach((val, i) => setTimeout(() => this.set(val, STATION), i * model.duration));
+        if (i >= model.loop.length) {
+          i = 0;
+          if (!isNaN(model.repeat)) model.repeat -= 1
+        }
+      }, model.interval, model.while, STATION);
+    }, model.delay);
     return this;
   }
   if (model._bonds) model = model.bind();
@@ -430,26 +440,26 @@ class Binder {
     };
   }
   //Iterates through values. Reverts to the intital
-  flash(values, delay = 1000, revert, callback) {
+  through(values, interval = 1000, revert = false, callback = () => null) {
     if (!Array.isArray(values)) values = [values];
-    if (!Array.isArray(delay)) delay = new Array(values.length).fill(delay);
+    if (!Array.isArray(interval)) interval = new Array(values.length).fill(interval);
     let oldValue = this.value;
     this.value = values.shift();
     if (revert === false) {
       values.push(oldValue);
-      delay.push(delay[0]);
+      interval.push(interval[0]);
     }
     setTimeout(_ => {
-      if (values.length) return this.flash(values, delay, revert);
+      if (values.length) return this.through(values, interval, revert);
       if (revert === true) return this.value = oldValue;
-      if (callback) callback();
-    }, delay.shift());
+      callback();
+    }, interval.shift());
   }
   //Iterates through values in a loop
-  loop(values, delay) {
+  loop(values, interval) {
     if (!Array.isArray(values)) return;
     this.value = values.shift();
-    setTimeout(() => this.flash(values, delay, false), delay);
+    setTimeout(() => this.through(values, interval, false), interval);
   }
   apply(val) {
     this.value = val;
@@ -705,21 +715,21 @@ class DOM {
     }
     return qs.split("/");
   }
-  static interval(elem, func, t, end, station) {
+  static interval(elem, func, ms, end, station = "none") {
     if (!elem.intervals) elem.intervals = {};
-    else if (station && elem.intervals[station]) clearInterval(elem.intervals[station]);
+    else if (elem.intervals[station]) clearInterval(elem.intervals[station]);
     let iId = setInterval(() => {
       let go = typeof end === "function" ? end() : end || end === undefined;
       if (!go) return clearInterval(iId);
       func(elem);
-      isNaN(end) ? null : end -= 1;
-    }, t);
-    if (station) elem.intervals[station] = iId;
+      if (!isNaN(end)) end -= 1;
+    }, ms);
+    elem.intervals[station] = iId;
   }
   static transition(elem, trn) { // for animations (loop, duration)
     let prop = trn.split(' ')[0].trim();
     let trns = elem.get("transition");
-    if(trns) trns = trns.split(",").map(t => t.trim()).filter(t => t !== "NaN")
+    if (trns) trns = trns.split(",").map(t => t.trim()).filter(t => t !== "NaN")
       .map(t => t.startsWith(prop) ? trn : t);
     else trns = [trn];
     elem.set(trns.join(", "), "transition");
