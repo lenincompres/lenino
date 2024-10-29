@@ -1,18 +1,8 @@
 import * as STYLE from "./src/style.js";
-import PAGES from "./src/pages.js";
+import pager from "./src/pages.js";
 import SOCIAL_LINKS from "./src/social.js";
 import queueDown from "./src/animations.js";
 import Copy from "./src/Copy.js";
-
-const _currentPage = new Binder();
-
-function navigated(e) {
-  let hash = window.location.hash.split("#")[1];
-  if (hash === _currentPage.value) return;
-  _currentPage.value = hash ? hash : 'home';
-}
-window.addEventListener('hashchange', navigated);
-navigated();
 
 const _hoverPage = new Binder();
 
@@ -23,10 +13,6 @@ function resized(e) {
   _isMobile.value = window.innerWidth < 780;
   _isWide.value = window.innerWidth > 1050;
 };
-
-const PAGE_NAMES = Object.keys(PAGES);
-
-if (!_currentPage.value) _currentPage.value = Copy.KEY.home;
 
 Copy.add({
   storyteller: {
@@ -132,7 +118,7 @@ DOM.set({
               fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
               text: "Lenino",
             },
-            click: e => _currentPage.value = PAGE_NAMES[0],
+            click: e => pager.key = pager.default,
           }
         },
         tagline: {
@@ -173,20 +159,19 @@ DOM.set({
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          content: PAGE_NAMES.map(name => ({
-            backgroundColor: _currentPage.as({
+          content: pager.keys.map(name => ({
+            backgroundColor: pager._key.as({
               [name]: STYLE.COLOR.LINK_DARK,
               default: STYLE.COLOR.LINK,
             }),
-            display: _isMobile.as(val => (val || name !== PAGE_NAMES.slice(-1)[0]) && name !== PAGE_NAMES[0], "none", "block"),
+            display: _isMobile.as(val => (val || name !== pager.keys.slice(-1)[0]) && name !== pager.keys[0], "none", "block"),
             boxShadow: {
-              bind: [_hoverPage, _currentPage],
-              as: (over, current) =>
-                current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
+              bind: [_hoverPage, pager._key],
+              as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
             },
             href: "#" + name,
             text: Copy.get(name),
-            click: e => _currentPage.value = name,
+            click: e => pager.key = name,
             mouseover: e => _hoverPage.value = name,
             mouseout: e => _hoverPage.value = false,
           }))
@@ -200,13 +185,22 @@ DOM.set({
         height: "fit-content",
         width: _isMobile.as("47em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
-        content: _currentPage.as(p => PAGES[p] ? PAGES[p] : undefined),
+        content: pager._content,
       },
       footer: {
-        padding: "1em",
-        backgroundColor: "#11161A",
-        color: "gray",
-        textAlign: "center",
+        css: {
+          padding: "1em",
+          backgroundColor: "#11161A",
+          color: "silver",
+          textAlign: "center",
+          a: {
+            color: STYLE.COLOR.HIGHLIGHT,
+          }
+        },
+        markdown: Copy.text({
+          es: "Creador por Lenin Comprés usando [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
+          en: "Created by Lenin Comprés using [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
+        })
       },
     },
   },

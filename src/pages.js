@@ -5,6 +5,7 @@ import SOCIAL_LINKS from "./social.js";
 import Copy from "./Copy.js";
 import CardScroll from "./CardScroll.js";
 import news from "./news.js";
+import Pager from "./Pager.js";
 
 const projects = allProjects.filter(p => !p.hidden);
 const NONE = "∅";
@@ -40,9 +41,8 @@ window.addEventListener('hashchange', () => {
   newsScroll.clear();
   newsScroll.start()
 });
-console.log(newsScroll)
 
-export const PAGES = {
+export const pager = new Pager({
   [Copy.KEY.home]: {
     section: newsScroll,
   },
@@ -166,6 +166,6 @@ export const PAGES = {
       }, a))
     }
   },
-}
+}, true);
 
-export default PAGES;
+export default pager;
