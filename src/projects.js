@@ -1,97 +1,95 @@
 import Copy from "./Copy.js";
 
-Copy.addKey("hermanastra", "jackrabbits", "DOMjs", "locos", "pre", "album", "animacules", "chimes", "eloping", "pieces", "lave", "book", "code", "film", "game", "music", "performance", "theatre", "tool", "writing");
-
 Copy.add({
-  [Copy.KEY.book]: {
+  book: {
     en: "book",
     es: "libro",
   },
-  [Copy.KEY.code]: {
+  code: {
     en: "code",
     es: "código",
   },
-  [Copy.KEY.film]: {
+  film: {
     en: "film",
     es: "cine",
   },
-  [Copy.KEY.game]: {
+  game: {
     en: "game",
     es: "juego",
   },
-  [Copy.KEY.music]: {
+ music: {
     en: "music",
     es: "música",
   },
-  [Copy.KEY.performance]: "performance",
-  [Copy.KEY.theatre]: {
+  performance: "performance",
+  theatre: {
     en: "theatre",
     es: "teatro",
   },
-  [Copy.KEY.tool]: {
+  tool: {
     en: "tool",
     es: "herramienta",
   },
-  [Copy.KEY.writing]: {
+  writing: {
     en: "writing",
     es: "escritura",
   },
-  [Copy.KEY.hermanastra]: [{
+  hermanastra: [{
     en: "La Hermanastra",
     es: "The Stepsister",
   }, {
     en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
     es: "Monólogo músical que revela lo que pasó con la hermanastra de la Cenicienta tras perder al príncipe.",
   }],
-  [Copy.KEY.jackrabbits]: ["Jack Rabbits", {
+  jackrabbits: ["Jack Rabbits", {
     en: "The board game for playing cards on a land of wooden shards",
     es: "El juego de tablero en el que viajas al reino de conejos y barajas.",
   }],
-  [Copy.KEY.DOMjs]: ["DOM.js (DOM.set)", {
+  DOMjs: ["DOM.js (DOM.set)", {
     en: "JavaScript library that creates and handles DOM structures using a JS structural objects as a model",
     es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando objetos estructurales de JS como modelo.",
   }],
-  [Copy.KEY.locos]: [{
+  locos: [{
     en: "Mis 500 Locos",
     es: "A State of Madness",
   }, {
     en: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
     es: "Película de largometraje escrita por Lenin Comprés y Waddys Jáquez, dirigida por Leticia Tonos, basada en un libro de Antonio Zaglul",
   }],
-  [Copy.KEY.pre]: ["3DPsyche", {
+  pre: ["3DPsyche", {
     en: "Psychometric tool to visualize the physical, rational and emotional spectrum—interests, focus, personality types.",
     es: "Herramienta psicométrica que visualiza la espectro físico, racional y emocional del interes, el enfoque y la personalidad.",
   }],
-  [Copy.KEY.album]: ["Illusions of Duality", {
+  album: ["Illusions of Duality", {
     en: "Musical album: a storyteller's journey through conflict and empathy",
     es: "Album musical: la travesía del cuentacuentos a través del conflicto y la empatía",
   }],
-  [Copy.KEY.animacules]: [{
+  animacules: [{
     en: "Animalcules",
     es: "Animalucos",
   }, {
     en: "A digital story of life. Use movement and voice to survive as an unicellular organism.",
     es: "Una historia digital de la vida. Utiliza tu movimiento y voz para sobrevivir como un organismo unicelular",
   }],
-  [Copy.KEY.chimes]: [{
+  chimes: [{
     en: "Photonic Chimes",
     es: "Fotones Musicales",
   }, {
     en: "A refreshing and relaxing piece of creative code.",
     es: "Una pieza de código creativo y relajante.",
   }],
-  [Copy.KEY.eloping]: ["Eloping is Fun", {
+ eloping: ["Eloping is Fun", {
     en: "Lenino may officiate the wedding of your wildest dreams stress-free, easy and fun.",
     es: "Lenino podría oficiar la boda de tus fantasías sin estrés, con facilidad y diversión.",
   }],
-  [Copy.KEY.pieces]: [{
+  pieces: [{
     en: "12 Short Pieces",
     es: "Las 12 Piezas Cortas",
   }, {
     en: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <b>Desayuno en Rojo Chino</b>.",
     es: "First theatre plays by Lenino, aimed at training theater talents. Includes <b>Desayuno en Rojo Chino</b>.",
   }],
-  [Copy.KEY.lave]: ["La Ve", {
+  lave: ["La Ve", {
     en: "Cover of Regina Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
     es: "Cover de “That Time” de Regina Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
   }],

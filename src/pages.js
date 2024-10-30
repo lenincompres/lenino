@@ -1,4 +1,3 @@
-import queueDown from "./animations.js"
 import allProjects from "./projects.js"
 import * as STYLE from "./style.js";
 import SOCIAL_LINKS from "./social.js";
@@ -12,6 +11,8 @@ const NONE = "∅";
 const _activeProject = new Binder();
 const _allTags = new Binder([]);
 const _activeTag = new Binder(NONE);
+Pager._key.onChange(val => _activeTag.value = NONE);
+
 const showTag = (tag = NONE) => _activeTag.value = tag;
 const addTag = (tag) => !_allTags.value.includes(tag) ? (_allTags.value = [..._allTags.value, tag].sort(sortWords)) : null;
 const sortWords = (a, b) => a < b ? -1 : 1;
@@ -42,13 +43,14 @@ window.addEventListener('hashchange', () => {
   newsScroll.start()
 });
 
-export const pager = new Pager({
+Pager.add({
   [Copy.KEY.home]: {
     section: newsScroll,
   },
   [Copy.KEY.bio]: {
     section: {
       style: STYLE.PAGE,
+      model: STYLE.SLIDE(0, "left"),
       lineHeight: "1.5em",
       content: {
         p: Copy.text({
@@ -56,47 +58,47 @@ export const pager = new Pager({
           en: `Lenin Comprés (also known as Prof. Lenino) is a professional in interactive media, educational sciences, and performing arts. He serves as a professor and creative technologist at <a href="https://itp.nyu.edu/itp/people/?tab=staff">New York University's TISCH School of the Arts</a>  and holds a degree from Columbia University's Teachers College. Lenin is the co-writer of the award-winning script for <a href="https://www.imdb.com/title/tt7552938/">A State of Madness</a>, which represented the Dominican Republic at the 2021 Oscars. He is also the creator of <a href="http://jackrabbits.lenino.net">Lenino’s JACK RABBITS</a>, the first original Dominican-authored board game featuring an instructional booklet written entirely in verse and rhyme. As an artist, he performs as a quirky musical storyteller under his Lenino moniker.`
         }),
       },
-      onready: elt => queueDown(elt, {
-        left: ['-30px', '10px', 0],
-        opacity: [0, 1],
-      }),
     }
   },
   [Copy.KEY.projects]: {
     menu: {
-      maxWidth: "50em",
-      margin: "0 0.5em 0.5em",
-      justifyContent: "center",
       display: "flex",
-      flexWrap: "wrap",
-      content: _allTags.as(val => ({
-        a: [NONE, ...val].map(tag => ({
-          backgroundColor: _activeTag.as({
-            [tag]: STYLE.COLOR.LINK_DARK,
-            default: STYLE.COLOR.PALE
-          }),
-          color: _activeTag.as(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
-          boxShadow: STYLE.SHADOW.NORMAL,
-          borderRadius: "0.25em",
-          padding: "0.2em 0.68em",
-          margin: "0.3em 0.3em 0 0",
-          display: "inline-block",
-          text: tag,
-          onclick: e => showTag(tag),
-        }))
+      ul: _allTags.as(val => ({
+        maxWidth: "50em",
+        margin: "0 0.5em 0.5em",
+        justifyContent: "center",
+        display: "flex",
+        flexWrap: "wrap",
+        li: [
+          [NONE, ...val].map((tag, i) => ({
+            a: {
+              model: STYLE.SLIDE("left", i),
+              backgroundColor: _activeTag.as({
+                [tag]: STYLE.COLOR.LINK_DARK,
+                default: STYLE.COLOR.PALE
+              }),
+              color: _activeTag.as(val => val === tag ? STYLE.COLOR.PAGE : STYLE.COLOR.LINK),
+              boxShadow: STYLE.SHADOW.NORMAL,
+              borderRadius: "0.25em",
+              padding: "0.2em 0.68em",
+              margin: "0.3em 0.3em 0 0",
+              display: "inline-block",
+              text: tag,
+              onclick: e => showTag(tag),
+            },
+          })),
+          {
+            color: STYLE.COLOR.PALE,
+            textShadow: STYLE.SHADOW.TEXT,
+            text: _activeTag.as(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
+          }
+        ],
       })),
-      span: {
-        color: STYLE.COLOR.PALE,
-        textShadow: STYLE.SHADOW.TEXT,
-        text: _activeTag.as(val => val !== NONE ? projects.filter(p => p.tags.includes(val)).length : projects.length),
-      },
-      onready: elt => queueDown(elt, {
-        left: ['-30px', '10px', 0],
-        opacity: [0, 1],
-      }),
     },
     section: projects.map((project, i) => ({
-      model: STYLE.PAGE,
+      style: STYLE.PAGE,
+      model: STYLE.SLIDE(),
+      position: "relative",
       fontSize: "1em",
       width: "23em",
       cursor: "pointer",
@@ -148,7 +150,6 @@ export const pager = new Pager({
         let link = project.link ? project.link : project.folder
         window.open(link, "_blank")
       },
-      onready: queueDown
     })),
     onready: () => {
       showTag();
@@ -161,11 +162,9 @@ export const pager = new Pager({
       marginTop: "1em",
       textAlign: "center",
       a: SOCIAL_LINKS.map(a => Object.assign({
+        model: STYLE.SLIDE(),
         margin: "0.25em",
-        onready: queueDown
       }, a))
     }
   },
-}, true);
-
-export default pager;
+});

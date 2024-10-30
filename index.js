@@ -1,11 +1,10 @@
 import * as STYLE from "./src/style.js";
-import pager from "./src/pages.js";
-import SOCIAL_LINKS from "./src/social.js";
-import queueDown from "./src/animations.js";
+import Pager from "./src/Pager.js";
 import Copy from "./src/Copy.js";
+import "./src/pages.js";
+import SOCIAL_LINKS from "./src/social.js";
 
 const _hoverPage = new Binder();
-
 const _isMobile = new Binder();
 const _isWide = new Binder();
 
@@ -13,6 +12,7 @@ function resized(e) {
   _isMobile.value = window.innerWidth < 780;
   _isWide.value = window.innerWidth > 1050;
 };
+
 
 Copy.add({
   storyteller: {
@@ -91,7 +91,7 @@ DOM.set({
         }
       },
       header: {
-        model: [STYLE.PAGE, STYLE.FLEX],
+        model: [STYLE.PAGE, STYLE.FLEX, STYLE.SLIDE(0)],
         alignItems: "center",
         placeContent: "center",
         padding: "0.5em",
@@ -118,7 +118,7 @@ DOM.set({
               fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
               text: "Lenino",
             },
-            click: e => pager.key = pager.default,
+            click: e => Pager.key = Pager.default,
           }
         },
         tagline: {
@@ -129,10 +129,11 @@ DOM.set({
           display: _isMobile.as("block", "none"),
           a: SOCIAL_LINKS,
         },
-        onready: queueDown,
+        //onready: queueDown,
       },
       nav: {
         style: STYLE.FLEX,
+        model: STYLE.SLIDE(1),
         flexDirection: "column",
         color: "rgb(245, 220, 154)",
         zIndex: 5,
@@ -147,7 +148,7 @@ DOM.set({
         borderRadius: _isMobile.as("0.5em", 0),
         margin: _isMobile.as("2em 0 0 1.1em", 0),
         position: _isMobile.as("absolute", "relative"),
-        a: {
+        content: Pager.getLinkMenu(name => ({
           color: STYLE.COLOR.PAGE,
           width: "5em",
           padding: ".25em",
@@ -159,24 +160,20 @@ DOM.set({
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          content: pager.keys.map(name => ({
-            backgroundColor: pager._key.as({
-              [name]: STYLE.COLOR.LINK_DARK,
-              default: STYLE.COLOR.LINK,
-            }),
-            display: _isMobile.as(val => (val || name !== pager.keys.slice(-1)[0]) && name !== pager.keys[0], "none", "block"),
-            boxShadow: {
-              bind: [_hoverPage, pager._key],
-              as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
-            },
-            href: "#" + name,
-            text: Copy.get(name),
-            click: e => pager.key = name,
-            mouseover: e => _hoverPage.value = name,
-            mouseout: e => _hoverPage.value = false,
-          }))
-        },
-        onready: queueDown
+          backgroundColor: Pager._key.as({
+            [name]: STYLE.COLOR.LINK_DARK,
+            default: STYLE.COLOR.LINK,
+          }),
+          display: _isMobile.as(val => (val || name !== Pager.keys.slice(-1)[0]) && name !== Pager.keys[0], "none", "block"),
+          boxShadow: {
+            bind: [_hoverPage, Pager._key],
+            as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
+          },
+          text: Copy.get(name),
+          mouseover: e => _hoverPage.value = name,
+          mouseout: e => _hoverPage.value = false,
+        })),
+        //onready: queueDown
       },
       article: {
         model: STYLE.FLEX,
@@ -185,7 +182,7 @@ DOM.set({
         height: "fit-content",
         width: _isMobile.as("47em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
-        content: pager._content,
+        content: Pager._content,
       },
       footer: {
         css: {

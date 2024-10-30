@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.2.4
+ * @version 1.2.6
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -9,7 +9,7 @@
  * Gets the value of an element's property.
  * @param {station} string - The style|attribute|(element)tag|innerText/innetHTML|on(event)|name of an element.
  */
- Element.prototype.get = function (station) {
+Element.prototype.get = function (station) {
   let output;
   if (!station && this.tagName.toLocaleLowerCase() === "input") output = this.value;
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
@@ -69,7 +69,7 @@ Element.prototype.set = function (model, ...args) {
   const IS_PRIMITIVE = modelType.isPrimitive;
   let station = argsType.string; // original style|attr|tag|inner…|on…|name
   const CLEAR = !station && IS_PRIMITIVE || station === "content";
-  if ([undefined, "create", "assign", "model", "inner", "set"].includes(station)) station = "content";
+  if ([undefined, "inner", "create", "assign", "model", "set"].includes(station)) station = "content";
   const STATION = station;
   station = station.toLowerCase(); // station lowercase
   // SELECT and input exception
@@ -105,9 +105,14 @@ Element.prototype.set = function (model, ...args) {
     else this[STATION] = e => model(e, this);
     return this;
   }
+  // deletes related transition/animation intervals
+  if (IS_CONTENT && argsType.boolean === true) {
+    while (this.firstChild) this.removeChild(parentElement.firstChild);
+    this.innerHTML = "";
+  }
   if (argsType.boolean === true && this.intervals && this.intervals[STATION]) {
+    clearInterval(this.intervals[station]);
     DOM.transition(this, `${DOM.unCamelize(STATION)} 0s`);
-    clearInterval(this.intervals[STATION]);
   }
   if ((model.interval || model.delay) && (model.to || model.through || model.loop)) {
     model.interval = parseInt(model.interval);
@@ -120,20 +125,22 @@ Element.prototype.set = function (model, ...args) {
     }
     if (model.delay === undefined) model.delay = 0;
     if (model.delay !== undefined && model.interval === undefined) model.interval = model.delay;
-    if (model.transition) DOM.transition(this, `${DOM.unCamelize(STATION)} ${model.interval}ms ${model.transition}`);
     if (model.repeat === undefined) model.repeat = -1;
-    if (!model.while) model.while = typeof model.repeat === "function" ? model.repeat : () => model.repeat;
-    if (model.loop) setTimeout(() => {
-      this.set(model.loop[0], STATION);
+    if (!model.while) model.while = (typeof model.repeat === "function") ? model.repeat : (() => model.repeat > 0);
+    DOM.transition(this, `${DOM.unCamelize(STATION)} 0s`);
+    this.set(model.loop[0], STATION);
+    setTimeout(() => {
       let i = 1;
+      if (model.transition) DOM.transition(this, `${DOM.unCamelize(STATION)} ${model.interval}ms ${model.transition}`);
       DOM.interval(this, () => {
         this.set(model.loop[i], STATION);
         i += 1;
-        if (i >= model.loop.length) {
-          i = 0;
-          if (!isNaN(model.repeat)) model.repeat -= 1
-        }
-      }, model.interval, model.while, STATION);
+        if (i >= model.loop.length) i = 0;
+        if (i === 0 && !isNaN(model.repeat)) model.repeat -= 1;
+      }, model.interval, model.while, STATION, () => {
+        this.set(model.loop[model.loop.length - 1], STATION);
+        if(model.callBack) model.callBack();
+      });
     }, model.delay);
     return this;
   }
@@ -287,14 +294,25 @@ Element.prototype.set = function (model, ...args) {
     }
     if (DOM.typify(model.content).object) model.content = DOM.css(model.content);
   }
+  if (IS_HEAD && !IS_PRIMITIVE) {
+    if (station === "image") {
+      return this.set({
+        "og:image": model.src,
+        "og:image:alt": model.alt,
+        "twitter:image": model.src,
+        "twitter:card": model.card,
+      })
+    }
+  }
   if (IS_PRIMITIVE) {
     if (IS_HEAD) {
       const type = DOM.getDocType(model);
-      if (station === "title") this.innerHTML += `<title>${model}</title>`;
+      if (station === "description") this.innerHTML += `<meta property="og:description" content="${model}">`;
+      if (station === "title") this.innerHTML += `<title>${model}</title><meta property="og:title" content="${model}"><meta property="og:type" content="website">`;
       else if (station === "icon") this.innerHTML += `<link rel="icon" href="${model}">`;
       else if (station === "image") this.innerHTML += `<meta property="og:image" content="${model}">`;
       else if (station === "charset") this.innerHTML += `<meta charset="${model}">`;
-      else if (station.startsWith("og:")) this.innerHTML += `<meta property="${station}" content="${model}">`;
+      else if (station.includes(":")) this.innerHTML += `<meta property="${station}" content="${model}">`;
       else if (DOM.metaNames.includes(station)) this.innerHTML += `<meta name="${station}" content="${model}">`;
       else if (DOM.htmlEquivs.includes(STATION)) this.innerHTML += `<meta http-equiv="${DOM.unCamelize(STATION)}" content="${model}">`;
       else if (station === "font") DOM.set({
@@ -327,7 +345,7 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute("id", id);
-  if (argsType.boolean === undefined) this.append(elt);
+  argsType.boolean === false ? this.prepend(elt) : this.append(elt);
   ["ready", "onready", "done", "ondone"].forEach(f => {
     if (!model[f]) return this;
     model[f](elem);
@@ -335,7 +353,7 @@ Element.prototype.set = function (model, ...args) {
   ["timeout"].forEach(f => {
     if (!model[f]) return this;
     let [func, t] = Array.isArray(model[f]) ? model[f] : [model[f], 1];
-    setTimeout(() => func(elem), t);
+    DOM.interval(this, func, t, 1);
   });
   ["interval"].forEach(f => {
     if (!model[f]) return this;
@@ -382,19 +400,21 @@ Element.prototype.css = function (style) {
  * Updates stations of element when its value changes. Can also update other binders.
  */
 class Binder {
+  #value;
+
   /**
    * creates a new instance of a Binder.
    * @param {val} - Initial value for the Binder to hold.
    */
   constructor(val) {
-    this._value = val;
+    this.#value = val;
     this._bonds = [];
     this._listeners = {};
     this._listenerCount = 0;
     this.onvalue = v => v;
     this.update = bond => {
       if (!bond.target) return;
-      let theirValue = bond.as(this._value);
+      let theirValue = bond.as(this.#value);
       if (bond.target.tagName) {
         if (!bond.type) return bond.target.set(theirValue, bond.station);
         return bond.target.set({
@@ -411,7 +431,7 @@ class Binder {
    * Keeps track of other Binders or binds that may be tracking value changes.
    * @param {func} - 
    */
-  addListener(func) {
+  onChange(func) {
     if (typeof func !== "function") return;
     this._listeners[this._listenerCount] = func;
     return this._listenerCount++;
@@ -474,7 +494,7 @@ class Binder {
     let as = argsType.function ? argsType.function : val => val;
     if (values && values.length) as = this.getAs(values, as);
     else if (map && map !== target) as = this.getAs(map, as);
-    if (!target) return DOM.bind([this], as, listener); // binding in a model 
+    if (!target) return DOM.bind([this], as, listener); // binding in a model
     if (listener) this.removeListener(listener); // if in a model, removes the listener
     let bond = {
       binder: this,
@@ -541,7 +561,7 @@ class Binder {
    * @param {val} - value to hold.
    */
   set value(val) {
-    this._value = val;
+    this.#value = val;
     this._bonds.forEach(bond => {
       if (bond.target === this.setter) return;
       this.update(bond);
@@ -554,7 +574,7 @@ class Binder {
    * Gets the value in the binder.
    */
   get value() {
-    return this._value;
+    return this.#value;
   }
   /**
    * Creates a bind, given one of more binders.
@@ -602,25 +622,32 @@ Element.prototype.bind = function (...args) {
  * @param {value} string - initial value in the binder
  */
 Object.prototype.binderSet = function (name, value) {
-  const BS = new BinderSet(name, value);
-  BS.names.forEach(key =>{
-    const _key = '_' + key;
-    Object.defineProperty(this, _key, {
+  if (typeof name == 'string') {
+    const _name = '_' + name;
+    const _ = new Binder(value);
+    Object.defineProperty(this, _name, {
       get() {
-        return BS[_key];
+        return _;
+      },
+      set(val) {
+        console.error(`Error: This (${_name}) is a read-only binder and cannot be reassigned. Use: ${name}, or: ${_name}.value. to change its value.`);
       },
       configurable: false, // Prevents deletion of the property
       enumerable: true,
     });
-    Object.defineProperty(this, key, {
+    Object.defineProperty(this, name, {
       get() {
-        return BS[key];
+        return this[_name].value;
       },
       set(val) {
-        BS[key] = val;
+        this[_name].value = val;
       },
     });
-  });
+    return;
+  }
+  for (const [key, value] of Object.entries(name)) {
+    this.binderSet(key, value);
+  }
 }
 
 /**
@@ -630,38 +657,8 @@ class BinderSet {
   /**
    * Creates a BinderSet instance
    */
-  names = [];
   constructor(...args) {
-    this.addBinder(...args);
-  }
-  addBinder(name, value) {
-    if (typeof name == 'string') {
-      const _name = '_' + name;
-      const _ = new Binder(value);
-      Object.defineProperty(this, _name, {
-        get() {
-          return _;
-        },
-        set(val) {
-          console.error(`Error: This (${_name}) is a read-only binder and cannot be reassigned. Use: ${name}, or: ${_name}.value. to change its value.`);
-        },
-        configurable: false, // Prevents deletion of the property
-        enumerable: true,
-      });
-      Object.defineProperty(this, name, {
-        get() {
-          return this[_name].value;
-        },
-        set(val) {
-          this[_name].value = val;
-        },
-      });
-      this.names.push(name);
-      return;
-    }
-    for (const [key, value] of Object.entries(name)) {
-      this.addBinder(key, value);
-    }
+    this.binderSet(...args);
   }
   /**
    * Creates a binding object inside a model to be set() applying one of multiple binders in the set. Expected to be called followed by a "as()" call: myBinderSet.with("binderName").as(func).
@@ -669,15 +666,7 @@ class BinderSet {
    */
   with(...args) {
     if (Array.isArray(args[0])) return this.with(...args[0]).as(args[1]);
-    return DOM.bind(...this.validate(args));
-  }
-  /**
-   * Given a string name returnd the appropriate binder in the set.
-   * @param {args} array - binders to be returned.
-   */
-  validate(...args) {
-    if (Array.isArray(args[0])) return this.validate(...args[0]);
-    return args.map(a => typeof a === 'string' ? this["_" + a] : a);
+    return DOM.bind(...BinderSet.validate(args));
   }
   /**
    * Binds binders in the set to an element's property.
@@ -694,15 +683,23 @@ class BinderSet {
     if (argsType.element) return {
       with: (...binders) => ({
         as: func => argsType.element.set({
-          [argsType.string]: DOM.bind(this.validate(binders), func),
+          [argsType.string]: DOM.bind(BinderSet.validate(binders), func),
         })
       })
     }
     if (args[0].target) return args[0].target.set({
-      [args[0].station]: DOM.bind(this.validate(args[0].with), args[0].as),
+      [args[0].station]: DOM.bind(BinderSet.validate(args[0].with), args[0].as),
     });
     if (args[0].with) return this.with(args[0].with, args[0].as);
     return this.with(...args);
+  }
+  /**
+   * Given a string name returnd the appropriate binder in the set.
+   * @param {args} array - binders to be returned.
+   */
+  static validate(...args) {
+    if (Array.isArray(args[0])) return BinderSet.validate(...args[0]);
+    return args.map(a => typeof a === 'string' ? this["_" + a] : a);
   }
 }
 
@@ -785,7 +782,12 @@ class DOM {
    * @param {model} object - model to be set to create the structure and properties of the element.
    * @param {tag} string - tag.
    */
-  static element = (model, tag = "section") => {
+  static element = (model, tag) => {
+    if (tag === undefined && typeof model === "string") {
+      tag = model;
+      model = {};
+    }
+    if (tag === undefined) tag = "section";
     if (model && model.tag) {
       tag = model.tag;
       delete model.tag;
@@ -911,6 +913,22 @@ class DOM {
     return qs.split("/");
   }
   /**
+   * @param {array} - model of items in the list
+   * @return {object} - Model of ul with li
+   */
+  static list = (...items) => Array.isArray(items[0]) ? DOM.list(...items[0]) : ({
+    ul: {
+      li: items,
+    }
+  });
+  /**
+   * @param {array} - model of links in the menu list
+   * @return {object} - Model of ul with li with links in it
+   */
+  static linkMenu = (...links) => Array.isArray(links[0]) ? DOM.linkMenu(...links[0]) : DOM.list(links.map(link => ({
+    a: link,
+  })));
+  /**
    * Sets and interval tied to an element and station 
    * @param {elem} element - element related to the interval.
    * @param {func} function - action to take on interval.
@@ -925,6 +943,7 @@ class DOM {
       let go = typeof end === "function" ? end() : end || end === undefined;
       if (!go) {
         callback();
+        delete elem.intervals[station];
         return clearInterval(iId);
       }
       func(elem);
@@ -940,10 +959,10 @@ class DOM {
   static transition(elem, trn) { // 
     let prop = trn.split(' ')[0].trim();
     let trns = elem.get("transition");
-    if (trns) trns = trns.split(",").map(t => t.trim()).filter(t => t !== "NaN")
-      .map(t => t.startsWith(prop) ? trn : t);
-    else trns = [trn];
-    elem.set(trns.join(", "), "transition");
+    if (trns) trns = trns.split(",").map(t => t.trim()).filter(t => t !== "NaN").map(t => t.startsWith(prop) ? trn : t).join(", ");
+    else trns = trn;
+    if (!trns.includes(trn)) trns += ", " + trn;
+    elem.set(trns, "transition");
   }
   /**
    * Ads a new global variable for elements with an id

@@ -32,3 +32,31 @@ export const FLEX = {
   alignItems: 'flex-start',
   alignContent: 'flex-start',
 };
+
+let slideDelay = 0;
+
+export const SLIDE = (from = "top", delay, interval = 200) => {
+  if (typeof from === "number") {
+    delay = top;
+    from = "top"
+  };
+  if (delay === undefined) delay = slideDelay++;
+  return {
+    pointerEvents: "default",
+    position: "relative",
+    maxHeight: "100em",
+    [from]: {
+      through: ["-2em", "1em", 0],
+      interval: interval,
+      delay: delay * interval / 3,
+      transition: "ease",
+      callBack: () => slideDelay--,
+    },
+    opacity: {
+      through: [0, 1],
+      interval: interval,
+      delay: delay * interval / 3,
+      transition: "ease",
+    },
+  }
+};
