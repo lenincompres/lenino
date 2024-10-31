@@ -50,7 +50,7 @@ Pager.add({
   [Copy.KEY.bio]: {
     section: {
       style: STYLE.PAGE,
-      model: STYLE.SLIDE(0, "left"),
+      model: STYLE.SLIDE("left", 2),
       lineHeight: "1.5em",
       content: {
         p: Copy.text({
@@ -97,7 +97,7 @@ Pager.add({
     },
     section: projects.map((project, i) => ({
       style: STYLE.PAGE,
-      model: STYLE.SLIDE(),
+      model: STYLE.SLIDE(i),
       position: "relative",
       fontSize: "1em",
       width: "23em",
@@ -160,11 +160,16 @@ Pager.add({
     menu: {
       fontSize: "3.43em",
       marginTop: "1em",
-      textAlign: "center",
-      a: SOCIAL_LINKS.map(a => Object.assign({
-        model: STYLE.SLIDE(),
-        margin: "0.25em",
-      }, a))
+      ul: {
+        style: STYLE.FLEX,
+        justifyContent: "center",
+        li: SOCIAL_LINKS.map((a, i) => ({
+          a: {
+            model: [a, STYLE.SLIDE(i)],
+            margin: "0.25em",
+          }
+        }))
+      }
     }
   },
 });

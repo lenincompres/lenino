@@ -37,7 +37,7 @@ let slideDelay = 0;
 
 export const SLIDE = (from = "top", delay, interval = 200) => {
   if (typeof from === "number") {
-    delay = top;
+    delay = from;
     from = "top"
   };
   if (delay === undefined) delay = slideDelay++;
