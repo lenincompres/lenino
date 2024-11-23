@@ -1,7 +1,7 @@
 /**
  * Creates DOM structures from a JS object (structure)
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.2.6
+ * @version 1.2.9
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -9,7 +9,7 @@
  * Gets the value of an element's property.
  * @param {station} string - The style|attribute|(element)tag|innerText/innetHTML|on(event)|name of an element.
  */
-Element.prototype.get = function (station) {
+ Element.prototype.get = function (station) {
   let output;
   if (!station && this.tagName.toLocaleLowerCase() === "input") output = this.value;
   else if (!station || ["content", "inner", "innerhtml", "html"].includes(station)) output = this.innerHTML;
@@ -55,7 +55,7 @@ Element.prototype.set = function (model, ...args) {
   }
   if (Array.isArray(model.content)) {
     model.content.forEach(item => {
-      if ([null, undefined].includes(item)) return;
+      if ([null, undefined].includes(item)) return this;
       let individual = Object.assign({}, model);
       individual.content = item;
       this.set(individual, ...args);
@@ -237,7 +237,6 @@ Element.prototype.set = function (model, ...args) {
   let elt = modelType.p5Element ? model.elt : modelType.element;
   if (elt) {
     if (id) DOM.addID(id, elt);
-    else if (tag != elt.tagName.toLowerCase()) DOM.addID(tag, elt);
     if (CLEAR) this.innerHTML = "";
     if (cls.length) elt.classList.add(...cls);
     return this.append(elt);
@@ -345,7 +344,7 @@ Element.prototype.set = function (model, ...args) {
   elt = p5Elem ? elem.elt : elem;
   if (cls.length) elt.classList.add(...cls);
   if (id) elt.setAttribute("id", id);
-  argsType.boolean === false ? this.prepend(elt) : this.append(elt);
+  if(argsType.boolean !== false) argsType.boolean === true ? this.prepend(elt) : this.append(elt);
   ["ready", "onready", "done", "ondone"].forEach(f => {
     if (!model[f]) return this;
     model[f](elem);
@@ -556,6 +555,9 @@ class Binder {
   apply(val) {
     this.value = val;
   }
+  static set(...args) {
+    binderSet(...args);
+  }
   /**
    * Sets the value in the binder.
    * @param {val} - value to hold.
@@ -719,9 +721,8 @@ class DOM {
    * @param {station} station - propety to get.
    * @param {be} func - logic to be applied based on the current value of the station.
    */
-  static
-  let (station, be) {
-    DOM.headTags.includes(station.toLowerCase()) ? document.head.let(station, be) : document.body.let(station, be);
+  static let (station, ...args) {
+    return DOM.headTags.includes(station.toLowerCase()) ? document.head.let(station, ...args) : document.body.let(station, ...args);
   }
   /**
    * Sets the value of a property and creates elements in the document head and body based on an object model. Also resets the css.
@@ -774,8 +775,10 @@ class DOM {
     // checks if the model should replace the DOM
     if (argsType.boolean) document.body.innerHTML = "";
     // checks if the body is loaded
-    if (document.body) setTimeout(() => document.body.set(model, ...args), 0);
-    else window.addEventListener("load", _ => document.body.set(model, ...args));
+    if (!document.body) return window.addEventListener("load", _ => document.body.set(model, ...args));
+    document.body.set(model, ...args);
+    document.body.let("visibility", "hidden");
+    setTimeout(() => document.body.let("visibility", "visible"), 0);
   }
   /**
    * Returns a new element without appending it to the DOM.
@@ -893,7 +896,7 @@ class DOM {
    * @param {model} object - HTML in JSON format.
    * @param {tag} string - tag of the object to create.
    */
-  static html = (model, tag = "section") => !model ? null : (model.tagName ? model : DOM.element(model, tag)).outerHTML;
+  static html = (model, tag = "section") => !!model && (model.tagName ? model : DOM.element(model, tag)).outerHTML;
   /**
    * Returns querystring as an object 
    */
