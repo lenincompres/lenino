@@ -1,7 +1,7 @@
-import Copy from "../Copy.js";
+import Copy from "../../lib/Copy.js";
 import * as STYLE from "../style.js";
-import allProjects from "../projects.js";
-import Pager from "../Pager.js";
+import allProjects from "./data/projects.js";
+import Pager from "../../lib/Pager.js";
 
 const projects = allProjects.filter(p => !p.hidden);
 const NONE = "∅";

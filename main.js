@@ -1,9 +1,9 @@
 import * as STYLE from "./src/style.js";
-import Pager from "./src/Pager.js";
-import Copy from "./src/Copy.js";
-import SOCIAL_LINKS from "./src/social.js";
+import Pager from "./lib/Pager.js";
+import Copy from "./lib/Copy.js";
+import SOCIAL_LINKS from "./src/pages/data/social.js";
 import CardScroll from "./src/CardScroll.js";
-import news from "./src/news.js";
+import news from "./src/pages/data/news.js";
 import bioPage from "./src/pages/bio.js";
 import projectsPage from "./src/pages/projects.js";
 import contactPage from "./src/pages/contact.js";
@@ -14,11 +14,10 @@ binderSet({
   isWide: false,
 })
 
-function resized(e) {
+function checkViewport(e) {
   isMobile = window.innerWidth < 780;
   isWide = window.innerWidth > 1050;
 };
-
 
 Copy.add({
   storyteller: {
@@ -44,7 +43,7 @@ Copy.add({
   contact: {
     es: "contacto",
     en: "contact",
-  }
+  },
 });
 
 let newsScroll = new CardScroll(news);
@@ -161,7 +160,7 @@ DOM.set({
         },
         tagline: {
           margin: "0 .6em",
-          text: Copy.get('storyteller') + ' · inventor · ' + Copy.get('educator'),
+          text: Copy.at.storyteller + ' · inventor · ' + Copy.at.educator,
         },
         menu: {
           display: _isMobile.as("block", "none"),
@@ -211,7 +210,7 @@ DOM.set({
                 bind: [_hoverPage, Pager._key],
                 as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
               },
-              text: Copy.get(name),
+              text: Copy.at[name],
               onclick: e => Pager.key = name,
               mouseover: e => hoverPage = name,
               mouseout: e => hoverPage = false,
@@ -245,6 +244,6 @@ DOM.set({
       },
     },
   },
-  onload: resized,
-  onresize: resized,
+  onload: checkViewport,
+  onresize: checkViewport,
 });

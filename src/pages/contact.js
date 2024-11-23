@@ -1,4 +1,4 @@
-import SOCIAL_LINKS from "../social.js";
+import SOCIAL_LINKS from "./data/social.js";
 import * as STYLE from "../style.js";
 
 const contactPage = {
