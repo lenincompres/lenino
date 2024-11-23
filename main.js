@@ -1,16 +1,22 @@
 import * as STYLE from "./src/style.js";
 import Pager from "./src/Pager.js";
 import Copy from "./src/Copy.js";
-import "./src/pages.js";
 import SOCIAL_LINKS from "./src/social.js";
+import CardScroll from "./src/CardScroll.js";
+import news from "./src/news.js";
+import bioPage from "./src/pages/bio.js";
+import projectsPage from "./src/pages/projects.js";
+import contactPage from "./src/pages/contact.js";
 
-const _hoverPage = new Binder();
-const _isMobile = new Binder();
-const _isWide = new Binder();
+binderSet({
+  hoverPage: false,
+  isMobile: false,
+  isWide: false,
+})
 
 function resized(e) {
-  _isMobile.value = window.innerWidth < 780;
-  _isWide.value = window.innerWidth > 1050;
+  isMobile = window.innerWidth < 780;
+  isWide = window.innerWidth > 1050;
 };
 
 
@@ -23,6 +29,38 @@ Copy.add({
     en: "educator",
     es: "educador",
   },
+  bio: {
+    en: "bio",
+    es: "biografía"
+  },
+  home: {
+    es: "home",
+    en: "inicio",
+  },
+  projects: {
+    es: "proyectos",
+    en: "projects",
+  },
+  contact: {
+    es: "contacto",
+    en: "contact",
+  }
+});
+
+let newsScroll = new CardScroll(news);
+newsScroll.start();
+window.addEventListener('hashchange', () => {
+  newsScroll.clear();
+  newsScroll.start();
+});
+
+Pager.add({
+  [Copy.KEY.home]: {
+    section: newsScroll,
+  },
+  [Copy.KEY.bio]: bioPage,
+  [Copy.KEY.projects]: projectsPage,
+  [Copy.KEY.contact]: contactPage,
 });
 
 DOM.set({
@@ -175,8 +213,8 @@ DOM.set({
               },
               text: Copy.get(name),
               onclick: e => Pager.key = name,
-              mouseover: e => _hoverPage.value = name,
-              mouseout: e => _hoverPage.value = false,
+              mouseover: e => hoverPage = name,
+              mouseout: e => hoverPage = false,
             },
           })),
         },
