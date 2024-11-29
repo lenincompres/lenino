@@ -69,8 +69,10 @@ const projectsPage = {
         backgroundSize: "cover",
         backgroundPosition: "center"
       },
-      h6: {
-        marginBottom: "0.25em",
+      h3: {
+        color: STYLE.COLOR.LINK,
+        fontFamily : "title",
+        fontSize: "1rem",
         fontWeight: "bold",
         text: project.title,
       },

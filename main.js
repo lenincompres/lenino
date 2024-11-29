@@ -28,6 +28,10 @@ Copy.add({
     en: "educator",
     es: "educador",
   },
+  creativist: {
+    en: "creativist",
+    es: "creativo",
+  },
   bio: {
     en: "bio",
     es: "biografía"
@@ -76,12 +80,12 @@ DOM.set({
       },
       __fa: {
         color: "white",
-        width: "2em",
-        height: "2em",
-        padding: "0.5em",
-        margin: "0 0.25em",
+        width: "1.9em",
+        height: "1.9em",
+        padding: "0.45em",
+        margin: "0 0.2em",
         textAlign: "center",
-        borderRadius: "0.25em",
+        borderRadius: "0.2em",
         verticalAlign: "text-bottom",
         boxShadow: STYLE.SHADOW.NORMAL,
         hover: {
@@ -92,7 +96,7 @@ DOM.set({
   },
   font: {
     fontFamily: 'title',
-    src: 'url("./assets/markerfeltnormal.ttf")'
+    src: 'url("./assets/BowlbyOneSC-Regular.ttf")'
   },
   fontSize: "14px",
   backgroundColor: "#023",
@@ -140,27 +144,25 @@ DOM.set({
         flexDirection: _isMobile.as("row", "column"),
         borderRadius: _isMobile.as(".5em", 0),
         span: {
-          //span: 'Prof. ',
           img: {
             src: "assets/leninoLogo.png",
             alt: "Lenino's Logo",
-            height: "30",
-            marginRight: '0.5em'
+            height: "2.5rem",
+            margin: '0 0.3em'
           },
           a: {
-            //verticalAlign: 'middle',
-            fontSize: "2.3em",
+            fontSize: "2.3rem",
+            verticalAlign: "super",
+            lineHeight: "1.3rem",
             href: "#home",
-            span: {
-              fontFamily: "title, Georgia, \"Times New Roman\", Times, serif",
-              text: "Lenino",
-            },
+            fontFamily: "title",
+            text: "Lenino",
             click: e => Pager.key = Pager.default,
           }
         },
         tagline: {
-          margin: "0 .6em",
-          text: Copy.at.storyteller + ' · inventor · ' + Copy.at.educator,
+          margin: "0 1em 0 0.7em",
+          text: Copy.at.storyteller + ' · ' + Copy.at.creativist + ' · ' + Copy.at.educator,
         },
         menu: {
           display: _isMobile.as("block", "none"),

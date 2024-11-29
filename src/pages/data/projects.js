@@ -24,7 +24,7 @@ export const projects = [{
   }),
   tags: [Copy.at.game, Copy.at.code]
 }, {
-  title: "DOM.js (DOM.set())",
+  title: "DOM.js",
   link: "https://github.com/lenincompres/DOM.js",
   img: "assets/dom.png",
   desc: Copy.text({

@@ -1,6 +1,6 @@
 import Copy from "../../../lib/Copy.js";
 
-const newsies = [{
+const newsies = [/*{
   src: "assets/poster.jpg",
   alt: Copy.text({
     es: "desCONCIERTO de Jalogüín",
@@ -11,15 +11,15 @@ const newsies = [{
     es: `Lenino sale de su madriguera a cantarle cuentos a las brujas, ogros, duendes y hadas que se manifiesten la noche del **3 de Noviembre** en [Cañave]({href}).`,
     en: `Lenino comes out of his burrow to sing stories to the witches, ogres, goblins and fairies that appear on the night of **November 3** at [Cañave]({href}).`,
   }),
-}, {
+}, */{
   title: Copy.text({
     es: "¡Nuevo website!",
     en: "New website!",
   }),
   src: "https://i.etsystatic.com/52679041/r/il/c0dc16/6069187861/il_794xN.6069187861_a4dz.jpg",
   title: Copy.text({
-    es: "Nuevo website y turotial",
-    en: "New website and tutorial",
+    es: "Nuevo website",
+    en: "New website",
   }),
   url: "https://jackrabbits.lenino.net/",
   desc: Copy.text({
