@@ -3,8 +3,8 @@ import tags from "./tags.js";
 
 export const projects = [{
   title: Copy.text({
-    en: "La Hermanastra",
-    es: "The Stepsister",
+    es: "La Hermanastra",
+    en: "The Stepsister",
   }),
   folder: "hermanastra",
   img: "assets/hermanastra.png",
@@ -33,18 +33,6 @@ export const projects = [{
   }),
   tags: [Copy.at.code]
 }, {
-  title: Copy.text({
-    en: "Mis 500 Locos",
-    es: "A State of Madness",
-  }),
-  link: "https://www.imdb.com/title/tt7552938/",
-  img: "assets/mis500locos.jpg",
-  desc: Copy.text({
-    en: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
-    es: "Película de largometraje escrita por Lenin Comprés y Waddys Jáquez, dirigida por Leticia Tonos, basada en un libro de Antonio Zaglul",
-  }),
-  tags: [Copy.at.film, Copy.at.writing]
-}, {
   title: "3DPsyche",
   folder: "pre",
   link: "http://pre.lenino.net",
@@ -62,7 +50,7 @@ export const projects = [{
     es: "Album musical: la travesía del cuentacuentos a través del conflicto y la empatía",
   }),
   tags: [Copy.at.music, Copy.at.writing],
-}, {
+}, /*{
   title: Copy.text({
     en: "Animalcules",
     es: "Animalucos",
@@ -97,6 +85,18 @@ export const projects = [{
     es: "Lenino podría oficiar la boda de tus fantasías sin estrés, con facilidad y diversión.",
   }),
   tags: [Copy.at.performance]
+},*/ {
+  title: Copy.text({
+    es: "Mis 500 Locos",
+    en: "A State of Madness",
+  }),
+  link: "https://www.imdb.com/title/tt7552938/",
+  img: "assets/mis500locos.jpg",
+  desc: Copy.text({
+    es: "Película de largometraje escrita por Lenin Comprés y Waddys Jáquez, dirigida por Leticia Tonos, basada en un libro de Antonio Zaglul",
+    en: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
+  }),
+  tags: [Copy.at.film, Copy.at.writing]
 }, {
   title: Copy.text({
     en: "12 Short Pieces",
