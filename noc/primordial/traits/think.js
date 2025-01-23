@@ -21,7 +21,7 @@ export const think = {
       ...me.sensors.map(s => s.value),
       //...me.output.map(o => o.value),
     ];
-    me.brain = me.brain ? me.brain : ml5.neuralNetwork({
+    me.brain = me.brain || ml5.neuralNetwork({
       inputs: me.inputs().length,
       outputs: me.output.length,
       task: "regression",

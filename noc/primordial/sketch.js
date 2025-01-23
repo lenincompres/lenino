@@ -15,7 +15,7 @@ Mass.TRAITS.steer = steer;
 Mass.TRAITS.bite = bite;
 Mass.TRAITS.clone = clone;
 Mass.TRAITS.clone.arg = addBloop;
-Mass.TRAITS.think = think;
+//Mass.TRAITS.think = think;
 
 window.setup = setup;
 window.draw = draw;

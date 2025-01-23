@@ -16,7 +16,7 @@ export const clone = {
       me.hue -= clone.hue - me.hue;
       clone.mass = me.mass * randomGaussian(me.cloneLevel ? 1.5 * me.cloneLevel : 1, DEVIATION);
       clone.cloningMass = randomGaussian(me.cloningMass, DEVIATION);
-      if (me.brain) clone.brain = me.brain.copy().mutate(0.1);
+      if (me.brain) clone.brain = me.brain.copy();//.mutate(0.1);
       clone.addTrait(...me.traits.filter(() => random() < 0.8));
       me.mass += me.mass - clone.mass;
     }
