@@ -1,4 +1,3 @@
-import Copy from "../../lib/Copy.js";
 import * as STYLE from "../style.js";
 import allProjects from "./data/projects.js";
 import Pager from "../../lib/Pager.js";
@@ -18,7 +17,7 @@ const projectsPage = {
   menu: {
     display: "flex",
     ul: _allTags.as(val => ({
-      maxWidth: "50em",
+      //maxWidth: "50em",
       margin: "0 0.5em 0.5em",
       justifyContent: "center",
       display: "flex",
@@ -54,7 +53,7 @@ const projectsPage = {
     model: STYLE.SLIDE(i),
     position: "relative",
     fontSize: "1em",
-    width: "23em",
+    width: "25em",
     cursor: "pointer",
     boxShadow: _activeProject.as(val => val === i ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL),
     display: _activeTag.as(val => val === NONE || project.tags.includes(val) ? "block" : "none"),

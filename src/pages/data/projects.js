@@ -10,7 +10,7 @@ export const projects = [{
   img: "assets/hermanastra.png",
   desc: Copy.text({
     en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    es: "Monólogo músical que revela lo que pasó con la hermanastra de la Cenicienta tras perder al príncipe.",
+    es: "Monólogo músical que revela el destino de la hermanastra de Cenicienta tras perder al príncipe.",
   }),
   tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
 }, {
@@ -19,17 +19,32 @@ export const projects = [{
   link: "http://jackrabbits.lenino.net",
   img: "assets/jackrabbits.png",
   desc: Copy.text({
-    en: "The board game for playing cards on a land of wooden shards",
+    en: "The board game for playing cards on a land of wooden shards.",
     es: "El juego de tablero en el que viajas al reino de conejos y barajas.",
   }),
   tags: [Copy.at.game, Copy.at.code]
+}, {
+  title: Copy.text({
+    es: "Terrafirma",
+    en: "Yonder Lands",
+  }),
+  link: Copy.text({
+    es: "https://terrafirma.yonderlands.net/",
+    en: "https://yonderlands.net/",
+  }),
+  img: "assets/terrafirma.png",
+  desc: Copy.text({
+    en: "My debut novel, an original and multiethnic prequel to Wonderland.",
+    es: "Mi primera novela, una precuela inédita y multiétnica del País de las Maravillas.",
+  }),
+  tags: [Copy.at.writing, Copy.at.book]
 }, {
   title: "DOM.js",
   link: "https://github.com/lenincompres/DOM.js",
   img: "assets/dom.png",
   desc: Copy.text({
     en: "JavaScript library that creates and handles DOM structures using a JS structural objects as a model",
-    es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando objetos estructurales de JS como modelo.",
+    es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando modelos de JS.",
   }),
   tags: [Copy.at.code]
 }, {
@@ -38,8 +53,8 @@ export const projects = [{
   link: "http://pre.lenino.net",
   img: "assets/pre.png",
   desc: Copy.text({
-    en: "Psychometric tool to visualize the physical, rational and emotional spectrum—interests, focus, personality types.",
-    es: "Herramienta psicométrica que visualiza la espectro físico, racional y emocional del interes, el enfoque y la personalidad.",
+    en: "Psychometric tool to visualize the physical, rational and emotional spectrum of our personality.",
+    es: "Herramienta psicométrica que visualiza el espectro físico, racional y emocional de la personalidad.",
   }),
   tags: [Copy.at.tool],
 }, {
@@ -93,8 +108,8 @@ export const projects = [{
   link: "https://www.imdb.com/title/tt7552938/",
   img: "assets/mis500locos.jpg",
   desc: Copy.text({
-    es: "Película de largometraje escrita por Lenin Comprés y Waddys Jáquez, dirigida por Leticia Tonos, basada en un libro de Antonio Zaglul",
-    en: "Feature film written by Lenin Compres & Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
+    es: "Largometraje co-escrito con Waddys Jáquez, dirigido por Leticia Tonos, basado en un libro de Antonio Zaglul",
+    en: "Feature film co-written with Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
   }),
   tags: [Copy.at.film, Copy.at.writing]
 }, {
@@ -114,8 +129,8 @@ export const projects = [{
   link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
   img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
   desc: Copy.text({
-    en: "Cover of Regina Spektor's “That Time” to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
-    es: "Cover de “That Time” de Regina Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
+    en: "Cover of Regina Spektor to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
+    es: "Cover Regina Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
   }),
   tags: [Copy.at.music, Copy.at.performance, Copy.at.theatre]
 }]

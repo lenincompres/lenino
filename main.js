@@ -103,16 +103,16 @@ DOM.set({
   container: {
     model: STYLE.FLEX,
     margin: "0 auto",
-    maxWidth: "800px",
+    maxWidth: "860px",
     overflowX: "hidden",
     main: {
       position: "relative",
-      maxWidth: _isWide.as("100%", "800px"),
+      maxWidth: _isWide.as("100%", "860px"),
       width: "100%",
       boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: _isMobile.as("800px", "initial"),
+      backgroundSize: _isMobile.as("860px", "initial"),
       backgroundPosition: "center top",
       backgroundAttachment: "fixed",
       menu: {
@@ -225,7 +225,7 @@ DOM.set({
         justifyContent: _isMobile.as("flex-start", "center"),
         minHeight: _isMobile.as(["40em", "calc(100vh - 13em)"]),
         height: "fit-content",
-        width: _isMobile.as("47em", "100%"),
+        width: _isMobile.as("52em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
         content: Pager._content,
       },
