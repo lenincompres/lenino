@@ -30,7 +30,7 @@ export const projects = [{
   }),
   link: Copy.text({
     es: "https://terrafirma.yonderlands.net/",
-    en: "https://yonderlands.net/",
+    en: "https://www.yonderlands.net/",
   }),
   img: "assets/terrafirma.png",
   desc: Copy.text({
