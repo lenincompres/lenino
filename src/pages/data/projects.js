@@ -48,7 +48,10 @@ export const projects = [{
   }),
   tags: [Copy.at.code]
 }, {
-  title: "3DPsyche",
+  title: Copy.text({
+    es: "La Psiquis 3D (3DPsyche)",
+    en: "3DPsyche",
+  }),
   folder: "pre",
   link: "http://pre.lenino.net",
   img: "assets/pre.png",
@@ -62,7 +65,7 @@ export const projects = [{
   folder: "album",
   desc: Copy.text({
     en: "Musical album: a storyteller's journey through conflict and empathy",
-    es: "Album musical: la travesía del cuentacuentos a través del conflicto y la empatía",
+    es: "Album musical <i>Ilusiónes de dualidad</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
   }),
   tags: [Copy.at.music, Copy.at.writing],
 }, /*{
@@ -120,8 +123,8 @@ export const projects = [{
   folder: "las12piezascortas",
   img: "assets/12piezascortas.png",
   desc: Copy.text({
-    en: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <i>Desayuno en Rojo Chino</i>.",
-    es: "First theatre plays by Lenino, aimed at training theater talents. Includes <i>Desayuno en Rojo Chino</i>.",
+    en: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
+    es: "<i>12 Short Pieces</i>: plays written in 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
   }),
   tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
 }, {
