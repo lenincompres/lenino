@@ -10,7 +10,7 @@ export const projects = [{
   img: "assets/hermanastra.png",
   desc: Copy.text({
     en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    es: "Monólogo músical que revela el destino de la hermanastra de Cenicienta tras perder al príncipe.",
+    es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
   }),
   tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
 }, {
@@ -34,8 +34,8 @@ export const projects = [{
   }),
   img: "assets/terrafirma.png",
   desc: Copy.text({
-    en: "My debut novel, an original and multiethnic prequel to Wonderland.",
-    es: "Mi primera novela, una precuela inédita y multiétnica del País de las Maravillas.",
+    en: "My debut novel: an original and multiethnic prequel to Alice's Wonderland.",
+    es: "Mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.",
   }),
   tags: [Copy.at.writing, Copy.at.book]
 }, {
@@ -43,7 +43,7 @@ export const projects = [{
   link: "https://github.com/lenincompres/DOM.js",
   img: "assets/dom.png",
   desc: Copy.text({
-    en: "JavaScript library that creates and handles DOM structures using a JS structural objects as a model",
+    en: "JavaScript library that creates and handles DOM structures using JS structural objects a models.",
     es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando modelos de JS.",
   }),
   tags: [Copy.at.code]
@@ -53,8 +53,8 @@ export const projects = [{
   link: "http://pre.lenino.net",
   img: "assets/pre.png",
   desc: Copy.text({
-    en: "Psychometric tool to visualize the physical, rational and emotional spectrum of our personality.",
-    es: "Herramienta psicométrica que visualiza el espectro físico, racional y emocional de la personalidad.",
+    en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
+    es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
   }),
   tags: [Copy.at.tool],
 }, {
@@ -120,8 +120,8 @@ export const projects = [{
   folder: "las12piezascortas",
   img: "assets/12piezascortas.png",
   desc: Copy.text({
-    en: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <b>Desayuno en Rojo Chino</b>.",
-    es: "First theatre plays by Lenino, aimed at training theater talents. Includes <b>Desayuno en Rojo Chino</b>.",
+    en: "Primeras obras de teatro, dirigidas a la formación de talentos teatrales. Incluye <i>Desayuno en Rojo Chino</i>.",
+    es: "First theatre plays by Lenino, aimed at training theater talents. Includes <i>Desayuno en Rojo Chino</i>.",
   }),
   tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
 }, {
@@ -129,8 +129,8 @@ export const projects = [{
   link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
   img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
   desc: Copy.text({
-    en: "Cover of Regina Spektor to celebrate international theatre month at La 37 por las Tablas, Santiago R.D.",
-    es: "Cover Regina Spektor para celebrar el mes internacional del teatro en La 37 por las Tablas, Santiago R.D.",
+    en: "Cover of Regina Spektor to celebrate the international theatre month at La 37 por las Tablas, Santiago R.D.",
+    es: "Cover de Regina Spektor para celebrar el mes internacional del teatro, en La 37 por las Tablas, R.D.",
   }),
   tags: [Copy.at.music, Copy.at.performance, Copy.at.theatre]
 }]
