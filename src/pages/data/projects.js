@@ -44,7 +44,7 @@ export const projects = [{
   img: "assets/dom.png",
   desc: Copy.text({
     en: "JavaScript library that creates and handles DOM structures using JS structural objects a models.",
-    es: "Librería de JavaScript que crea y maneja estructuras de DOM utilizando modelos de JS.",
+    es: "Librería de JavaScript que crea y maneja estructuras del DOM utilizando notación de objetos de JS.",
   }),
   tags: [Copy.at.code]
 }, {
@@ -117,18 +117,21 @@ export const projects = [{
   tags: [Copy.at.film, Copy.at.writing]
 }, {
   title: Copy.text({
-    en: "12 Short Pieces",
     es: "Las 12 Piezas Cortas",
+    en: "The 12 Short Pieces",
   }),
   folder: "las12piezascortas",
   img: "assets/12piezascortas.png",
   desc: Copy.text({
-    en: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
-    es: "<i>12 Short Pieces</i>: plays written in 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
+    es: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
+    en: "Short plays written in 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
   }),
   tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
 }, {
-  title: "La Ve",
+  title: Copy.text({
+    es: "La Ve",
+    en: "La Ve (That Time)",
+  }),
   link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
   img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
   desc: Copy.text({
