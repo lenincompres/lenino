@@ -13,9 +13,19 @@ const newsies = [/*{
   }),
 }, */{
   title: Copy.text({
-    es: "¡Nuevo website!",
-    en: "New website!",
+    es: "¡Ayuda!",
+    en: "Help!",
   }),
+  src: "https://lenino.net/assets/terrafirma.png",
+  url: Copy.text({
+    es: `https://terrafirma.yonderlands.net/`,
+    en: `https://www.yonderlands.net/`,
+  }),
+  desc: Copy.text({
+    es: `Mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.`,
+    en: `My debut novel: an original and multiethnic prequel to Alice's Wonderland.`,
+  }),
+}, {
   src: "https://i.etsystatic.com/52679041/r/il/c0dc16/6069187861/il_794xN.6069187861_a4dz.jpg",
   title: Copy.text({
     es: "Nuevo website",
@@ -23,8 +33,8 @@ const newsies = [/*{
   }),
   url: "https://jackrabbits.lenino.net/",
   desc: Copy.text({
-    es: `**Jack Rabbits** tiene un nuevo [website y video tutorial]({href}). También puedes comprar una copia limitada en introductoria del juego.`,
-    en: `**Jack Rabbits** has a new [website and video tutorial]({href}). You can also buy a limited copy of the game there.`,
+    es: `**Jack Rabbits** tiene un nuevo [website y video tutorial]({href}). Adquiere una copia limitada en introductoria del juego.`,
+    en: `**Jack Rabbits** has a new [website and video tutorial]({href}). Get limited copy of the game.`,
   }),
 }];
 
@@ -35,7 +45,7 @@ export default newsies.map(n =>  ({
     text: n.title,
   },
   a: {
-    href: n.href,
+    href: n.url,
     target: "_blank",
     img: {
       width: "100%",
@@ -45,6 +55,6 @@ export default newsies.map(n =>  ({
   },
   div: {
     marginBottom: "1em",
-    markdown: n.desc.replace('{href}', n.href),
+    markdown: n.desc.replace('{href}', n.url),
   }
 }));
