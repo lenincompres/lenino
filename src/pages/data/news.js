@@ -33,7 +33,7 @@ const newsies = [/*{
   }),
   url: "https://jackrabbits.lenino.net/",
   desc: Copy.text({
-    es: `**Jack Rabbits** tiene un nuevo [website y video tutorial]({href}). Adquiere una copia limitada en introductoria del juego.`,
+    es: `**Jack Rabbits** tiene un nuevo [website y video tutorial]({href}). Adquiere una copia limitada del juego.`,
     en: `**Jack Rabbits** has a new [website and video tutorial]({href}). Get limited copy of the game.`,
   }),
 }];
