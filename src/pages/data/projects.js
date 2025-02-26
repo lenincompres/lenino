@@ -52,9 +52,8 @@ export const projects = [{
     es: "La Psiquis 3D (3DPsyche)",
     en: "3DPsyche",
   }),
-  folder: "pre",
-  link: "http://pre.lenino.net",
-  img: "assets/pre.png",
+  link: "http://3dpsyche.lenino.net",
+  img: "assets/3dpsyche.png",
   desc: Copy.text({
     en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
     es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
