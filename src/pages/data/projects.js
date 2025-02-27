@@ -3,16 +3,19 @@ import tags from "./tags.js";
 
 export const projects = [{
   title: Copy.text({
-    es: "La Hermanastra",
-    en: "The Stepsister",
+    es: "Terrafirma",
+    en: "Yonder Lands",
   }),
-  folder: "hermanastra",
-  img: "assets/hermanastra.png",
+  link: Copy.text({
+    es: "https://terrafirma.yonderlands.net/",
+    en: "https://www.yonderlands.net/",
+  }),
+  img: "assets/terrafirma.png",
   desc: Copy.text({
-    en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
+    en: "My debut novel's manuscript: an original and multiethnic prequel to Alice's Wonderland.",
+    es: "Manuscrito de mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.",
   }),
-  tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
+  tags: [Copy.at.writing, Copy.at.book]
 }, {
   title: "JackRabbits",
   folder: "jackrabbits",
@@ -25,19 +28,16 @@ export const projects = [{
   tags: [Copy.at.game, Copy.at.code]
 }, {
   title: Copy.text({
-    es: "Terrafirma",
-    en: "Yonder Lands",
+    es: "La Psiquis 3D (3DPsyche)",
+    en: "3DPsyche",
   }),
-  link: Copy.text({
-    es: "https://terrafirma.yonderlands.net/",
-    en: "https://www.yonderlands.net/",
-  }),
-  img: "assets/terrafirma.png",
+  link: "http://3dpsyche.lenino.net",
+  img: "assets/3dpsyche.png",
   desc: Copy.text({
-    en: "My debut novel: an original and multiethnic prequel to Alice's Wonderland.",
-    es: "Mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.",
+    en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
+    es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
   }),
-  tags: [Copy.at.writing, Copy.at.book]
+  tags: [Copy.at.tool],
 }, {
   title: "DOM.js",
   link: "https://github.com/lenincompres/DOM.js",
@@ -49,16 +49,16 @@ export const projects = [{
   tags: [Copy.at.code]
 }, {
   title: Copy.text({
-    es: "La Psiquis 3D (3DPsyche)",
-    en: "3DPsyche",
+    es: "La Hermanastra",
+    en: "The Stepsister",
   }),
-  link: "http://3dpsyche.lenino.net",
-  img: "assets/3dpsyche.png",
+  folder: "hermanastra",
+  img: "assets/hermanastra.png",
   desc: Copy.text({
-    en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
-    es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
+    en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
+    es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
   }),
-  tags: [Copy.at.tool],
+  tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
 }, {
   title: "Illusions of Duality",
   folder: "album",
@@ -123,7 +123,7 @@ export const projects = [{
   img: "assets/12piezascortas.png",
   desc: Copy.text({
     es: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
-    en: "Short plays written in 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
+    en: "Short plays written in the 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
   }),
   tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
 }, {
