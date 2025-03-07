@@ -43,7 +43,7 @@ export const projects = [{
   link: "https://github.com/lenincompres/DOM.js",
   img: "assets/dom.png",
   desc: Copy.text({
-    en: "JavaScript library that creates and handles DOM structures using JS structural objects a models.",
+    en: "JavaScript library that creates and handles DOM structures using JS structural objects as models.",
     es: "Librería de JavaScript que crea y maneja estructuras del DOM utilizando notación de objetos de JS.",
   }),
   tags: [Copy.at.code]
