@@ -1,15 +1,15 @@
 class Segment {
   constructor({ x = 0, y = 0, angle, weight, rotation = 0, level = 0, on = false} = {}) {
-    let a = PI/100;
     this.x = x;
     this.y = y;
+    this.radius = level * (2 * weight + 2);
+    this.level = level;
+    let a = PI/30/level;
     this.angle = angle - a;
     this.weight = weight;
     this.rotation = rotation + a/2;
     this.on = on;
     this.hover = false;
-    this.radius = level * (2 * weight + 2);
-    this.level = level;
   }
 
   show() {

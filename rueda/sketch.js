@@ -24,8 +24,8 @@ let notas = params.get('notas');
 
 function setup() {
   let canvas = createCanvas(700, 700);
-  vals = vals ? vals.split(',').map(v => parseInt(v)) : names.map(n => ceil(random(names.length)));
-  notas = notas ? notas.split(',') : names.map(v => '');
+  vals = vals ? vals.split('|').map(v => parseInt(v)) : names.map(n => ceil(random(names.length)));
+  notas = notas ? notas.split('|') : names.map(v => '');
   DOM.set({
     width: '800px',
     margin: '0 auto',
@@ -81,8 +81,8 @@ function setup() {
         margin: '0.5em',
         text: 'Salvar el vínculo',
         click: () => window.open(window.parent.location.href.split('?')[0] +
-          '?vals=' + vals.join(',') +
-          '&notas=' + notasInput.map(n => n.value).join(','))
+          '?vals=' + vals.join('|') +
+          '&notas=' + notasInput.map(n => n.value).join('|'))
       },
     },
     footer: {
