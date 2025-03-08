@@ -3,7 +3,7 @@ import tags from "./tags.js";
 
 export const projects = [{
   title: Copy.text({
-    es: "Terrafirma",
+    es: "Terräfirmä",
     en: "Yonder Lands",
   }),
   link: Copy.text({

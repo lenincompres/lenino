@@ -6,7 +6,7 @@ const tags = {
     es: "libro",
   },
   code: {
-    en: "code",
+    en: "coding",
     es: "código",
   },
   film: {
