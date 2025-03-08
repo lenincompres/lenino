@@ -1,15 +1,15 @@
 let segments = [];
 let names = [
-  "amor / pareja",
+  "amor",
   "amistad",
   "hogar",
   "cuerpo",
   "desarrollo",
   "dinero",
   "entorno",
-  "espíritu / valores",
+  "espíritu",
   "familia",
-  "ocio / diversión",
+  "recreo",
   "salud",
   "trabajo",
 ];
