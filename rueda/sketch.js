@@ -65,7 +65,7 @@ function setup() {
             textAlign: 'right',
             paddingRight: '0.4em',
             display: 'inline-block',
-            width: '11em',
+            width: windowWidth < 700 ? 'fit-content' : '11em',
             text: name.toUpperCase(),
           },
           input: {
