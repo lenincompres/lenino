@@ -17,20 +17,20 @@ let pNumber = names.length;
 let tNumber = 10;
 let sWeight = 30;
 let selectedCol = [];
+let maxWidth = 700;
 
 const params = new URLSearchParams(window.parent.location.search);
 let vals = params.get('vals');
 let notas = params.get('notas');
 
 function setup() {
-  let canvasSize = windowWidth%700;
-  console.log(windowWidth);
-  sWeight = 30 * canvasSize / 700;
+  let canvasSize = min(windowWidth, maxWidth);
+  sWeight = 30 * canvasSize / maxWidth;
   let canvas = createCanvas(canvasSize, canvasSize);
   vals = vals ? vals.split('|').map(v => parseInt(v)) : names.map(n => ceil(random(names.length)));
   notas = notas ? notas.split('|') : names.map(v => '');
   DOM.set({
-    maxWidth: '800px',
+    maxWidth: maxWidth + 'px',
     margin: '0 auto',
     backgroundColor: 'silver',
     textAlign: 'center',
@@ -65,14 +65,14 @@ function setup() {
             textAlign: 'right',
             paddingRight: '0.4em',
             display: 'inline-block',
-            width: windowWidth < 700 ? 'fit-content' : '11em',
+            width: windowWidth < maxWidth ? 'fit-content' : '11em',
             text: name.toUpperCase(),
           },
           input: {
             id: 'notasInput',
             border: 'solid 2px',
             padding: '0.2em 0.5em',
-            width: '35em',
+            width: '38em',
             maxWidth: 'calc(100vw - 1em)',
             value: notas[i],
             borderColor: `hsl(${i = map(i, 0, names.length, 0, 360)} 50% 60%)`,
