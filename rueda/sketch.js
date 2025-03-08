@@ -23,11 +23,14 @@ let vals = params.get('vals');
 let notas = params.get('notas');
 
 function setup() {
-  let canvas = createCanvas(700, 700);
+  let canvasSize = windowWidth%700;
+  console.log(windowWidth);
+  sWeight = 30 * canvasSize / 700;
+  let canvas = createCanvas(canvasSize, canvasSize);
   vals = vals ? vals.split('|').map(v => parseInt(v)) : names.map(n => ceil(random(names.length)));
   notas = notas ? notas.split('|') : names.map(v => '');
   DOM.set({
-    width: '800px',
+    maxWidth: '800px',
     margin: '0 auto',
     backgroundColor: 'silver',
     textAlign: 'center',
@@ -56,7 +59,7 @@ function setup() {
         display: 'flex column',
         h2: 'Notas',
         section: names.map((name, i) => ({
-          margin: '0.2em 0 0.2em -5em',
+          margin: '0.2em 0',
           label: {
             whiteSpace: 'nowrap',
             textAlign: 'right',
@@ -70,6 +73,7 @@ function setup() {
             border: 'solid 2px',
             padding: '0.2em 0.5em',
             width: '35em',
+            maxWidth: 'calc(100vw - 1em)',
             value: notas[i],
             borderColor: `hsl(${i = map(i, 0, names.length, 0, 360)} 50% 60%)`,
             backgroundColor: `hsl(${i} 50% 90%)`,
@@ -137,7 +141,7 @@ function mousePressed() {
 
 function drawLabels() {
   push();
-  textSize(16);
+  textSize(sWeight / 2);
   textAlign(CENTER);
   fill(0);
   let ang = TWO_PI / pNumber;
@@ -146,7 +150,7 @@ function drawLabels() {
   names.forEach((name, i) => {
     push();
     rotate(i * ang);
-    translate(sWeight * tNumber, 0);
+    translate(sWeight * tNumber + sWeight / 3, 0);
     rotate(PI / 2);
     text(name.toUpperCase(), 0, 0);
     pop();
@@ -157,5 +161,4 @@ function drawLabels() {
 function updateVals() {
   vals = vals.map(v => 0);
   segments.forEach(s => s.on && vals[s.row] <= s.level && (vals[s.row] = s.level));
-  console.log(vals);
 }
