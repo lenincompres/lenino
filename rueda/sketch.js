@@ -15,9 +15,10 @@ let names = [
 ];
 let pNumber = names.length;
 let tNumber = 10;
-let sWeight = 30;
+let sWeight = 32;
 let selectedCol = [];
 let maxWidth = 700;
+let mouse;
 
 const params = new URLSearchParams(window.parent.location.search);
 let vals = params.get('vals');
@@ -25,7 +26,7 @@ let notas = params.get('notas');
 
 function setup() {
   let canvasSize = min(windowWidth, maxWidth);
-  sWeight = 30 * canvasSize / maxWidth;
+  sWeight *= canvasSize / maxWidth;
   let canvas = createCanvas(canvasSize, canvasSize);
   vals = vals ? vals.split('|').map(v => parseInt(v)) : names.map(n => ceil(random(names.length)));
   notas = notas ? notas.split('|') : names.map(v => '');
@@ -41,25 +42,19 @@ function setup() {
     },
     header: {
       fontSize: '1.5em',
-      margin: '1em',
+      margin: '1em 1em 0',
       h1: 'Rueda de La vida',
-      section: {
-        fontSize: '1.5em',
-        height: '0.5em',
-        lineHeight: '0.5em',
-        b: names.map((name, i) => ({
-          color: `hsl(${map(i, 0, names.length, 0, 360)} 50% 50%)`,
-          text: '•',
-        }))
-      },
     },
     main: {
       canvas: canvas,
-      form: {
-        display: 'flex column',
+      section: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: 'fit-content',
+        margin: '2em auto 0',
         h2: 'Notas',
         section: names.map((name, i) => ({
-          margin: '0.2em 0',
+          margin: '0 0 1em',
           label: {
             whiteSpace: 'nowrap',
             textAlign: 'right',
@@ -68,11 +63,13 @@ function setup() {
             width: windowWidth < maxWidth ? 'fit-content' : '11em',
             text: name.toUpperCase(),
           },
-          input: {
+          span: {
+            display: 'inline-block',
             id: 'notasInput',
+            contenteditable: 'true',
             border: 'solid 2px',
             padding: '0.2em 0.5em',
-            width: '38em',
+            minWidth: '38em',
             maxWidth: 'calc(100vw - 1em)',
             value: notas[i],
             borderColor: `hsl(${i = map(i, 0, names.length, 0, 360)} 50% 60%)`,
@@ -121,7 +118,7 @@ function draw() {
 
 function mouseMoved() {
   let cent = createVector(width / 2, height / 2);
-  let mouse = createVector(mouseX, mouseY).sub(cent);
+  mouse = createVector(mouseX, mouseY).sub(cent);
   selectedCol = [];
   segments.forEach(s => s.hover = false);
   if (mouse.mag() < tNumber * sWeight) {
@@ -133,10 +130,7 @@ function mouseMoved() {
 }
 
 function mousePressed() {
-  let cent = createVector(width / 2, height / 2);
-  let mouse = createVector(mouseX, mouseY).sub(cent);
   selectedCol.forEach(s => s.on = s.radius / 2 < mouse.mag() + s.weight / 2);
-  updateVals();
 }
 
 function drawLabels() {
