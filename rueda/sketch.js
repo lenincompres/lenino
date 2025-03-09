@@ -43,7 +43,7 @@ function setup() {
     header: {
       fontSize: '1.5em',
       margin: '1em 1em 0',
-      h1: 'Rueda de La vida',
+      h1: 'Rueda de la Vida',
     },
     main: {
       canvas: canvas,
@@ -60,7 +60,7 @@ function setup() {
             textAlign: 'right',
             paddingRight: '0.4em',
             display: 'inline-block',
-            width: windowWidth < maxWidth ? 'fit-content' : '11em',
+            width: windowWidth < maxWidth ? 'fit-content' : '8em',
             text: name.toUpperCase(),
           },
           span: {
@@ -69,10 +69,10 @@ function setup() {
             contenteditable: 'true',
             border: 'solid 2px',
             padding: '0.2em 0.5em',
-            minWidth: '38em',
+            width: '38em',
             maxWidth: 'calc(100vw - 1em)',
             value: notas[i],
-            borderColor: `hsl(${i = map(i, 0, names.length, 0, 360)} 50% 60%)`,
+            borderColor: `hsl(${i = map(i, 0, names.length, 0, 360)} 50% 50%)`,
             backgroundColor: `hsl(${i} 50% 90%)`,
           }
         })),
