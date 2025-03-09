@@ -131,6 +131,7 @@ function mouseMoved() {
 
 function mousePressed() {
   selectedCol.forEach(s => s.on = s.radius / 2 < mouse.mag() + s.weight / 2);
+  updateVals();
 }
 
 function drawLabels() {
