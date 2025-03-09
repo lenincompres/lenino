@@ -15,9 +15,9 @@ let names = [
 ];
 let pNumber = names.length;
 let tNumber = 10;
-let sWeight = 32;
 let selectedCol = [];
 let maxWidth = 700;
+let sWeight = 32 * maxWidth / 700;
 let mouse;
 
 const params = new URLSearchParams(window.parent.location.search);
