@@ -22,8 +22,8 @@ export const projects = [{
   link: "http://jackrabbits.lenino.net",
   img: "assets/jackrabbits.png",
   desc: Copy.text({
-    en: "The board game for playing cards on a land of wooden shards.",
-    es: "El juego de tablero en el que viajas al reino de conejos y barajas.",
+    en: "The board game for playing cards</br> on a land of wooden shards.",
+    es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
   }),
   tags: [Copy.at.game, Copy.at.code]
 }, {
@@ -37,7 +37,7 @@ export const projects = [{
     en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
     es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
   }),
-  tags: [Copy.at.tool],
+  tags: [Copy.at.tool, Copy.at.code],
 }, {
   title: "DOM.js",
   link: "https://github.com/lenincompres/DOM.js",
@@ -64,7 +64,7 @@ export const projects = [{
   folder: "album",
   desc: Copy.text({
     en: "Musical album: a storyteller's journey through conflict and empathy",
-    es: "Album musical <i>Ilusiónes de dualidad</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
+    es: "Album musical <i>Ilusiones de dualidad</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
   }),
   tags: [Copy.at.music, Copy.at.writing],
 }, /*{
