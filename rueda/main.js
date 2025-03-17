@@ -1,17 +1,56 @@
+import Copy from "../lib/Copy.js";
+import Segment from "./segment.js";
+
 let segments = [];
 let names = [
-  "amor",
-  "amistad",
-  "hogar",
-  "cuerpo",
-  "desarrollo",
-  "dinero",
-  "entorno",
-  "espíritu",
-  "familia",
-  "recreo",
-  "salud",
-  "trabajo",
+  Copy.text({
+    es: "amor",
+    en: "love",
+  }),
+  Copy.text({
+    es: "amistad",
+    en: "friendship",
+  }),
+  Copy.text({
+    es: "hogar",
+    en: "home",
+  }),
+  Copy.text({
+    es: "cuerpo",
+    en: "body",
+  }),
+  Copy.text({
+    es: "desarrollo",
+    en: "development",
+  }),
+  Copy.text({
+    es: "dinero",
+    en: "money",
+  }),
+  Copy.text({
+    es: "entorno",
+    en: "environment",
+  }),
+  Copy.text({
+    es: "espíritu",
+    en: "spirit",
+  }),
+  Copy.text({
+    es: "familia",
+    en: "family",
+  }),
+  Copy.text({
+    es: "recreo",
+    en: "leisure",
+  }),
+  Copy.text({
+    es: "salud",
+    en: "health",
+  }),
+  Copy.text({
+    es: "trabajo",
+    en: "work",
+  }),
 ];
 let pNumber = names.length;
 let tNumber = 10;
@@ -24,7 +63,7 @@ const params = new URLSearchParams(window.parent.location.search);
 let vals = params.get('vals');
 let notas = params.get('notas');
 
-function setup() {
+window.setup = function () {
   let canvasSize = min(windowWidth, maxWidth);
   sWeight *= canvasSize / maxWidth;
   let canvas = createCanvas(canvasSize, canvasSize);
@@ -33,17 +72,32 @@ function setup() {
   DOM.set({
     maxWidth: maxWidth + 'px',
     margin: '0 auto',
-    backgroundColor: 'silver',
+    backgroundColor: '#ddd',
     textAlign: 'center',
     css: {
       h: {
         fontFamily: 'Papyrus',
-      }
+      },
+      a: {
+        textDecoration: 'underline',
+      },
     },
     header: {
-      fontSize: '1.5em',
-      margin: '1em 1em 0',
-      h1: 'Rueda de la Vida',
+      margin: '2em 1em 0',
+      h1: {
+        fontSize: '3em',
+        text: Copy.text({
+          es: 'Rueda de la Vida',
+          en: 'Wheel of Life',
+        }),
+      },
+      menu: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        margin: '1em 2em',
+        a: Copy.getToggleLink(Copy.LANG.es, Copy.LANG.en),
+      },
     },
     main: {
       canvas: canvas,
@@ -52,7 +106,10 @@ function setup() {
         flexDirection: 'column',
         width: 'fit-content',
         margin: '2em auto 0',
-        h2: 'Notas',
+        h2: Copy.text({
+          es: 'Notas',
+          en: 'Notes',
+        }),
         section: names.map((name, i) => ({
           margin: '0 0 1em',
           label: {
@@ -80,7 +137,10 @@ function setup() {
       button: {
         fontSize: '1.5em',
         margin: '0.5em',
-        text: 'Salvar el vínculo',
+        text: Copy.text({
+          es: 'Salvar el vínculo',
+          en: 'Save the link',
+        }),
         click: () => window.open(window.parent.location.href.split('?')[0] +
           '?vals=' + vals.join('|') +
           '&notas=' + notasInput.map(n => n.value).join('|'))
@@ -88,7 +148,10 @@ function setup() {
     },
     footer: {
       padding: '2em',
-      markdown: 'Creado por [Lenin Comprés](http://www.lenino.net) usando [DOM.js](https://github.com/lenincompres/DOM.js) and [P5js](https://p5js.org/).',
+      markdown: Copy.text({
+        es: 'Creado por [Lenin Comprés](http://www.lenino.net) usando [DOM.js](https://github.com/lenincompres/DOM.js) y [P5js](https://p5js.org/).',
+        es: 'Creaded by [Lenin Comprés](http://www.lenino.net) using [DOM.js](https://github.com/lenincompres/DOM.js) and [P5js](https://p5js.org/).',
+      }),
     }
   })
 
@@ -110,13 +173,13 @@ function setup() {
   }
 }
 
-function draw() {
+window.draw = function () {
   clear();
   segments.forEach((s) => s.show());
   drawLabels();
 }
 
-function mouseMoved() {
+window.mouseMoved = function () {
   let cent = createVector(width / 2, height / 2);
   mouse = createVector(mouseX, mouseY).sub(cent);
   selectedCol = [];
@@ -129,7 +192,7 @@ function mouseMoved() {
   selectedCol.forEach(s => s.hover = s.radius / 2 < mouse.mag() + s.weight / 2);
 }
 
-function mousePressed() {
+window.mousePressed = function () {
   selectedCol.forEach(s => s.on = s.radius / 2 < mouse.mag() + s.weight / 2);
   updateVals();
 }

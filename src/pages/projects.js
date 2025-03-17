@@ -70,12 +70,15 @@ const projectsPage = {
       },
       h3: {
         color: STYLE.COLOR.LINK,
-        fontFamily : "title",
+        fontFamily: "title",
         fontSize: "1rem",
         fontWeight: "bold",
         text: project.title,
       },
-      p: project.desc,
+      p: {
+        lineHeight: "1.35em",
+        content: project.desc,
+      },
     },
     ul: {
       marginTop: "0.2em",

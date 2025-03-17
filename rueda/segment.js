@@ -1,4 +1,4 @@
-class Segment {
+export class Segment {
   constructor({ x = 0, y = 0, angle, weight, rotation = 0, level = 0, on = false} = {}) {
     this.x = x;
     this.y = y;
@@ -31,3 +31,5 @@ class Segment {
     pop();
   }
 }
+
+export default Segment;
