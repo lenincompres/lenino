@@ -21,16 +21,16 @@ function checkViewport(e) {
 
 Copy.add({
   storyteller: {
-    en: "storyteller",
-    es: "cantacuentos",
+    en: "storytelling",
+    es: "cuentería",
   },
   educator: {
-    en: "educator",
-    es: "educador",
+    en: "education",
+    es: "educación",
   },
   creativist: {
     en: "creativist",
-    es: "creativo",
+    es: "creativismo",
   },
   bio: {
     en: "bio",
