@@ -8,6 +8,7 @@ import {
   INC
 } from "./settings.js";
 import sponsorsModel from "./modules/sponsors.js";
+import Copy from "../lib/Copy.js";
 
 DOM.set({
   head: {
@@ -80,12 +81,36 @@ DOM.set({
       margin: "-0.3em 0 -0.8em",
       i: "&",
     }, {
-      i: "La Hermanastra"
+      i: Copy.text({
+        es: "La Hermanastra",
+        en: "The Stepsister",
+      }),
     }],
     p: {
       color: COLOR.ACCENT,
       fontSize: "0.7em",
-      text: "Un monólogo musical rococómico"
+      text: Copy.text({
+        es: "Un monólogo musical rococómico",
+        en: "A Rococomic Musical Monologue",
+      }),
+    },
+    menu: {
+      fontSize: '1rem',
+      position: "absolute",
+      right: 0,
+      top: 0,
+      margin: "0.5em 1.5em",
+      zIndex: 100,
+      a: {
+        color: 'wheat',
+        hover: {
+          textShadow: "0 0 2px white",
+        },
+        after: {
+          content: '" »"',
+        },
+        content: Copy.getToggleLink(Copy.LANG.es, Copy.LANG.en),
+      }
     },
   },
 

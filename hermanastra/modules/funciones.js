@@ -1,3 +1,4 @@
+import Copy from "../../lib/Copy.js";
 
 const data = [
   {
@@ -78,7 +79,10 @@ export const funcionesModel = {
     p:  upcoming.map(printDate),
   },
   ul: {
-    h6: "Funciones pasadas",
+    h6: Copy.text({
+      es: "Funciones pasadas",
+      en: "Past Shows",
+    }),
     li: data.filter(d => !upcoming.includes(d)).map(printDate),
   }
 };

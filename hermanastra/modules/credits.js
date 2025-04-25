@@ -1,12 +1,19 @@
+import Copy from "../../lib/Copy.js";
 
 export const creditsModel = {
     marginTop: "3em",
     tag: "ul",
-    h1: "Créditos & equipo",
+    h1: Copy.text({
+      es: "Créditos & equipo",
+      en: "Credits & Team",
+    }),
     li: {
       margin: "1em 0",
       content: [{
-          h6: "Autoría e interpretación",
+          h6: Copy.text({
+            es: "Autoría e interpretación",
+            en: "written & performed by",
+          }),
           a: {
             text: "Lenin Comprés",
             href: "http://lenino.net",
@@ -14,7 +21,10 @@ export const creditsModel = {
           },
         },
         {
-          h6: "Asesoría escénica",
+          h6: Copy.text({
+            es: "Asesoría escénica y artística",
+            en: "artistic & stage advisor",
+          }),
           p: "Bethania Rivera",
           a: {
             text: "Waddys Jáquez",
@@ -23,7 +33,10 @@ export const creditsModel = {
           },
         },
         {
-          h6: "Asesoría musical",
+          h6: Copy.text({
+            es: "Asesoría musical",
+            en: "musical advisor",
+          }),
           a: {
             text: "Mariana Cabot",
             href: "https://marianacabot.com/",
@@ -31,11 +44,17 @@ export const creditsModel = {
           },
         },
         {
-          h6: "Equipo técnico",
+          h6: Copy.text({
+            es: "Equipo técnico",
+            en: "technical team",
+          }),
           p: ["Rossy Torres", "Félix Guzmán"]
         },
         {
-          h6: "Fotografía",
+          h6: Copy.text({
+            es: "Fotografía",
+            en: "photography",
+          }),
           a: {
             text: "Mariliana Arvelo",
             href: "https://www.stylishhipkids.com/",

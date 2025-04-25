@@ -33,10 +33,10 @@ function getMIDIMessage(midiMessage) {
   // nothing
   if(command == 254) return;
   // note down
-  if(command == 144) return playNote(note, vel);
-  // not up
-  if(command === 128) return stopNote(note);
+  if(command == 144 && playNote) return playNote(note, vel);
+  // note up
+  if(command === 128 && stopNote) return stopNote(note);
   // pedal
-  if(command === 177) return sustain(!!vel);
+  if(command === 177 && sustain) return sustain(!!vel);
   // console.log(command, note, vel);
 }
