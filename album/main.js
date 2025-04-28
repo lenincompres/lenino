@@ -265,57 +265,6 @@ function popup(m) {
   modal.style.display = "block";
 }
 
-/*------ YOUTUBE -----------
-
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var player;
-
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: 'auto',
-    width: '100%',
-    videoId: 'M7lc1UVf-VE',
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-}
-function onPlayerReady(event) {
-  event.target.playVideo();
-}
-function onPlayerStateChange(event) {
-  console.log(event);
-  switch (event.data) {
-    case YT.PlayerState.UNSTARTED:
-      console.log('unstarted');
-      break;
-    case YT.PlayerState.ENDED:
-      console.log('ended');
-      break;
-    case YT.PlayerState.PLAYING:
-      console.log('playing');
-      break;
-    case YT.PlayerState.PAUSED:
-      console.log('paused');
-      break;
-    case YT.PlayerState.BUFFERING:
-      console.log('buffering');
-      break;
-    case YT.PlayerState.CUED:
-      console.log('video cued');
-      break;
-  }
-}
-function stopVideo() {
-  player.stopVideo();
-}
-*/
-
 
 // SOUNDCLOUD WIDGET
 
@@ -353,4 +302,9 @@ SCwidget.bind(SC.Widget.Events.READY, function () {
     $('.rotate').removeClass('rotate');
     scPlayer.removeClass('hidden');
   });
+});
+
+$('.expand_button').click(e => {
+  e.currentTarget.classList.toggle('expanded');
+  $('#synopsis').toggleClass('expanded');
 });

@@ -9,6 +9,7 @@ import {
 } from "./settings.js";
 import sponsorsModel from "./modules/sponsors.js";
 import Copy from "../lib/Copy.js";
+import bookingModel from "./modules/booking.js";
 
 DOM.set({
   head: {
@@ -143,7 +144,8 @@ DOM.set({
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
       },
-      songlistModel,
+      bookingModel,
+      //songlistModel,
     ],
     onscroll: e => {
       lastKnownScrollPosition = window.scrollY;

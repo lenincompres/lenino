@@ -160,8 +160,7 @@ article .index, article .purchase {
 
 article .purchase {
   right: 4.5em;
-  top: 10.5em;
-  font-size: .86em;
+  top: 9em;
 }
 
 article b.play {
@@ -262,8 +261,9 @@ img.card {
 
 h2 {
   margin: 0;
-  font-size: 1.1em;
-  color: #942;
+  font-size: 1.3em;
+  color: rgb(185, 90, 53);
+  font-weight: bold;
 }
 
 article h3 {
@@ -363,10 +363,6 @@ article#1 {
 }
 
 /* for no-chords */
-
-.no-chords h2 {
-  margin-bottom: 1em;
-}
 
 .no-chords h3 {
   display: none;
@@ -663,4 +659,38 @@ footer p {
   article .purchase {
     right: 1em;
   }
+}
+
+#synopsis {
+  max-width: 48em;
+  margin: 0 auto;
+  padding: 0 1em;
+  text-align: left;
+  max-height: 0;
+  overflow-y: hidden;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+#synopsis p {
+  margin: 0.6em 0 0;
+  line-height: 1.5em;
+  text-indent: 1.5em;
+}
+
+#synopsis.expanded {
+  max-height: 30em;
+}
+
+.expand_button {
+  display: block;
+  margin: 0 auto 0;
+  rotate: 180deg;
+}
+
+.expand_button.expanded {
+  rotate: 0deg;
 }

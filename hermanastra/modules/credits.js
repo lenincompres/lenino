@@ -3,7 +3,7 @@ import Copy from "../../lib/Copy.js";
 export const creditsModel = {
     marginTop: "3em",
     tag: "ul",
-    h1: Copy.text({
+    h2: Copy.text({
       es: "Créditos & equipo",
       en: "Credits & Team",
     }),

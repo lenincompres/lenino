@@ -16,7 +16,7 @@ export const songlistModel = {
 
   marginTop: "1em",
 
-  h1: Copy.text({
+  h2: Copy.text({
     es: "Números musicales",
     en: "Musical Numbers",
   }),
