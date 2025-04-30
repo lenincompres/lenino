@@ -75,11 +75,11 @@ export const funcionesModel = {
     display: upcoming.length ? "block" : "none",
     fontSize: "1.25em",
     marginBottom: "1.5em",
-    h6: "Próximas funciónes",
+    h2: "Próximas funciónes",
     p:  upcoming.map(printDate),
   },
   ul: {
-    h6: Copy.text({
+    h2: Copy.text({
       es: "Funciones pasadas",
       en: "Past Shows",
     }),

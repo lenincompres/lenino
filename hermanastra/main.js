@@ -32,7 +32,7 @@ DOM.set({
 
   font: [{
     fontFamily: 'title',
-    src: 'url("./fonts/CinzelDecorative-Regular.ttf")',
+    src: 'url("./fonts/LavishlyYours-Regular.ttf")',
   }, {
     fontFamily: 'body',
     src: 'url("./fonts/Skia Regular.ttf")',
@@ -47,6 +47,12 @@ DOM.set({
       margin: "0.5em 0 0.1em",
       fontFamily: "title",
     },
+    h1: {
+      fontSize: "2.5em",
+    },
+    h2: {
+      fontSize: "2.2em",
+    },
     a: {
       color: COLOR.BRIGHT,
       hover: {
@@ -54,11 +60,11 @@ DOM.set({
       },
     },
     b: {
-      fontFamily: "title",
+      fontWeight: "bold",
     },
-    i: {
-      fontFamily: "fancy",
-    },
+    p: {
+      marginBottom: "0.5em",
+    }
   },
 
   fontFamily: "body",
@@ -77,16 +83,26 @@ DOM.set({
     lineHeight: "1.4em",
     align: "center",
     textDecoration: "0 0.1em 0.3em black",
-    h1: ["Lenino", {
-      color: COLOR.HIGHLIGHT,
-      margin: "-0.3em 0 -0.8em",
-      i: "&",
-    }, {
-      i: Copy.text({
-        es: "La Hermanastra",
-        en: "The Stepsister",
-      }),
-    }],
+    span: {
+      p: [{
+        margin: "0 0 -1em -10em",
+        i: "Lenino ",
+      },
+      {
+        fontSize: "1.6em",
+        color: COLOR.HIGHLIGHT,
+        margin: Copy.text({
+          es: "0.25em  0 -1.1em -4.55em",
+          en: "0  0 -0.8em -3.2em",
+        }),
+        fontFamily: "title",
+        b: "&",
+      }]
+    },
+    h1: Copy.text({
+      es: "La Hermanastra",
+      en: "The Stepsister",
+    }),
     p: {
       color: COLOR.ACCENT,
       fontSize: "0.7em",
@@ -154,15 +170,15 @@ DOM.set({
 
   footer: {
     align: "center",
-    background: "black",
-    color: "white",
-    margin: "3em auto 0",
-    padding: "2em 1em 2em",
-    backgroundImage: "url(media/leavesBWW.jpg)",
+    //background: "black",
+    //color: "white",
+    margin: "1em auto 0",
+    padding: "2em 1em 8em",
+    //backgroundImage: "url(media/leavesBWW.jpg)",
     a: {
       img: {
-        width: "2em",
-        src: "../assets/leninoLogoW.png",
+        alt: "Lenino logo seal",
+        src: "media/logo-seal.png",
       },
       href: "http://lenino.net",
       p: "lenino.net",

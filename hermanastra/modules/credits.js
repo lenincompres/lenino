@@ -4,15 +4,15 @@ export const creditsModel = {
     marginTop: "3em",
     tag: "ul",
     h2: Copy.text({
-      es: "Créditos & equipo",
-      en: "Credits & Team",
+      es: "Créditos",
+      en: "Credits",
     }),
     li: {
       margin: "1em 0",
       content: [{
-          h6: Copy.text({
+          h3: Copy.text({
             es: "Autoría e interpretación",
-            en: "written & performed by",
+            en: "Written & Performed by",
           }),
           a: {
             text: "Lenin Comprés",
@@ -21,21 +21,21 @@ export const creditsModel = {
           },
         },
         {
-          h6: Copy.text({
+          h3: Copy.text({
             es: "Asesoría escénica y artística",
-            en: "artistic & stage advisor",
+            en: "Artistic & Stage Advisors",
           }),
-          p: "Bethania Rivera",
           a: {
             text: "Waddys Jáquez",
             href: "https://www.instagram.com/waddysjaquez",
             target: "_blank",
           },
+          div: ["Bethania Rivera", "Rossy Torres"],
         },
         {
-          h6: Copy.text({
+          h3: Copy.text({
             es: "Asesoría musical",
-            en: "musical advisor",
+            en: "Musical Advisor",
           }),
           a: {
             text: "Mariana Cabot",
@@ -44,16 +44,9 @@ export const creditsModel = {
           },
         },
         {
-          h6: Copy.text({
-            es: "Equipo técnico",
-            en: "technical team",
-          }),
-          p: ["Rossy Torres", "Félix Guzmán"]
-        },
-        {
-          h6: Copy.text({
+          h3: Copy.text({
             es: "Fotografía",
-            en: "photography",
+            en: "Photography",
           }),
           a: {
             text: "Mariliana Arvelo",

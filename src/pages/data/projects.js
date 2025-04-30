@@ -102,7 +102,19 @@ export const projects = [{
     es: "Lenino podría oficiar la boda de tus fantasías sin estrés, con facilidad y diversión.",
   }),
   tags: [Copy.at.performance]
-},*/ {
+}, {
+  title: Copy.text({
+    es: "La Ve",
+    en: "La Ve (That Time)",
+  }),
+  link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
+  img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
+  desc: Copy.text({
+    en: "Cover of Regina Spektor to celebrate the international theatre month at La 37 por las Tablas, Santiago R.D.",
+    es: "Cover de Regina Spektor para celebrar el mes internacional del teatro, en La 37 por las Tablas, R.D.",
+  }),
+  tags: [Copy.at.music, Copy.at.performance, Copy.at.theatre]
+}, */ {
   title: Copy.text({
     es: "Mis 500 Locos",
     en: "A State of Madness",
@@ -126,18 +138,6 @@ export const projects = [{
     en: "Short plays written in the 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
   }),
   tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
-}, {
-  title: Copy.text({
-    es: "La Ve",
-    en: "La Ve (That Time)",
-  }),
-  link: "https://www.youtube.com/watch?v=Fr4daDGACKs&t=17s",
-  img: "https://i.ytimg.com/vi/Fr4daDGACKs/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBbk0ztUHhK0oCNYTrtibFNoLrhkQ",
-  desc: Copy.text({
-    en: "Cover of Regina Spektor to celebrate the international theatre month at La 37 por las Tablas, Santiago R.D.",
-    es: "Cover de Regina Spektor para celebrar el mes internacional del teatro, en La 37 por las Tablas, R.D.",
-  }),
-  tags: [Copy.at.music, Copy.at.performance, Copy.at.theatre]
-}]
+}, ]
 
 export default projects;
