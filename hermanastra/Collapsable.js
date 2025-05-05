@@ -1,16 +1,19 @@
 // declares the class
 class Collapsable extends HTMLElement {
-  constructor(content, linkTextOpen = "Expand", linkTextClose = "Close", linkModel) {
+  constructor(content, linkTextOpen, linkTextClose, linkModel) {
     super();
-
     this._opened = new Binder();
     this.name = linkTextOpen;
-
+    if(!linkTextOpen) linkTextOpen = this.getAttribute('open-text');
+    if(!linkTextClose) linkTextClose = this.getAttribute('close-text');
+    if(!linkTextOpen) linkTextOpen = "Expand";
+    if(!linkTextClose) linkTextClose = "Close";
+    if(content == undefined) content = this.innerHTML;
     let contentElt = DOM.let('section', content);
-
     this.set({
+      html: "",
       main: {
-        maxHeight: this._opened.as(val => val ? `${contentElt. offsetHeight}px` : 0),
+        maxHeight: this._opened.as(val => val ? `${contentElt.offsetHeight}px` : 0),
         overflow: `hidden`,
         transition: `0.5s`,
         a: {
@@ -22,6 +25,7 @@ class Collapsable extends HTMLElement {
         display: `block`,
         textAlign: `right`,
         model: linkModel,
+        href: `#${this.name}`,
         onclick: () => this.toggle(),
         content: this._opened.as(linkTextOpen, linkTextClose),
       }
