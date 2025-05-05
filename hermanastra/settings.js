@@ -3,7 +3,7 @@
 export const COLOR = {
     LIGHT: "antiqueWhite",
     DARK: "#012",
-    BRIGHT: "#09a",
+    BRIGHT: "#077",
     HIGHLIGHT: "teal",
     ACCENT: "#D45AAC",
 };
