@@ -121,6 +121,7 @@ const programsPage = {
       model: STYLE.SLIDE("left", i + 3),
       display: "flex",
       flexFlow: "wrap",
+      justifyContent: "center",
       a: {
         href: program.url,
         img: {

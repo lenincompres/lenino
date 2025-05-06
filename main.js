@@ -23,7 +23,7 @@ function checkViewport(e) {
 Copy.add({
   tagline: {
     en: "Tales and Tools for Creativity and Learning",
-    es: "Relatos y artefactos para la creatividad y el aprendizaje",
+    es: "Relatos y herramientas para la creatividad y el aprendizaje",
   },
   educator: {
     en: "education",
