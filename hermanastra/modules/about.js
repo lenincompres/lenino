@@ -6,21 +6,26 @@ import {
 export const aboutModel = {
   main: {
     display: "flex",
-    marginTop: "1em",
+    margin: "1em auto 0",
+    maxWidth: "44em",
     figure: {
       img: {
         src: "media/cover.png",
         maxWidth: "30em",
         minWidth: "15em",
+        maxHeight: "40em",
         width: "100%",
+        height:"100%",
+        objectFit: "cover",
       }
     },
     section: {
       align: "left",
-      width: "26em",
-      minWidth: "15em",
+      width: "100%",
+      maxWidth: "26em",
+      minWidth: "18em",
       height: "fit-content",
-      margin: "1em 0 0 -6em",
+      margin: "1em 0 0 -7.5em",
       borderRadius: "1em",
       padding: "1em 1.5em",
       tag: "section",
