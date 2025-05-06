@@ -134,7 +134,7 @@ const programsPage = {
       },
       section: {
         width: "100%",
-        maxWidth: "30em",
+        maxWidth: "31.8em",
         h3: {
           a: {
             text: program.title,
