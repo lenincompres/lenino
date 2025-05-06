@@ -2,72 +2,76 @@ import Copy from "../../../lib/Copy.js";
 import tags from "./tags.js";
 
 export const projects = [{
-  title: Copy.text({
-    es: "Terräfirmä",
-    en: "Yonder Lands",
-  }),
-  link: Copy.text({
-    es: "https://terrafirma.yonderlands.net/",
-    en: "https://www.yonderlands.net/",
-  }),
-  img: "assets/terrafirma.png",
-  desc: Copy.text({
-    en: "My debut novel's manuscript: an original and multiethnic prequel to Alice's Wonderland.",
-    es: "Manuscrito de mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.",
-  }),
-  tags: [Copy.at.writing, Copy.at.book]
-}, {
-  title: "Jack Rabbits",
-  folder: "jackrabbits",
-  link: "http://jackrabbits.lenino.net",
-  img: "assets/jackrabbits.png",
-  desc: Copy.text({
-    en: "The board game for playing cards</br> on a land of wooden shards.",
-    es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
-  }),
-  tags: [Copy.at.game, Copy.at.code]
-}, {
-  title: Copy.text({
-    es: "La Psiquis 3D (3DPsyche)",
-    en: "3D Psyche",
-  }),
-  link: "http://3dpsyche.lenino.net",
-  img: "assets/3dpsyche.png",
-  desc: Copy.text({
-    en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
-    es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
-  }),
-  tags: [Copy.at.tool, Copy.at.code],
-}, {
-  title: "DOM.js",
-  link: "https://github.com/lenincompres/DOM.js",
-  img: "assets/dom.png",
-  desc: Copy.text({
-    en: "JavaScript library that creates and handles DOM structures using JS structural objects as models.",
-    es: "Librería de JavaScript que crea y maneja estructuras del DOM utilizando notación de objetos de JS.",
-  }),
-  tags: [Copy.at.code]
-}, {
-  title: Copy.text({
-    es: "La Hermanastra",
-    en: "The Stepsister",
-  }),
-  folder: "hermanastra",
-  img: "assets/hermanastra.png",
-  desc: Copy.text({
-    en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
-    es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
-  }),
-  tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
-}, {
-  title: "Illusions of Duality",
-  folder: "album",
-  desc: Copy.text({
-    en: "Musical album: a storyteller's journey through conflict and empathy",
-    es: "Album musical <i>Ilusiones de dualidad</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
-  }),
-  tags: [Copy.at.music, Copy.at.writing],
-}, /*{
+    title: "Jack Rabbits",
+    folder: "jackrabbits",
+    link: "http://jackrabbits.lenino.net",
+    img: "assets/jackrabbits.png",
+    desc: Copy.text({
+      en: "The board game for playing cards</br> on a land of wooden shards.",
+      es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
+    }),
+    tags: [Copy.at.game, Copy.at.code]
+  }, {
+    title: Copy.text({
+      es: "La Psiquis 3D (3DPsyche)",
+      en: "3D Psyche",
+    }),
+    link: "http://3dpsyche.lenino.net",
+    img: "assets/3dpsyche.png",
+    desc: Copy.text({
+      en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
+      es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
+    }),
+    tags: [Copy.at.tool, Copy.at.code],
+  }, {
+    title: Copy.text({
+      es: "La Hermanastra",
+      en: "The Stepsister",
+    }),
+    folder: "hermanastra",
+    img: "assets/hermanastra.png",
+    desc: Copy.text({
+      en: "A cabaret style musical monologue that reveals the stepsister's fate after Cinderella steals her prince.",
+      es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
+    }),
+    tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
+  }, {
+    title: Copy.text({
+      es: "Terräfirmä",
+      en: "Yonder Lands",
+    }),
+    link: Copy.text({
+      es: "https://terrafirma.yonderlands.net/",
+      en: "https://www.yonderlands.net/",
+    }),
+    img: "assets/terrafirma.png",
+    desc: Copy.text({
+      en: "My debut novel's manuscript: an original and multiethnic prequel to Alice's Wonderland.",
+      es: "Manuscrito de mi primera novela: una precuela inédita y multiétnica del País de las Maravillas.",
+    }),
+    tags: [Copy.at.writing, Copy.at.book]
+  }, {
+    title: "DOM.js",
+    link: "https://github.com/lenincompres/DOM.js",
+    img: "assets/dom.png",
+    desc: Copy.text({
+      en: "JavaScript library that creates and handles DOM structures using JS structural objects as models.",
+      es: "Librería de JavaScript que crea y maneja estructuras del DOM utilizando notación de objetos de JS.",
+    }),
+    tags: [Copy.at.code]
+  }, {
+    title: Copy.text({
+      en: "Delusions of Duality",
+      es: "Delirios de Dualidad"
+    }),
+    folder: "album",
+    desc: Copy.text({
+      en: "Musical album: a storyteller's journey through conflict and empathy",
+      es: "Album musical <i>Ilusiones de dualidad</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
+    }),
+    tags: [Copy.at.music, Copy.at.writing],
+  },
+  /*{
   title: Copy.text({
     en: "Animalcules",
     es: "Animalucos",
@@ -114,30 +118,32 @@ export const projects = [{
     es: "Cover de Regina Spektor para celebrar el mes internacional del teatro, en La 37 por las Tablas, R.D.",
   }),
   tags: [Copy.at.music, Copy.at.performance, Copy.at.theatre]
-}, */ {
-  title: Copy.text({
-    es: "Mis 500 Locos",
-    en: "A State of Madness",
-  }),
-  link: "https://www.imdb.com/title/tt7552938/",
-  img: "assets/mis500locos.jpg",
-  desc: Copy.text({
-    es: "Largometraje co-escrito con Waddys Jáquez, dirigido por Leticia Tonos, basado en un libro de Antonio Zaglul",
-    en: "Feature film co-written with Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
-  }),
-  tags: [Copy.at.film, Copy.at.writing]
-}, {
-  title: Copy.text({
-    es: "Las 12 Piezas Cortas",
-    en: "The 12 Short Pieces",
-  }),
-  folder: "las12piezascortas",
-  img: "assets/12piezascortas.png",
-  desc: Copy.text({
-    es: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
-    en: "Short plays written in the 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
-  }),
-  tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
-}, ]
+}, */
+  {
+    title: Copy.text({
+      es: "Mis 500 Locos",
+      en: "A State of Madness",
+    }),
+    link: "https://www.imdb.com/title/tt7552938/",
+    img: "assets/mis500locos.jpg",
+    desc: Copy.text({
+      es: "Largometraje co-escrito con Waddys Jáquez, dirigido por Leticia Tonos, basado en un libro de Antonio Zaglul",
+      en: "Feature film co-written with Waddys Jaquez, directed by Leticia Tonos, based on book by Antonio Zaglul",
+    }),
+    tags: [Copy.at.film, Copy.at.writing]
+  }, {
+    title: Copy.text({
+      es: "Las 12 Piezas Cortas",
+      en: "The 12 Short Pieces",
+    }),
+    folder: "las12piezascortas",
+    img: "assets/12piezascortas.png",
+    desc: Copy.text({
+      es: "Primeras obras de teatro,  escritas en los 90's en la República Dominicana. Incluye <i>Desayuno en Rojo Chino</i>.",
+      en: "Short plays written in the 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
+    }),
+    tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
+  },
+]
 
 export default projects;

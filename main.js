@@ -7,6 +7,7 @@ import news from "./src/pages/data/news.js";
 import bioPage from "./src/pages/bio.js";
 import projectsPage from "./src/pages/projects.js";
 import contactPage from "./src/pages/contact.js";
+import programsPage from "./src/pages/programs.js";
 
 binderSet({
   hoverPage: false,
@@ -20,9 +21,9 @@ function checkViewport(e) {
 };
 
 Copy.add({
-  storyteller: {
-    en: "storytelling",
-    es: "cuentería",
+  tagline: {
+    en: "Tales and Tools for Creativity and Learning",
+    es: "Historias y herramientas para la creatividad y el aprendizaje",
   },
   educator: {
     en: "education",
@@ -32,21 +33,25 @@ Copy.add({
     en: "creativist",
     es: "creativismo",
   },
-  bio: {
-    en: "bio",
-    es: "biografía"
+  about: {
+    en: "About",
+    es: "Reseña"
   },
   home: {
-    es: "home",
-    en: "inicio",
+    es: "Home",
+    en: "Inicio",
   },
   projects: {
-    es: "proyectos",
-    en: "projects",
+    es: "Portafolio",
+    en: "Portfolio",
+  },
+  offerings: {
+    es: "Propuestas",
+    en: "Offerings",
   },
   contact: {
-    es: "contacto",
-    en: "contact",
+    es: "Contacto",
+    en: "Contact",
   },
 });
 
@@ -61,7 +66,8 @@ Pager.add({
   [Copy.KEY.home]: {
     section: newsScroll,
   },
-  [Copy.KEY.bio]: bioPage,
+  [Copy.KEY.about]: bioPage,
+  [Copy.KEY.offerings]: programsPage,
   [Copy.KEY.projects]: projectsPage,
   [Copy.KEY.contact]: contactPage,
 });
@@ -93,11 +99,32 @@ DOM.set({
         }
       },
     },
+    h: {
+      fontFamily: 'title',
+      color: STYLE.COLOR.LINK,
+    },
+    h2: {
+      fontSize: "1.20em",
+    },
+    h3: {
+      fontSize: "1rem",
+    },
+    p: {
+      lineHeight: "1.35em",
+      li: {
+        listStyleType: "disc",
+        marginLeft: "1.5em",
+      }
+    },
+    "p:not(:first-of-type)": {
+      marginTop: ".6em",
+    },
   },
   font: {
     fontFamily: 'title',
     src: 'url("./assets/BowlbyOneSC-Regular.ttf")'
   },
+  fontFamily: 'arial',
   fontSize: "14px",
   backgroundColor: "#023",
   container: {
@@ -107,12 +134,12 @@ DOM.set({
     overflowX: "hidden",
     main: {
       position: "relative",
-      maxWidth: _isWide.as("100%", "860px"),
+      maxWidth: _isWide.as("100%", "900px"),
       width: "100%",
       boxShadow: "2px 2px 4px",
       backgroundColor: STYLE.COLOR.BACKGROUND,
       backgroundImage: "url(assets/leninoYourCard.jpg)",
-      backgroundSize: _isMobile.as("860px", "initial"),
+      backgroundSize: _isMobile.as("900px", "initial"),
       backgroundPosition: "center top",
       backgroundAttachment: "fixed",
       menu: {
@@ -140,15 +167,17 @@ DOM.set({
         height: "auto",
         position: _isMobile.as("absolute", "relative"),
         width: _isMobile.as("fit-content", "100%"),
-        margin: _isMobile.as("1em", 0),
+        margin: _isMobile.as("1em 0.6em", 0),
         flexDirection: _isMobile.as("row", "column"),
         borderRadius: _isMobile.as(".5em", 0),
-        span: {
+        h1: {
+          height: "1em",
           img: {
             src: "assets/leninoLogo.png",
             alt: "Lenino's Logo",
             height: "2.5rem",
-            margin: '0 0.3em'
+            margin: '0 0.15em',
+            verticalAlign: "text-top",
           },
           a: {
             fontSize: "2.3rem",
@@ -161,8 +190,9 @@ DOM.set({
           }
         },
         tagline: {
-          margin: "0 1em 0 0.7em",
-          text: Copy.at.storyteller + ' · ' + Copy.at.creativist + ' · ' + Copy.at.educator,
+          maxWidth: "20em",
+          margin: "0 0.6em",
+          i: `“${Copy.at.tagline}”`,
         },
         menu: {
           display: _isMobile.as("block", "none"),
@@ -185,7 +215,7 @@ DOM.set({
         ),
         padding: _isMobile.as("4.5em 0.5em 0.5em", "0.5em 0"),
         borderRadius: _isMobile.as("0.5em", 0),
-        margin: _isMobile.as("2em 0 0 1.1em", 0),
+        margin: _isMobile.as("2em 0 0 0.6em", 0),
         position: _isMobile.as("absolute", "relative"),
         ul: {
           style: STYLE.FLEX,
@@ -193,14 +223,13 @@ DOM.set({
           li: Pager.keys.map(name => ({
             a: {
               color: STYLE.COLOR.PAGE,
-              width: "5em",
+              width: "6em",
               padding: ".25em",
               margin: "0.2em",
               fontSize: "1.25em",
               textAlign: "center",
               borderRadius: "0.25em",
               fontWeight: "normal",
-              whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
               backgroundColor: Pager._key.as({
@@ -225,8 +254,8 @@ DOM.set({
         justifyContent: _isMobile.as("flex-start", "center"),
         minHeight: _isMobile.as(["40em", "calc(100vh - 13em)"]),
         height: "fit-content",
-        width: _isMobile.as("52em", "100%"),
-        margin: _isMobile.as("6em 0 1.5em 9em", "0 0 1em 0"),
+        width: _isMobile.as("51em", "100%"),
+        margin: _isMobile.as("6em 0 1.5em 10em", "0 0 1em 0"),
         content: Pager._content,
       },
       footer: {
