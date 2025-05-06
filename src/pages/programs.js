@@ -60,7 +60,7 @@ const programs = [{
   }),
   description: Copy.text({
     en: "Enter a wonderland of logic, lore, and luck. Explore the mechanics and design of the Jack Rabbits board game—learning how games can teach math, strategy, poetry, power dynamics, and narrative thinking.",
-    es: "Adéntrate en un país de las maravillas de lógica, suerte y leyenda. Explora las mecánicas y el diseño del juego Jack Rabbits—aprendiendo cómo los juegos pueden enseñar matemáticas, estrategia, poesía, sistemas de poder y pensamiento narrativo.",
+    es: "Adéntrate en un país de las maravillas, lógica, suerte y leyenda. Explora las mecánicas y el diseño del juego Jack Rabbits—aprendiendo cómo los juegos pueden enseñar matemáticas, estrategia, poesía, sistemas de poder y pensamiento narrativo.",
   }),
   formats: Copy.text({
     en: "Game Lab / Workshop / Artist Talk",
