@@ -50,8 +50,8 @@ Copy.add({
     en: "Offerings",
   },
   contact: {
-    es: "Contacto",
-    en: "Contact",
+    es: "💬",
+    en: "💬",
   },
 });
 
@@ -223,8 +223,9 @@ DOM.set({
           li: Pager.keys.map(name => ({
             a: {
               color: STYLE.COLOR.PAGE,
-              width: "6em",
-              padding: ".25em",
+              width: _isMobile.as(() => name !== Pager.keys.slice(-1)[0], "2.5em", "5.7em"),
+              lineHeight: "1em",
+              padding: ".3em 0",
               margin: "0.2em",
               fontSize: "1.25em",
               textAlign: "center",
