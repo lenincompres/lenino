@@ -13,8 +13,8 @@ export const projects = [{
     tags: [Copy.at.game, Copy.at.code]
   }, {
     title: Copy.text({
-      es: "La Psiquis 3D (3DPsyche)",
-      en: "3D Psyche",
+      es: "La Psique Tridimensional",
+      en: "The 3D Psyche",
     }),
     link: "http://3dpsyche.lenino.net",
     img: "assets/3dpsyche.png",
