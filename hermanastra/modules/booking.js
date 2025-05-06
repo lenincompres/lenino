@@ -21,9 +21,9 @@ export const bookingModel = {
   },
   section: new Collapsable({
     iframe: {
-      src: "https://docs.google.com/forms/d/e/1FAIpQLSf-QRMN0oLrpjbgQ6ZBX8I8ggWsWd5byyIw91QMhL4GMDcAtg/viewform?usp=sharing",
+      src: "https://docs.google.com/forms/d/e/1FAIpQLSf-QRMN0oLrpjbgQ6ZBX8I8ggWsWd5byyIw91QMhL4GMDcAtg/viewform?embedded=true",
       width: "100%",
-      height: 1550,
+      height: window.innerWidth > 800 ? 1440 : 1600,
     }
   }, Copy.text({
     en: "✉️ Contact Us",
