@@ -121,17 +121,25 @@ const programsPage = {
       model: STYLE.SLIDE("left", i + 3),
       display: "flex",
       flexFlow: "wrap",
-      img: {
-        width: "9em",
-        height: "fit-content",
-        marginRight: "0.5em",
-        src: program.img,
-        alt: `${program.title} image`,
+      a: {
+        href: program.url,
+        img: {
+          width: "9em",
+          height: "fit-content",
+          marginRight: "0.5em",
+          src: program.img,
+          alt: `${program.title} image`,
+        },
       },
       section: {
         width: "100%",
         maxWidth: "30em",
-        h3: program.title,
+        h3: {
+          a: {
+            text: program.title,
+            href: program.url,
+          }
+        },
         p: [`<b>${program.tagline}</b>`, program.description, {
           ul: {
             li: [
