@@ -32,7 +32,7 @@ const programs = [{
     es: "Psicología visual para mentes curiosas",
   }),
   description: Copy.text({
-    en: "Explore how we think, feel, and act using a vibrant, cube-based framework that maps our states of focus across body, mind, and heart. Great for social-emotional learning, self-awareness, and group dynamics",
+    en: "Explore how we think, feel, and act using a vibrant, cube-based framework that maps our states of focus across body, mind, and heart. Perfect for social-emotional learning, self-awareness, and group dynamics",
     es: "Explora cómo pensamos, sentimos y actuamos a través de un modelo vibrante basado en un cubo que mapea nuestros estados de enfoque entre cuerpo, mente y corazón. Ideal para aprendizaje socioemocional, autoconocimiento y dinámicas de grupo.",
   }),
   formats: Copy.text({
@@ -59,8 +59,8 @@ const programs = [{
     es: "Juego de mesa y pensamiento creativo",
   }),
   description: Copy.text({
-    en: "Enter a wonderland of logic, lore, and luck. Participants explore the mechanics and design of the Jack Rabbits board game—learning how games can teach math, strategy, and narrative thinking.",
-    es: "Adéntrate en un país de las maravillas de lógica, suerte y leyenda. Lxs participantes exploran las mecánicas y el diseño del juego Jack Rabbits—aprendiendo cómo los juegos pueden enseñar matemáticas, estrategia y pensamiento narrativo.",
+    en: "Enter a wonderland of logic, lore, and luck. Explore the mechanics and design of the Jack Rabbits board game—learning how games can teach math, strategy, poetry, power dynamics, and narrative thinking.",
+    es: "Adéntrate en un país de las maravillas de lógica, suerte y leyenda. Explora las mecánicas y el diseño del juego Jack Rabbits—aprendiendo cómo los juegos pueden enseñar matemáticas, estrategia, poesía, sistemas de poder y pensamiento narrativo.",
   }),
   formats: Copy.text({
     en: "Game Lab / Workshop / Artist Talk",
@@ -79,15 +79,15 @@ const programs = [{
   img: "assets/hermanastra.png",
   title: Copy.text({
     en: "The Stepsister",
-    es: "",
+    es: "La Hermanastra",
   }),
   tagline: Copy.text({
     en: "Fairytales flipped with humor and heart",
     es: "Cuentos de hadas al revés, con humor y corazón",
   }),
   description: Copy.text({
-    en: "A musical-theater workshop or performance experience that reimagines Cinderella through the voice of her clever, awkward stepsister. Explores themes of self-image, gender, voice, and power with humor and song.",
-    es: "Una experiencia de teatro musical en formato taller o función que reimagina la historia de Cenicienta desde la voz de su hermanastra torpe e ingeniosa. Aborda temas como la imagen propia, el género, la voz y el poder con humor y canciones.",
+    en: "A musical-theater workshop or performance experience that reimagines Cinderella through the point of view of her curiously vain stepsister. Explores themes of self-image, gender, voice, and power with humor and song.",
+    es: "Una experiencia de teatro musical en formato taller o función que reimagina la historia de Cenicienta desde el punto de vista de su hermanastra curiosamente vanidosa. Aborda con humor y canciones temas como la imagen, el género, la voz y el poder.",
   }),
   formats: Copy.text({
     en: "Performance + Q&A / Workshop / Talk",
