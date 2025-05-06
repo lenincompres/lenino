@@ -98,8 +98,8 @@ const programs = [{
     es: "Mayores de 14 años",
   }),
   dossier: Copy.text({
-    en: "http://hermanastra.lenino.net/educationalDossier.pdf",
-    es: "http://hermanastra.lenino.net/dossierEducativo.pdf",
+    en: "hermanastra/educationalDossier.pdf",
+    es: "hermanastra/dossierEducativo.pdf",
   }),
 }]
 
