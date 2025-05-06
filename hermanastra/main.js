@@ -173,7 +173,7 @@ DOM.set({
     //background: "black",
     //color: "white",
     margin: "1em auto 0",
-    padding: "2em 1em 8em",
+    padding: "1em 1em 3em",
     //backgroundImage: "url(media/leavesBWW.jpg)",
     a: {
       img: {
