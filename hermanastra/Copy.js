@@ -1,7 +1,7 @@
 /**
  * Class that stores the copy text and retrieves the appropriate language copy (text) from a map given a key.
  * @author Lenin Compres <lenincompres@gmail.com>
- * @version 1.0.4
+ * @version 1.0.7
  * @repository https://github.com/lenincompres/DOM.js
  */
 
@@ -30,7 +30,7 @@
     }
    * */
   constructor(map = {}) {
-    this.#map = map;
+    this.add(map);
     this.#key = this.keys[0];
   }
 
@@ -149,7 +149,7 @@
   static treat(str, vars = []) {
     if (!str) return str;
     if (Array.isArray(str)) return str.map(i => Copy.treat(i));
-    str = str.replaceAll("—", '<em class="em-dash">--</em>');
+    if(typeof str === "string") str = str.replaceAll("—", '<span class="em-dash">—--</span>');
     if (vars.length) vars.forEach((v, i) => str = str.replaceAll(`%${i}`, v));
     return str;
   }
@@ -225,14 +225,14 @@
 /**
  * Browser readers don't handle em-dashes(—) correctly. This css, together with the treat method, allows writting copy with double dashes (--) and displays them as em-dashes, having readers read appropriately.
  */
-DOM.css({
-  "em.em-dash": {
-    display: "inline-block",
-    width: "0.7em",
-    height: "1em",
-    overflow: "hidden",
-    before: {
-      content: "—",
+DOM.set({
+  css: {
+    "span.em-dash": {
+      display: "inline-block",
+      width: "0.7em",
+      marginRight: "0.15em",
+      height: "1em",
+      overflow: "hidden",
     },
   },
 });

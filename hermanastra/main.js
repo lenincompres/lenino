@@ -1,5 +1,6 @@
 import creditsModel from "./modules/credits.js";
-import songlistModel from "./modules/songs.js";
+// import songlistModel from "./modules/songs.js";
+// import sponsorsModel from "./modules/sponsors.js";
 import funcionesModel from "./modules/funciones.js";
 import galleryModel from "./modules/gallery.js";
 import aboutModel from "./modules/about.js";
@@ -7,8 +8,7 @@ import {
   COLOR,
   INC
 } from "./settings.js";
-import sponsorsModel from "./modules/sponsors.js";
-import Copy from "../lib/Copy.js";
+import Copy from "./Copy.js";
 import bookingModel from "./modules/booking.js";
 
 DOM.set({

@@ -104,7 +104,7 @@ DOM.set({
       color: STYLE.COLOR.LINK,
     },
     h2: {
-      fontSize: "1.20em",
+      fontSize: "1.35em",
     },
     h3: {
       fontSize: "1rem",
