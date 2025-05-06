@@ -111,6 +111,7 @@ DOM.set({
     },
     p: {
       lineHeight: "1.35em",
+      textAlign: "justify",
       li: {
         listStyleType: "disc",
         marginLeft: "1.5em",
