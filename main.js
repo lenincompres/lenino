@@ -265,7 +265,8 @@ DOM.set({
           padding: "1em",
           backgroundColor: "#11161A",
           color: "silver",
-          textAlign: "center",
+          display: "flex",
+          justifyContent: "space-around",
           a: {
             color: STYLE.COLOR.HIGHLIGHT,
           }
