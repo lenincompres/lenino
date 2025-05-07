@@ -13,7 +13,7 @@ binderSet({
   hoverPage: false,
   isMobile: false,
   isWide: false,
-})
+});
 
 function checkViewport(e) {
   isMobile = window.innerWidth < 780;
