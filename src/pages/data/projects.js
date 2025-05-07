@@ -2,16 +2,6 @@ import Copy from "../../../lib/Copy.js";
 import tags from "./tags.js";
 
 export const projects = [{
-    title: "Jack Rabbits",
-    folder: "jackrabbits",
-    link: "http://jackrabbits.lenino.net",
-    img: "assets/jackrabbits.png",
-    desc: Copy.text({
-      en: "The board game for playing cards</br> on a land of wooden shards.",
-      es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
-    }),
-    tags: [Copy.at.game, Copy.at.code]
-  }, {
     title: Copy.text({
       es: "La Psique Tridimensional",
       en: "The 3D Psyche",
@@ -35,6 +25,16 @@ export const projects = [{
       es: "Monólogo músical que revela el destino de la hermanastra de la Cenicienta tras perder al príncipe.",
     }),
     tags: [Copy.at.music, Copy.at.writing, Copy.at.theatre, Copy.at.performance]
+  }, {
+    title: "Jack Rabbits",
+    folder: "jackrabbits",
+    link: "http://jackrabbits.lenino.net",
+    img: "assets/jackrabbits.png",
+    desc: Copy.text({
+      en: "The board game for playing cards</br> on a land of wooden shards.",
+      es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
+    }),
+    tags: [Copy.at.game, Copy.at.code]
   }, {
     title: Copy.text({
       es: "Terräfirmä",

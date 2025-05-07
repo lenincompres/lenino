@@ -114,8 +114,14 @@ const programsPage = {
         es: "Propuestas Educativas",
       }),
       p: Copy.text({
-        en: ["<b>Workshops, talks, and tools for transformative learning</b>", "Lenino offers dynamic programs at the intersection of creativity, storytelling, and critical reflection. These offerings are designed to meet learners where they are—whether in classrooms, community centers, conferences, or creative residencies. All programs are available in English or Spanish, in-person or online, and can be tailored for youth, educators, or general audiences."],
-        es: ["<b>Talleres, charlas y herramientas para un aprendizaje transformador</b>", "Lenino ofrece programas dinámicos en la intersección entre creatividad, narración y reflexión crítica. Estas propuestas están diseñadas para encontrar participantes donde estén—ya sea en aulas, centros comunitarios, conferencias o residencias creativas. Todos los programas están disponibles en inglés o español, de forma presencial o virtual, y pueden adaptarse para jóvenes, educadores o públicos generales."],
+        en: [
+          "<b>Workshops, talks, and tools for transformative learning</b>",
+          "Lenino offers dynamic programs at the intersection of creativity, storytelling, and critical reflection. These offerings are designed to meet learners where they are—whether in classrooms, community centers, conferences, or creative residencies. All programs are available in English or Spanish, in-person or online, and can be tailored for youth, educators, or general audiences."
+        ],
+        es: [
+          "<b>Talleres, charlas y herramientas para un aprendizaje transformador</b>",
+          "Lenino ofrece programas dinámicos en la intersección entre creatividad, narración y reflexión crítica. Estas propuestas están diseñadas para encontrar participantes donde estén, ya sea en aulas, centros comunitarios, conferencias o residencias creativas. Todos los programas están disponibles en inglés o español, de forma presencial o virtual, y pueden adaptarse para jóvenes, educadores o públicos generales."
+        ],
       }),
     }, ...programs.map((program, i) => ({
       model: STYLE.SLIDE("left", i + 3),

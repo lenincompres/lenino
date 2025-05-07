@@ -12,8 +12,14 @@ const bioPage = {
         es: "Propósito",
       }),
       p: Copy.text({
-        en: ["<b>Lenino blends storytelling, play, and technology to spark learning, reflection, and wonder—across classrooms, stages, and minds. Each project invites deeper connection with the self, others, and the natural world.</b>", "Lenino is rooted in a deep respect for diversity in all its forms—ecological, cultural, and human. Our work celebrates a world of many minds and many bodies, across ethnicities, sexualities, neurotypes, abilities, and lived experiences. We create tools and stories that invite everyone—whether at the margins or the center, at the top or the base—to engage, belong, and wonder."],
-        es: ["<b>Lenino entrelaza narrativa, juego y tecnología para despertar aprendizaje, reflexión y asombro en aulas, escenarios y mentes. Cada proyecto invita a una conexión más profunda con uno mismo, con los demás y con el mundo natural.</b>", "Lenino nace de un profundo respeto por la diversidad en todas sus formas: ecológica, cultural y humana. Nuestro trabajo celebra un mundo de muchas mentes y muchos cuerpos—abarcando etnicidades, orientaciones, neurodivergencias, capacidades y experiencias vividas. Creamos herramientas y relatos que invitan a todas las personas—a quienes están en los márgenes o en el centro, en el tope o en la base—a participar, pertenecer y maravillarse."],
+        en: [
+          "<b>Lenino blends storytelling, play, and technology to spark learning, reflection, and wonder—across classrooms, stages, and minds. Each project invites deeper connection with the self, others, and the natural world.</b>",
+          "Lenino is rooted in a deep respect for diversity in all its forms—ecological, cultural, and human—to celebrate a world of many minds, bodies, and hearts, across ethnicities, sexualities, neurotypes, abilities, and lived experiences. The tools and stories you will find on this portal invite everyone—whether at the margins or the center, at the top or the base—to engage, belong, and wonder."
+        ],
+        es: [
+          "<b>Lenino entrelaza narrativa, juego y tecnología para despertar aprendizaje, reflexión y asombro en aulas, escenarios y mentes. Cada proyecto invita a una conexión más profunda con uno mismo, con los demás y con el mundo natural.</b>",
+          "Lenino nace de un profundo respeto por la diversidad en todas sus formas: ecológica, cultural y humana, para celebrar un mundo de muchas mentes, cuerpos y corazones, abarcando etnicidades, orientaciones, neurodivergencias, capacidades y experiencias vividas. Las herramientas y relatos que encontrarás en este portal invitan a todas las personas, ya estén en los márgenes o en el centro, en el tope o en la base, a participar, pertenecer y maravillarse."
+        ],
       }),
     }, {
       model: STYLE.SLIDE("left", 3),
