@@ -29,7 +29,7 @@ class CardScroll extends HTMLElement {
           flexDirection: "column",
           justifyContent: "center",
           width: "20em",
-          minHeight: "29.3em",
+          minHeight: "29.5em",
           backgroundColor: "white",
           borderRadius: "2.3em",
           boxShadow: "1px 1px 3px black",
