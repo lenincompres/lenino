@@ -23,7 +23,7 @@ function checkViewport(e) {
 Copy.add({
   tagline: {
     en: "Tales and Tools for Creativity and Learning",
-    es: "Relatos y herramientas para la creatividad y el aprendizaje",
+    es: "Un portal para la creatividad y el aprendizaje",
   },
   educator: {
     en: "education",
@@ -191,8 +191,8 @@ DOM.set({
           }
         },
         tagline: {
-          maxWidth: "20em",
-          margin: "0 0.6em",
+          maxWidth: "22em",
+          margin: "0 0.5em",
           i: `“${Copy.at.tagline}”`,
         },
         menu: {
