@@ -75,7 +75,10 @@ Pager.add({
 DOM.set({
   title: "Lenino.net",
   keywords: "lenin, lenino, lenin compres, jackrabbits, jack rabbits, rabbit candy jar, cantacuentos",
-  description: "Prof. Lenino is a creative storyteller—the affectionate alter-ego of Lenin Compres—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+  description: Copy.text({
+    en: "Prof. Lenino is a creative storyteller—the affectionate alter-ego of Lenin Comprés—an explorer of sience, technology and arts who was born in the Caribbean and has lived in New York City all his “adult” life.",
+    es: "El Profesor Lenino es un narrador creativo, el alter ego de Lenin Comprés, un explorador de la ciencia, la tecnología y el arte, nacido en el Caribe y residente en Nueva York durante toda su vida “adulta”."
+  }),
   link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css",
   icon: "assets/icon.png",
   css: {
