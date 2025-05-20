@@ -81,6 +81,32 @@ export const programs = [{
     en: "hermanastra/educationalDossier.pdf",
     es: "hermanastra/dossierEducativo.pdf",
   }),
+}, {
+  img: "assets/creative.png",
+  title: Copy.text({
+    en: "Creative Coding: The Web as a Canvas",
+    es: "Creative Coding: La Web como Lienzo",
+  }),
+  tagline: Copy.text({
+    en: "Visual expression through algorithms and interactivity",
+    es: "Expresión visual a través de algoritmos e interactividad",
+  }),
+  description: Copy.text({
+    en: "Discover how programming becomes a medium for creative exploration. Based on the experience of teaching at NYU Tisch’s ITP and IMA programs—including The Nature of Code and Front-End Web—this offering introduces coding as a tool for artistic expression, motion, and interaction. Topics include generative visuals, physics-based animation, interactive storytelling, and web-based creativity.",
+    es: "Descubre cómo la programación puede convertirse en un medio para la exploración creativa. Basado la experience de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la interacción. Los temas incluyen visuales generativos, animación basada en física, narrativas interactivas y creatividad en la web.",
+  }),
+  formats: Copy.text({
+    en: "Talk / Workshop / Custom Course",
+    es: "Charla / Taller / Curso personalizado",
+  }),
+  audience: Copy.text({
+    en: "Teens – Adults",
+    es: "Jóvenes – Adultos",
+  }),
+  footer: Copy.text({
+    en: "Available for classrooms, conferences, or creative residencies",
+    es: "Disponible para aulas, conferencias o residencias creativas",
+  }),
 }];
 
 export default programs;

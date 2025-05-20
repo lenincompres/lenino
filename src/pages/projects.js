@@ -48,7 +48,7 @@ const projectsPage = {
       ],
     })),
   },
-  section: projects.map((project, i) => ({
+  section: projects.sort(() => Math.random() - 0.5).map((project, i) => ({
     style: STYLE.PAGE,
     model: STYLE.SLIDE(i),
     position: "relative",

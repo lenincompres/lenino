@@ -41,7 +41,7 @@ const programsPage = {
           "Lenino ofrece programas dinámicos en la intersección entre creatividad, narración y reflexión crítica. Estas propuestas están diseñadas para encontrar participantes donde estén, ya sea en aulas, centros comunitarios, conferencias o residencias creativas. Todos los programas están disponibles en inglés o español, de forma presencial o virtual, y pueden adaptarse para jóvenes, educadores o públicos generales."
         ],
       }),
-    }, ...programs.map((program, i) => ({
+    }, ...programs.sort(() => Math.random() - 0.5).map((program, i) => ({
       model: STYLE.SLIDE("left", i + 3),
       display: "flex",
       flexFlow: "wrap",
@@ -79,19 +79,19 @@ const programsPage = {
           display: "flex",
           justifyContent: "space-evenly",
           a: [{
-            display: "block",
+            display: program.url ? "block" : "none",
             textAlign: "right",
             text: Copy.text({
               en: "Visit the Site",
-              es: "Visita la página"
+              es: "Visita la página",
             }),
             href: program.url,
           }, {
-            display: "block",
+            display: program.dossier ? "block" : "none",
             textAlign: "right",
             text: Copy.text({
               en: "Download Dossier",
-              es: "Descarga el dossier"
+              es: "Descarga el dossier",
             }),
             href: program.dossier,
           }],
