@@ -92,8 +92,8 @@ export const programs = [{
     es: "Expresión visual a través de algoritmos e interactividad",
   }),
   description: Copy.text({
-    en: "Discover how programming becomes a medium for creative exploration. Based on the experience of teaching at NYU Tisch’s ITP and IMA programs—including The Nature of Code and Front-End Web—this offering introduces coding as a tool for artistic expression, motion, and interaction. Topics include generative visuals, physics-based animation, interactive storytelling, and web-based creativity.",
-    es: "Descubre cómo la programación puede convertirse en un medio para la exploración creativa. Basado la experience de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la interacción. Los temas incluyen visuales generativos, animación basada en física, narrativas interactivas y creatividad en la web.",
+    en: "Discover how programming becomes a medium for creative exploration. Based on the experience of teaching at NYU Tisch’s ITP and IMA programs—including The Nature of Code and Front-End Web—this offering introduces coding as a tool for artistic expression, motion, and interaction. Topics include generative visuals, physics and nature-based animation, interactive storytelling, and web-based creativity.",
+    es: "Descubre cómo la programación puede convertirse en un medio para la exploración creativa. Basado en la experience de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la interacción. Los temas incluyen visuales generativos, animación basada en física y en la naturaleza, narrativas interactivas y creatividad en la web.",
   }),
   formats: Copy.text({
     en: "Talk / Workshop / Custom Course",
