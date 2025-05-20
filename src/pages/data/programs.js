@@ -85,7 +85,7 @@ export const programs = [{
   img: "assets/creative.png",
   title: Copy.text({
     en: "Creative Coding: The Web as a Canvas",
-    es: "Creative Coding: La Web como Lienzo",
+    es: "Código Piñata: La Web como Lienzo",
   }),
   tagline: Copy.text({
     en: "Visual expression through algorithms and interactivity",
