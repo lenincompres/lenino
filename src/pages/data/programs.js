@@ -84,8 +84,8 @@ export const programs = [{
 }, {
   img: "assets/creative.png",
   title: Copy.text({
-    en: "Creative Coding: Unleash your creativity in the browser",
-    es: "Código Piñata: Libera tu creatividad en el navegador",
+    en: "Piñata Code: Explore, Create, and Play with the Web",
+    es: "Código Piñata: Explora, crea y juega con la web",
   }),
   tagline: Copy.text({
     en: "Visual expression through algorithms and interactivity",
