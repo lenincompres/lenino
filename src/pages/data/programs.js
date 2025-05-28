@@ -84,16 +84,16 @@ export const programs = [{
 }, {
   img: "assets/creative.png",
   title: Copy.text({
-    en: "Creative Coding: The Web as a Canvas",
-    es: "Código Piñata: La Web como Lienzo",
+    en: "Creative Coding: Unleash your creativity in the browser",
+    es: "Código Piñata: Libera tu creatividad en el navegador",
   }),
   tagline: Copy.text({
     en: "Visual expression through algorithms and interactivity",
     es: "Expresión visual a través de algoritmos e interactividad",
   }),
   description: Copy.text({
-    en: "Discover how programming becomes a medium for creative exploration. Based on the experience of teaching at NYU Tisch’s ITP and IMA programs—including The Nature of Code and Front-End Web—this offering introduces coding as a tool for artistic expression, motion, and interaction. Topics include generative visuals, physics and nature-based animation, interactive storytelling, and web-based creativity.",
-    es: "Descubre cómo la programación puede convertirse en un medio para la exploración creativa. Basado en la experiencia de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la interacción. Los temas incluyen visuales generativos, animación basada en física y en la naturaleza, narrativas interactivas y creatividad en la web.",
+    en: "Discover how programming can become a surprise filled with visual possibilities, interactive ideas, and creative logic. Based on years of teaching experience in the ITP and IMA programs at NYU Tisch—including The Nature of Code and Front-End Web—this workshop presents code as a tool for artistic expression, motion, and playful experimentation. Topics include generative visuals, physics- and nature-inspired animation, interactive narratives, and creative exploration on the web.",
+    es: "Descubre cómo la programación puede convertirse en una sorpresa llena de posibilidades visuales, ideas interactivas y lógica creativa. Basado en la experiencia de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la experimentación lúdica. Los temas incluyen visuales generativos, animación inspirada en la física y la naturaleza, narrativas interactivas y exploración creativa en la web.",
   }),
   formats: Copy.text({
     en: "Talk / Workshop / Custom Course",
