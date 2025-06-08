@@ -269,15 +269,27 @@ DOM.set({
           backgroundColor: "#11161A",
           color: "silver",
           display: "flex",
-          justifyContent: "space-around",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           a: {
             color: STYLE.COLOR.HIGHLIGHT,
           }
         },
-        markdown: Copy.text({
-          es: "Creado por Lenin Comprés usando [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
-          en: "Created by Lenin Comprés using [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
-        }),
+        section: [{
+          markdown: Copy.text({
+            es: "Creado por Lenin Comprés usando [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
+            en: "Created by Lenin Comprés using [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
+          }),
+        }, {
+          a: {
+            href: "#contact",
+            text: Copy.text({
+              es: "Contáctanos aquí",
+              en: "Contact us here",
+            })
+          },
+        }]
       },
     },
   },
