@@ -25,19 +25,19 @@ class Spade extends Dot {
     return atan2(this.velocity.y, this.velocity.x);
   }
 
-  draw() {
+  draw(show) {
     push();
     translate(this.position.x, this.position.y);
     noStroke();
     fill(this.hue, this.sat, this.bright, 0.68);
-    Suit.drawSpade(0, 0, this.size, this.angle);
+    if(show) Suit.drawSpade(0, 0, this.size, this.angle);
     noFill();
     let tresh = 0.25;
     let pulse = 1 + tresh * sin(this.t * this.bright / Note.TOTAL);
     let dis = map(abs(1 - pulse), 0, tresh, 1, 0);
     stroke(this.hue, 100, 100, dis, 0.86);
     strokeWeight(dis * 0.1 * this.size);
-    Suit.drawSpade(0, 0, this.size * pulse, this.angle);
+    if(show) Suit.drawSpade(0, 0, this.size * pulse, this.angle);
     pop();
     this.update();
   }
@@ -78,13 +78,12 @@ class Spade extends Dot {
   static getCounter() {
     let counter = {};
     Note.names.forEach(n => counter[n] = 0);
-    Spade.drawSpades();
     spades.forEach(spade => counter[spade.note.name] += spade.mass);
     return counter;
   }
 
-  static drawSpades() {
-    spades.forEach(spade => spade.draw());
+  static drawSpades(show = true) {
+    spades.forEach(spade => spade.draw(show));
   }
 
   static speed() {

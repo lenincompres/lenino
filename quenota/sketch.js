@@ -5,8 +5,9 @@ let captionFiles = [];
 let caption = {};
 let _SETTINGS = new Binder({});
 let _IS_COMMAND = new Binder(false);
+_SETTINGS.value.showSpades = false;
 _SETTINGS.value.showKeys = true;
-_SETTINGS.value.showClubs = true;
+_SETTINGS.value.showClubs = false;
 _SETTINGS.value.showEmojis = false;
 let isPlayingCounter = 500;
 
@@ -18,9 +19,10 @@ function onSpadeLanded(spade) {
 function preload() {
   titleFont = loadFont(titleFontURL);
   bodyFont = loadFont(bodyFontURL);
-  captionFiles.push(loadJSON("songs/rabbitcandyjar.json"));
   captionFiles.push(loadJSON("songs/mysteryscars.json"));
-  captionFiles.push(loadJSON("songs/thisisherstory.json"));
+  captionFiles.push(loadJSON("songs/haha.json"));
+  captionFiles.push(loadJSON("songs/thecelestine.json"));
+  captionFiles.push(loadJSON("songs/holdheart.json"));
   Card.load("assets");
 }
 
@@ -120,6 +122,7 @@ function setup() {
         if(s.showKeys) text += "🎹";
         if(s.showClubs) text += "🌷";
         if(s.showEmojis) text += "🐰";
+        if(s.showSpades) text += "🏹";
         return text;
       }),
     },
@@ -137,7 +140,7 @@ function setup() {
   colorMode(HSB);
   //blendMode(ADD);
 
-  let GRID = min(width, height) / 10;
+  let GRID = min(width, height) / 12;
   Card.setup();
   cards = [];
   SUITS.forEach(suit => {
@@ -155,7 +158,7 @@ function draw() {
 
   if(isPlayingCounter > 6 * frameRate()) cards.forEach(card => card.draw());
 
-  Spade.drawSpades();
+  Spade.drawSpades(_SETTINGS.value.showSpades);
 
   if (_SETTINGS.value.showClubs) Clover.drawClovers();
 
@@ -179,11 +182,12 @@ function commandKey(num, isBlack) {
   if (!isBlack) return loadSong(num);
   let newSet = Object.assign({}, _SETTINGS.value);
   if (num === 0) newSet.showKeys = !newSet.showKeys;
-  else if (num === 1) {
+  else if (num == 1) caption.showSpades = newSet.showSpades = !newSet.showSpades;
+  else if (num === 2) {
     clovers = [];
     newSet.showClubs = !newSet.showClubs;
   }
-  else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
+  else if (num == 3) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
   _SETTINGS.value = newSet;
 }
 

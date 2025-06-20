@@ -184,9 +184,7 @@ class Card extends Dot {
 
   drawPip(dist, t, alpha = false) {
     dist *= map(this.blend / FLIP_SPEED, 0, 1, 0.85, 1);
-    if (alpha) {
-      tint(this.suit.color);
-    }
+    if (alpha) tint(255, 0.05);
     image(this.suit.image, -t / 2, dist - t / 2, t, t);
     image(this._newSuit.image, -t / 2, dist - t / 2, t, t);
   }

@@ -28,7 +28,7 @@ class Note {
     textAlign(CENTER, CENTER);
     Note.names.forEach((name, i) => {
       let hue = 360 - ((360 - 180 * i / 6) % 360);
-      let bright = counter ? counter[name] : 0;
+      let bright = counter ? 2 * counter[name] : 0;
       fill(hue, 100, 100, map(bright, 0, 50, 0, 1));
       text(name, pos.x, pos.y);
       pos.rotate(a);
