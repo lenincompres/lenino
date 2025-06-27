@@ -2,7 +2,7 @@ let spades = [];
 let isSustain = false;
 
 class Spade extends Dot {
-  constructor(x, y, size, angle, speed) {
+  constructor(x, y, size, angle, speed, onLanded = () => null) {
     super(x, y, size / 4);
     this.ini = this.position.copy();
     if (speed === undefined) speed = Spade.speed();
@@ -15,6 +15,7 @@ class Spade extends Dot {
     spades.push(this);
     this.t = 0;
     this.sustain = isSustain;
+    this.onLanded = onLanded;
   }
 
   get size() {
@@ -66,7 +67,7 @@ class Spade extends Dot {
     this.position.sub(this.velocity);
     let size = 0.5 * sqrt(this.size);
     if (!this.landed) size += 4 * Spade.speed() * sqrt(this.t);
-    if(onSpadeLanded) onSpadeLanded(this);
+    this.onLanded(this);
     this.landed = true;
   }
 
@@ -90,7 +91,7 @@ class Spade extends Dot {
     return min(width, height) / 200;
   }
 
-  static addSpade(id, vel) {
+  static addSpade(id, vel, onLanded) {
     let note = new Note(id);
     let len = 8 * Spade.speed();
     let trunk = 10 * Spade.speed();
@@ -99,6 +100,7 @@ class Spade extends Dot {
       map(vel, 0, 200, 0, 100 * Spade.speed()),
       note.angle,
       map(note.id, Note.MIN - 24, Note.MAX, 0, 2 * len),
+      onLanded,
     );
     spade.hue = note.hue;
     spade.sat = note.sat;

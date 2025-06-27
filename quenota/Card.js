@@ -217,4 +217,5 @@ class Card extends Dot {
     };
     window.SUITS = [HEARTS, CLUBS, SPADES, DIAMONDS];
   }
+  
 }

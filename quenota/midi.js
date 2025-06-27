@@ -1,42 +1,27 @@
-// read midi input and
-// Lenin compres
+// Read midi input and
+// by Lenin compres
 
-let command, note, velocity;
+if (navigator.requestMIDIAccess) console.log("This browser supports WebMIDI!");
+else console.error("WebMIDI is not supported in this browser.");
 
-if (navigator.requestMIDIAccess) {
-    console.log('This browser supports WebMIDI!');
-} else {
-    console.log('WebMIDI is not supported in this browser.');
-}
-
-navigator.requestMIDIAccess()
-    .then(onMIDISuccess, onMIDIFailure);
+navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
 function onMIDISuccess(midiAccess) {
     console.log(midiAccess);
-    var inputs = midiAccess.inputs;
-    var outputs = midiAccess.outputs;
 }
 
 function onMIDIFailure() {
-    console.log('Could not access your MIDI devices.');
+    console.error("Could not access your MIDI devices.");
 }
 
 function onMIDISuccess(midiAccess) {
-    for (var input of midiAccess.inputs.values()) {
-      input.onmidimessage = getMIDIMessage;
-    }
+    midiAccess.inputs.values().forEach(input => input.onmidimessage = getMIDIMessage);
 }
 
 function getMIDIMessage(midiMessage) {
-  [command, note, vel] = midiMessage.data;
-  // nothing
-  if(command == 254) return;
-  // note down
-  if(command == 144 && playNote) return playNote(note, vel);
-  // note up
-  if(command === 128 && stopNote) return stopNote(note);
-  // pedal
-  if(command === 177 && sustain) return sustain(!!vel);
-  // console.log(command, note, vel);
+  let [command, note, vel] = midiMessage.data;
+  if(command == 254) return; // nothing
+  if(command == 144 && playNote) return playNote(note, vel);  // note down
+  if(command === 128 && stopNote) return stopNote(note);  // note up
+  if(command === 177 && sustain) return sustain(!!vel);  // pedal
 }

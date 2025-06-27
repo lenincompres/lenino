@@ -11,11 +11,6 @@ _SETTINGS.value.showClubs = false;
 _SETTINGS.value.showEmojis = false;
 let isPlayingCounter = 500;
 
-function onSpadeLanded(spade) {
-  if (!_SETTINGS.value.showClubs) return;
-  Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
-}
-
 function preload() {
   titleFont = loadFont(titleFontURL);
   bodyFont = loadFont(bodyFontURL);
@@ -41,7 +36,14 @@ function loadSong(n = 0) {
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   caption = new Caption();
-  //loadSong(0);
+  colorMode(HSB);
+
+  Card.setup();
+  cards = SUITS.map(suit => {
+    let card = new Card(width/2, height/2, min(width, height) / 12, 1, suit);
+    card.velocity = p5.Vector.fromAngle(random(TWO_PI)).setMag(random(4));
+    return card;
+  });
 
   DOM.set({
     title: "Lenino's Note Visualizer by LENINO",
@@ -135,19 +137,6 @@ function setup() {
       p: "Lenino's",
       h2: "Visualizer",
     }
-  })
-
-  colorMode(HSB);
-  //blendMode(ADD);
-
-  let GRID = min(width, height) / 12;
-  Card.setup();
-  cards = [];
-  SUITS.forEach(suit => {
-    cards.push(new Card(width/2, height/2, GRID, 1, suit));
-  })
-  cards.forEach(card => {
-    card.velocity = createVector(random(4) - 2, random(4) - 2);
   });
 }
 
@@ -156,12 +145,12 @@ function draw() {
   noFill();
   noStroke();
 
+  // cards
   if(isPlayingCounter > 6 * frameRate()) cards.forEach(card => card.draw());
 
+  // suit animations
   Spade.drawSpades(_SETTINGS.value.showSpades);
-
   if (_SETTINGS.value.showClubs) Clover.drawClovers();
-
   if (_SETTINGS.value.showKeys) {
     textFont(titleFont);
     let radius = min(width, height) / 3;
@@ -199,7 +188,10 @@ function playNote(id, vel) {
     let indexes = Note.names.filter(n => note.isBlack ? n.includes("#") : !n.includes("#")).reverse();
     commandKey(indexes.indexOf(note.name), note.isBlack);
   }
-  Spade.addSpade(id, vel);
+  Spade.addSpade(id, vel, (spade) => {
+    if (!_SETTINGS.value.showClubs) return;
+    Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
+  });
 }
 
 function stopNote(id) {
@@ -213,7 +205,6 @@ function sustain(bool) {
 
 function keyPressed() {
   isPlayingCounter = 0;
-  /*
   let newSet = Object.assign({}, _SETTINGS.value);
   if (num === 0) newSet.showKeys = !newSet.showKeys;
   else if (num === 1) {
@@ -222,5 +213,4 @@ function keyPressed() {
   }
   else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
   _SETTINGS.value = newSet;
-  */
 }

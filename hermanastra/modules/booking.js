@@ -21,7 +21,7 @@ export const bookingModel = {
   },
   section: new Collapsable({
     iframe: {
-      src: "https://docs.google.com/forms/d/e/1FAIpQLSf-QRMN0oLrpjbgQ6ZBX8I8ggWsWd5byyIw91QMhL4GMDcAtg/viewform?embedded=true",
+      src: "https://docs.google.com/forms/d/e/1FAIpQLSfHo4V73M4wiM2rrCiNx7Z3UYx9qkOtWlQ8DR2ZCVSTRdgl3w/viewform?embedded=true",
       width: "100%",
       height: window.innerWidth > 800 ? 1440 : 1600,
     }
