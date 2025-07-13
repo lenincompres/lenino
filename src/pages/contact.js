@@ -5,7 +5,7 @@ const contactPage = {
   iframe: {
     src: "https://docs.google.com/forms/d/e/1FAIpQLScAZWRx8a_YpAN89piURPuHzXnNv-8v0Kq5CubgZPVHcqZpyg/viewform?embedded=true",
     width: "100%",
-    height: window.innerWidth > 800 ? 1440 : 1600,
+    height: 1600,
   }
   /*
   menu: {
