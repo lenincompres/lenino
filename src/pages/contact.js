@@ -2,6 +2,12 @@ import SOCIAL_LINKS from "./data/social.js";
 import * as STYLE from "../style.js";
 
 const contactPage = {
+  iframe: {
+    src: "https://docs.google.com/forms/d/e/1FAIpQLScAZWRx8a_YpAN89piURPuHzXnNv-8v0Kq5CubgZPVHcqZpyg/viewform?embedded=true",
+    width: "100%",
+    height: window.innerWidth > 800 ? 1440 : 1600,
+  }
+  /*
   menu: {
     fontSize: "3.43em",
     marginTop: "1em",
@@ -15,7 +21,7 @@ const contactPage = {
         }
       }))
     }
-  }
+  }*/
 };
 
 export default contactPage;

@@ -50,8 +50,8 @@ Copy.add({
     en: "Offerings",
   },
   contact: {
-    es: "💬",
-    en: "💬",
+    es: "Contacto",
+    en: "Contact Us",
   },
 });
 
@@ -224,10 +224,10 @@ DOM.set({
         ul: {
           style: STYLE.FLEX,
           flexDirection: _isMobile.as("column", "row"),
-          li: Pager.keys.map(name => ({
+          li: Pager.keys.map((name, i, names) => ({
             a: {
               color: STYLE.COLOR.PAGE,
-              width: _isMobile.as(() => name !== Pager.keys.slice(-1)[0], "2.5em", "5.7em"),
+              width: _isMobile.as(val => val && name === Pager.keys.slice(-1)[0], "5.7em", "2.5em"),
               lineHeight: "1em",
               padding: ".3em 0",
               margin: "0.2em",
@@ -241,12 +241,13 @@ DOM.set({
                 [name]: STYLE.COLOR.LINK_DARK,
                 default: STYLE.COLOR.LINK,
               }),
-              display: _isMobile.as(val => (val || name !== Pager.keys.slice(-1)[0]) && name !== Pager.keys[0], "none", "block"),
+              display: "block",
+              //display: _isMobile.as(val => (val || name !== Pager.keys.slice(-1)[0]) && name !== Pager.keys[0], "none", "block"),
               boxShadow: {
                 bind: [_hoverPage, Pager._key],
                 as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
               },
-              text: Copy.at[name],
+              text: _isMobile.as(val => val && name === Pager.keys.slice(-1)[0], Copy.at[name], "💬", ),
               onclick: e => Pager.key = name,
               mouseover: e => hoverPage = name,
               mouseout: e => hoverPage = false,
