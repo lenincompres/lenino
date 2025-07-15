@@ -38,8 +38,8 @@ Copy.add({
     es: "Reseña"
   },
   home: {
-    es: "Home",
-    en: "Inicio",
+    en: "Home",
+    es: "Inicio",
   },
   portfolio: {
     es: "Portafolio",
