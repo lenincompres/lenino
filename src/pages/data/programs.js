@@ -16,8 +16,8 @@ export const programs = [{
     es: "Explora cómo pensamos, sentimos y actuamos a través de un modelo vibrante basado en un cubo que mapea nuestros estados de enfoque entre cuerpo, mente y corazón. Ideal para aprendizaje socioemocional, autoconocimiento y dinámicas de grupo.",
   }),
   formats: Copy.text({
-    en: "Talk / Workshop / Multi-session Series",
-    es: "Charla / Taller / Serie de sesiones",
+    en: "Talk, Workshop, Multi-session Series",
+    es: "Charla, Taller, Serie de sesiones",
   }),
   audience: Copy.text({
     en: "Teens – Adults",
@@ -43,8 +43,8 @@ export const programs = [{
     es: "Adéntrate en un país de maravillas, lógica, suerte y leyenda. Explora las mecánicas y el diseño del juego Jack Rabbits—aprendiendo cómo los juegos pueden enseñar matemáticas, estrategia, poesía, sistemas de poder y pensamiento narrativo.",
   }),
   formats: Copy.text({
-    en: "Game Lab / Workshop / Artist Talk",
-    es: "Laboratorio de juego / Taller / Charla artística",
+    en: "Game Lab, Workshop, Artist Talk",
+    es: "Laboratorio de juego, Taller, Charla artística",
   }),
   audience: Copy.text({
     en: "Ages 10+",
@@ -70,8 +70,8 @@ export const programs = [{
     es: "Una experiencia de teatro musical en formato taller o función que reimagina la historia de Cenicienta desde el punto de vista de su hermanastra curiosamente vanidosa. Aborda con humor y canciones temas como la imagen, el género, la voz y el poder.",
   }),
   formats: Copy.text({
-    en: "Performance + Q&A / Workshop / Talk",
-    es: "Función + Conversatorio / Taller / Charla",
+    en: "Performance + Q&A, Workshop, Talk",
+    es: "Función + Conversatorio, Taller, Charla",
   }),
   audience: Copy.text({
     en: "Ages 14+",
@@ -96,8 +96,8 @@ export const programs = [{
     es: "Descubre cómo la programación puede convertirse en una sorpresa llena de posibilidades visuales, ideas interactivas y lógica creativa. Basado en la experiencia de enseñanza en los programas ITP e IMA de NYU Tisch—incluyendo The Nature of Code y Front-End Web—este taller presenta el código como una herramienta para la expresión artística, el movimiento y la experimentación lúdica. Los temas incluyen visuales generativos, animación inspirada en la física y la naturaleza, narrativas interactivas y exploración creativa en la web.",
   }),
   formats: Copy.text({
-    en: "Talk / Workshop / Custom Course",
-    es: "Charla / Taller / Curso personalizado",
+    en: "Talk, Workshop, Custom Course",
+    es: "Charla, Taller, Curso personalizado",
   }),
   audience: Copy.text({
     en: "Teens – Adults",

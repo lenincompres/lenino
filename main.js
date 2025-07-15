@@ -117,7 +117,7 @@ DOM.set({
       textAlign: "justify",
       li: {
         listStyleType: "disc",
-        marginLeft: "1.5em",
+        marginLeft: "1em",
       }
     },
     "p:not(:first-of-type)": {
@@ -259,7 +259,7 @@ DOM.set({
       article: {
         model: STYLE.FLEX,
         justifyContent: _isMobile.as("flex-start", "center"),
-        minHeight: _isMobile.as(["40em", "calc(100vh - 13em)"]),
+        minHeight: _isMobile.as(["40em", "calc(100vh - 14.7em)"]),
         height: "fit-content",
         width: _isMobile.as("51em", "100%"),
         margin: _isMobile.as("6em 0 1.5em 10em", "0 0 1em 0"),
