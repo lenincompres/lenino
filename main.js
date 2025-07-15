@@ -224,7 +224,8 @@ DOM.set({
         ul: {
           style: STYLE.FLEX,
           flexDirection: _isMobile.as("column", "row"),
-          li: Pager.keys.map((name, i, names) => ({
+          li: Pager.keys.map((name, i) => ({
+            display: i ? "block" : "none",
             a: {
               color: STYLE.COLOR.PAGE,
               width: _isMobile.as(val => val && name === Pager.keys.slice(-1)[0], "5.7em", "2.5em"),
