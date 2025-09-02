@@ -61,13 +61,13 @@ export const projects = [{
     tags: [Copy.at.code]
   }, {
     title: Copy.text({
-      en: "Delusions of Duality",
+      en: "Illusions of Duality",
       es: "Delirios de Dualidad"
     }),
     folder: "album",
     desc: Copy.text({
       en: "Musical album: a storyteller's journey through conflict and empathy",
-      es: "Album musical <i>Delusions of Duality</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
+      es: "Album musical <i>Illusions of Duality</i>: la travesía del cuentacuentos a través del conflicto y la empatía",
     }),
     tags: [Copy.at.music, Copy.at.writing],
   },
