@@ -62,7 +62,7 @@ export const projects = [{
   }, {
     title: Copy.text({
       en: "Illusions of Duality",
-      es: "Delirios de Dualidad"
+      es: "Ilusiones de Dualidad"
     }),
     folder: "album",
     desc: Copy.text({
