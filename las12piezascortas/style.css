@@ -1,0 +1,169 @@
+/* style.css */
+
+/* Base page styling */
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 0;
+  background: #fdfdfd;
+  color: #222;
+}
+
+body>main {
+  margin: 0 auto;
+  max-width: 50em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Header */
+header {
+  background: #222;
+  color: #fff;
+  padding: 1em 2em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+header h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav {
+  margin-top: 0.5em;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+header nav li {
+  display: inline;
+}
+
+header nav a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: color 0.2s ease;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+header nav a:hover,
+header nav a:focus {
+  color: #fff;
+  background-color: #ddd8;
+}
+
+/* Main content */
+main {
+  max-width: 900px;
+  margin: 2em auto;
+  padding: 0 1em;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 1em;
+  margin-top: 3em;
+  font-size: 0.9em;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Titles */
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin: 1em 0 0.5em;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 2em;
+  color: #555;
+}
+
+/* Sections (Sobre la obra, Personajes, Cuadros) */
+.section {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 2em 0 0.5em;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.2em;
+}
+
+/* Characters list */
+.characters {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5em 0 1.5em;
+}
+.characters li {
+  padding: 0.2em 0;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Dialogue formatting */
+.character {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  margin-top: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #222;
+}
+.dialogue {
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-top: 0.2em;
+}
+
+/* Stage directions */
+.action {
+  font-style: italic;
+  color: #555;
+  margin: 1em 0;
+  margin-left: 1em;
+}
+
+/* Fin at the end */
+.section:last-of-type {
+  text-align: center;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #666;
+}

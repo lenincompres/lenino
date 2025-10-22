@@ -53,7 +53,7 @@ class Spade extends Dot {
     this.tip = this.velocity.copy().setMag(this.size / 3);
     this.tip.add(this.position);
     let [x, y] = [this.tip.x, this.tip.y];
-    if (x < 0 || x > width || y < 0 || y > height) this.land();
+    if (this.tip.mag() >= min(width, height) / 2) this.land();
     // decay
     this.velocity.mult(decay);
     if (this.decay && !this.sustain) decay *= 0.8;
