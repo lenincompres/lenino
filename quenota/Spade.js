@@ -53,7 +53,7 @@ class Spade extends Dot {
     this.tip = this.velocity.copy().setMag(this.size / 3);
     this.tip.add(this.position);
     let [x, y] = [this.tip.x, this.tip.y];
-    if (this.tip.mag() >= min(width, height) / 2) this.land();
+    if (x < 0 || x > width || y < 0 || y > height) this.land();
     // decay
     this.velocity.mult(decay);
     if (this.decay && !this.sustain) decay *= 0.8;
@@ -81,6 +81,12 @@ class Spade extends Dot {
     Note.names.forEach(n => counter[n] = 0);
     spades.forEach(spade => counter[spade.note.name] += spade.mass);
     return counter;
+  }
+
+  static getNotes() {
+    let notes = [];
+    spades.forEach(spade => notes[spade.note.id] = Object.assign({strength: spade.mass}, spade.note));
+    return notes;
   }
 
   static drawSpades(show = true) {

@@ -11,6 +11,9 @@ _SETTINGS.value.showClubs = false;
 _SETTINGS.value.showEmojis = false;
 let isPlayingCounter = 500;
 
+let lines = (new Array(Note.TOTAL)).fill(0);
+let isSustained;
+
 function preload() {
   titleFont = loadFont(titleFontURL);
   bodyFont = loadFont(bodyFontURL);
@@ -40,7 +43,7 @@ function setup() {
 
   Card.setup();
   cards = SUITS.map(suit => {
-    let card = new Card(width/2, height/2, min(width, height) / 12, 1, suit);
+    let card = new Card(width / 2, height / 2, min(width, height) / 12, 1, suit);
     card.velocity = p5.Vector.fromAngle(random(TWO_PI)).setMag(random(4));
     return card;
   });
@@ -121,10 +124,10 @@ function setup() {
       visibility: _IS_COMMAND.as("hidden", "visible"),
       content: _SETTINGS.as(s => {
         let text = "";
-        if(s.showKeys) text += "🎹";
-        if(s.showClubs) text += "🌷";
-        if(s.showEmojis) text += "🐰";
-        if(s.showSpades) text += "🏹";
+        if (s.showKeys) text += "🎹";
+        if (s.showClubs) text += "🌷";
+        if (s.showEmojis) text += "🐰";
+        if (s.showSpades) text += "🏹";
         return text;
       }),
     },
@@ -145,8 +148,20 @@ function draw() {
   noFill();
   noStroke();
 
+  lines.forEach((line, i) => {
+    push();
+    let hue = map((i-3) % 12, 0, 11, 0, 360);
+    colorMode(HSB);
+    noStroke();
+    let b = map(sin(frameCount * i / 30), -1, 1, 0, 1) * map(line, 0, 50, 0, 0.2);
+    fill(hue, 100, 50, b);
+    let d = width / lines.length;
+    rect(i * d, 0, d, height);
+    pop();
+  });
+
   // cards
-  if(isPlayingCounter > 6 * frameRate()) cards.forEach(card => card.draw());
+  if (isPlayingCounter > 6 * frameRate()) cards.forEach(card => card.draw());
 
   // suit animations
   Spade.drawSpades(_SETTINGS.value.showSpades);
@@ -175,8 +190,7 @@ function commandKey(num, isBlack) {
   else if (num === 2) {
     clovers = [];
     newSet.showClubs = !newSet.showClubs;
-  }
-  else if (num == 3) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
+  } else if (num == 3) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
   _SETTINGS.value = newSet;
 }
 
@@ -188,6 +202,7 @@ function playNote(id, vel) {
     let indexes = Note.names.filter(n => note.isBlack ? n.includes("#") : !n.includes("#")).reverse();
     commandKey(indexes.indexOf(note.name), note.isBlack);
   }
+  lines[id - Note.MIN] = vel;
   Spade.addSpade(id, vel, (spade) => {
     if (!_SETTINGS.value.showClubs) return;
     Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
@@ -196,11 +211,14 @@ function playNote(id, vel) {
 
 function stopNote(id) {
   if (id <= Note.MIN) _IS_COMMAND.value = false;
+  if(isSustained) lines[id - Note.MIN] = 0;
+  else lines[id - Note.MIN] = 0;
   Spade.endSpade(id);
 }
 
 function sustain(bool) {
   Spade.sustain(bool);
+  isSustained  = bool;
 }
 
 function keyPressed() {
@@ -210,7 +228,6 @@ function keyPressed() {
   else if (num === 1) {
     clovers = [];
     newSet.showClubs = !newSet.showClubs;
-  }
-  else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
+  } else if (num == 2) caption.showEmojis = newSet.showEmojis = !newSet.showEmojis;
   _SETTINGS.value = newSet;
 }
