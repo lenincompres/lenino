@@ -11,7 +11,7 @@ _SETTINGS.value.showClubs = false;
 _SETTINGS.value.showEmojis = false;
 let isPlayingCounter = 500;
 
-let lines = (new Array(Note.TOTAL)).fill(0);
+let cuerdas = (new Array(Note.TOTAL)).fill(0);
 let isSustained;
 
 function preload() {
@@ -148,15 +148,20 @@ function draw() {
   noFill();
   noStroke();
 
-  lines.forEach((line, i) => {
+  // lines
+  cuerdas.forEach((cuerda, i) => {
+    let hue = map((i-3) % 12, 0, 12, 0, 360);
+    let b = map(sin(frameCount * i / 30), -1, 1, 0, 1) * map(cuerda, 0, 50, 0, 0.25);
+    let d = width / cuerdas.length;
+    let delta = i * d + d / 2;
     push();
-    let hue = map((i-3) % 12, 0, 11, 0, 360);
-    colorMode(HSB);
     noStroke();
-    let b = map(sin(frameCount * i / 30), -1, 1, 0, 1) * map(line, 0, 50, 0, 0.2);
-    fill(hue, 100, 50, b);
-    let d = width / lines.length;
-    rect(i * d, 0, d, height);
+    fill(hue, 100, 100, b);
+    rectMode(CENTER);
+    rect(delta, height/2, 4 * d * b, height);
+    stroke(hue, 100, 100, cuerda ? 0.7 : 0);
+    strokeWeight(1);
+    line(delta, 0, delta, height);
     pop();
   });
 
@@ -202,7 +207,7 @@ function playNote(id, vel) {
     let indexes = Note.names.filter(n => note.isBlack ? n.includes("#") : !n.includes("#")).reverse();
     commandKey(indexes.indexOf(note.name), note.isBlack);
   }
-  lines[id - Note.MIN] = vel;
+  cuerdas[id - Note.MIN] = vel;
   Spade.addSpade(id, vel, (spade) => {
     if (!_SETTINGS.value.showClubs) return;
     Clover.addClover(spade.tip.x, spade.tip.y, spade.note, 5 * spade.mass);
@@ -211,8 +216,8 @@ function playNote(id, vel) {
 
 function stopNote(id) {
   if (id <= Note.MIN) _IS_COMMAND.value = false;
-  if(isSustained) lines[id - Note.MIN] = 0;
-  else lines[id - Note.MIN] = 0;
+  if(isSustained) cuerdas[id - Note.MIN] = 0;
+  else cuerdas[id - Note.MIN] = 0;
   Spade.endSpade(id);
 }
 

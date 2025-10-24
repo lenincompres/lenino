@@ -7,7 +7,7 @@ class Note {
     this.isBlack = this.name.includes("#");
     this.angle = map(this.index, 0, 12, 0, TWO_PI);
     this.sat = map(this.oct, 0, (Note.MAX - Note.MIN) / 12, Note.MINS, 255);
-    this.hue = 360 - ((360 - 180 * this.angle / PI) % 360);
+    this.hue = map((this.index) % 12, 0, 12, 0, 360);
     this.bright = map(this.id, Note.MIN, Note.MAX, 50, 255);
   }
 
