@@ -2,11 +2,11 @@ import Copy from "../../lib/Copy.js";
 
 const data = [
   {
-    date: new Date("2025", "11", "29"),
+    date: new Date("2025", "10", "29"),
     place: "Teatro Don Bosco, Moca, RD.",
   },
   {
-    date: new Date("2025", "11", "28"),
+    date: new Date("2025", "10", "28"),
     place: "La 37 Por las Tablas, Santiago, RD.",
   },
   {
