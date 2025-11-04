@@ -44,7 +44,7 @@ DOM.set({
   css: {
     h: {
       textAlign: "center",
-      margin: "0.5em 0 0.1em",
+      margin: "0.5em 0 0.3em",
       fontFamily: "title",
     },
     h1: {

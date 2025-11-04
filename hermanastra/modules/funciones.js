@@ -2,6 +2,14 @@ import Copy from "../../lib/Copy.js";
 
 const data = [
   {
+    date: new Date("2025", "11", "29"),
+    place: "Teatro Don Bosco, Moca, RD.",
+  },
+  {
+    date: new Date("2025", "11", "28"),
+    place: "La 37 Por las Tablas, Santiago, RD.",
+  },
+  {
     date: new Date("2024", "10", "3"),
     place: "Cañave, New York, NY.",
     link: "https://www.instagram.com/canavenyc/?hl=en",
@@ -75,7 +83,10 @@ export const funcionesModel = {
     display: upcoming.length ? "block" : "none",
     fontSize: "1.25em",
     marginBottom: "1.5em",
-    h2: "Próximas funciónes",
+    h2: Copy.text({
+      es: "Próximas funciónes",
+      en: "Upcoming Shows",
+    }),
     p:  upcoming.map(printDate),
   },
   ul: {
