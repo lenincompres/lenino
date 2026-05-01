@@ -280,8 +280,8 @@ DOM.set({
         },
         section: [{
           markdown: Copy.text({
-            es: "Creado por Lenin Comprés usando [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
-            en: "Created by Lenin Comprés using [DOM.js](https://github.com/lenincompres/DOM.js/blob/main/README.md).",
+            es: "Creado por Lenin Comprés usando [BareDOM](https://github.com/lenincompres/baredom).",
+            en: "Created by Lenin Comprés using [BareDOM](https://github.com/lenincompres/baredom).",
           }),
         }, {
           a: {

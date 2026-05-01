@@ -51,12 +51,12 @@ export const projects = [{
     }),
     tags: [Copy.at.writing, Copy.at.book]
   }, {
-    title: "DOM.js",
-    link: "https://github.com/lenincompres/DOM.js",
-    img: "assets/dom.png",
+    title: "BareDOM",
+    link: "https://github.com/lenincompres/baredom",
+    img: "assets/{DOM}.png",
     desc: Copy.text({
-      en: "JavaScript library that creates and handles DOM structures using JS structural objects as models.",
-      es: "Librería de JavaScript que crea y maneja estructuras del DOM utilizando notación de objetos de JS.",
+      en: "The DOM, unbound. Build interfaces directly in JavaScript; no frameworks, no templates.",
+      es: "Construye interfaces directamente en JavaScript, sin frameworks ni plantillas.",
     }),
     tags: [Copy.at.code]
   }, {

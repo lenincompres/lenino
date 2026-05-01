@@ -149,8 +149,8 @@ window.setup = function () {
     footer: {
       padding: '2em',
       markdown: Copy.text({
-        es: 'Creado por [Lenin Comprés](http://www.lenino.net) usando [DOM.js](https://github.com/lenincompres/DOM.js) y [P5js](https://p5js.org/).',
-        es: 'Creaded by [Lenin Comprés](http://www.lenino.net) using [DOM.js](https://github.com/lenincompres/DOM.js) and [P5js](https://p5js.org/).',
+        es: 'Creado por [Lenin Comprés](http://www.lenino.net) usando [BareDOM](https://github.com/lenincompres/baredom) y [P5js](https://p5js.org/).',
+        es: 'Creaded by [Lenin Comprés](http://www.lenino.net) using [BareDOM](https://github.com/lenincompres/baredom) and [P5js](https://p5js.org/).',
       }),
     }
   })
