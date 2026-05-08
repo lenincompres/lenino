@@ -248,7 +248,7 @@ DOM.set({
                 bind: [_hoverPage, Pager._key],
                 as: (over, current) => current === name ? STYLE.SHADOW.INSET : over === name ? STYLE.SHADOW.HIGHLIGHT : STYLE.SHADOW.NORMAL,
               },
-              text: _isMobile.as(val => val && name === Pager.keys.slice(-1)[0], Copy.at[name], "💬", ),
+              text: _isMobile.as(val => val && name === Pager.keys.slice(-1)[0], Copy.at[name], "✉️", ),
               onclick: e => Pager.key = name,
               mouseover: e => hoverPage = name,
               mouseout: e => hoverPage = false,
@@ -280,8 +280,8 @@ DOM.set({
         },
         section: [{
           markdown: Copy.text({
-            es: "Creado por Lenin Comprés usando [BareDOM](https://github.com/lenincompres/baredom).",
-            en: "Created by Lenin Comprés using [BareDOM](https://github.com/lenincompres/baredom).",
+            es: "Creado por Lenin Comprés usando [BareDOM](http://baredom.org).",
+            en: "Created by Lenin Comprés using [BareDOM](http://baredom.org).",
           }),
         }, {
           a: {
