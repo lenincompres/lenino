@@ -52,7 +52,7 @@ export const projects = [{
     tags: [Copy.at.writing, Copy.at.book]
   }, {
     title: "BareDOM",
-    link: "https://github.com/lenincompres/baredom",
+    link: "http://baredom.org",
     img: "assets/{DOM}.png",
     desc: Copy.text({
       en: "The DOM, unbound. Build interfaces directly in JavaScript; no frameworks, no templates.",
