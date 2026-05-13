@@ -92,8 +92,8 @@ export const programs = [
       es: "Código Piñata: Explora, crea y juega con la web",
     }),
     tagline: Copy.text({
-      en: "Programación como herramienta de asombro, movimiento, narrativa y expresión visual.",
-      es: "Programming as a tool for wonder, motion, storytelling, and visual expression.",
+      en: "Programming as a tool for wonder, motion, storytelling, and visual expression.",
+      es: "Programación como herramienta de asombro, movimiento, narrativa y expresión visual.",
     }),
     description: Copy.text({
       en: [
