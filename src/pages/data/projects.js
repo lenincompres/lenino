@@ -31,10 +31,10 @@ export const projects = [{
     link: "http://jackrabbits.lenino.net",
     img: "assets/jackrabbits.png",
     desc: Copy.text({
-      en: "The board game for playing cards</br> on a land of wooden shards.",
-      es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.",
+      en: "The board game for playing cards</br> on a land of wooden shards</br>Its site's a musical experience.",
+      es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.</br>Su sitio es una experiencia musical.",
     }),
-    tags: [Copy.at.game, Copy.at.code]
+    tags: [Copy.at.game, Copy.at.music, Copy.at.code]
   }, {
     title: Copy.text({
       es: "Terräfirmä",
