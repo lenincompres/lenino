@@ -307,4 +307,13 @@ SCwidget.bind(SC.Widget.Events.READY, function () {
 $('.expand_button').click(e => {
   e.currentTarget.classList.toggle('expanded');
   $('#synopsis').toggleClass('expanded');
+  e.stopPropagation();
+  setTimeout(() => setFooter(), 100);
 });
+
+$('body').click(e => {
+  if(!$('#synopsis').hasClass('expanded')) return;
+  $('.expand_button').removeClass('expanded');
+  $('#synopsis').removeClass('expanded');
+  setTimeout(() => setFooter(), 100);
+})
