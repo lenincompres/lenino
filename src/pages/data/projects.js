@@ -9,7 +9,7 @@ export const projects = [{
     link: "http://3dpsyche.lenino.net",
     img: "assets/3dpsyche.png",
     desc: Copy.text({
-      en: "Explore the dimensions of your mind: a framework for human perception, determination, and focus.",
+      en: "Explore the dimensions of your mind: a framework for human perception, judgement, and focus.",
       es: "Explora las dimensiones de tu mente: una visualización para la percepción, determinación y enfoque humano.",
     }),
     tags: [Copy.at.tool, Copy.at.code],
@@ -31,7 +31,7 @@ export const projects = [{
     link: "http://jackrabbits.lenino.net",
     img: "assets/jackrabbits.png",
     desc: Copy.text({
-      en: "The board game for playing cards</br> on a land of wooden shards</br>Its site's a musical experience.",
+      en: "The board game for playing cards</br> on a land of wooden shards.</br>It also hosts a musical experience.",
       es: "El juego de tablero en el que viajas</br> al reino de conejos y barajas.</br>Su sitio es una experiencia musical.",
     }),
     tags: [Copy.at.game, Copy.at.music, Copy.at.code]
