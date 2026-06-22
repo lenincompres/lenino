@@ -30,8 +30,8 @@ const newsies = [
   }, */ {
     src: "https://i.etsystatic.com/52679041/r/il/c0dc16/6069187861/il_794xN.6069187861_a4dz.jpg",
     title: Copy.text({
-      es: "Aventura musical",
-      en: "Musical adventure",
+      es: "Juego y música",
+      en: "Game and music",
     }),
     url: "https://jackrabbits.lenino.net/",
     desc: Copy.text({
