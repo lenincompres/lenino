@@ -30,8 +30,8 @@ const newsies = [
   }, */ {
     src: "https://i.etsystatic.com/52679041/r/il/c0dc16/6069187861/il_794xN.6069187861_a4dz.jpg",
     title: Copy.text({
-      es: "Juego y música",
-      en: "Game and music",
+      es: "Música en página",
+      en: "New website music",
     }),
     url: "https://jackrabbits.lenino.net/",
     desc: Copy.text({
@@ -41,10 +41,18 @@ const newsies = [
   },  {
     src: "assets/candelaria.png",
     title: Copy.text({
-      es: "Nuevos shows",
-      en: "New shows",
+      es: "Juegos y Música",
+      en: "Music and Games",
     }),
-    url: "https://www.instagram.com/lenino",
+    url: "candelaria2026.html",
+    desc: "",
+  },  {
+    src: "assets/hermanastraRatona.png",
+    title: Copy.text({
+      es: "Monólogo Musical",
+      en: "Musical Monologue",
+    }),
+    url: "candelaria2026.html",
     desc: "",
   }
 ];
