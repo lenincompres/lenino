@@ -40,18 +40,10 @@ const newsies = [
     }),
   },  {
     src: "assets/candelaria.png",
-    title: Copy.text({
-      es: "Juegos y Música",
-      en: "Music and Games",
-    }),
     url: "candelaria2026.html",
     desc: "",
   },  {
     src: "assets/hermanastraRatona.png",
-    title: Copy.text({
-      es: "Monólogo Musical",
-      en: "Musical Monologue",
-    }),
     url: "candelaria2026.html",
     desc: "",
   }
