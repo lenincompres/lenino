@@ -28,6 +28,14 @@ const newsies = [
       en: `My debut novel: an original and multiethnic prequel to Alice's Wonderland.`,
     }),
   }, */ {
+    src: "assets/candelaria.png",
+    url: "candelaria2026.html",
+    desc: "",
+  },  {
+    src: "assets/hermanastraRatona.png",
+    url: "candelaria2026.html",
+    desc: "",
+  }, {
     src: "https://i.etsystatic.com/52679041/r/il/c0dc16/6069187861/il_794xN.6069187861_a4dz.jpg",
     title: Copy.text({
       es: "Música en página",
@@ -38,15 +46,7 @@ const newsies = [
       es: `El website de **Jack Rabbits** es también un [viaje musical]({href}). Aprende a jugar u adquiere una copia limitada del juego.`,
       en: `**Jack Rabbits**' website is also a [musical experience]({href}). Learn to play and get a limited copy of the game.`,
     }),
-  },  {
-    src: "assets/candelaria.png",
-    url: "candelaria2026.html",
-    desc: "",
-  },  {
-    src: "assets/hermanastraRatona.png",
-    url: "candelaria2026.html",
-    desc: "",
-  }
+  },  
 ];
 
 export default newsies.map(n => ({
