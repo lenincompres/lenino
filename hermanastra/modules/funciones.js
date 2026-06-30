@@ -2,6 +2,11 @@ import Copy from "../../lib/Copy.js";
 
 const data = [
   {
+    date: new Date("2026", "07", "04"),
+    place: "Tablero Mágico, Medellín, Colombia.",
+    link: "https://lenino.net/candelaria2026.html",
+  },
+  {
     date: new Date("2025", "10", "29"),
     place: "Teatro Don Bosco, Moca, RD.",
   },
