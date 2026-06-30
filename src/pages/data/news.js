@@ -32,7 +32,7 @@ const newsies = [
     url: "candelaria2026.html",
     desc: "",
   },  {
-    src: "assets/hermanastraRatona.png",
+    src: "assets/hermanastraTablero.png",
     url: "candelaria2026.html",
     desc: "",
   }, {
