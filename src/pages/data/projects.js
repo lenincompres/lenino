@@ -143,6 +143,30 @@ export const projects = [{
       en: "Short plays written in the 1990's in the Dominican Republic. Includes <i>Desayuno en Rojo Chino</i>.",
     }),
     tags: [Copy.at.book, Copy.at.writing, Copy.at.theatre]
+  }, {
+    title: Copy.text({
+      es: "El salto de la virgen",
+      en: "Virgin's Falls",
+    }),
+    folder: "movies/elsaltodelavirgen",
+    img: "movies/elsaltodelavirgen/thumbnail.png",
+    desc: Copy.text({
+      es: "De algunos viajes las niñas no regresan. Guión del largometraje original.",
+      en: "From some journeys, girls never return. Original screenplay.",
+    }),
+    tags: [Copy.at.film, Copy.at.writing]
+  }, {
+    title: Copy.text({
+      es: "Carmesí",
+      en: "Carmesí",
+    }),
+    folder: "movies/carmesi",
+    img: "movies/carmesi/thumbnail.png",
+    desc: Copy.text({
+      es: "Una noche. Varias historias. Todo cambia. Antes del amanecer. Guión del largometraje original.",
+      en: "One night. Many stories. Everything changes. Before dawn. Original screenplay.",
+    }),
+    tags: [Copy.at.film, Copy.at.writing]
   },
 ]
 
