@@ -167,6 +167,18 @@ export const projects = [{
       en: "One night. Many stories. Everything changes. Before dawn. Original screenplay.",
     }),
     tags: [Copy.at.film, Copy.at.writing]
+  }, {
+    title: Copy.text({
+      es: "Campos Santos",
+      en: "Campos Santos",
+    }),
+    folder: "movies/campossantos",
+    img: "movies/campossantos/thumbnail.png",
+    desc: Copy.text({
+      es: "Sobre la posibilidad de que el significado que hemos heredado no exista. Guión del largometraje original.",
+      en: "About the posibility that the meaning we've inherited may not exist. Original screenplay.",
+    }),
+    tags: [Copy.at.film, Copy.at.writing]
   },
 ]
 
