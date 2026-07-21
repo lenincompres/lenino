@@ -175,7 +175,7 @@ export const projects = [{
     folder: "movies/campossantos",
     img: "movies/campossantos/thumbnail.png",
     desc: Copy.text({
-      es: "Sobre la posibilidad de que el significado que hemos heredado no exista. Guión del largometraje original.",
+      es: "Sobre la posibilidad de que el significado que hemos heredado no exista. Guión del largometraje.",
       en: "About the posibility that the meaning we've inherited may not exist. Original screenplay.",
     }),
     tags: [Copy.at.film, Copy.at.writing]
