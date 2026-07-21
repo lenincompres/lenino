@@ -10,7 +10,7 @@
 
 body {
   box-sizing: border-box;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   font-size: 14px;
   font-weight: 200;
   line-height: 1.55;
@@ -19,6 +19,10 @@ body {
   max-width: 900px;
   margin: 0 auto;
   box-shadow: 0 0 15em var(--line-color);
+}
+
+body > * {
+  background-color: var(--secondary-color);
 }
 
 h1,
@@ -51,7 +55,6 @@ p {
 
 body > header {
   background-image: url("hero.png");
-  background-color: black;
   background-position: left;
   background-size: cover;
   background-repeat: no-repeat;
@@ -76,6 +79,8 @@ body > header > section {
 
 body > p {
   text-align: center;
+  padding: 0.3em;
+  margin-bottom: 2em;
 }
 
 button,
@@ -100,7 +105,6 @@ a.button {
 body > footer {
   background-image: url("footer.png");
   background-repeat: no-repeat;
-  background-color: black;
   background-size: cover;
   background-position: center;
   height: fit-content;

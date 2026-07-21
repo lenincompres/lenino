@@ -20,6 +20,10 @@ body {
   margin: 0 auto;
 }
 
+body > * {
+  background-color: var(--secondary-color);
+}
+
 h1,
 h2,
 h3,
@@ -43,7 +47,6 @@ p {
 
 body > header {
   background-image: url("hero.png");
-  background-color: black;
   background-position: right;
   background-size: cover;
   background-repeat: no-repeat;
@@ -55,6 +58,8 @@ body > header {
 
 body > p {
   text-align: center;
+  padding: 0.3em;
+  margin-bottom: 2em;
 }
 
 body > header > section {
@@ -105,18 +110,6 @@ body > main {
   flex-wrap: wrap;
   padding: 3em 3em 0;
   background-color: var(--secondary-color);
-}
-
-body > aside {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.9);
 }
 
 body > aside > img {

@@ -21,6 +21,10 @@ body {
   box-shadow: 0 0 8em var(--secondary-color);
 }
 
+body > * {
+  background-color: var(--secondary-color);
+}
+
 h1,
 h2,
 h3,
@@ -58,7 +62,6 @@ p {
 
 body > header {
   background-image: url("hero.png");
-  background-color: black;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,6 +73,8 @@ body > header {
 
 body > p {
   text-align: center;
+  padding: 0.3em;
+  margin-bottom: 2em;
 }
 
 body > header > section {
@@ -103,7 +108,6 @@ button, a.button {
 body > footer {
   background-image: url("footer.png");
   background-repeat: no-repeat;
-  background-color: black;
   background-size: cover;
   background-position: top right;
   height: 10em;
