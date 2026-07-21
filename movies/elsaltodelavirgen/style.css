@@ -53,6 +53,10 @@ body > header {
   padding: 3em 20em 3em 3em;
 }
 
+body > p {
+  text-align: center;
+}
+
 body > header > section {
   max-width: 30rem;
   min-width: 10rem;

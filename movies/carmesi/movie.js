@@ -61,6 +61,7 @@ DOM.set({
                 `<b>Idioma:</b> ${movie.language}`,
                 `<b>Locación:</b> ${movie.location}`,
                 `<b>Estado:</b> ${movie.draft}`,
+                `<b>Autor:</b> ${movie.author}`,
               ],
             },
           },
@@ -78,9 +79,10 @@ DOM.set({
       href: "https://docs.google.com/forms/d/e/1FAIpQLSdim__utpeLGVRwo2z5-qJQ21WPEs1iJ0dCf4ypDQ5agu8D7A/viewform?usp=sharing&ouid=113685914100261088020",
       target: "_blank",
     },
-    p: "Disponible a solicitud para productores y directores.",
+    p: "Disponible para productores y directores.",
     backgroundImage: "footer.png",
   },
+  p: "© Lenin Comprés Todos los derechos reservados."
   /*
   aside : {
     img: {

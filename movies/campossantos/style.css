@@ -3,7 +3,7 @@
   --secondary-color: #0a0e05;
   --text-color: #ffec;
   --title-color: #af9960;
-  --line-color: rgba(250, 239, 218, 0.5);
+  --line-color: #faefda4d;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200..700;1,300..700&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
@@ -38,7 +38,7 @@ a.button {
 }
 
 h1 {
-  color:  var(--text-color);
+  color: var(--text-color);
   line-height: 1em;
   font-size: 4.5em;
   margin: 0.5em 0;
@@ -52,7 +52,7 @@ p {
 body > header {
   background-image: url("hero.png");
   background-color: black;
-  background-position: right;
+  background-position: left;
   background-size: cover;
   background-repeat: no-repeat;
   max-height: 30em;
@@ -74,6 +74,10 @@ body > header > section {
   text-align: left;
 }
 
+body > p {
+  text-align: center;
+}
+
 button,
 a.button {
   display: inline-block;
@@ -85,6 +89,8 @@ a.button {
   font-weight: bold;
   cursor: pointer;
   border-radius: 0.25em;
+  text-align: center;
+  background-color: #0106;
   -webkit-border-radius: 0.25em;
   -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
@@ -97,9 +103,10 @@ body > footer {
   background-color: black;
   background-size: cover;
   background-position: center;
-  height: 10em;
+  height: fit-content;
+  max-height: 10em;
   text-align: right;
-  padding: 3em 3em 3em 10em;
+  padding: 2em 3em 4em;
   font-family: "Cormorant Garamond", serif;
   border-top: 1px solid var(--line-color);
 }
@@ -110,7 +117,7 @@ body > main {
   flex-direction: row;
   gap: 1em 3em;
   flex-wrap: wrap;
-  padding: 3em 0 0;
+  padding: 2em 0 0;
   background-color: var(--secondary-color);
 }
 
@@ -123,11 +130,25 @@ body > aside > img {
 
 .synopsis,
 .history {
-  width: calc((900px - 6em) / 2);
+  width: calc((900px - 7em) / 2);
 }
 
-.history li {
-  margin-left: 3em;
+.icon {
+  margin-left: 2em;
+  position: relative;
+}
+
+.icon::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  left: -3em;
+  background-image: url("icons.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .characters section img {
@@ -148,9 +169,11 @@ body > aside > img {
 
 .characters,
 .details {
+  padding: 0 1em;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0;
 }
 
@@ -160,7 +183,7 @@ body > aside > img {
 
 .details {
   border-top: 1px solid var(--line-color);
-  background-color: var(--line-color);
+  background-color: var(--text-color);
 }
 
 .details section {
@@ -180,15 +203,14 @@ h3 {
   color: var(--secondary-color) !important;
 }
 
-@media (width <= 800px) {
+@media (width < 900px) {
   .synopsis,
   .history {
-    width: calc(100% - 2em);
+    width: calc(100% - 4em);
   }
 }
 
 @media (width <= 600px) {
-
   .characters section {
     width: calc(100% / 2);
   }
@@ -196,5 +218,8 @@ h3 {
   .details section {
     width: 100%;
   }
-}
 
+  body > footer {
+    padding: 1em;
+  }
+}
