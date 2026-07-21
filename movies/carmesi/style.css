@@ -91,7 +91,7 @@ body > header > section > img {
 
 button, a.button {
   display: inline-block;
-  background-color: transparent;
+  background-color: #0005;
   border: 1px solid var(--title-color);
   padding: 0.5em 1em;
   margin: 0.5em 1em;
