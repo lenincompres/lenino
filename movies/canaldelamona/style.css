@@ -69,13 +69,14 @@ p {
 
 body > header {
   background-image: url("hero.png");
-  background-position: left top;
-  background-size: cover;
+  background-position: right top;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-color: var(--primary-color);
   max-height: 30em;
   min-height: fit-content;
   height: 50vw;
-  padding: 3em;
+  padding: 4em 3em;
   border-bottom: 1px solid var(--line-color);
 }
 
@@ -204,6 +205,14 @@ body > aside > img {
 }
 
 @media (width <= 700px) {
+  h1{
+    font-size: 2.5em;
+    text-shadow: 0 0 5px black;
+  }
+body > header {
+  background-position: left bottom;
+  background-size: contain;
+}
 
   .details section {
     width: 100%;
