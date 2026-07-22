@@ -59,7 +59,7 @@ DOM.set({
                 `Duración: ${movie.duration}`,
                 `Género: ${movie.genre}`,
                 `Idioma: ${movie.language}`,
-                `locación: ${movie.location}`,
+                `Locación: ${movie.location}`,
                 `Estado: ${movie.draft}`,
                 `Autor: ${movie.author}`,
               ],
