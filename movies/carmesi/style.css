@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #0a1318;
+  --primary-color: #22333e;
   --secondary-color: #000;
   --text-color: #fedc;
   --title-color: #a10;
@@ -18,7 +18,7 @@ body {
   font-family: "Roboto Condensed", sans-serif;
   max-width: 900px;
   margin: 0 auto;
-  box-shadow: 0 0 8em var(--secondary-color);
+  box-shadow: 0 0 10em var(--secondary-color);
 }
 
 body > * {
