@@ -80,7 +80,7 @@ DOM.set({
     p: "Disponible para productores y directores.",
     backgroundImage: "footer.png",
   },
-  p: "© Lenin Comprés Todos los derechos reservados."
+  p: "© Lenin Comprés Todos los derechos reservados.",
   /*
   aside : {
     img: {
