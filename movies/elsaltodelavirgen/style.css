@@ -139,8 +139,18 @@ body > aside > img {
 
 .characters section h3,
 .characters section p {
+  margin-left: 0.6em;
+  margin-right: 0.6em;
+}
+
+.characters section:first-child h3,
+.characters section:first-child p {
   margin-left: 1.5em;
-  margin-right: 0.5em;
+}
+
+.characters section:last-child h3,
+.characters section:last-child p {
+  margin-right: 1em;
 }
 
 .characters,
@@ -175,6 +185,11 @@ h3 {
   .history {
     width: 100%;
     padding: 0 1.5em;
+  }
+
+  .characters section h3,
+  .characters section p {
+    margin-left: 1.5em;
   }
 
   .characters section {

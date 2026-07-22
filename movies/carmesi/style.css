@@ -112,7 +112,7 @@ body > footer {
   background-position: top right;
   height: 10em;
   text-align: right;
-  padding: 0 1em;
+  padding: 0 1.5em;
   font-family: "Cormorant Garamond", serif;
   display: flex;
   flex-direction: column;
@@ -221,6 +221,10 @@ h3 {
   .synopsis,
   .history {
     width: 100%;
+  }
+
+  .history li > p{
+    padding-right: 1em;
   }
 
   .characters section {
