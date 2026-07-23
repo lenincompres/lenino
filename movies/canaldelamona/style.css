@@ -134,7 +134,7 @@ body > main {
   gap: 2em 3em;
   flex-wrap: wrap;
   background-color: var(--secondary-color);
-  box-shadow: 0 30em 30em var(--primary-color) inset;
+  box-shadow: 0 30em 32em var(--primary-color) inset;
 }
 
 body > aside > img {
