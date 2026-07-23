@@ -66,10 +66,10 @@ DOM.set({
               ],
             },
           },
+          { p: "© Lenin Comprés Todos los derechos reservados." },
         ],
       },
     ],
-    p: "© Lenin Comprés Todos los derechos reservados.",
   },
   footer: {
     a_button: {
