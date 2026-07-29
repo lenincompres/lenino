@@ -96,14 +96,8 @@ export const programs = [
       es: "Programación como herramienta de asombro, movimiento, narrativa y expresión visual.",
     }),
     description: Copy.text({
-      en: [
-        "Inspired by years teaching creative coding and web development at NYU Tisch ITP/IMA—including courses influenced by The Nature of Code—Piñata Code introduces programming through experimentation, imagination, and play. Participants explore generative visuals, motion systems, interactive narratives, physics-inspired animation, and creative experiences for the web.",
-        "Piñata Code aims to make creative technology more accessible to Spanish-speaking and bilingual communities through workshops, talks, tutorials, and playful learning experiences inspired by art, nature, storytelling, and open exploration.",
-      ],
-      es: [
-        "Inspirado en años de experiencia enseñando creative coding y desarrollo web en NYU Tisch ITP/IMA—incluyendo cursos inspirados por The Nature of Code—Piñata Code presenta la programación desde la exploración, la imaginación y el juego. A través de visuales generativos, sistemas de movimiento, animación inspirada en la naturaleza y experiencias interactivas, los participantes descubren el código como un medio creativo y expresivo.",
-        "Piñata Code busca acercar la tecnología creativa a comunidades hispanohablantes y bilingües mediante talleres, charlas, tutoriales y experiencias educativas que conectan arte, narrativa, diseño, movimiento y pensamiento computacional.",
-      ],
+      en: "Drawing on years of teaching creative coding and web development at NYU Tisch ITP/IMA—including courses influenced by The Nature of Code—Piñata Code introduces programming through experimentation, imagination, and play. Participants explore generative visuals, motion systems, interactive narratives, physics-inspired animation, and creative experiences for the web.",
+      es: "Basado en años de enseñanza de programación creativa y desarrollo web en ITP/IMA de NYU Tisch—incluyendo cursos inspirados en The Nature of Code—, Código piñata presenta la programación a través de la experimentación, la imaginación y el juego. Los participantes exploran visuales generativos, sistemas de movimiento, narrativas interactivas, animación inspirada en la física y experiencias creativas para la web.",
     }),
     formats: Copy.text({
       en: "Talks, Workshops, Custom Courses, Creative Coding Series",
