@@ -22,8 +22,8 @@ function checkViewport(e) {
 
 Copy.add({
   tagline: {
-    en: "Tales and Tools for Creativity and Learning",
-    es: "Un portal para la creatividad y el aprendizaje",
+    en: "Tales and Tools to Cultivate Wonder",
+    es: "Herramientas para cultivar el asombro",
   },
   educator: {
     en: "education",
