@@ -1,0 +1,129 @@
+
+    :root {
+      --paper: #f4f1e9;
+      --card: #fffdf7;
+      --ink: #202c2c;
+      --muted: #667370;
+      --line: #d9d5c9;
+      --accent: #e96d47;
+      --green: #2c675d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, serif;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.15;
+    }
+
+    .content-interface {
+      font-family: Arial, sans-serif;
+    }
+
+    .source-status {
+      display: inline-block;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .rendered-content {
+      padding: 20px;
+    }
+
+    .json-output {
+      max-height: 75vh;
+      overflow: auto;
+      margin: 0;
+      padding: 20px;
+      background: #1e2928;
+      color: #dae5e1;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .content-section {
+      margin: 18px 0;
+      padding-left: 16px;
+      border-left: 2px solid var(--line);
+    }
+
+    .content-section.level-1 {
+      border-left-color: var(--accent);
+    }
+
+    .content-section.level-2 {
+      border-left-color: var(--green);
+    }
+
+    .content-key {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #e7ece7;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .content-block {
+      margin: 14px 0;
+    }
+
+    blockquote {
+      margin-left: 0;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+      font-style: italic;
+    }
+
+    @media (max-width: 750px) {
+      .columns {
+        grid-template-columns: 1fr;
+      }
+    }

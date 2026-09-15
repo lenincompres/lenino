@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markdown or HTML Content Tree</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="contentTree.js"></script>
+</head>
+
+<body>
+
+  <!--
+    HTML FALLBACK CONTENT
+
+    If #markdown-source exists, the JavaScript uses the Markdown.
+
+    If you remove #markdown-source, the JavaScript reads the
+    semantic HTML content already present in the body.
+  -->
+
+    <h1>The Field Guide to Wandering Houses</h1>
+
+    <p>
+      This is the semantic HTML version of the test content.
+      It becomes the source when the Markdown script is removed.
+    </p>
+
+    <h2>Recognizing a Wandering House</h2>
+
+    <p>
+      A wandering house keeps its curtains closed and its front
+      steps pointed toward the nearest horizon.
+    </p>
+
+    <ul>
+      <li>Its chimney leans into the wind</li>
+      <li>Its doorbell answers in unfamiliar languages</li>
+      <li>Its garden contains freshly packed suitcases</li>
+    </ul>
+
+    <h3>Approaching safely</h3>
+
+    <p>
+      Stand where the welcome mat can see you, then knock exactly twice.
+    </p>
+
+    <h2>Inviting One to Stay</h2>
+
+    <p>
+      Offer level ground, good conversation, and a compelling
+      reason to grow roots.
+    </p>
+
+    <ol>
+      <li>Leave a porch light on</li>
+      <li>Plant something perennial</li>
+      <li>Learn the house’s true address</li>
+    </ol>
+
+    <blockquote>
+      A house settles only after somebody learns its name.
+    </blockquote>
+
+
+  <!--
+    MARKDOWN SOURCE
+
+    The browser ignores this as executable JavaScript because its
+    type is text/markdown. The parser reads its text content.
+
+    Remove this entire script element to test the HTML fallback.
+  -->
+
+  <script id="markdown-source" type="text/markdown">
+# A Small Atlas of Impossible Places (markdown)
+
+This content comes from the **Markdown source** embedded in the HTML file.
+
+## The Clockwork Orchard
+
+Every tree keeps a slightly different time. Travelers visit at noon and leave several seasons later.
+
+- Wind the pear trees before entering
+- Never argue with an apple
+- Return borrowed minutes before sunset
+
+### What grows there
+
+The orchard produces brass peaches, silver leaves, and one perfectly ordinary plum.
+
+## The Library Beneath the Lake
+
+The books stay dry, but readers must learn to breathe between sentences.
+
+> The shortest route to the surface is always the unfinished story.
+
+### Visiting hours
+
+1. Dawn, for maps
+2. Dusk, for histories
+3. Midnight, for books that have not been written
+  </script>
+
+  <script>
+    const body = ContentTree.content;
+    document.body.innerHTML = "";
+    document.body.append(ContentTree.renderTree(body));
+  </script>
+</body>
+</html>
