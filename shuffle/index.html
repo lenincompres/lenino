@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Random Word Speaker</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      color: #eee;
+      background: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 35px;
+      left: 50%;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      transform: translateX(-50%);
+    }
+
+    button,
+    select,
+    input {
+      padding: 8px 12px;
+      color: #eee;
+      background: #222;
+      border: 1px solid #777;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    label {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="controls">
+    <select id="voiceSelect"></select>
+
+    <label>
+      Speed:
+      <input
+        id="speedControl"
+        type="range"
+        min="0.5"
+        max="1.2"
+        step="0.05"
+      >
+      <span id="speedValue"></span>
+    </label>
+
+    <button id="startButton">Start</button>
+  </div>
+
+<script>
+// --------------------------------------------------
+// DEFAULT SETTINGS
+// --------------------------------------------------
+
+const DEFAULT_VOICE = "Google UK English";
+const DEFAULT_LANGUAGE = "en-GB";
+const DEFAULT_SPEED = 0.7;
+const INTERVAL_SECONDS = 10;
+
+// --------------------------------------------------
+
+const WORD_LIST_URL =
+  "https://cdn.jsdelivr.net/gh/first20hours/google-10000-english@master/google-10000-english.txt";
+
+const INTERVAL = INTERVAL_SECONDS * 1000;
+
+let allWords = [];
+let familiarWords = [];
+let currentWord = "";
+
+let running = false;
+let nextWordTime = 0;
+let voices = [];
+
+const voiceSelect = document.getElementById("voiceSelect");
+const speedControl = document.getElementById("speedControl");
+const speedValue = document.getElementById("speedValue");
+const startButton = document.getElementById("startButton");
+
+function preload() {
+  allWords = loadStrings(WORD_LIST_URL);
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textAlign(CENTER, CENTER);
+
+  familiarWords = allWords
+    .slice(100, 3000)
+    .map(word => word.trim().toLowerCase())
+    .filter(word => /^[a-z]{3,12}$/.test(word));
+
+  speedControl.value = DEFAULT_SPEED;
+  speedValue.textContent = DEFAULT_SPEED;
+
+  loadVoices();
+
+  speechSynthesis.addEventListener("voiceschanged", loadVoices);
+  startButton.addEventListener("click", toggleSpeaker);
+
+  speedControl.addEventListener("input", function () {
+    speedValue.textContent = speedControl.value;
+  });
+}
+
+function draw() {
+  background(0);
+
+  fill(235);
+  noStroke();
+
+  textSize(18);
+  text(
+    running
+      ? "Current word is"
+      : `One random word every ${INTERVAL_SECONDS} seconds`,
+    width / 2,
+    height / 2 - 100
+  );
+
+  textSize(72);
+  textStyle(BOLD);
+  text(currentWord || "ready?", width / 2, height / 2);
+
+  textStyle(NORMAL);
+
+  if (running) {
+    if (millis() >= nextWordTime) {
+      chooseAndSpeak();
+    }
+
+    const secondsRemaining =
+      max(0, ceil((nextWordTime - millis()) / 1000));
+
+    fill(170);
+    textSize(15);
+
+    text(
+      `Next word in ${secondsRemaining} second${
+        secondsRemaining === 1 ? "" : "s"
+      }`,
+      width / 2,
+      height / 2 + 100
+    );
+  }
+}
+
+function loadVoices() {
+  voices = speechSynthesis
+    .getVoices()
+    .filter(voice => voice.lang.startsWith("en"));
+
+  voiceSelect.innerHTML = "";
+
+  voices.forEach((voice, index) => {
+    const option = document.createElement("option");
+
+    option.value = index;
+    option.textContent = `${voice.name} (${voice.lang})`;
+
+    voiceSelect.appendChild(option);
+  });
+
+  const preferredVoiceIndex = voices.findIndex(voice =>
+    voice.name.includes(DEFAULT_VOICE) &&
+    voice.lang === DEFAULT_LANGUAGE
+  );
+
+  const BritishVoiceIndex = voices.findIndex(
+    voice => voice.lang === DEFAULT_LANGUAGE
+  );
+
+  if (preferredVoiceIndex >= 0) {
+    voiceSelect.value = preferredVoiceIndex;
+  } else if (BritishVoiceIndex >= 0) {
+    voiceSelect.value = BritishVoiceIndex;
+  }
+}
+
+function toggleSpeaker() {
+  running = !running;
+
+  if (running) {
+    startButton.textContent = "Pause";
+    chooseAndSpeak();
+  } else {
+    startButton.textContent = "Start";
+    speechSynthesis.cancel();
+  }
+}
+
+function chooseAndSpeak() {
+  let nextWord;
+
+  do {
+    nextWord = random(familiarWords);
+  } while (
+    nextWord === currentWord &&
+    familiarWords.length > 1
+  );
+
+  currentWord = nextWord;
+  nextWordTime = millis() + INTERVAL;
+
+  speakWord(currentWord);
+}
+
+function speakWord(word) {
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(word);
+  const selectedVoice = voices[Number(voiceSelect.value)];
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+
+  utterance.lang = selectedVoice?.lang || DEFAULT_LANGUAGE;
+  utterance.rate = Number(speedControl.value);
+  utterance.pitch = 0.9;
+  utterance.volume = 1;
+
+  speechSynthesis.speak(utterance);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+</body>
+</html>
